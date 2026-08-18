@@ -75,10 +75,3 @@ Today, we built a complete, high-trust, responsive B2B industrial battery web ap
 
 ---
 
-## 📦 How to Push to GitHub
-
-```bash
-git branch -M main
-git remote add origin https://github.com/<YOUR-USERNAME>/<YOUR-REPO-NAME>.git
-git push -u origin main
-```
