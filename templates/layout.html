@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Power-Sonic Industrial Energy Solutions | B2B Battery Specifications{% endblock %}</title>
+  <meta name="description"
+    content="{% block meta_description %}Leading manufacturer of SLA, AGM, Gel, and Lithium LiFePO4 industrial batteries engineered for UPS, Solar, Medical, Telecom, and Security applications.{% endblock %}">
+
+  <!-- Fonts: Inter & Montserrat -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap"
+    rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  {% block head_extra %}{% endblock %}
+</head>
+
+<body>
+
+  <!-- 1. Top Utility Bar -->
+  <header class="top-utility-bar">
+    <div class="container utility-flex">
+      <div class="utility-left">
+        <div class="utility-item">
+          <span>📞 B2B Direct Hotline:</span>
+          <a href="tel:+18005557693">+1 (800) 555-POWER</a>
+        </div>
+        <div class="utility-item">
+          <span>✉️ Technical Support:</span>
+          <a href="mailto:engineering@power-sonic-b2b.com">engineering@power-sonic-b2b.com</a>
+        </div>
+      </div>
+      <div class="utility-right">
+        <!-- Live Header Search -->
+        <div class="header-search-wrapper">
+          <span class="header-search-icon">🔍</span>
+          <input type="text" id="header-search-input" class="header-search-input"
+            placeholder="Search battery model or spec..." autocomplete="off">
+          <div id="header-search-results" class="header-search-results"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. Main Navigation Bar -->
+  <nav class="main-header">
+    <div class="container navbar-flex">
+      <a href="/" class="brand-logo">
+        <div class="logo-icon"><img src="{{ url_for('static', filename='images/meri_logo.png') }}" alt="MERI H INDUSTRIES Logo"></div>
+        <div>
+          MERI <span class="accent">INDUSTRIES</span>
+          <span class="brand-tag">INDUSTRIAL ENERGY SOLUTIONS</span>
+        </div>
+      </a>
+
+      <ul class="nav-menu">
+        <li><a href="/" class="nav-link {% if request.path == '/' %}active{% endif %}">Home</a></li>
+        <li><a href="/catalog" class="nav-link {% if request.path == '/catalog' %}active{% endif %}">Battery Catalog</a>
+        </li>
+        <li><a href="/contact" class="nav-link {% if request.path == '/contact' %}active{% endif %}">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <a href="/download/catalog-pdf" class="btn btn-outline-navy" download="MERI-Industries-2026-Product-Catalog.pdf">Battery Catalog PDF 📥</a>
+        <button class="btn btn-accent open-rfq-modal-btn">Request Bulk Quote</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Body Content Placeholder -->
+  <main>
+    {% block content %}
+    {{ custom_body|safe if custom_body else '' }}
+    {% endblock %}
+  </main>
+
+  <!-- 4. Global B2B RFQ Modal -->
+  <div id="rfq-modal-overlay" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Submit B2B Request for Quote (RFQ)</h3>
+        <button id="rfq-modal-close" class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="b2b-rfq-form">
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="rfq-full-name">Full Name *</label>
+              <input type="text" id="rfq-full-name" name="full_name" class="form-control"
+                placeholder="e.g. Robert Vance" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="rfq-company-name">Company Name *</label>
+              <input type="text" id="rfq-company-name" name="company_name" class="form-control"
+                placeholder="e.g. Apex Telecom Infrastructure" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="rfq-email">Corporate Work Email *</label>
+              <input type="email" id="rfq-email" name="email" class="form-control" placeholder="rvance@apextelecom.com"
+                required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="rfq-phone">Phone Number *</label>
+              <input type="tel" id="rfq-phone" name="phone" class="form-control" placeholder="+1 (555) 019-2834"
+                required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="rfq-tax-id">GSTIN / Tax ID (Optional)</label>
+              <input type="text" id="rfq-tax-id" name="gstin_tax_id" class="form-control" placeholder="27AAACG0000A1Z5">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="rfq-product-model">Target Battery Model</label>
+              <input type="text" id="rfq-product-model" name="product_model" class="form-control"
+                placeholder="e.g. PSL-121000 or Multiple Models">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="rfq-qty">Estimated Quantity / MOQ</label>
+              <input type="number" id="rfq-qty" name="estimated_qty" class="form-control" min="1" value="10">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="rfq-application">Target Application</label>
+              <select id="rfq-application" name="application_details" class="form-control">
+                <option value="UPS Systems">UPS & Data Center Standby</option>
+                <option value="Solar & Energy Storage">Solar & Energy Storage (ESS)</option>
+                <option value="Telecom">Telecom Towers & 5G Infrastructure</option>
+                <option value="Medical Equipment">Medical Devices & Healthcare</option>
+                <option value="Mobility / EV">Industrial Mobility & EV Robotics</option>
+                <option value="Fire & Security">Fire Systems & Security Alarm</option>
+              </select>
+            </div>
+            <div class="form-group full-width">
+              <label class="form-label" for="rfq-message">Technical Requirements & Custom Specifications</label>
+              <textarea id="rfq-message" name="message" class="form-control" rows="3"
+                placeholder="Provide details on operating temperature, peak discharge current, dimension constraints, or delivery timeline..."></textarea>
+            </div>
+          </div>
+          <div class="mt-3 text-right">
+            <button type="submit" class="btn btn-accent btn-lg style='width: 100%;'">Submit Official RFQ
+              Request</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Technical Trust & Certification Footer Banner -->
+  <section class="trust-banner">
+    <div class="container trust-grid">
+      <div class="trust-item">
+        <div class="trust-icon">🏅</div>
+        <h4>ISO 9001:2015 Certified</h4>
+        <p>Stringent automated quality testing standards across all manufacturing lines.</p>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">⚡</div>
+        <h4>High Recombination Rate</h4>
+        <p>>99% gas recombination efficiency with flame retardant UL94-V0 enclosures.</p>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🚚</div>
+        <h4>Global B2B Supply Network</h4>
+        <p>Strategically located regional warehousing for rapid 24-48 hr dispatch.</p>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon">🛡️</div>
+        <h4>Complete Warranty Coverage</h4>
+        <p>Comprehensive 2 to 5-year replacement warranty on industrial batteries.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Footer -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <h3>POWER<span class="accent" style="color:var(--color-accent-red);">SONIC</span></h3>
+        <p class="mb-3">Power-Sonic is a global leader in engineered energy solutions, delivering high-performance SLA,
+          AGM, Gel, and Smart Lithium batteries for critical industrial infrastructure.</p>
+        <p style="font-size: 0.8rem; color: #64748B;">Registered Corporate Office: 3650 Rosecrans St, San Diego, CA
+          92110<br>GSTIN / Tax Reg: US943820194</p>
+      </div>
+
+      <div class="footer-links">
+        <h4>Battery Chemistries</h4>
+        <ul>
+          <li><a href="/catalog?chemistry=agm">Sealed Lead Acid (AGM)</a></li>
+          <li><a href="/catalog?chemistry=lithium">Lithium LiFePO4 Smart</a></li>
+          <li><a href="/catalog?chemistry=gel">Deep Cycle Gel Series</a></li>
+          <li><a href="/catalog?chemistry=high_rate">High Rate UPS Series</a></li>
+          <li><a href="/catalog?voltage=48">48V Telecom Rackmount</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <h4>Target Applications</h4>
+        <ul>
+          <li><a href="/catalog">UPS & Data Centers</a></li>
+          <li><a href="/catalog">Solar Energy Storage</a></li>
+          <li><a href="/catalog">Telecom Infrastructure</a></li>
+          <li><a href="/catalog">Medical & Life Safety</a></li>
+          <li><a href="/catalog">Mobility & AGV Robotics</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <h4>Technical Resources</h4>
+        <ul>
+          <li><a href="/about">Quality & Testing Standards</a></li>
+          <li><a href="/catalog">Download SDS Safety Sheets</a></li>
+          <li><a href="/catalog">Download PDF Specification Cards</a></li>
+          <li><a href="/contact">Submit Technical Support Inquiry</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="container footer-bottom">
+      <p>&copy; {{ now.year if now else 2026 }} Power-Sonic Industrial Battery Corporation. All rights reserved.</p>
+      <div style="display:flex; gap: 1.5rem;">
+        <a href="/about" style="color: #64748B;">Privacy Policy</a>
+        <a href="/about" style="color: #64748B;">Terms of Supply</a>
+        <a href="/about" style="color: #64748B;">ISO Certifications</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+
+</html>

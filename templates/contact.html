@@ -1,0 +1,72 @@
+{% extends "layout.html" %}
+
+{% block title %}Contact & Technical Support | Power-Sonic B2B{% endblock %}
+
+{% block content %}
+<section class="section" style="padding-top: 3rem;">
+  <div class="container">
+
+    <div class="section-header">
+      <span class="section-subtitle">DIRECT B2B SUPPORT</span>
+      <h1 class="section-title">Get in Touch with Our Application Engineers</h1>
+      <p class="section-desc">Have questions about battery sizing, custom OEM designs, or volume distributor pricing? Submit your request below.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: start;">
+
+      <!-- Direct Contact Info -->
+      <div style="background: white; border: 1px solid #E2E8F0; border-radius: 12px; padding: 2rem; box-shadow: var(--shadow-sm);">
+        <h3 style="color: var(--color-navy-dark); font-size: 1.3rem; margin-bottom: 1.5rem;">Corporate Headquarters</h3>
+        
+        <div style="margin-bottom: 1.5rem;">
+          <strong style="display:block; color: var(--color-navy-dark); font-size: 0.9rem; text-transform: uppercase;">Address</strong>
+          <p style="color: #64748B; font-size: 0.95rem;">Power-Sonic Corporation<br>3650 Rosecrans St, San Diego, CA 92110</p>
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+          <strong style="display:block; color: var(--color-navy-dark); font-size: 0.9rem; text-transform: uppercase;">Direct Phone Hotline</strong>
+          <p style="color: #64748B; font-size: 0.95rem;">Toll Free: +1 (800) 555-POWER<br>International: +1 (619) 661-2020</p>
+        </div>
+
+        <div style="margin-bottom: 1.5rem;">
+          <strong style="display:block; color: var(--color-navy-dark); font-size: 0.9rem; text-transform: uppercase;">Email Contacts</strong>
+          <p style="color: #64748B; font-size: 0.95rem;">Sales & RFQ: <a href="mailto:sales@power-sonic-b2b.com">sales@power-sonic-b2b.com</a><br>Engineering: <a href="mailto:engineering@power-sonic-b2b.com">engineering@power-sonic-b2b.com</a></p>
+        </div>
+      </div>
+
+      <!-- Contact Inquiry Form -->
+      <div style="background: white; border: 1px solid #E2E8F0; border-radius: 12px; padding: 2rem; box-shadow: var(--shadow-sm);">
+        <h3 style="color: var(--color-navy-dark); font-size: 1.3rem; margin-bottom: 1.5rem;">Submit B2B Technical Inquiry</h3>
+
+        <form id="contact-page-form" onsubmit="event.preventDefault(); document.querySelector('.open-rfq-modal-btn').click();">
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label">Full Name *</label>
+              <input type="text" class="form-control" placeholder="John Doe" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Company Name *</label>
+              <input type="text" class="form-control" placeholder="Company Inc." required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Work Email *</label>
+              <input type="email" class="form-control" placeholder="jdoe@company.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone *</label>
+              <input type="tel" class="form-control" placeholder="+1 (555) 000-0000" required>
+            </div>
+            <div class="form-group full-width">
+              <label class="form-label">Message / Inquiry Details</label>
+              <textarea class="form-control" rows="4" placeholder="How can our application engineers assist you?"></textarea>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-accent btn-lg mt-3 style='width:100%;'">Send Inquiry</button>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block title %}About Power-Sonic | Engineering & Quality Standards{% endblock %}
+
+{% block content %}
+<section class="section" style="padding-top: 3rem;">
+  <div class="container" style="max-width: 960px;">
+    
+    <div class="text-center mb-5">
+      <span class="section-subtitle">GLOBAL ENERGY LEADERSHIP</span>
+      <h1 class="section-title">Engineering Excellence Since 1970</h1>
+      <p class="section-desc">For over 50 years, Power-Sonic has been at the forefront of industrial battery manufacturing, powering critical infrastructure across 80+ countries worldwide.</p>
+    </div>
+
+    <div class="mb-5" style="background: white; border: 1px solid #E2E8F0; border-radius: 12px; padding: 2.5rem; box-shadow: var(--shadow-md);">
+      <h2 style="color: var(--color-navy-dark); font-size: 1.6rem; margin-bottom: 1rem;">Quality Assurance & Testing Standards</h2>
+      <p style="margin-bottom: 1.25rem;">Our state-of-the-art manufacturing facilities operate under strict ISO 9001:2015 quality management systems. Every battery unit undergoes automated computerized testing for internal resistance, open circuit voltage (OCV), high-rate load capacity, and leak checks before packaging.</p>
+      
+      <div class="grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem;">
+        <div style="background:#F8FAFC; padding: 1.25rem; border-radius: 8px; border-left: 4px solid var(--color-accent-orange);">
+          <h4 style="color: var(--color-navy-dark);">ISO 9001:2015 & ISO 14001</h4>
+          <p style="font-size:0.875rem; color:#64748B;">Certified quality management and environmental compliance across all assembly facilities.</p>
+        </div>
+        <div style="background:#F8FAFC; padding: 1.25rem; border-radius: 8px; border-left: 4px solid var(--color-accent-red);">
+          <h4 style="color: var(--color-navy-dark);">UL & CE Safety Recognition</h4>
+          <p style="font-size:0.875rem; color:#64748B;">Underwriters Laboratories (UL1989 / UL1973) component recognized for standby safety.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center py-4">
+      <h3 style="color: var(--color-navy-dark); margin-bottom: 1rem;">Need Custom Battery Pack Design?</h3>
+      <p class="mb-4" style="color: #64748B;">Our engineering team can design custom PCM/BMS protection circuits, custom wire harnesses, and specific battery enclosures to match your exact OEM specifications.</p>
+      <a href="/contact" class="btn btn-accent btn-lg">Consult with Application Engineer →</a>
+    </div>
+
+  </div>
+</section>
+{% endblock %}

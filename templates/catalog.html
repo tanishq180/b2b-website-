@@ -1,0 +1,148 @@
+{% extends "layout.html" %}
+
+{% block title %}Interactive Battery Catalog & Specs Filter | Power-Sonic{% endblock %}
+
+{% block content %}
+<section class="section" style="padding-top: 2.5rem;">
+  <div class="container">
+    
+    <!-- Catalog Header -->
+    <div style="margin-bottom: 2rem;">
+      <h1 class="section-title" style="margin-bottom: 0.5rem;">Industrial Battery Catalog</h1>
+      <p class="section-desc">Search, filter, and compare technical specifications across our full product line of SLA, Gel, and Lithium batteries.</p>
+    </div>
+
+    <div class="catalog-layout">
+
+      <!-- Multi-Attribute Filter Sidebar -->
+      <aside class="filter-sidebar">
+        <div class="filter-header">
+          <h3>Filter Specifications</h3>
+          <button id="reset-filters-btn" class="btn-reset-filter">Reset All</button>
+        </div>
+
+        <form id="catalog-filter-form">
+          <!-- Chemistry Filter -->
+          <div class="filter-group">
+            <div class="filter-group-title">Battery Chemistry</div>
+            <div class="filter-options">
+              <label class="filter-checkbox">
+                <input type="checkbox" name="chemistry" value="sla" {% if request.args.get('chemistry') == 'sla' %}checked{% endif %}>
+                <span>SLA (Sealed Lead Acid)</span>
+              </label>
+              <label class="filter-checkbox">
+                <input type="checkbox" name="chemistry" value="lithium" {% if request.args.get('chemistry') == 'lithium' %}checked{% endif %}>
+                <span>Lithium</span>
+              </label>
+              <label class="filter-checkbox">
+                <input type="checkbox" name="chemistry" value="graphene" {% if request.args.get('chemistry') == 'graphene' %}checked{% endif %}>
+                <span>Graphene</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Nominal Voltage Filter -->
+          <div class="filter-group">
+            <div class="filter-group-title">Nominal Voltage (V)</div>
+            <div class="filter-options">
+              <label class="filter-checkbox">
+                <input type="checkbox" name="voltage" value="4">
+                <span>4 Volt</span>
+              </label>
+              <label class="filter-checkbox">
+                <input type="checkbox" name="voltage" value="6">
+                <span>6 Volt</span>
+              </label>
+              <label class="filter-checkbox">
+                <input type="checkbox" name="voltage" value="12" {% if request.args.get('voltage') == '12' %}checked{% endif %}>
+                <span>12 Volt</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Capacity Range Filter -->
+          <div class="filter-group">
+            <div class="filter-group-title">Amp-Hour Capacity (Ah)</div>
+            <div class="filter-options">
+              <label class="filter-checkbox">
+                <input type="checkbox" name="capacity" value="2.8Ah">
+                <span>2.8 Ah</span>
+              </label>
+              <label class="filter-checkbox">
+                <input type="checkbox" name="capacity" value="9Ah">
+                <span>9 Ah</span>
+              </label>
+              <label class="filter-checkbox">
+                <input type="checkbox" name="capacity" value="9.5Ah">
+                <span>9.5 Ah</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Terminal Type Filter -->
+          <div class="filter-group">
+            <div class="filter-group-title">Terminal Type</div>
+            <div class="filter-options">
+              <label class="filter-checkbox">
+                <input type="checkbox" name="terminal" value="f1">
+                <span>Faston F1 (0.187")</span>
+              </label>
+              <label class="filter-checkbox">
+                <input type="checkbox" name="terminal" value="f2">
+                <span>Faston F2 (0.250")</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Target Application Filter -->
+          <div class="filter-group">
+            <div class="filter-group-title">Target Application</div>
+            <div class="filter-options">
+              <label class="filter-checkbox">
+                <input type="checkbox" name="application" value="UPS Systems">
+                <span>UPS Systems & Data Centers</span>
+              </label>
+              <label class="filter-checkbox">
+                <input type="checkbox" name="application" value="Solar & Energy Storage">
+                <span>Solar & Energy Storage</span>
+              </label>
+              <label class="filter-checkbox">
+                <input type="checkbox" name="application" value="Telecom">
+                <span>Telecom & 5G Base Station</span>
+              </label>
+              <label class="filter-checkbox">
+                <input type="checkbox" name="application" value="Medical Equipment">
+                <span>Medical & Healthcare</span>
+              </label>
+              <label class="filter-checkbox">
+                <input type="checkbox" name="application" value="Fire & Security">
+                <span>Fire & Security Alarms</span>
+              </label>
+            </div>
+          </div>
+
+        </form>
+      </aside>
+
+      <!-- Catalog Main Area -->
+      <main class="catalog-main">
+        <!-- Toolbar -->
+        <div class="catalog-toolbar">
+          <div id="catalog-result-count" style="font-weight: 700; color: var(--color-navy-dark);">
+            Loading Product Catalog...
+          </div>
+          <div>
+            <input type="text" id="catalog-search-input" class="catalog-search-input" placeholder="Search model or keyword..." autocomplete="off">
+          </div>
+        </div>
+
+        <!-- Product Grid -->
+        <div id="catalog-product-grid" class="product-grid">
+          <!-- Populated dynamically by main.js via REST API -->
+        </div>
+      </main>
+
+    </div>
+  </div>
+</section>
+{% endblock %}

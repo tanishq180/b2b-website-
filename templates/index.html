@@ -1,0 +1,250 @@
+{% extends "layout.html" %}
+
+{% block title %}Power-Sonic Industrial Energy Solutions | SLA, AGM & Lithium Batteries{% endblock %}
+
+{% block content %}
+
+<!-- Hero Banner -->
+<section class="hero-section">
+  <div class="container hero-grid">
+    <div class="hero-content">
+      <div class="eyebrow">
+        <span>⚡ ENGINEERED FOR MISSION-CRITICAL UPTIME</span>
+      </div>
+      <h1 class="hero-title">
+        Engineered Energy Solutions <span class="highlight">Built for Industry.</span>
+      </h1>
+      <p class="hero-subtitle">
+        High-performance Sealed Lead Acid (AGM, Gel) and Smart Lithium Iron Phosphate (LiFePO4) batteries engineered for uninterruptible power, renewable storage, telecom, and critical equipment.
+      </p>
+      <div class="hero-actions">
+        <a href="/catalog" class="btn btn-accent btn-lg">Explore Battery Catalog</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">50<span>+</span></div>
+          <div class="stat-label">Years of Engineering</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">100M<span>+</span></div>
+          <div class="stat-label">Batteries Deployed</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">99.9<span>%</span></div>
+          <div class="stat-label">Recombination Efficiency</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-img-card">
+        <img src="{{ url_for('static', filename='images/lithium_lifepo4_battery.jpg') }}" alt="Power-Sonic Smart Lithium LiFePO4 Battery">
+      </div>
+      <div class="hero-badge-float">
+        <div class="badge-icon">🔋</div>
+        <div class="badge-text">
+          <strong>PSL-121000 Smart LiFePO4</strong>
+          <span>12.8V 100Ah with Bluetooth & CANbus BMS</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Application / Market Grid -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-subtitle">TARGET MARKETS & SECTORS</span>
+      <h2 class="section-title">Industrial Applications</h2>
+      <p class="section-desc">Custom power configurations tailored for maximum longevity and strict regulatory compliance.</p>
+    </div>
+
+    <div class="app-grid">
+      <a href="/catalog" class="app-card">
+        <div class="app-icon-wrapper">💻</div>
+        <h3>UPS & Data Centers</h3>
+        <p>High-rate short-duration discharge batteries for critical server backup power.</p>
+      </a>
+
+      <a href="/catalog" class="app-card">
+        <div class="app-icon-wrapper">☀️</div>
+        <h3>Solar & ESS</h3>
+        <p>Deep-cycle Gel and LiFePO4 storage for off-grid and hybrid renewable microgrids.</p>
+      </a>
+
+      <a href="/catalog" class="app-card">
+        <div class="app-icon-wrapper">📡</div>
+        <h3>Telecom & 5G</h3>
+        <p>48V 19-inch rack-mountable lithium modules for base transceiver stations.</p>
+      </a>
+
+      <a href="/catalog" class="app-card">
+        <div class="app-icon-wrapper">🏥</div>
+        <h3>Medical Equipment</h3>
+        <p>ISO 13485 compliant batteries powering mobile diagnostic carts and life-support units.</p>
+      </a>
+
+      <a href="/catalog" class="app-card">
+        <div class="app-icon-wrapper">🤖</div>
+        <h3>Mobility & AGV</h3>
+        <p>Vibration-resistant high-cycle batteries for warehouse robotics and electric fork lifts.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Product Category Showcase -->
+<section class="section" style="background-color: #FFFFFF; border-top: 1px solid #E2E8F0; border-bottom: 1px solid #E2E8F0;">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-subtitle">OUR PRODUCT FAMILIES</span>
+      <h2 class="section-title">Engineered Battery Technologies</h2>
+      <p class="section-desc">Select from our broad range of chemistries engineered to deliver optimal volumetric density and cycle life.</p>
+    </div>
+
+    <div class="product-grid">
+
+      <!-- SLA / AGM Family Card -->
+      <div class="product-card">
+        <span class="product-badge-tag">SLA / AGM</span>
+        <div class="product-img-wrapper">
+          <img src="{{ url_for('static', filename='images/sla_agm_battery.jpg') }}" alt="PS Series AGM Battery">
+        </div>
+        <div class="product-body">
+          <h3 class="product-model">PS Series General Purpose</h3>
+          <p class="product-title">Absorbent Glass Mat (AGM) valve regulated lead acid batteries for general standby backup power.</p>
+          <div class="spec-mini-grid">
+            <div class="spec-item"><strong>4V - 12V</strong><span>Voltage Range</span></div>
+            <div class="spec-item"><strong>0.8Ah - 200Ah</strong><span>Capacity Range</span></div>
+          </div>
+          <a href="/catalog?chemistry=agm" class="btn btn-navy style='width:100%;'">Explore AGM Series →</a>
+        </div>
+      </div>
+
+      <!-- Lithium LiFePO4 Family Card -->
+      <div class="product-card">
+        <span class="product-badge-tag" style="background-color:#E11D48;">Lithium LiFePO4</span>
+        <div class="product-img-wrapper">
+          <img src="{{ url_for('static', filename='images/lithium_lifepo4_battery.jpg') }}" alt="PSL Series Lithium Battery">
+        </div>
+        <div class="product-body">
+          <h3 class="product-model">PSL Series Smart Lithium</h3>
+          <p class="product-title">Next-gen LiFePO4 with built-in intelligent BMS, CANbus telemetry, and 3500+ deep cycles.</p>
+          <div class="spec-mini-grid">
+            <div class="spec-item"><strong>12.8V - 51.2V</strong><span>Voltage Range</span></div>
+            <div class="spec-item"><strong>9Ah - 300Ah</strong><span>Capacity Range</span></div>
+          </div>
+          <a href="/catalog?chemistry=lithium" class="btn btn-navy style='width:100%;'">Explore Lithium Series →</a>
+        </div>
+      </div>
+
+      <!-- Deep Cycle Gel Card -->
+      <div class="product-card">
+        <span class="product-badge-tag" style="background-color:#EA580C;">Deep Cycle Gel</span>
+        <div class="product-img-wrapper">
+          <img src="{{ url_for('static', filename='images/deep_cycle_gel_battery.jpg') }}" alt="PSG Series Gel Battery">
+        </div>
+        <div class="product-body">
+          <h3 class="product-model">PSG Series Gel Deep Cycle</h3>
+          <p class="product-title">Gel electrolyte chemistry designed for high temperature tolerance and deep recovery capability.</p>
+          <div class="spec-mini-grid">
+            <div class="spec-item"><strong>6V - 12V</strong><span>Voltage Range</span></div>
+            <div class="spec-item"><strong>15Ah - 200Ah</strong><span>Capacity Range</span></div>
+          </div>
+          <a href="/catalog?chemistry=gel" class="btn btn-navy style='width:100%;'">Explore Gel Series →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Featured Technical Spec Batteries -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-subtitle">POPULAR SPECIFICATIONS</span>
+      <h2 class="section-title">Featured Industrial Batteries</h2>
+    </div>
+
+    <div class="product-grid">
+      {% for p in featured_products %}
+      <div class="product-card">
+        <span class="product-badge-tag">{{ p.chemistry }}</span>
+        <div class="product-img-wrapper">
+          <img src="{{ p.image }}" alt="{{ p.model }}">
+        </div>
+        <div class="product-body">
+          <h3 class="product-model">{{ p.model }}</h3>
+          <p class="product-title">{{ p.title }}</p>
+          <div class="spec-mini-grid">
+            <div class="spec-item">
+              <strong>{{ p.voltage }}V</strong>
+              <span>Voltage</span>
+            </div>
+            <div class="spec-item">
+              <strong>{{ p.capacity_ah }} Ah</strong>
+              <span>Capacity</span>
+            </div>
+            <div class="spec-item">
+              <strong>{{ p.weight_kg }} kg</strong>
+              <span>Weight</span>
+            </div>
+            <div class="spec-item">
+              <strong>{{ p.terminal_code.upper() }}</strong>
+              <span>Terminal</span>
+            </div>
+          </div>
+          <div class="product-actions">
+            <a href="/product/{{ p.id }}" class="btn btn-outline-navy btn-sm" style="width: 100%;">View Specs</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="/catalog" class="btn btn-lg btn-outline-navy">View Complete 2026 Catalog & Filter Specs →</a>
+    </div>
+  </div>
+</section>
+
+<!-- B2B Quick Inquiry Lead Capture Banner -->
+<section class="section" style="background-color: var(--color-navy-dark); color: white;">
+  <div class="container" style="max-width: 900px;">
+    <div class="text-center mb-4">
+      <span class="section-subtitle" style="color: var(--color-accent-orange);">APPLICATION ENGINEERING ASSISTANCE</span>
+      <h2 class="section-title" style="color: white;">Find the Right Battery for Your Project</h2>
+      <p style="color: #94A3B8;">Need assistance calculating Ah capacity, sizing C-rates, or specifying custom wiring terminals? Speak directly with a Power-Sonic sales engineer.</p>
+    </div>
+
+    <form class="p-4" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px;" onsubmit="event.preventDefault(); document.querySelector('.open-rfq-modal-btn').click();">
+      <div class="form-grid">
+        <div class="form-group">
+          <label class="form-label" style="color:white;">Select Chemistry</label>
+          <select class="form-control">
+            <option>Sealed Lead Acid (AGM)</option>
+            <option>Lithium LiFePO4 Smart</option>
+            <option>Deep Cycle Gel</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label" style="color:white;">Required Voltage (V)</label>
+          <select class="form-control">
+            <option>12 Volt (Standard)</option>
+            <option>24 Volt</option>
+            <option>48 Volt (Rackmount)</option>
+            <option>6 Volt</option>
+          </select>
+        </div>
+      </div>
+      <div class="mt-3 text-center">
+        <button type="submit" class="btn btn-accent btn-lg">Launch Custom Specification Inquiry →</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+{% endblock %}
