@@ -1,62 +1,126 @@
 [
   {
-    "id": "ps-428",
-    "model": "PS-428 F1",
-    "title": "4V 2.8Ah Sealed Lead Acid (SLA) Battery",
+    "id": "sunka-mr1232bs",
+    "model": "SUNKA MR1232BS",
+    "title": "12V 3.2Ah Sealed Lead-Acid (SLA) Rechargeable Battery",
     "chemistry": "SLA",
     "chemistry_code": "sla",
-    "voltage": 4,
-    "capacity_ah": 2.8,
-    "capacity_bucket": "2.8Ah",
-    "energy_wh": 11.2,
-    "terminal_type": "Faston F1 (0.187\")",
+    "voltage": 12,
+    "capacity_ah": 3.2,
+    "capacity_bucket": "3.2Ah",
+    "energy_wh": 38.4,
+    "terminal_type": "T1 (Faston Tab 4.8mm)",
     "terminal_code": "f1",
-    "applications": ["Emergency Lighting", "Fire & Security", "Medical Equipment"],
+    "applications": [
+      "UPS Systems",
+      "Emergency Lighting",
+      "Alarms & Security Systems",
+      "Medical Equipment",
+      "Solar & Renewable Energy"
+    ],
     "dimensions": {
-      "length_mm": 66,
-      "width_mm": 33,
-      "height_mm": 97,
-      "total_height_mm": 104,
-      "length_in": 2.60,
-      "width_in": 1.30,
-      "height_in": 3.82
+      "length_mm": 134,
+      "width_mm": 67,
+      "height_mm": 61,
+      "total_height_mm": 67,
+      "length_in": 5.28,
+      "width_in": 2.64,
+      "height_in": 2.4
     },
-    "weight_kg": 0.38,
-    "weight_lbs": 0.84,
-    "max_discharge_current_a": 42,
-    "internal_resistance_mOhm": 25.0,
+    "weight_kg": 1.25,
+    "weight_lbs": 2.76,
+    "max_discharge_current_a": 48,
+    "internal_resistance_mOhm": 30.0,
     "operating_temp_range": {
-      "charge": "-15°C to 50°C",
-      "discharge": "-20°C to 60°C",
-      "storage": "-20°C to 50°C"
+      "charge": "-10\u00b0C to 40\u00b0C",
+      "discharge": "-15\u00b0C to 50\u00b0C",
+      "storage": "-20\u00b0C to 40\u00b0C"
     },
     "cycle_life": "300 - 500 cycles at 100% DOD",
-    "certifications": ["ISO 9001:2015", "UL 1989", "CE Certified"],
-    "image": "/static/images/sla_agm_battery.jpg",
-    "datasheet_pdf": "/static/docs/PS-428-Datasheet.pdf",
-    "sds_pdf": "/static/docs/PowerSonic-SLA-SDS.pdf",
-    "description": "Compact 4V 2.8Ah SLA battery designed for architectural emergency lighting, electronic balances, scale units, and backup power.",
-    "features": [
-      "VRLA technology for leak-proof, maintenance-free operation",
-      "Low self-discharge rate suitable for long standby service",
-      "Flame retardant ABS case"
+    "certifications": [
+      "ISO 9001:2015",
+      "CE",
+      "UL94-HB"
     ],
-    "moq": 20,
+    "image": "/static/images/products/sunka_mr1232bs.jpg",
+    "description": "SUNKA MR1232BS 12V 3.2Ah sealed lead-acid battery engineered for maintenance-free operation in UPS backup, emergency lighting, and alarm systems.",
+    "features": [
+      "High quality lead plates and advanced SLA technology",
+      "Sealed leak-proof construction - no water top-up required",
+      "Flame retardant ABS case material"
+    ],
+    "moq": 10,
     "lead_time": "In Stock (Ships in 24 hrs)"
   },
   {
-    "id": "ps-690",
-    "model": "PS-690 F1",
-    "title": "6V 9.0Ah Sealed Lead Acid (SLA) Battery",
+    "id": "sunka-rb1245e",
+    "model": "SUNKA RB1245E",
+    "title": "12V 4.5Ah Sealed Lead-Acid Rechargeable Battery",
+    "chemistry": "SLA",
+    "chemistry_code": "sla",
+    "voltage": 12,
+    "capacity_ah": 4.5,
+    "capacity_bucket": "4.5Ah",
+    "energy_wh": 54,
+    "terminal_type": "F1 (Faston Tab 187)",
+    "terminal_code": "f1",
+    "applications": [
+      "UPS Systems",
+      "Security & Alarm Systems",
+      "Emergency Lighting",
+      "Medical Equipment"
+    ],
+    "dimensions": {
+      "length_mm": 90,
+      "width_mm": 70,
+      "height_mm": 101,
+      "total_height_mm": 107,
+      "length_in": 3.54,
+      "width_in": 2.76,
+      "height_in": 3.98
+    },
+    "weight_kg": 1.35,
+    "weight_lbs": 2.98,
+    "max_discharge_current_a": 67.5,
+    "internal_resistance_mOhm": 35.0,
+    "operating_temp_range": {
+      "charge": "-10\u00b0C to 40\u00b0C",
+      "discharge": "-15\u00b0C to 50\u00b0C",
+      "storage": "-20\u00b0C to 40\u00b0C"
+    },
+    "cycle_life": "300 - 500 cycles at 100% DOD",
+    "certifications": [
+      "ISO 9001:2015",
+      "CE"
+    ],
+    "image": "/static/images/products/sunka_rb1245e.jpg",
+    "description": "SUNKA RB1245E 12V 4.5Ah maintenance-free VRLA battery engineered for reliable long service life in medical and security backup systems.",
+    "features": [
+      "Low self-discharge rate (3% per month at 25\u00b0C)",
+      "Wide operating temperature range",
+      "F1 Faston Tab 187 terminal connection"
+    ],
+    "moq": 10,
+    "lead_time": "In Stock (Ships in 24 hrs)"
+  },
+  {
+    "id": "sunka-rb670e",
+    "model": "SUNKA RB670E",
+    "title": "6V 7.0Ah Valve Regulated Lead-Acid Battery",
     "chemistry": "SLA",
     "chemistry_code": "sla",
     "voltage": 6,
-    "capacity_ah": 9.0,
-    "capacity_bucket": "9Ah",
-    "energy_wh": 54,
-    "terminal_type": "Faston F1 (0.187\")",
+    "capacity_ah": 7.0,
+    "capacity_bucket": "7Ah",
+    "energy_wh": 42,
+    "terminal_type": "F1 (Faston Tab 187)",
     "terminal_code": "f1",
-    "applications": ["UPS Systems", "Fire & Security", "Medical Equipment"],
+    "applications": [
+      "UPS Systems",
+      "Alarm & Security Systems",
+      "Emergency Lighting",
+      "Solar & Renewable Energy"
+    ],
     "dimensions": {
       "length_mm": 151,
       "width_mm": 34,
@@ -64,34 +128,550 @@
       "total_height_mm": 100,
       "length_in": 5.94,
       "width_in": 1.34,
-      "height_in": 3.70
+      "height_in": 3.7
     },
-    "weight_kg": 1.45,
-    "weight_lbs": 3.20,
-    "max_discharge_current_a": 135,
-    "internal_resistance_mOhm": 18.0,
+    "weight_kg": 1.1,
+    "weight_lbs": 2.43,
+    "max_discharge_current_a": 105,
+    "internal_resistance_mOhm": 16.0,
     "operating_temp_range": {
-      "charge": "-15°C to 50°C",
-      "discharge": "-20°C to 60°C",
-      "storage": "-20°C to 50°C"
+      "charge": "-10\u00b0C to 60\u00b0C",
+      "discharge": "-20\u00b0C to 60\u00b0C",
+      "storage": "-20\u00b0C to 60\u00b0C"
     },
     "cycle_life": "300 - 500 cycles at 100% DOD",
-    "certifications": ["ISO 9001:2015", "UL 1989", "CE"],
-    "image": "/static/images/sla_agm_battery.jpg",
-    "datasheet_pdf": "/static/docs/PS-690-Datasheet.pdf",
-    "sds_pdf": "/static/docs/PowerSonic-SLA-SDS.pdf",
-    "description": "6V 9.0Ah AGM SLA battery engineered for reliable standby power in security alarm panels and UPS backup units.",
+    "certifications": [
+      "ISO 9001:2015",
+      "CE",
+      "UL94-HB"
+    ],
+    "image": "/static/images/products/sunka_rb670e.jpg",
+    "description": "SUNKA RB670E 6V 7Ah VRLA battery featuring 16 m\u03a9 ultra-low internal resistance for security alarms and emergency lighting panels.",
     "features": [
-      "Absorbent Glass Mat (AGM) technology",
-      "High discharge efficiency and fast recovery rate"
+      "Valve regulated sealed maintenance-free design",
+      "Absorbent Glass Mat (AGM) electrolyte absorption",
+      "Flame retardant ABS case"
     ],
     "moq": 10,
     "lead_time": "In Stock (Ships in 24 hrs)"
   },
   {
+    "id": "sunka-rb6100e",
+    "model": "SUNKA RB6100E",
+    "title": "6V 10.0Ah High Capacity VRLA Battery",
+    "chemistry": "SLA",
+    "chemistry_code": "sla",
+    "voltage": 6,
+    "capacity_ah": 10.0,
+    "capacity_bucket": "10Ah",
+    "energy_wh": 60,
+    "terminal_type": "F1 (Faston Tab 187)",
+    "terminal_code": "f1",
+    "applications": [
+      "UPS Systems",
+      "Alarm & Security Systems",
+      "Emergency Lighting",
+      "Solar & Renewable Energy"
+    ],
+    "dimensions": {
+      "length_mm": 151,
+      "width_mm": 50,
+      "height_mm": 94,
+      "total_height_mm": 100,
+      "length_in": 5.94,
+      "width_in": 1.97,
+      "height_in": 3.7
+    },
+    "weight_kg": 1.56,
+    "weight_lbs": 3.44,
+    "max_discharge_current_a": 150,
+    "internal_resistance_mOhm": 12.0,
+    "operating_temp_range": {
+      "charge": "-10\u00b0C to 60\u00b0C",
+      "discharge": "-20\u00b0C to 60\u00b0C",
+      "storage": "-20\u00b0C to 60\u00b0C"
+    },
+    "cycle_life": "300 - 500 cycles at 100% DOD",
+    "certifications": [
+      "ISO 9001:2015",
+      "CE",
+      "UL94-HB"
+    ],
+    "image": "/static/images/products/sunka_rb6100e.jpg",
+    "description": "High capacity 6V 10Ah VRLA battery with 12 m\u03a9 internal resistance delivering long standby runtime.",
+    "features": [
+      "High rate discharge capability",
+      "Stable voltage output throughout discharge curve"
+    ],
+    "moq": 10,
+    "lead_time": "In Stock (Ships in 24 hrs)"
+  },
+  {
+    "id": "sunka-18650-2200",
+    "model": "SUNKA 18650-2200",
+    "title": "3.7V 2200mAh 18650 Rechargeable Li-ion Battery Cell",
+    "chemistry": "Lithium",
+    "chemistry_code": "lithium",
+    "voltage": 3.7,
+    "capacity_ah": 2.2,
+    "capacity_bucket": "2.2Ah",
+    "energy_wh": 8.14,
+    "terminal_type": "Button / Flat Top",
+    "terminal_code": "f1",
+    "applications": [
+      "LED Flashlights",
+      "Emergency Lighting",
+      "Solar Lighting",
+      "Power Banks",
+      "Medical Devices",
+      "DIY Battery Packs"
+    ],
+    "dimensions": {
+      "length_mm": 65,
+      "width_mm": 18,
+      "height_mm": 18,
+      "total_height_mm": 65,
+      "length_in": 2.56,
+      "width_in": 0.71,
+      "height_in": 0.71
+    },
+    "weight_kg": 0.045,
+    "weight_lbs": 0.1,
+    "max_discharge_current_a": 6.6,
+    "internal_resistance_mOhm": 35.0,
+    "operating_temp_range": {
+      "charge": "0\u00b0C to 45\u00b0C",
+      "discharge": "-20\u00b0C to 60\u00b0C",
+      "storage": "-10\u00b0C to 45\u00b0C"
+    },
+    "cycle_life": "500+ cycles",
+    "certifications": [
+      "IS 16046:2018",
+      "CE",
+      "UN38.3",
+      "RoHS"
+    ],
+    "image": "/static/images/products/sunka_18650_2200.jpg",
+    "description": "High performance 18650 Li-ion battery cell delivering 2200mAh (8.14Wh) capacity with Bureau of Indian Standards (BIS IS 16046) certification.",
+    "features": [
+      "High energy density 2200mAh 3.7V cell",
+      "BIS IS 16046:2018 Certified",
+      "Low self-discharge rate retains charge during long storage"
+    ],
+    "moq": 50,
+    "lead_time": "In Stock (Ships in 24 hrs)"
+  },
+  {
+    "id": "sunka-18650-2000",
+    "model": "SUNKA 18650-2000",
+    "title": "3.7V 2000mAh 18650 Rechargeable Li-ion Battery Cell",
+    "chemistry": "Lithium",
+    "chemistry_code": "lithium",
+    "voltage": 3.7,
+    "capacity_ah": 2.0,
+    "capacity_bucket": "2Ah",
+    "energy_wh": 7.4,
+    "terminal_type": "Button / Flat Top",
+    "terminal_code": "f1",
+    "applications": [
+      "LED Flashlights",
+      "Emergency Lighting",
+      "Solar Lighting",
+      "Power Banks",
+      "Medical Devices",
+      "UPS Systems"
+    ],
+    "dimensions": {
+      "length_mm": 65,
+      "width_mm": 18,
+      "height_mm": 18,
+      "total_height_mm": 65,
+      "length_in": 2.56,
+      "width_in": 0.71,
+      "height_in": 0.71
+    },
+    "weight_kg": 0.043,
+    "weight_lbs": 0.09,
+    "max_discharge_current_a": 6.0,
+    "internal_resistance_mOhm": 38.0,
+    "operating_temp_range": {
+      "charge": "0\u00b0C to 45\u00b0C",
+      "discharge": "-20\u00b0C to 60\u00b0C",
+      "storage": "-10\u00b0C to 45\u00b0C"
+    },
+    "cycle_life": "500+ cycles",
+    "certifications": [
+      "IS 16046:2018",
+      "CE",
+      "UN38.3"
+    ],
+    "image": "/static/images/products/sunka_18650_2000.jpg",
+    "description": "SUNKA 3.7V 2000mAh 18650 Li-ion cell (7.40Wh) optimized for high reliability, portable devices, and custom pack assembly.",
+    "features": [
+      "Certified IS 16046:2018 safety compliance",
+      "Stable discharge voltage platform"
+    ],
+    "moq": 50,
+    "lead_time": "In Stock (Ships in 24 hrs)"
+  },
+  {
+    "id": "sunka-18650-1600",
+    "model": "SUNKA 18650-1600",
+    "title": "3.7V 1600mAh 18650 Rechargeable Li-ion Battery Cell",
+    "chemistry": "Lithium",
+    "chemistry_code": "lithium",
+    "voltage": 3.7,
+    "capacity_ah": 1.6,
+    "capacity_bucket": "1.6Ah",
+    "energy_wh": 5.92,
+    "terminal_type": "Button / Flat Top",
+    "terminal_code": "f1",
+    "applications": [
+      "LED Flashlights",
+      "Emergency Lighting",
+      "Solar Lighting",
+      "Security Equipment"
+    ],
+    "dimensions": {
+      "length_mm": 65,
+      "width_mm": 18,
+      "height_mm": 18,
+      "total_height_mm": 65,
+      "length_in": 2.56,
+      "width_in": 0.71,
+      "height_in": 0.71
+    },
+    "weight_kg": 0.04,
+    "weight_lbs": 0.08,
+    "max_discharge_current_a": 4.8,
+    "internal_resistance_mOhm": 40.0,
+    "operating_temp_range": {
+      "charge": "0\u00b0C to 45\u00b0C",
+      "discharge": "-20\u00b0C to 60\u00b0C",
+      "storage": "-10\u00b0C to 45\u00b0C"
+    },
+    "cycle_life": "500+ cycles",
+    "certifications": [
+      "IS 16046:2018",
+      "CE",
+      "RoHS",
+      "UN38.3"
+    ],
+    "image": "/static/images/products/sunka_18650_1600.jpg",
+    "description": "3.7V 1600mAh (5.92Wh) economical 18650 Li-ion battery cell for high volume solar lighting and emergency lanterns.",
+    "features": [
+      "Cost-effective OEM battery solution",
+      "Multiple safety certifications (BIS, CE, RoHS)"
+    ],
+    "moq": 100,
+    "lead_time": "In Stock (Ships in 24 hrs)"
+  },
+  {
+    "id": "sunka-rb495bs",
+    "model": "SUNKA RB495BS",
+    "title": "4V 9.5Ah Sealed Lead-Acid Rechargeable Battery",
+    "chemistry": "SLA",
+    "chemistry_code": "sla",
+    "voltage": 4,
+    "capacity_ah": 9.5,
+    "capacity_bucket": "9.5Ah",
+    "energy_wh": 38,
+    "terminal_type": "T1 / T2 Optional",
+    "terminal_code": "f1",
+    "applications": [
+      "Emergency Lighting",
+      "Alarm & Security Systems",
+      "UPS Systems",
+      "Medical Equipment",
+      "Solar Power Systems"
+    ],
+    "dimensions": {
+      "length_mm": 90,
+      "width_mm": 70,
+      "height_mm": 101,
+      "total_height_mm": 107,
+      "length_in": 3.54,
+      "width_in": 2.76,
+      "height_in": 3.98
+    },
+    "weight_kg": 0.82,
+    "weight_lbs": 1.81,
+    "max_discharge_current_a": 142.5,
+    "internal_resistance_mOhm": 20.0,
+    "operating_temp_range": {
+      "charge": "-10\u00b0C to 40\u00b0C",
+      "discharge": "-15\u00b0C to 50\u00b0C",
+      "storage": "-20\u00b0C to 40\u00b0C"
+    },
+    "cycle_life": "300 - 500 cycles at 100% DOD",
+    "certifications": [
+      "ISO 9001:2015",
+      "CE",
+      "UL94-HB"
+    ],
+    "image": "/static/images/products/sunka_rb495bs.jpg",
+    "description": "High capacity 4V 9.5Ah SLA battery engineered for heavy standby discharge requirements in emergency lights and scale devices.",
+    "features": [
+      "Spill-proof, maintenance-free construction",
+      "High energy density in compact form factor"
+    ],
+    "moq": 10,
+    "lead_time": "In Stock (Ships in 24 hrs)"
+  },
+  {
+    "id": "sunka-rb460bs",
+    "model": "SUNKA RB460BS",
+    "title": "4V 6.0Ah Sealed Lead-Acid Rechargeable Battery",
+    "chemistry": "SLA",
+    "chemistry_code": "sla",
+    "voltage": 4,
+    "capacity_ah": 6.0,
+    "capacity_bucket": "6Ah",
+    "energy_wh": 24,
+    "terminal_type": "T1 (Faston 187)",
+    "terminal_code": "f1",
+    "applications": [
+      "UPS Systems",
+      "Emergency Lighting",
+      "Security Systems",
+      "Medical Devices"
+    ],
+    "dimensions": {
+      "length_mm": 70,
+      "width_mm": 47,
+      "height_mm": 101,
+      "total_height_mm": 107,
+      "length_in": 2.76,
+      "width_in": 1.85,
+      "height_in": 3.98
+    },
+    "weight_kg": 0.55,
+    "weight_lbs": 1.21,
+    "max_discharge_current_a": 90,
+    "internal_resistance_mOhm": 22.0,
+    "operating_temp_range": {
+      "charge": "-10\u00b0C to 40\u00b0C",
+      "discharge": "-15\u00b0C to 50\u00b0C",
+      "storage": "-20\u00b0C to 40\u00b0C"
+    },
+    "cycle_life": "300 - 500 cycles at 100% DOD",
+    "certifications": [
+      "ISO 9001:2015",
+      "CE"
+    ],
+    "image": "/static/images/products/sunka_rb460bs.jpg",
+    "description": "SUNKA RB460BS 4V 6.0Ah sealed lead acid battery with 3-5 years design service life.",
+    "features": [
+      "Leak-proof maintenance-free sealed design",
+      "Optimal charge acceptance"
+    ],
+    "moq": 10,
+    "lead_time": "In Stock (Ships in 24 hrs)"
+  },
+  {
+    "id": "sunka-rb650bs",
+    "model": "SUNKA RB650BS",
+    "title": "6V 5.5Ah Sealed Lead-Acid Rechargeable Battery",
+    "chemistry": "SLA",
+    "chemistry_code": "sla",
+    "voltage": 6,
+    "capacity_ah": 5.5,
+    "capacity_bucket": "5.5Ah",
+    "energy_wh": 33,
+    "terminal_type": "T1 / T2 Optional",
+    "terminal_code": "f1",
+    "applications": [
+      "Emergency Lighting",
+      "Alarm & Security Systems",
+      "UPS Systems",
+      "Medical Equipment"
+    ],
+    "dimensions": {
+      "length_mm": 70,
+      "width_mm": 48,
+      "height_mm": 101,
+      "total_height_mm": 107,
+      "length_in": 2.76,
+      "width_in": 1.89,
+      "height_in": 3.98
+    },
+    "weight_kg": 0.72,
+    "weight_lbs": 1.59,
+    "max_discharge_current_a": 82.5,
+    "internal_resistance_mOhm": 24.0,
+    "operating_temp_range": {
+      "charge": "-10\u00b0C to 40\u00b0C",
+      "discharge": "-15\u00b0C to 50\u00b0C",
+      "storage": "-20\u00b0C to 40\u00b0C"
+    },
+    "cycle_life": "300 - 500 cycles at 100% DOD",
+    "certifications": [
+      "ISO 9001:2015",
+      "CE",
+      "UL94-HB"
+    ],
+    "image": "/static/images/products/sunka_rb650bs.jpg",
+    "description": "6V 5.5Ah VRLA battery engineered for consistent performance in electronic cash registers and security backup.",
+    "features": [
+      "Absorbent Glass Mat (AGM) separator",
+      "Low internal resistance"
+    ],
+    "moq": 10,
+    "lead_time": "In Stock (Ships in 24 hrs)"
+  },
+  {
+    "id": "sunka-rb613e",
+    "model": "SUNKA RB613E",
+    "title": "6V 1.3Ah Compact Sealed Lead-Acid Battery",
+    "chemistry": "SLA",
+    "chemistry_code": "sla",
+    "voltage": 6,
+    "capacity_ah": 1.3,
+    "capacity_bucket": "1.3Ah",
+    "energy_wh": 7.8,
+    "terminal_type": "F1 (Faston Tab 187)",
+    "terminal_code": "f1",
+    "applications": [
+      "UPS Systems",
+      "Security & Alarm Systems",
+      "Emergency Lighting"
+    ],
+    "dimensions": {
+      "length_mm": 97,
+      "width_mm": 24,
+      "height_mm": 52,
+      "total_height_mm": 57,
+      "length_in": 3.82,
+      "width_in": 0.94,
+      "height_in": 2.05
+    },
+    "weight_kg": 0.3,
+    "weight_lbs": 0.66,
+    "max_discharge_current_a": 19.5,
+    "internal_resistance_mOhm": 45.0,
+    "operating_temp_range": {
+      "charge": "-10\u00b0C to 40\u00b0C",
+      "discharge": "-15\u00b0C to 50\u00b0C",
+      "storage": "-20\u00b0C to 40\u00b0C"
+    },
+    "cycle_life": "300 - 500 cycles",
+    "certifications": [
+      "ISO 9001:2015",
+      "CE"
+    ],
+    "image": "/static/images/products/sunka_rb613e.jpg",
+    "description": "Ultra-compact 6V 1.3Ah SLA rechargeable battery for small electronic instruments.",
+    "features": [
+      "Maintenance-free sealed construction",
+      "Long standby service life"
+    ],
+    "moq": 20,
+    "lead_time": "In Stock (Ships in 24 hrs)"
+  },
+  {
+    "id": "sunka-rb1213e",
+    "model": "SUNKA RB1213E",
+    "title": "12V 1.3Ah Sealed Lead-Acid Rechargeable Battery",
+    "chemistry": "SLA",
+    "chemistry_code": "sla",
+    "voltage": 12,
+    "capacity_ah": 1.3,
+    "capacity_bucket": "1.3Ah",
+    "energy_wh": 15.6,
+    "terminal_type": "F1 (Faston Tab 187)",
+    "terminal_code": "f1",
+    "applications": [
+      "UPS Systems",
+      "Security & Alarm Systems",
+      "Emergency Lighting"
+    ],
+    "dimensions": {
+      "length_mm": 97,
+      "width_mm": 43,
+      "height_mm": 52,
+      "total_height_mm": 58,
+      "length_in": 3.82,
+      "width_in": 1.69,
+      "height_in": 2.05
+    },
+    "weight_kg": 0.55,
+    "weight_lbs": 1.21,
+    "max_discharge_current_a": 19.5,
+    "internal_resistance_mOhm": 50.0,
+    "operating_temp_range": {
+      "charge": "-10\u00b0C to 40\u00b0C",
+      "discharge": "-15\u00b0C to 50\u00b0C",
+      "storage": "-20\u00b0C to 40\u00b0C"
+    },
+    "cycle_life": "300 - 500 cycles",
+    "certifications": [
+      "ISO 9001:2015",
+      "CE"
+    ],
+    "image": "/static/images/products/sunka_rb1213e.jpg",
+    "description": "12V 1.3Ah AGM SLA battery engineered for compact power backup.",
+    "features": [
+      "High reliability lead plates",
+      "Recyclable eco-friendly design"
+    ],
+    "moq": 20,
+    "lead_time": "In Stock (Ships in 24 hrs)"
+  },
+  {
+    "id": "sunka-rb410",
+    "model": "SUNKA RB410",
+    "title": "4V 1.0Ah Small Size Big Power SLA Battery",
+    "chemistry": "SLA",
+    "chemistry_code": "sla",
+    "voltage": 4,
+    "capacity_ah": 1.0,
+    "capacity_bucket": "1Ah",
+    "energy_wh": 4.0,
+    "terminal_type": "Pin Terminal",
+    "terminal_code": "f1",
+    "applications": [
+      "Emergency Lights",
+      "Toys",
+      "Speakers",
+      "Mosquito Racket",
+      "Security Systems"
+    ],
+    "dimensions": {
+      "length_mm": 50,
+      "width_mm": 22,
+      "height_mm": 75,
+      "total_height_mm": 78,
+      "length_in": 1.97,
+      "width_in": 0.87,
+      "height_in": 2.95
+    },
+    "weight_kg": 0.15,
+    "weight_lbs": 0.33,
+    "max_discharge_current_a": 15,
+    "internal_resistance_mOhm": 40.0,
+    "operating_temp_range": {
+      "charge": "-10\u00b0C to 40\u00b0C",
+      "discharge": "-15\u00b0C to 50\u00b0C",
+      "storage": "-20\u00b0C to 40\u00b0C"
+    },
+    "cycle_life": "300 - 500 cycles",
+    "certifications": [
+      "ISO 9001:2015",
+      "CE"
+    ],
+    "image": "/static/images/products/sunka_rb410.jpg",
+    "description": "SUNKA Small Size. Big Power. 4V 1.0Ah rechargeable battery designed for emergency lights, electronic scales, and mosquito zapper rackets.",
+    "features": [
+      "Compact size with high power density",
+      "Spill-proof sealed construction"
+    ],
+    "moq": 50,
+    "lead_time": "In Stock (Ships in 24 hrs)"
+  },
+  {
     "id": "ps-1295",
     "model": "PS-1295 F2",
-    "title": "12V 9.5Ah Sealed Lead Acid (SLA) Battery",
+    "title": "12V 9.5Ah Extended Capacity SLA Battery",
     "chemistry": "SLA",
     "chemistry_code": "sla",
     "voltage": 12,
@@ -100,7 +680,11 @@
     "energy_wh": 114,
     "terminal_type": "Faston F2 (0.250\")",
     "terminal_code": "f2",
-    "applications": ["UPS Systems", "Medical Equipment", "Fire & Security"],
+    "applications": [
+      "UPS Systems",
+      "Medical Equipment",
+      "Fire & Security"
+    ],
     "dimensions": {
       "length_mm": 151,
       "width_mm": 65,
@@ -108,23 +692,25 @@
       "total_height_mm": 100,
       "length_in": 5.94,
       "width_in": 2.56,
-      "height_in": 3.70
+      "height_in": 3.7
     },
-    "weight_kg": 2.70,
+    "weight_kg": 2.7,
     "weight_lbs": 5.95,
     "max_discharge_current_a": 142,
     "internal_resistance_mOhm": 17.0,
     "operating_temp_range": {
-      "charge": "-15°C to 50°C",
-      "discharge": "-20°C to 60°C",
-      "storage": "-20°C to 50°C"
+      "charge": "-15\u00b0C to 50\u00b0C",
+      "discharge": "-20\u00b0C to 60\u00b0C",
+      "storage": "-20\u00b0C to 50\u00b0C"
     },
     "cycle_life": "300 - 500 cycles at 100% DOD",
-    "certifications": ["ISO 9001:2015", "UL 1989", "CE"],
+    "certifications": [
+      "ISO 9001:2015",
+      "UL 1989",
+      "CE"
+    ],
     "image": "/static/images/sla_agm_battery.jpg",
-    "datasheet_pdf": "/static/docs/PS-1295-Datasheet.pdf",
-    "sds_pdf": "/static/docs/PowerSonic-SLA-SDS.pdf",
-    "description": "12V 9.5Ah AGM SLA battery with Faston F2 terminals delivering extended runtime for server UPS racks.",
+    "description": "12V 9.5Ah AGM SLA battery with Faston F2 terminals delivering extended runtime in standard 12V 7Ah/9Ah footprints.",
     "features": [
       "Enhanced energy density fits standard 12V 7Ah/9Ah footprints",
       "Maintenance-free sealed construction"
@@ -144,7 +730,12 @@
     "energy_wh": 115.2,
     "terminal_type": "Faston F2 (0.250\")",
     "terminal_code": "f2",
-    "applications": ["Solar & Energy Storage", "Medical Equipment", "Mobility / EV", "UPS Systems"],
+    "applications": [
+      "Solar & Energy Storage",
+      "Medical Equipment",
+      "Mobility / EV",
+      "UPS Systems"
+    ],
     "dimensions": {
       "length_mm": 151,
       "width_mm": 65,
@@ -152,22 +743,25 @@
       "total_height_mm": 100,
       "length_in": 5.94,
       "width_in": 2.56,
-      "height_in": 3.70
+      "height_in": 3.7
     },
-    "weight_kg": 1.20,
+    "weight_kg": 1.2,
     "weight_lbs": 2.64,
     "max_discharge_current_a": 18,
     "internal_resistance_mOhm": 15.0,
     "operating_temp_range": {
-      "charge": "0°C to 45°C",
-      "discharge": "-20°C to 60°C",
-      "storage": "-10°C to 45°C"
+      "charge": "0\u00b0C to 45\u00b0C",
+      "discharge": "-20\u00b0C to 60\u00b0C",
+      "storage": "-10\u00b0C to 45\u00b0C"
     },
     "cycle_life": "3500+ cycles at 80% DOD",
-    "certifications": ["ISO 9001:2015", "UN 38.3", "UL 1973", "CE"],
+    "certifications": [
+      "ISO 9001:2015",
+      "UN 38.3",
+      "UL 1973",
+      "CE"
+    ],
     "image": "/static/images/lithium_lifepo4_battery.jpg",
-    "datasheet_pdf": "/static/docs/PSL-1290-Datasheet.pdf",
-    "sds_pdf": "/static/docs/PowerSonic-Lithium-SDS.pdf",
     "description": "Ultra-lightweight 12.8V 9.0Ah LiFePO4 Lithium battery featuring integrated BMS protection and 3500+ cycles.",
     "features": [
       "Integrated Smart BMS prevents overcharge and thermal risks",
@@ -177,62 +771,21 @@
     "lead_time": "In Stock (Ships in 48 hrs)"
   },
   {
-    "id": "psl-695",
-    "model": "PSL-695 Lithium",
-    "title": "6.4V 9.5Ah Lithium LiFePO4 Industrial Battery",
-    "chemistry": "Lithium",
-    "chemistry_code": "lithium",
-    "voltage": 6,
-    "capacity_ah": 9.5,
-    "capacity_bucket": "9.5Ah",
-    "energy_wh": 60.8,
-    "terminal_type": "Faston F1 (0.187\")",
-    "terminal_code": "f1",
-    "applications": ["Medical Equipment", "Fire & Security", "Emergency Lighting"],
-    "dimensions": {
-      "length_mm": 151,
-      "width_mm": 34,
-      "height_mm": 94,
-      "total_height_mm": 100,
-      "length_in": 5.94,
-      "width_in": 1.34,
-      "height_in": 3.70
-    },
-    "weight_kg": 0.65,
-    "weight_lbs": 1.43,
-    "max_discharge_current_a": 20,
-    "internal_resistance_mOhm": 16.0,
-    "operating_temp_range": {
-      "charge": "0°C to 45°C",
-      "discharge": "-20°C to 60°C",
-      "storage": "-10°C to 45°C"
-    },
-    "cycle_life": "3500+ cycles at 80% DOD",
-    "certifications": ["ISO 9001:2015", "UN 38.3", "CE"],
-    "image": "/static/images/lithium_lifepo4_battery.jpg",
-    "datasheet_pdf": "/static/docs/PSL-695-Datasheet.pdf",
-    "sds_pdf": "/static/docs/PowerSonic-Lithium-SDS.pdf",
-    "description": "High-efficiency 6.4V 9.5Ah LiFePO4 battery pack engineered for portable medical analyzers and critical instruments.",
-    "features": [
-      "Stable discharge voltage curve throughout cycle",
-      "Rapid recharge capability"
-    ],
-    "moq": 6,
-    "lead_time": "In Stock (Ships in 24 hrs)"
-  },
-  {
-    "id": "psg-1295",
-    "model": "PSG-1295 Graphene",
-    "title": "12V 9.5Ah Graphene-Enhanced Deep Cycle Battery",
-    "chemistry": "Graphene",
-    "chemistry_code": "graphene",
+    "id": "psh-1280",
+    "model": "PSH-1280 High Rate",
+    "title": "12V 8.0Ah High Rate Discharge UPS Battery",
+    "chemistry": "High Rate UPS",
+    "chemistry_code": "high_rate",
     "voltage": 12,
-    "capacity_ah": 9.5,
-    "capacity_bucket": "9.5Ah",
-    "energy_wh": 114,
+    "capacity_ah": 8.0,
+    "capacity_bucket": "8Ah",
+    "energy_wh": 96,
     "terminal_type": "Faston F2 (0.250\")",
     "terminal_code": "f2",
-    "applications": ["Solar & Energy Storage", "UPS Systems", "Mobility / EV"],
+    "applications": [
+      "UPS Systems",
+      "Telecom"
+    ],
     "dimensions": {
       "length_mm": 151,
       "width_mm": 65,
@@ -240,73 +793,232 @@
       "total_height_mm": 100,
       "length_in": 5.94,
       "width_in": 2.56,
-      "height_in": 3.70
+      "height_in": 3.7
     },
-    "weight_kg": 2.60,
-    "weight_lbs": 5.73,
-    "max_discharge_current_a": 190,
-    "internal_resistance_mOhm": 10.0,
+    "weight_kg": 2.65,
+    "weight_lbs": 5.84,
+    "max_discharge_current_a": 160,
+    "internal_resistance_mOhm": 15.0,
     "operating_temp_range": {
-      "charge": "-20°C to 55°C",
-      "discharge": "-25°C to 65°C",
-      "storage": "-20°C to 50°C"
+      "charge": "-15\u00b0C to 50\u00b0C",
+      "discharge": "-20\u00b0C to 60\u00b0C",
+      "storage": "-20\u00b0C to 50\u00b0C"
     },
-    "cycle_life": "1800+ cycles at 80% DOD",
-    "certifications": ["ISO 9001:2015", "UL 1989", "CE", "Graphene Certified"],
-    "image": "/static/images/deep_cycle_gel_battery.jpg",
-    "datasheet_pdf": "/static/docs/PSG-1295-Datasheet.pdf",
-    "sds_pdf": "/static/docs/PowerSonic-Graphene-SDS.pdf",
-    "description": "State-of-the-art 12V 9.5Ah Graphene additive battery featuring ultra-low internal resistance, fast charging, and extended high-temperature endurance.",
-    "features": [
-      "Graphene nanoplates matrix increases grid conductivity by 40%",
-      "Substantially reduced sulfation for 3x cycle life vs conventional SLA",
-      "Superior cold cranking and extreme temperature tolerance"
+    "cycle_life": "5 years standby service life",
+    "certifications": [
+      "ISO 9001:2015",
+      "UL 1989",
+      "CE"
     ],
-    "moq": 4,
-    "lead_time": "In Stock (Ships in 24 hrs)"
-  },
-  {
-    "id": "psg-1228",
-    "model": "PSG-1228 Graphene",
-    "title": "12V 2.8Ah High Rate Graphene Battery",
-    "chemistry": "Graphene",
-    "chemistry_code": "graphene",
-    "voltage": 12,
-    "capacity_ah": 2.8,
-    "capacity_bucket": "2.8Ah",
-    "energy_wh": 33.6,
-    "terminal_type": "Faston F1 (0.187\")",
-    "terminal_code": "f1",
-    "applications": ["UPS Systems", "Medical Equipment", "Fire & Security"],
-    "dimensions": {
-      "length_mm": 134,
-      "width_mm": 67,
-      "height_mm": 61,
-      "total_height_mm": 67,
-      "length_in": 5.28,
-      "width_in": 2.64,
-      "height_in": 2.40
-    },
-    "weight_kg": 0.95,
-    "weight_lbs": 2.09,
-    "max_discharge_current_a": 65,
-    "internal_resistance_mOhm": 12.0,
-    "operating_temp_range": {
-      "charge": "-20°C to 55°C",
-      "discharge": "-25°C to 65°C",
-      "storage": "-20°C to 50°C"
-    },
-    "cycle_life": "1800+ cycles at 80% DOD",
-    "certifications": ["ISO 9001:2015", "UL 1989", "CE"],
-    "image": "/static/images/deep_cycle_gel_battery.jpg",
-    "datasheet_pdf": "/static/docs/PSG-1228-Datasheet.pdf",
-    "sds_pdf": "/static/docs/PowerSonic-Graphene-SDS.pdf",
-    "description": "12V 2.8Ah Graphene technology battery engineered for high pulse discharge rates and compact medical devices.",
+    "image": "/static/images/sla_agm_battery.jpg",
+    "description": "High rate discharge VRLA battery engineered specifically for short duration high wattage discharge requirements in server UPS cabinets.",
     "features": [
-      "Compact size with maximum pulse current density",
-      "Graphene enhanced heat dissipation"
+      "30% higher power output than standard SLA models",
+      "Thin plate technology for rapid energy delivery"
     ],
     "moq": 10,
     "lead_time": "In Stock (Ships in 24 hrs)"
+  },
+  {
+    "id": "psh-12100",
+    "model": "PSH-12100 High Rate",
+    "title": "12V 100Ah High Rate Data Center UPS Battery",
+    "chemistry": "High Rate UPS",
+    "chemistry_code": "high_rate",
+    "voltage": 12,
+    "capacity_ah": 100.0,
+    "capacity_bucket": "100Ah",
+    "energy_wh": 1200,
+    "terminal_type": "M8 Threaded Insert",
+    "terminal_code": "m8",
+    "applications": [
+      "UPS Systems",
+      "Telecom"
+    ],
+    "dimensions": {
+      "length_mm": 330,
+      "width_mm": 173,
+      "height_mm": 215,
+      "total_height_mm": 220,
+      "length_in": 12.99,
+      "width_in": 6.81,
+      "height_in": 8.46
+    },
+    "weight_kg": 31.5,
+    "weight_lbs": 69.4,
+    "max_discharge_current_a": 1200,
+    "internal_resistance_mOhm": 4.5,
+    "operating_temp_range": {
+      "charge": "-15\u00b0C to 50\u00b0C",
+      "discharge": "-20\u00b0C to 60\u00b0C",
+      "storage": "-20\u00b0C to 50\u00b0C"
+    },
+    "cycle_life": "10 years float service life",
+    "certifications": [
+      "ISO 9001:2015",
+      "UL 1989",
+      "CE"
+    ],
+    "image": "/static/images/sla_agm_battery.jpg",
+    "description": "Data center grade 12V 100Ah High Rate UPS battery delivering maximum kW/cell ratings during emergency utility power outages.",
+    "features": [
+      "Optimized grid design for high wattage discharge",
+      "Flame retardant UL94 V-0 case option"
+    ],
+    "moq": 2,
+    "lead_time": "In Stock (Ships in 48 hrs)"
+  },
+  {
+    "id": "dcg-12100",
+    "model": "DCG-12100 Gel",
+    "title": "12V 100Ah Deep Cycle Gel Solar Battery",
+    "chemistry": "Gel",
+    "chemistry_code": "gel",
+    "voltage": 12,
+    "capacity_ah": 100.0,
+    "capacity_bucket": "100Ah",
+    "energy_wh": 1200,
+    "terminal_type": "M8 Threaded Insert",
+    "terminal_code": "m8",
+    "applications": [
+      "Solar & Energy Storage",
+      "Mobility / EV",
+      "Telecom"
+    ],
+    "dimensions": {
+      "length_mm": 330,
+      "width_mm": 171,
+      "height_mm": 216,
+      "total_height_mm": 222,
+      "length_in": 12.99,
+      "width_in": 6.73,
+      "height_in": 8.5
+    },
+    "weight_kg": 30.5,
+    "weight_lbs": 67.2,
+    "max_discharge_current_a": 1000,
+    "internal_resistance_mOhm": 5.2,
+    "operating_temp_range": {
+      "charge": "-20\u00b0C to 50\u00b0C",
+      "discharge": "-40\u00b0C to 60\u00b0C",
+      "storage": "-20\u00b0C to 50\u00b0C"
+    },
+    "cycle_life": "1200+ cycles at 80% DOD",
+    "certifications": [
+      "ISO 9001:2015",
+      "UL 1989",
+      "CE"
+    ],
+    "image": "/static/images/deep_cycle_gel_battery.jpg",
+    "description": "Gel electrolyte battery engineered for deep cyclic performance, high ambient temperature tolerance, and off-grid solar energy systems.",
+    "features": [
+      "Thixotropic gel electrolyte eliminates acid stratification",
+      "Superior deep discharge recovery performance"
+    ],
+    "moq": 2,
+    "lead_time": "In Stock (Ships in 24 hrs)"
+  },
+  {
+    "id": "psg-12200",
+    "model": "PSG-12200 Graphene",
+    "title": "12V 200Ah High Conductivity Graphene Battery",
+    "chemistry": "Graphene",
+    "chemistry_code": "graphene",
+    "voltage": 12,
+    "capacity_ah": 200.0,
+    "capacity_bucket": "200Ah",
+    "energy_wh": 2400,
+    "terminal_type": "M8 Threaded Insert",
+    "terminal_code": "m8",
+    "applications": [
+      "Solar & Energy Storage",
+      "Telecom",
+      "Mobility / EV"
+    ],
+    "dimensions": {
+      "length_mm": 522,
+      "width_mm": 240,
+      "height_mm": 219,
+      "total_height_mm": 224,
+      "length_in": 20.55,
+      "width_in": 9.45,
+      "height_in": 8.62
+    },
+    "weight_kg": 61.0,
+    "weight_lbs": 134.5,
+    "max_discharge_current_a": 2000,
+    "internal_resistance_mOhm": 2.8,
+    "operating_temp_range": {
+      "charge": "-20\u00b0C to 55\u00b0C",
+      "discharge": "-30\u00b0C to 65\u00b0C",
+      "storage": "-20\u00b0C to 50\u00b0C"
+    },
+    "cycle_life": "2000+ cycles at 80% DOD",
+    "certifications": [
+      "ISO 9001:2015",
+      "UL 1989",
+      "CE",
+      "Graphene Certified"
+    ],
+    "image": "/static/images/deep_cycle_gel_battery.jpg",
+    "description": "Massive 12V 200Ah Graphene battery for commercial solar microgrids, off-grid telecom towers, and extreme temperature operations.",
+    "features": [
+      "Ultra-low 2.8 m\u03a9 internal resistance",
+      "Supports 1C fast charge capability"
+    ],
+    "moq": 1,
+    "lead_time": "In Stock (Ships in 48 hrs)"
+  },
+  {
+    "id": "psl-48100",
+    "model": "PSL-48100 Telecom Rack",
+    "title": "51.2V 100Ah 19-Inch Rackmount Telecom Lithium Module",
+    "chemistry": "Lithium",
+    "chemistry_code": "lithium",
+    "voltage": 48,
+    "capacity_ah": 100.0,
+    "capacity_bucket": "100Ah",
+    "energy_wh": 5120,
+    "terminal_type": "M8 Threaded Terminal Block",
+    "terminal_code": "m8",
+    "applications": [
+      "Telecom",
+      "UPS Systems",
+      "Solar & Energy Storage"
+    ],
+    "dimensions": {
+      "length_mm": 482,
+      "width_mm": 442,
+      "height_mm": 133,
+      "total_height_mm": 133,
+      "length_in": 18.98,
+      "width_in": 17.4,
+      "height_in": 5.24
+    },
+    "weight_kg": 43.0,
+    "weight_lbs": 94.8,
+    "max_discharge_current_a": 100,
+    "internal_resistance_mOhm": 5.0,
+    "operating_temp_range": {
+      "charge": "0\u00b0C to 50\u00b0C",
+      "discharge": "-20\u00b0C to 60\u00b0C",
+      "storage": "-10\u00b0C to 45\u00b0C"
+    },
+    "cycle_life": "6000+ cycles at 80% DOD",
+    "certifications": [
+      "ISO 9001:2015",
+      "UN 38.3",
+      "UL 1973",
+      "CE",
+      "GR-63-CORE"
+    ],
+    "image": "/static/images/telecom_rack_battery.jpg",
+    "description": "51.2V (48V nominal) 100Ah (5.12kWh) 3U 19-inch rack-mountable lithium iron phosphate module designed for 5G base transceiver stations.",
+    "features": [
+      "Standard 3U 19-inch rackmount chassis with RS485/CANbus communication",
+      "Multi-module parallel expansion up to 16 units (81.9 kWh)"
+    ],
+    "moq": 1,
+    "lead_time": "In Stock (Ships in 48 hrs)"
   }
 ]

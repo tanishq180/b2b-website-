@@ -1,0 +1,343 @@
+{% extends "layout.html" %}
+
+{% block title %}Admin Product Management Portal | MERI H Industries{% endblock %}
+
+{% block content %}
+<section class="section" style="padding-top: 2.5rem; background-color: #F8FAFC; min-height: 85vh;">
+  <div class="container">
+    
+    <!-- Top Header -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+      <div>
+        <div class="eyebrow" style="margin-bottom: 0.25rem;">
+          <span>⚙️ MANAGEMENT PORTAL</span>
+        </div>
+        <h1 class="section-title" style="margin-bottom: 0.25rem;">Battery Product Manager</h1>
+        <p class="section-desc">Add, update, or remove industrial battery models across all categories in real-time.</p>
+      </div>
+
+      <div style="display: flex; gap: 0.75rem;">
+        <a href="/admin/export" class="btn btn-outline-navy btn-sm" download>
+          📥 Export Catalog JSON
+        </a>
+        <button onclick="document.getElementById('add-product-modal').style.display='flex'" class="btn btn-accent btn-sm">
+          ➕ Add New Battery
+        </button>
+        <a href="/admin/logout" class="btn btn-sm" style="background: #E2E8F0; color: #334155; font-weight: 600;">
+          🔒 Logout
+        </a>
+      </div>
+    </div>
+
+    <!-- Summary Stats Row -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; margin-bottom: 2rem;">
+      <div style="background: white; border: 1px solid #E2E8F0; border-radius: 12px; padding: 1.25rem; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+        <div style="color: #64748B; font-size: 0.825rem; font-weight: 600; text-transform: uppercase;">Total Batteries</div>
+        <div style="color: var(--color-navy-dark); font-size: 2rem; font-weight: 800; margin-top: 0.25rem;">{{ total_products }}</div>
+      </div>
+      <div style="background: white; border: 1px solid #E2E8F0; border-radius: 12px; padding: 1.25rem; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+        <div style="color: #64748B; font-size: 0.825rem; font-weight: 600; text-transform: uppercase;">Active Chemistries</div>
+        <div style="color: var(--color-accent-orange); font-size: 2rem; font-weight: 800; margin-top: 0.25rem;">{{ chemistries|length }}</div>
+      </div>
+      <div style="background: white; border: 1px solid #E2E8F0; border-radius: 12px; padding: 1.25rem; box-shadow: 0 2px 4px rgba(0,0,0,0.02);">
+        <div style="color: #64748B; font-size: 0.825rem; font-weight: 600; text-transform: uppercase;">Nominal Voltages</div>
+        <div style="color: var(--color-navy-light); font-size: 2rem; font-weight: 800; margin-top: 0.25rem;">{{ voltages|length }}</div>
+      </div>
+    </div>
+
+    <!-- Product Search & Management Table -->
+    <div style="background: white; border: 1px solid #E2E8F0; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+      
+      <!-- Table Toolbar -->
+      <div style="padding: 1.25rem 1.5rem; border-bottom: 1px solid #E2E8F0; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap;">
+        <h3 style="margin: 0; font-size: 1.125rem; color: var(--color-navy-dark); font-weight: 700;">Live Catalog Items</h3>
+        <input type="text" id="admin-search-table" placeholder="Filter models or chemistry..." class="form-control" style="max-width: 320px; font-size: 0.875rem;">
+      </div>
+
+      <!-- Table Container -->
+      <div style="overflow-x: auto;">
+        <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.875rem;" id="admin-table">
+          <thead>
+            <tr style="background: #F8FAFC; border-bottom: 1px solid #E2E8F0; color: #475569; font-weight: 700; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em;">
+              <th style="padding: 1rem 1.5rem;">Preview</th>
+              <th style="padding: 1rem 1.5rem;">Model & ID</th>
+              <th style="padding: 1rem 1.5rem;">Title / Specs</th>
+              <th style="padding: 1rem 1.5rem;">Chemistry</th>
+              <th style="padding: 1rem 1.5rem;">Voltage / Capacity</th>
+              <th style="padding: 1rem 1.5rem;">MOQ</th>
+              <th style="padding: 1rem 1.5rem; text-align: right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for p in products %}
+            <tr style="border-bottom: 1px solid #F1F5F9;" class="admin-product-row" data-model="{{ p.model|lower }}" data-title="{{ p.title|lower }}" data-chem="{{ p.chemistry|lower }}">
+              <td style="padding: 1rem 1.5rem;">
+                <img src="{{ p.image }}" alt="{{ p.model }}" style="width: 48px; height: 48px; object-fit: contain; background: #F8FAFC; padding: 4px; border-radius: 6px; border: 1px solid #E2E8F0;">
+              </td>
+              <td style="padding: 1rem 1.5rem;">
+                <strong style="color: var(--color-navy-dark); font-size: 0.95rem;">{{ p.model }}</strong>
+                <div style="color: #94A3B8; font-size: 0.75rem;">ID: <code>{{ p.id }}</code></div>
+              </td>
+              <td style="padding: 1rem 1.5rem; max-width: 260px;">
+                <div style="font-weight: 600; color: #334155;">{{ p.title }}</div>
+                <div style="font-size: 0.75rem; color: #64748B; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                  {{ p.applications|join(', ') if p.applications else 'General Standby' }}
+                </div>
+              </td>
+              <td style="padding: 1rem 1.5rem;">
+                <span class="badge" style="background: #EFF6FF; color: #1D4ED8; font-weight: 700; padding: 4px 8px; border-radius: 4px; font-size: 0.75rem;">
+                  {{ p.chemistry }}
+                </span>
+              </td>
+              <td style="padding: 1rem 1.5rem; font-weight: 600; color: #1E293B;">
+                {{ p.voltage }}V / {{ p.capacity_ah }} Ah
+              </td>
+              <td style="padding: 1rem 1.5rem; color: #475569;">
+                {{ p.moq or 1 }} units
+              </td>
+              <td style="padding: 1rem 1.5rem; text-align: right;">
+                <div style="display: inline-flex; gap: 0.5rem;">
+                  <a href="/product/{{ p.id }}" target="_blank" class="btn btn-outline-navy btn-sm" style="padding: 4px 8px; font-size: 0.75rem;">
+                    👁️ View
+                  </a>
+                  <button onclick='openEditModal({{ p|tojson|safe }})' class="btn btn-sm" style="background: #F1F5F9; color: #0F172A; border: 1px solid #CBD5E1; padding: 4px 8px; font-size: 0.75rem; border-radius: 4px; cursor: pointer;">
+                    ✏️ Edit
+                  </button>
+                  <form method="POST" action="/admin/product/delete/{{ p.id }}" style="display: inline;" onsubmit="return confirm('Are you sure you want to remove {{ p.model }} from catalog?');">
+                    <button type="submit" class="btn btn-sm" style="background: #FEF2F2; color: #DC2626; border: 1px solid #FCA5A5; padding: 4px 8px; font-size: 0.75rem; border-radius: 4px; cursor: pointer;">
+                      🗑️ Delete
+                    </button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ==========================================================================
+     Modal 1: Add New Battery Product
+     ========================================================================== -->
+<div id="add-product-modal" style="display: none; position: fixed; inset: 0; background: rgba(11, 25, 44, 0.75); backdrop-filter: blur(4px); z-index: 9999; align-items: center; justify-content: center; padding: 1.5rem;">
+  <div style="background: white; border-radius: 16px; width: 100%; max-width: 720px; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); border: 1px solid #E2E8F0;">
+    
+    <div style="padding: 1.5rem 2rem; border-bottom: 1px solid #E2E8F0; display: flex; justify-content: space-between; align-items: center;">
+      <h3 style="margin: 0; color: var(--color-navy-dark); font-size: 1.25rem; font-weight: 800;">➕ Add Battery Specification</h3>
+      <button onclick="document.getElementById('add-product-modal').style.display='none'" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #64748B;">✕</button>
+    </div>
+
+    <form method="POST" action="/admin/product/add" enctype="multipart/form-data" style="padding: 2rem;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+        <div>
+          <label class="form-label">Model Name *</label>
+          <input type="text" name="model" class="form-control" placeholder="e.g. SUNKA RB1270" required>
+        </div>
+        <div>
+          <label class="form-label">Chemistry Category *</label>
+          <select name="chemistry" class="form-control" required>
+            <option value="SLA">SLA / AGM (Standard Lead Acid)</option>
+            <option value="High Rate UPS">High Rate UPS</option>
+            <option value="Lithium">Smart Lithium LiFePO4</option>
+            <option value="Gel">Deep Cycle Gel</option>
+            <option value="Graphene">Graphene</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 1.25rem;">
+        <label class="form-label">Full Title / Description Line *</label>
+        <input type="text" name="title" class="form-control" placeholder="e.g. 12V 7.0Ah Sealed Lead-Acid Rechargeable Battery" required>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+        <div>
+          <label class="form-label">Nominal Voltage (V) *</label>
+          <input type="number" step="0.1" name="voltage" class="form-control" placeholder="12" required>
+        </div>
+        <div>
+          <label class="form-label">Capacity (Ah) *</label>
+          <input type="number" step="0.1" name="capacity_ah" class="form-control" placeholder="7.0" required>
+        </div>
+        <div>
+          <label class="form-label">Terminal Type</label>
+          <input type="text" name="terminal_type" class="form-control" placeholder="Faston F2 (0.250&quot;)">
+        </div>
+      </div>
+
+      <!-- Image File Upload or URL -->
+      <div style="background: #F8FAFC; border: 1px dashed #CBD5E1; padding: 1.25rem; border-radius: 8px; margin-bottom: 1.25rem;">
+        <label class="form-label" style="font-weight: 700;">Product Image Flyer / Photo</label>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.5rem;">
+          <div>
+            <span style="font-size: 0.75rem; color: #64748B; display: block; margin-bottom: 0.25rem;">Upload Image File:</span>
+            <input type="file" name="product_image_file" accept="image/*" class="form-control" style="font-size: 0.8rem;">
+          </div>
+          <div>
+            <span style="font-size: 0.75rem; color: #64748B; display: block; margin-bottom: 0.25rem;">OR Existing Image Path:</span>
+            <input type="text" name="image_path" class="form-control" placeholder="/static/images/sla_agm_battery.jpg">
+          </div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+        <div>
+          <label class="form-label">Weight (kg)</label>
+          <input type="number" step="0.01" name="weight_kg" class="form-control" placeholder="2.18">
+        </div>
+        <div>
+          <label class="form-label">MOQ (Units)</label>
+          <input type="number" name="moq" class="form-control" value="10">
+        </div>
+        <div>
+          <label class="form-label">Lead Time</label>
+          <input type="text" name="lead_time" class="form-control" value="In Stock (Ships in 24 hrs)">
+        </div>
+      </div>
+
+      <div style="margin-bottom: 1.25rem;">
+        <label class="form-label">Applications (Comma separated)</label>
+        <input type="text" name="applications" class="form-control" placeholder="UPS Systems, Fire & Security, Emergency Lighting">
+      </div>
+
+      <div style="margin-bottom: 1.5rem;">
+        <label class="form-label">Technical Overview</label>
+        <textarea name="description" class="form-control" rows="3" placeholder="Detailed engineering product overview..."></textarea>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 0.75rem;">
+        <button type="button" onclick="document.getElementById('add-product-modal').style.display='none'" class="btn btn-sm" style="background: #E2E8F0; color: #334155;">Cancel</button>
+        <button type="submit" class="btn btn-accent btn-sm">Save & Publish Product →</button>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<!-- ==========================================================================
+     Modal 2: Edit Battery Product
+     ========================================================================== -->
+<div id="edit-product-modal" style="display: none; position: fixed; inset: 0; background: rgba(11, 25, 44, 0.75); backdrop-filter: blur(4px); z-index: 9999; align-items: center; justify-content: center; padding: 1.5rem;">
+  <div style="background: white; border-radius: 16px; width: 100%; max-width: 720px; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1); border: 1px solid #E2E8F0;">
+    
+    <div style="padding: 1.5rem 2rem; border-bottom: 1px solid #E2E8F0; display: flex; justify-content: space-between; align-items: center;">
+      <h3 style="margin: 0; color: var(--color-navy-dark); font-size: 1.25rem; font-weight: 800;">✏️ Edit Battery Specification</h3>
+      <button onclick="document.getElementById('edit-product-modal').style.display='none'" style="background: none; border: none; font-size: 1.5rem; cursor: pointer; color: #64748B;">✕</button>
+    </div>
+
+    <form id="edit-product-form" method="POST" action="" enctype="multipart/form-data" style="padding: 2rem;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+        <div>
+          <label class="form-label">Model Name *</label>
+          <input type="text" id="edit-model" name="model" class="form-control" required>
+        </div>
+        <div>
+          <label class="form-label">Chemistry Category *</label>
+          <select id="edit-chemistry" name="chemistry" class="form-control" required>
+            <option value="SLA">SLA / AGM (Standard Lead Acid)</option>
+            <option value="High Rate UPS">High Rate UPS</option>
+            <option value="Lithium">Smart Lithium LiFePO4</option>
+            <option value="Gel">Deep Cycle Gel</option>
+            <option value="Graphene">Graphene</option>
+          </select>
+        </div>
+      </div>
+
+      <div style="margin-bottom: 1.25rem;">
+        <label class="form-label">Full Title / Description Line *</label>
+        <input type="text" id="edit-title" name="title" class="form-control" required>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+        <div>
+          <label class="form-label">Nominal Voltage (V) *</label>
+          <input type="number" step="0.1" id="edit-voltage" name="voltage" class="form-control" required>
+        </div>
+        <div>
+          <label class="form-label">Capacity (Ah) *</label>
+          <input type="number" step="0.1" id="edit-capacity-ah" name="capacity_ah" class="form-control" required>
+        </div>
+        <div>
+          <label class="form-label">Terminal Type</label>
+          <input type="text" id="edit-terminal-type" name="terminal_type" class="form-control">
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.25rem; margin-bottom: 1.25rem;">
+        <div>
+          <label class="form-label">Weight (kg)</label>
+          <input type="number" step="0.01" id="edit-weight-kg" name="weight_kg" class="form-control">
+        </div>
+        <div>
+          <label class="form-label">MOQ (Units)</label>
+          <input type="number" id="edit-moq" name="moq" class="form-control">
+        </div>
+        <div>
+          <label class="form-label">Lead Time</label>
+          <input type="text" id="edit-lead-time" name="lead_time" class="form-control">
+        </div>
+      </div>
+
+      <div style="margin-bottom: 1.25rem;">
+        <label class="form-label">Applications (Comma separated)</label>
+        <input type="text" id="edit-applications" name="applications" class="form-control">
+      </div>
+
+      <div style="margin-bottom: 1.5rem;">
+        <label class="form-label">Technical Overview</label>
+        <textarea id="edit-description" name="description" class="form-control" rows="3"></textarea>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 0.75rem;">
+        <button type="button" onclick="document.getElementById('edit-product-modal').style.display='none'" class="btn btn-sm" style="background: #E2E8F0; color: #334155;">Cancel</button>
+        <button type="submit" class="btn btn-navy btn-sm">Update Product Specs →</button>
+      </div>
+    </form>
+
+  </div>
+</div>
+
+<script>
+  // Admin Live Filter Table
+  const searchInput = document.getElementById('admin-search-table');
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      const q = e.target.value.toLowerCase().trim();
+      document.querySelectorAll('.admin-product-row').forEach(row => {
+        const model = row.getAttribute('data-model');
+        const title = row.getAttribute('data-title');
+        const chem = row.getAttribute('data-chem');
+        if (model.includes(q) || title.includes(q) || chem.includes(q)) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    });
+  }
+
+  // Open & Pre-fill Edit Modal
+  function openEditModal(product) {
+    const form = document.getElementById('edit-product-form');
+    form.action = `/admin/product/edit/${product.id}`;
+
+    document.getElementById('edit-model').value = product.model || '';
+    document.getElementById('edit-chemistry').value = product.chemistry || 'SLA';
+    document.getElementById('edit-title').value = product.title || '';
+    document.getElementById('edit-voltage').value = product.voltage || '';
+    document.getElementById('edit-capacity-ah').value = product.capacity_ah || '';
+    document.getElementById('edit-terminal-type').value = product.terminal_type || '';
+    document.getElementById('edit-weight-kg').value = product.weight_kg || '';
+    document.getElementById('edit-moq').value = product.moq || 1;
+    document.getElementById('edit-lead-time').value = product.lead_time || '';
+    document.getElementById('edit-applications').value = (product.applications || []).join(', ');
+    document.getElementById('edit-description').value = product.description || '';
+
+    document.getElementById('edit-product-modal').style.display = 'flex';
+  }
+</script>
+{% endblock %}

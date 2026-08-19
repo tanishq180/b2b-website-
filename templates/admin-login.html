@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block title %}Admin Login | MERI H Industries{% endblock %}
+
+{% block content %}
+<section class="section" style="min-height: 70vh; display: flex; align-items: center; justify-content: center; background: var(--color-bg-light);">
+  <div class="container" style="max-width: 440px; margin: 0 auto;">
+    <div style="background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid #E2E8F0; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);">
+      
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <div style="display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; background: rgba(11, 25, 44, 0.05); border-radius: 12px; margin-bottom: 1rem; font-size: 1.75rem;">
+          🔐
+        </div>
+        <h2 style="color: var(--color-navy-dark); font-size: 1.5rem; font-weight: 800; margin-bottom: 0.25rem;">Admin Control Portal</h2>
+        <p style="color: #64748B; font-size: 0.875rem;">Authorized personnel access for catalog management</p>
+      </div>
+
+      {% if error %}
+      <div style="background: #FEF2F2; border: 1px solid #FCA5A5; color: #991B1B; padding: 0.75rem 1rem; border-radius: 8px; margin-bottom: 1.5rem; font-size: 0.875rem; display: flex; align-items: center; gap: 0.5rem;">
+        <span>⚠️</span> <span>{{ error }}</span>
+      </div>
+      {% endif %}
+
+      <form method="POST" action="/admin/login">
+        <div class="form-group" style="margin-bottom: 1.25rem;">
+          <label class="form-label" for="username">Username</label>
+          <input type="text" id="username" name="username" class="form-control" placeholder="Enter admin username" required autofocus>
+        </div>
+
+        <div class="form-group" style="margin-bottom: 1.75rem;">
+          <label class="form-label" for="password">Password</label>
+          <input type="password" id="password" name="password" class="form-control" placeholder="Enter admin password" required>
+        </div>
+
+        <button type="submit" class="btn btn-navy btn-lg" style="width: 100%; font-weight: 700;">
+          Authenticate Session →
+        </button>
+      </form>
+
+      <div style="margin-top: 1.75rem; text-align: center; font-size: 0.775rem; color: #94A3B8; border-top: 1px solid #F1F5F9; padding-top: 1.25rem;">
+        Default Credentials: <code>admin</code> / <code>meri2026</code>
+      </div>
+
+    </div>
+  </div>
+</section>
+{% endblock %}

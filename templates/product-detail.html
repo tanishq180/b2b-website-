@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}{{ product.model }} | {{ product.title }} | Technical Specs{% endblock %}
-{% block meta_description %}{{ product.model }} technical specifications, electrical parameters, mechanical dimensions, datasheet PDF, and B2B quote request.{% endblock %}
+{% block meta_description %}{{ product.model }} technical specifications, electrical parameters, mechanical dimensions, and B2B quote request.{% endblock %}
 
 {% block content %}
 <section class="section" style="padding-top: 2.5rem;">
@@ -85,25 +85,6 @@
           <button class="btn btn-accent btn-lg open-rfq-modal-btn" data-product-model="{{ product.model }}">
             Request Bulk Quote (RFQ)
           </button>
-        </div>
-
-        <div style="display:flex; gap: 1rem; margin-bottom: 2rem;">
-          <a href="#" class="btn btn-outline-navy btn-sm" onclick="event.preventDefault(); alert('📄 Downloading {{ product.model }} Official PDF Datasheet...');">
-            📥 Download PDF Datasheet
-          </a>
-          <a href="#" class="btn btn-outline-navy btn-sm" onclick="event.preventDefault(); alert('🛡️ Downloading Material Safety Data Sheet (SDS)...');">
-            🛡️ Download SDS (MSDS)
-          </a>
-        </div>
-
-        <!-- Key Engineering Features -->
-        <div style="background-color: #FFFFFF; border: 1px solid var(--color-border); border-radius: 8px; padding: 1.25rem;">
-          <h4 style="color: var(--color-navy-dark); font-size: 1rem; margin-bottom: 0.75rem;">Key Engineering Highlights</h4>
-          <ul style="padding-left: 1.25rem; font-size: 0.9rem; color: var(--color-text-main);">
-            {% for feature in product.features %}
-            <li style="margin-bottom: 0.4rem;">{{ feature }}</li>
-            {% endfor %}
-          </ul>
         </div>
 
       </div>
