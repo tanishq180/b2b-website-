@@ -2,14 +2,18 @@
 
 {% block title %}Admin Login | MERI H Industries{% endblock %}
 
+{% block header %}{% endblock %}
+{% block trust_banner %}{% endblock %}
+{% block footer %}{% endblock %}
+
 {% block content %}
-<section class="section" style="min-height: 70vh; display: flex; align-items: center; justify-content: center; background: var(--color-bg-light);">
+<section class="section" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #0B192C; padding: 2rem 1rem;">
   <div class="container" style="max-width: 440px; margin: 0 auto;">
-    <div style="background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid #E2E8F0; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);">
+    <div style="background: white; padding: 2.5rem; border-radius: 16px; border: 1px solid #1E293B; box-shadow: 0 20px 25px -5px rgba(0,0,0,0.3);">
       
       <div style="text-align: center; margin-bottom: 2rem;">
-        <div style="display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; background: rgba(11, 25, 44, 0.05); border-radius: 12px; margin-bottom: 1rem; font-size: 1.75rem;">
-          🔐
+        <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; background: #F8FAFC; border-radius: 14px; margin-bottom: 1rem; border: 1px solid #E2E8F0; padding: 6px;">
+          <img src="{{ url_for('static', filename='images/meri_logo.png') }}" alt="MERI Logo" style="max-width: 100%; max-height: 100%; object-fit: contain;">
         </div>
         <h2 style="color: var(--color-navy-dark); font-size: 1.5rem; font-weight: 800; margin-bottom: 0.25rem;">Admin Control Portal</h2>
         <p style="color: #64748B; font-size: 0.875rem;">Authorized personnel access for catalog management</p>
@@ -37,8 +41,9 @@
         </button>
       </form>
 
-      <div style="margin-top: 1.75rem; text-align: center; font-size: 0.775rem; color: #94A3B8; border-top: 1px solid #F1F5F9; padding-top: 1.25rem;">
-        Default Credentials: <code>admin</code> / <code>meri2026</code>
+      <div style="margin-top: 1.75rem; text-align: center; font-size: 0.775rem; color: #94A3B8; border-top: 1px solid #F1F5F9; padding-top: 1.25rem; display: flex; justify-content: space-between; align-items: center;">
+        <span>Default: <code>admin</code> / <code>meri2026</code></span>
+        <a href="/" style="color: var(--color-accent-orange); text-decoration: none; font-weight: 600;">← Back to Website</a>
       </div>
 
     </div>

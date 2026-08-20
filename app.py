@@ -298,6 +298,19 @@ def admin_dashboard():
     products = load_products()
     return render_template('admin-dashboard.html', products=products)
 
+def handle_product_image_upload(product_id, file, fallback_url=None):
+    if file and file.filename:
+        filename = secure_filename(file.filename)
+        _, ext = os.path.splitext(filename)
+        safe_name = f"{product_id}_{int(datetime.now().timestamp())}{ext.lower() if ext else '.jpg'}"
+        upload_dir = os.path.join(app.root_path, 'static', 'images', 'products')
+        os.makedirs(upload_dir, exist_ok=True)
+        file.save(os.path.join(upload_dir, safe_name))
+        return f"/static/images/products/{safe_name}"
+    elif fallback_url and fallback_url.strip():
+        return fallback_url.strip()
+    return None
+
 @app.route('/admin/product/add', methods=['POST'])
 @admin_required
 def admin_add_product():
@@ -319,15 +332,8 @@ def admin_add_product():
         
     product_id = model.lower().replace(' ', '-').replace('/', '-')
     
-    image_url = request.form.get('image_path', '').strip()
-    file = request.files.get('product_image_file')
-    if file and file.filename:
-        filename = secure_filename(file.filename)
-        upload_dir = os.path.join(app.root_path, 'static', 'images', 'products')
-        os.makedirs(upload_dir, exist_ok=True)
-        file.save(os.path.join(upload_dir, filename))
-        image_url = f"/static/images/products/{filename}"
-    elif not image_url:
+    image_url = handle_product_image_upload(product_id, request.files.get('product_image_file'), request.form.get('image_path'))
+    if not image_url:
         image_url = "/static/images/sla_agm_battery.jpg"
         
     chem_code_map = {
@@ -392,6 +398,34 @@ def admin_add_product():
     save_products(products)
     return redirect(url_for('admin_dashboard'))
 
+@app.route('/admin/product/upload-image/<product_id>', methods=['POST'])
+@admin_required
+def admin_upload_product_image(product_id):
+    products = load_products()
+    p = next((prod for prod in products if prod['id'] == product_id.lower()), None)
+    if not p:
+        return jsonify({'status': 'error', 'message': 'Product not found'}), 404
+        
+    file = request.files.get('product_image_file') or request.files.get('image') or request.files.get('file')
+    image_url = handle_product_image_upload(p['id'], file, request.form.get('image_path'))
+    
+    if not image_url:
+        return jsonify({'status': 'error', 'message': 'No image file or URL provided'}), 400
+        
+    p['image'] = image_url
+    save_products(products)
+    
+    # Check if requested as AJAX
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest' or request.is_json or 'multipart/form-data' in request.content_type:
+        return jsonify({
+            'status': 'success',
+            'message': f"Image for {p['model']} updated successfully.",
+            'image_url': image_url,
+            'product_id': p['id'],
+            'model': p['model']
+        })
+    return redirect(url_for('admin_dashboard'))
+
 @app.route('/admin/product/edit/<product_id>', methods=['POST'])
 @admin_required
 def admin_edit_product(product_id):
@@ -412,6 +446,11 @@ def admin_edit_product(product_id):
     p['lead_time'] = request.form.get('lead_time', p.get('lead_time', '')).strip()
     p['description'] = request.form.get('description', p.get('description', '')).strip()
     
+    # Image update handling
+    uploaded_image = handle_product_image_upload(p['id'], request.files.get('product_image_file'), request.form.get('image_path'))
+    if uploaded_image:
+        p['image'] = uploaded_image
+        
     apps_raw = request.form.get('applications', '')
     if apps_raw:
         p['applications'] = [a.strip() for a in apps_raw.split(',') if a.strip()]
