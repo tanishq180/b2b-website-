@@ -279,7 +279,10 @@ img {
 }
 
 .nav-menu {
-  display: none !important; /* Menu bar removed for desktop per user request */
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+  list-style: none;
 }
 .nav-link {
   font-weight: 600;
