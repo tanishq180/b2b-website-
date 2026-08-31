@@ -2,15 +2,11 @@ import os
 import json
 import uuid
 from datetime import datetime
-from functools import wraps
-from flask import Flask, render_template, request, jsonify, abort, Response, session, redirect, url_for, flash
+from flask import Flask, render_template, request, jsonify, abort, Response
 from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'meri_h_industries_secret_key_2026')
-
-ADMIN_USERNAME = os.environ.get('ADMIN_USERNAME', 'admin')
-ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', 'meri2026')
 
 # Load Product Dataset
 PRODUCTS_FILE = os.path.join(os.path.dirname(__file__), 'products.json')
@@ -20,18 +16,6 @@ def load_products():
         return []
     with open(PRODUCTS_FILE, 'r', encoding='utf-8') as f:
         return json.load(f)
-
-def save_products(products):
-    with open(PRODUCTS_FILE, 'w', encoding='utf-8') as f:
-        json.dump(products, f, indent=2)
-
-def admin_required(f):
-    @wraps(f)
-    def decorated_function(*args, **kwargs):
-        if not session.get('admin_logged_in'):
-            return redirect(url_for('admin_login'))
-        return f(*args, **kwargs)
-    return decorated_function
 
 # Storage for RFQ submissions (in-memory demo store & log file)
 RFQ_LOG_FILE = os.path.join(os.path.dirname(__file__), 'rfq_submissions.json')
@@ -270,211 +254,6 @@ def submit_rfq():
         'message': f'Thank you {full_name}. Your B2B Quote Request ({quote_id}) has been received. Our application engineer will reach out within 2 business hours.'
     })
 
-# --- ADMIN PORTAL ROUTES ---
-
-@app.route('/admin/login', methods=['GET', 'POST'])
-def admin_login():
-    if session.get('admin_logged_in'):
-        return redirect(url_for('admin_dashboard'))
-    error = None
-    if request.method == 'POST':
-        user = request.form.get('username', '').strip()
-        pwd = request.form.get('password', '').strip()
-        if user == ADMIN_USERNAME and pwd == ADMIN_PASSWORD:
-            session['admin_logged_in'] = True
-            return redirect(url_for('admin_dashboard'))
-        else:
-            error = 'Invalid username or password credentials.'
-    return render_template('admin-login.html', error=error)
-
-@app.route('/admin/logout')
-def admin_logout():
-    session.pop('admin_logged_in', None)
-    return redirect(url_for('admin_login'))
-
-@app.route('/admin')
-@admin_required
-def admin_dashboard():
-    products = load_products()
-    return render_template('admin-dashboard.html', products=products)
-
-def handle_product_image_upload(product_id, file, fallback_url=None):
-    if file and file.filename:
-        filename = secure_filename(file.filename)
-        _, ext = os.path.splitext(filename)
-        safe_name = f"{product_id}_{int(datetime.now().timestamp())}{ext.lower() if ext else '.jpg'}"
-        upload_dir = os.path.join(app.root_path, 'static', 'images', 'products')
-        os.makedirs(upload_dir, exist_ok=True)
-        file.save(os.path.join(upload_dir, safe_name))
-        return f"/static/images/products/{safe_name}"
-    elif fallback_url and fallback_url.strip():
-        return fallback_url.strip()
-    return None
-
-@app.route('/admin/product/add', methods=['POST'])
-@admin_required
-def admin_add_product():
-    model = request.form.get('model', '').strip()
-    chemistry = request.form.get('chemistry', 'SLA').strip()
-    title = request.form.get('title', '').strip()
-    voltage = float(request.form.get('voltage', 12))
-    capacity_ah = float(request.form.get('capacity_ah', 7))
-    terminal_type = request.form.get('terminal_type', 'F1 (Faston 187)').strip()
-    moq = int(request.form.get('moq', 10))
-    lead_time = request.form.get('lead_time', 'In Stock (Ships in 24 hrs)').strip()
-    description = request.form.get('description', '').strip()
-    weight_kg = float(request.form.get('weight_kg', 1.0)) if request.form.get('weight_kg') else 1.0
-    
-    apps_raw = request.form.get('applications', '')
-    applications = [a.strip() for a in apps_raw.split(',') if a.strip()]
-    if not applications:
-        applications = ["UPS Systems", "Emergency Lighting"]
-        
-    product_id = model.lower().replace(' ', '-').replace('/', '-')
-    
-    image_url = handle_product_image_upload(product_id, request.files.get('product_image_file'), request.form.get('image_path'))
-    if not image_url:
-        image_url = "/static/images/sla_agm_battery.jpg"
-        
-    chem_code_map = {
-        'SLA': 'sla',
-        'High Rate UPS': 'high_rate',
-        'Lithium': 'lithium',
-        'Gel': 'gel',
-        'Graphene': 'graphene'
-    }
-    chemistry_code = chem_code_map.get(chemistry, 'sla')
-    
-    new_product = {
-        "id": product_id,
-        "model": model,
-        "title": title or f"{voltage}V {capacity_ah}Ah Battery",
-        "chemistry": chemistry,
-        "chemistry_code": chemistry_code,
-        "voltage": voltage,
-        "capacity_ah": capacity_ah,
-        "capacity_bucket": f"{capacity_ah}Ah",
-        "energy_wh": round(voltage * capacity_ah, 1),
-        "terminal_type": terminal_type,
-        "terminal_code": "f1",
-        "applications": applications,
-        "dimensions": {
-            "length_mm": 151,
-            "width_mm": 65,
-            "height_mm": 94,
-            "total_height_mm": 100,
-            "length_in": 5.94,
-            "width_in": 2.56,
-            "height_in": 3.70
-        },
-        "weight_kg": weight_kg,
-        "weight_lbs": round(weight_kg * 2.20462, 2),
-        "max_discharge_current_a": round(capacity_ah * 10, 1),
-        "internal_resistance_mOhm": 20.0,
-        "operating_temp_range": {
-            "charge": "-10°C to 40°C",
-            "discharge": "-15°C to 50°C",
-            "storage": "-20°C to 40°C"
-        },
-        "cycle_life": "300 - 500 cycles",
-        "certifications": ["ISO 9001:2015", "CE"],
-        "image": image_url,
-        "description": description or f"{model} industrial battery pack.",
-        "features": [
-            "Maintenance-free sealed construction",
-            "High discharge efficiency and fast recovery"
-        ],
-        "moq": moq,
-        "lead_time": lead_time
-    }
-    
-    products = load_products()
-    existing_idx = next((i for i, p in enumerate(products) if p['id'] == product_id), None)
-    if existing_idx is not None:
-        products[existing_idx] = new_product
-    else:
-        products.insert(0, new_product)
-        
-    save_products(products)
-    return redirect(url_for('admin_dashboard'))
-
-@app.route('/admin/product/upload-image/<product_id>', methods=['POST'])
-@admin_required
-def admin_upload_product_image(product_id):
-    products = load_products()
-    p = next((prod for prod in products if prod['id'] == product_id.lower()), None)
-    if not p:
-        return jsonify({'status': 'error', 'message': 'Product not found'}), 404
-        
-    file = request.files.get('product_image_file') or request.files.get('image') or request.files.get('file')
-    image_url = handle_product_image_upload(p['id'], file, request.form.get('image_path'))
-    
-    if not image_url:
-        return jsonify({'status': 'error', 'message': 'No image file or URL provided'}), 400
-        
-    p['image'] = image_url
-    save_products(products)
-    
-    # Check if requested as AJAX
-    if request.headers.get('X-Requested-With') == 'XMLHttpRequest' or request.is_json or 'multipart/form-data' in request.content_type:
-        return jsonify({
-            'status': 'success',
-            'message': f"Image for {p['model']} updated successfully.",
-            'image_url': image_url,
-            'product_id': p['id'],
-            'model': p['model']
-        })
-    return redirect(url_for('admin_dashboard'))
-
-@app.route('/admin/product/edit/<product_id>', methods=['POST'])
-@admin_required
-def admin_edit_product(product_id):
-    products = load_products()
-    p = next((prod for prod in products if prod['id'] == product_id.lower()), None)
-    if not p:
-        abort(404)
-        
-    p['model'] = request.form.get('model', p['model']).strip()
-    p['title'] = request.form.get('title', p['title']).strip()
-    p['chemistry'] = request.form.get('chemistry', p['chemistry']).strip()
-    p['voltage'] = float(request.form.get('voltage', p['voltage']))
-    p['capacity_ah'] = float(request.form.get('capacity_ah', p['capacity_ah']))
-    p['capacity_bucket'] = f"{p['capacity_ah']}Ah"
-    p['terminal_type'] = request.form.get('terminal_type', p['terminal_type']).strip()
-    p['weight_kg'] = float(request.form.get('weight_kg', p['weight_kg'])) if request.form.get('weight_kg') else p['weight_kg']
-    p['moq'] = int(request.form.get('moq', p.get('moq', 1)))
-    p['lead_time'] = request.form.get('lead_time', p.get('lead_time', '')).strip()
-    p['description'] = request.form.get('description', p.get('description', '')).strip()
-    
-    # Image update handling
-    uploaded_image = handle_product_image_upload(p['id'], request.files.get('product_image_file'), request.form.get('image_path'))
-    if uploaded_image:
-        p['image'] = uploaded_image
-        
-    apps_raw = request.form.get('applications', '')
-    if apps_raw:
-        p['applications'] = [a.strip() for a in apps_raw.split(',') if a.strip()]
-        
-    save_products(products)
-    return redirect(url_for('admin_dashboard'))
-
-@app.route('/admin/product/delete/<product_id>', methods=['POST'])
-@admin_required
-def admin_delete_product(product_id):
-    products = load_products()
-    products = [p for p in products if p['id'] != product_id.lower()]
-    save_products(products)
-    return redirect(url_for('admin_dashboard'))
-
-@app.route('/admin/export', methods=['GET'])
-@admin_required
-def admin_export():
-    products = load_products()
-    content = json.dumps(products, indent=2)
-    response = Response(content, mimetype='application/json')
-    response.headers['Content-Disposition'] = 'attachment; filename=meri_products_catalog_backup.json'
-    return response
-
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('layout.html', custom_body="""
@@ -487,5 +266,5 @@ def page_not_found(e):
     """), 404
 
 if __name__ == '__main__':
-    print("Starting Power-Sonic B2B Industrial Battery Server on http://127.0.0.1:5000")
+    print("Starting Sunka B2B Industrial Battery Server on http://127.0.0.1:5000")
     app.run(host='0.0.0.0', port=5000, debug=True)

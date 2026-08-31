@@ -1,150 +1,91 @@
 /**
- * Power-Sonic Style B2B Industrial Battery Application Controller
+ * Sunka Style B2B Industrial Battery Application Controller
+ * Fully Mobile & Desktop Responsive
  */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initRFQBasket();
+  initMobileNav();
   initHeaderSearch();
   initCatalogFilters();
+  initRFQBasket();
   initRFQModal();
   initPDPGallery();
 });
 
 /* ==========================================================================
-   1. RFQ Quote Basket (LocalStorage State)
+   1. Mobile Navigation & Drawer Handlers
    ========================================================================== */
-let rfqBasket = [];
+function initMobileNav() {
+  const toggleBtn = document.getElementById('mobile-menu-toggle');
+  const bottomBarMenuBtn = document.getElementById('mobile-bar-menu-btn');
+  const closeBtn = document.getElementById('mobile-nav-close');
+  const drawer = document.getElementById('mobile-nav-drawer');
+  const overlay = document.getElementById('mobile-nav-overlay');
 
-function initRFQBasket() {
-  const saved = localStorage.getItem('power_sonic_rfq_basket');
-  if (saved) {
-    try {
-      rfqBasket = JSON.parse(saved);
-    } catch (e) {
-      rfqBasket = [];
+  function openMobileNav() {
+    if (drawer && overlay) {
+      drawer.classList.add('active');
+      overlay.classList.add('active');
+      if (toggleBtn) toggleBtn.classList.add('open');
+      document.body.style.overflow = 'hidden';
     }
   }
-  updateBasketUI();
 
-  // Drawer Toggle Handlers
-  const basketBtn = document.getElementById('rfq-basket-btn');
-  const drawerOverlay = document.getElementById('rfq-drawer-overlay');
-  const drawer = document.getElementById('rfq-drawer');
-  const drawerCloseBtn = document.getElementById('rfq-drawer-close');
-
-  if (basketBtn && drawer && drawerOverlay) {
-    basketBtn.addEventListener('click', () => {
-      drawerOverlay.classList.add('active');
-      drawer.classList.add('active');
-    });
+  function closeMobileNav() {
+    if (drawer && overlay) {
+      drawer.classList.remove('active');
+      overlay.classList.remove('active');
+      if (toggleBtn) toggleBtn.classList.remove('open');
+      document.body.style.overflow = '';
+    }
   }
 
-  if (drawerCloseBtn && drawer && drawerOverlay) {
-    drawerCloseBtn.addEventListener('click', () => {
-      drawerOverlay.classList.remove('active');
-      drawer.classList.remove('active');
-    });
-    drawerOverlay.addEventListener('click', (e) => {
-      if (e.target === drawerOverlay) {
-        drawerOverlay.classList.remove('active');
-        drawer.classList.remove('active');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (drawer && drawer.classList.contains('active')) {
+        closeMobileNav();
+      } else {
+        openMobileNav();
       }
     });
   }
-}
 
-function saveBasket() {
-  localStorage.setItem('power_sonic_rfq_basket', JSON.stringify(rfqBasket));
-  updateBasketUI();
-}
-
-function addToRFQBasket(product, qty = 1) {
-  const existing = rfqBasket.find(item => item.id === product.id);
-  if (existing) {
-    existing.qty += parseInt(qty, 10);
-  } else {
-    rfqBasket.push({
-      id: product.id,
-      model: product.model,
-      title: product.title,
-      chemistry: product.chemistry,
-      voltage: product.voltage,
-      capacity_ah: product.capacity_ah,
-      moq: product.moq || 1,
-      qty: parseInt(qty, 10) || (product.moq || 1)
+  if (bottomBarMenuBtn) {
+    bottomBarMenuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openMobileNav();
     });
   }
-  saveBasket();
-  showToast(`Added ${product.model} to RFQ Quote Basket`, 'success');
 
-  // Open drawer automatically
-  const drawerOverlay = document.getElementById('rfq-drawer-overlay');
-  const drawer = document.getElementById('rfq-drawer');
-  if (drawerOverlay && drawer) {
-    drawerOverlay.classList.add('active');
-    drawer.classList.add('active');
-  }
-}
-
-function removeFromBasket(id) {
-  rfqBasket = rfqBasket.filter(item => item.id !== id);
-  saveBasket();
-  showToast('Item removed from Quote Basket', 'info');
-}
-
-function updateBasketQty(id, qty) {
-  const item = rfqBasket.find(i => i.id === id);
-  if (item) {
-    item.qty = Math.max(1, parseInt(qty, 10) || 1);
-    saveBasket();
-  }
-}
-
-function updateBasketUI() {
-  const countBadge = document.getElementById('basket-count-badge');
-  const drawerBody = document.getElementById('rfq-drawer-items');
-  const drawerFooter = document.getElementById('rfq-drawer-footer');
-
-  const totalCount = rfqBasket.reduce((sum, item) => sum + item.qty, 0);
-
-  if (countBadge) {
-    countBadge.textContent = totalCount;
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeMobileNav);
   }
 
-  if (drawerBody) {
-    if (rfqBasket.length === 0) {
-      drawerBody.innerHTML = `
-        <div class="text-center py-5 text-muted">
-          <p class="mb-2" style="font-size: 2rem;">🛒</p>
-          <p style="font-weight: 600;">Your RFQ Basket is Empty</p>
-          <p style="font-size: 0.825rem;">Browse catalog and select battery specs to request bulk pricing.</p>
-        </div>
-      `;
-      if (drawerFooter) drawerFooter.style.display = 'none';
-    } else {
-      if (drawerFooter) drawerFooter.style.display = 'block';
-      drawerBody.innerHTML = rfqBasket.map(item => `
-        <div class="drawer-item">
-          <div class="drawer-item-info">
-            <h4>${item.model}</h4>
-            <p>${item.voltage}V ${item.capacity_ah}Ah | ${item.chemistry}</p>
-          </div>
-          <div class="drawer-item-qty">
-            <input type="number" class="qty-input" value="${item.qty}" min="${item.moq}" onchange="updateBasketQty('${item.id}', this.value)">
-            <button class="btn btn-sm text-danger" style="background:none; border:none; cursor:pointer;" onclick="removeFromBasket('${item.id}')">✕</button>
-          </div>
-        </div>
-      `).join('');
+  if (overlay) {
+    overlay.addEventListener('click', closeMobileNav);
+  }
+
+  // Close with Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeMobileNav();
+      const filterSidebar = document.getElementById('filter-sidebar');
+      const filterOverlay = document.getElementById('filter-sidebar-overlay');
+      if (filterSidebar) filterSidebar.classList.remove('mobile-open');
+      if (filterOverlay) filterOverlay.classList.remove('active');
+      const rfqModal = document.getElementById('rfq-modal-overlay');
+      if (rfqModal) rfqModal.classList.remove('active');
     }
-  }
+  });
 }
 
 /* ==========================================================================
-   2. Header Live Search Autocomplete
+   2. Live Search Autocomplete (Desktop & Mobile)
    ========================================================================== */
-function initHeaderSearch() {
-  const input = document.getElementById('header-search-input');
-  const resultsContainer = document.getElementById('header-search-results');
+function setupSearchAutocomplete(inputId, resultsId) {
+  const input = document.getElementById(inputId);
+  const resultsContainer = document.getElementById(resultsId);
 
   if (!input || !resultsContainer) return;
 
@@ -170,18 +111,21 @@ function initHeaderSearch() {
                   <span class="search-result-model">${p.model}</span>
                   <span style="font-size: 0.75rem; color: #64748B; display: block;">${p.title}</span>
                 </div>
-                <span class="badge" style="background-color:#F1F5F9; color:#1E293B; font-size:0.75rem; padding: 2px 6px; border-radius:3px;">${p.voltage}V</span>
+                <span class="pdp-badge" style="font-size:0.75rem;">${p.voltage}V</span>
               </a>
             `).join('');
             resultsContainer.classList.add('active');
           } else {
             resultsContainer.innerHTML = `
-              <div class="p-3 text-muted style="font-size:0.85rem; text-align:center;">
+              <div style="padding: 1rem; color: #64748B; font-size: 0.85rem; text-align: center;">
                 No battery specs matching "${q}"
               </div>
             `;
             resultsContainer.classList.add('active');
           }
+        })
+        .catch(() => {
+          resultsContainer.classList.remove('active');
         });
     }, 250);
   });
@@ -193,17 +137,71 @@ function initHeaderSearch() {
   });
 }
 
+function initHeaderSearch() {
+  setupSearchAutocomplete('header-search-input', 'header-search-results');
+  setupSearchAutocomplete('mobile-search-input', 'mobile-search-results');
+}
+
 /* ==========================================================================
-   3. Catalog Dynamic Filtering (AJAX / REST)
+   3. Catalog Dynamic Filtering & Mobile Offcanvas Sheet
    ========================================================================== */
 function initCatalogFilters() {
   const catalogGrid = document.getElementById('catalog-product-grid');
   const filterForm = document.getElementById('catalog-filter-form');
   const catalogSearchInput = document.getElementById('catalog-search-input');
   const resultCountEl = document.getElementById('catalog-result-count');
+  const mobileCountEl = document.getElementById('mobile-catalog-count');
   const resetBtn = document.getElementById('reset-filters-btn');
+  const filterBadge = document.getElementById('active-filter-badge');
+
+  // Mobile Filter Drawer Elements
+  const filterToggleBtn = document.getElementById('mobile-filter-toggle-btn');
+  const filterSidebar = document.getElementById('filter-sidebar');
+  const filterOverlay = document.getElementById('filter-sidebar-overlay');
+  const closeFilterBtn = document.getElementById('close-filter-sidebar-btn');
+  const applyFilterBtn = document.getElementById('apply-filters-btn');
+
+  function openMobileFilter() {
+    if (filterSidebar && filterOverlay) {
+      filterSidebar.classList.add('mobile-open');
+      filterOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeMobileFilter() {
+    if (filterSidebar && filterOverlay) {
+      filterSidebar.classList.remove('mobile-open');
+      filterOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+
+  if (filterToggleBtn) {
+    filterToggleBtn.addEventListener('click', openMobileFilter);
+  }
+  if (closeFilterBtn) {
+    closeFilterBtn.addEventListener('click', closeMobileFilter);
+  }
+  if (applyFilterBtn) {
+    applyFilterBtn.addEventListener('click', closeMobileFilter);
+  }
+  if (filterOverlay) {
+    filterOverlay.addEventListener('click', closeMobileFilter);
+  }
 
   if (!catalogGrid) return;
+
+  function updateFilterBadge() {
+    if (!filterForm || !filterBadge) return;
+    const checkedCount = filterForm.querySelectorAll('input[type="checkbox"]:checked').length;
+    if (checkedCount > 0) {
+      filterBadge.textContent = checkedCount;
+      filterBadge.style.display = 'inline-block';
+    } else {
+      filterBadge.style.display = 'none';
+    }
+  }
 
   function fetchFilteredProducts() {
     const chemistry = Array.from(document.querySelectorAll('input[name="chemistry"]:checked')).map(cb => cb.value);
@@ -212,6 +210,8 @@ function initCatalogFilters() {
     const terminal = Array.from(document.querySelectorAll('input[name="terminal"]:checked')).map(cb => cb.value);
     const applications = Array.from(document.querySelectorAll('input[name="application"]:checked')).map(cb => cb.value);
     const search = catalogSearchInput ? catalogSearchInput.value.trim() : '';
+
+    updateFilterBadge();
 
     const payload = { chemistry, voltage, capacity, terminal, applications, search };
 
@@ -224,8 +224,12 @@ function initCatalogFilters() {
       .then(data => {
         if (data.status === 'success') {
           renderCatalogProducts(data.products);
+          const countText = `Showing ${data.filtered_count} of ${data.total_count} Batteries`;
           if (resultCountEl) {
-            resultCountEl.textContent = `Showing ${data.filtered_count} of ${data.total_count} Batteries`;
+            resultCountEl.textContent = countText;
+          }
+          if (mobileCountEl) {
+            mobileCountEl.textContent = `${data.filtered_count} Models`;
           }
         }
       })
@@ -263,9 +267,9 @@ function renderCatalogProducts(products) {
 
   if (products.length === 0) {
     catalogGrid.innerHTML = `
-      <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 1rem; background: white; border: 1px solid #E2E8F0; border-radius: 8px;">
-        <h3 style="color: #0B192C; margin-bottom: 0.5rem;">No Matching Battery Specifications</h3>
-        <p style="color: #64748B; max-width: 480px; margin: 0 auto 1.5rem auto;">Try adjusting your voltage, chemistry, or capacity filters to view available industrial models.</p>
+      <div style="grid-column: 1 / -1; text-align: center; padding: 3.5rem 1rem; background: white; border: 1px solid #E2E8F0; border-radius: 10px;">
+        <h3 style="color: #0B192C; margin-bottom: 0.5rem; font-size: 1.3rem;">No Matching Battery Specifications</h3>
+        <p style="color: #64748B; max-width: 480px; margin: 0 auto 1.5rem auto; font-size: 0.95rem;">Try adjusting your voltage, chemistry, or capacity filters to view available industrial models.</p>
         <button onclick="document.getElementById('reset-filters-btn').click()" class="btn btn-outline-navy btn-sm">Reset All Filters</button>
       </div>
     `;
@@ -274,9 +278,9 @@ function renderCatalogProducts(products) {
 
   catalogGrid.innerHTML = products.map(p => `
     <div class="product-card">
-      <span class="product-badge-tag">${p.chemistry}</span>
+      <span class="product-badge-tag ${p.chemistry_code === 'lithium' ? 'badge-lithium' : (p.chemistry_code === 'gel' ? 'badge-gel' : '')}">${p.chemistry}</span>
       <div class="product-img-wrapper">
-        <img src="${p.image}" alt="${p.model}">
+        <img src="${p.image}" alt="${p.model}" loading="lazy">
       </div>
       <div class="product-body">
         <h3 class="product-model">${p.model}</h3>
@@ -295,7 +299,7 @@ function renderCatalogProducts(products) {
             <span>Weight</span>
           </div>
           <div class="spec-item">
-            <strong>${p.terminal_code.toUpperCase()}</strong>
+            <strong>${(p.terminal_code || 'F2').toUpperCase()}</strong>
             <span>Terminal</span>
           </div>
         </div>
@@ -309,7 +313,57 @@ function renderCatalogProducts(products) {
 }
 
 /* ==========================================================================
-   4. B2B RFQ Form Modal & API Submit
+   4. RFQ Basket LocalStorage State
+   ========================================================================== */
+let rfqBasket = [];
+
+function initRFQBasket() {
+  const saved = localStorage.getItem('sunka_rfq_basket') || localStorage.getItem('power_sonic_rfq_basket');
+  if (saved) {
+    try {
+      rfqBasket = JSON.parse(saved);
+    } catch (e) {
+      rfqBasket = [];
+    }
+  }
+  updateBasketUI();
+}
+
+function saveBasket() {
+  localStorage.setItem('sunka_rfq_basket', JSON.stringify(rfqBasket));
+  updateBasketUI();
+}
+
+function addToRFQBasket(product, qty = 1) {
+  const existing = rfqBasket.find(item => item.id === product.id);
+  if (existing) {
+    existing.qty += parseInt(qty, 10);
+  } else {
+    rfqBasket.push({
+      id: product.id,
+      model: product.model,
+      title: product.title,
+      chemistry: product.chemistry,
+      voltage: product.voltage,
+      capacity_ah: product.capacity_ah,
+      moq: product.moq || 1,
+      qty: parseInt(qty, 10) || (product.moq || 1)
+    });
+  }
+  saveBasket();
+  showToast(`Added ${product.model} to RFQ Quote Basket`, 'success');
+}
+
+function updateBasketUI() {
+  const countBadge = document.getElementById('basket-count-badge');
+  const totalCount = rfqBasket.reduce((sum, item) => sum + item.qty, 0);
+  if (countBadge) {
+    countBadge.textContent = totalCount;
+  }
+}
+
+/* ==========================================================================
+   5. B2B RFQ Form Modal & API Submit
    ========================================================================== */
 function initRFQModal() {
   const modalOverlay = document.getElementById('rfq-modal-overlay');
@@ -325,14 +379,24 @@ function initRFQModal() {
         const modelInput = document.getElementById('rfq-product-model');
         if (modelInput) modelInput.value = singleModel;
       }
-      if (modalOverlay) modalOverlay.classList.add('active');
+      if (modalOverlay) {
+        modalOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
     }
   });
 
+  function closeModal() {
+    if (modalOverlay) {
+      modalOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  }
+
   if (modalCloseBtn && modalOverlay) {
-    modalCloseBtn.addEventListener('click', () => modalOverlay.classList.remove('active'));
+    modalCloseBtn.addEventListener('click', closeModal);
     modalOverlay.addEventListener('click', (e) => {
-      if (e.target === modalOverlay) modalOverlay.classList.remove('active');
+      if (e.target === modalOverlay) closeModal();
     });
   }
 
@@ -370,28 +434,26 @@ function initRFQModal() {
           submitBtn.textContent = originalText;
 
           if (data.status === 'success') {
-            if (modalOverlay) modalOverlay.classList.remove('active');
+            closeModal();
             rfqForm.reset();
             rfqBasket = [];
             saveBasket();
-
-            // Render Success Dialog
-            alert(`✅ ${data.message}`);
+            showToast(`✅ ${data.message}`, 'success');
           } else {
-            alert(`⚠️ Error: ${data.message}`);
+            showToast(`⚠️ Error: ${data.message}`, 'error');
           }
         })
         .catch(err => {
           submitBtn.disabled = false;
           submitBtn.textContent = originalText;
-          alert('Network connection error. Please try again.');
+          showToast('Network connection error. Please try again.', 'error');
         });
     });
   }
 }
 
 /* ==========================================================================
-   5. PDP Image Gallery & Tabs
+   6. PDP Image Gallery & Tabs
    ========================================================================== */
 function initPDPGallery() {
   const mainImg = document.getElementById('pdp-main-image');
@@ -410,7 +472,7 @@ function initPDPGallery() {
 }
 
 /* ==========================================================================
-   6. Toast Notifications
+   7. Toast Notifications
    ========================================================================== */
 function showToast(message, type = 'info') {
   let container = document.getElementById('toast-container');
@@ -429,5 +491,5 @@ function showToast(message, type = 'info') {
 
   setTimeout(() => {
     toast.remove();
-  }, 3500);
+  }, 4000);
 }

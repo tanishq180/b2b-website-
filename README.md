@@ -7,7 +7,7 @@
 
 ## 📅 Summary of Development Work Completed Today (August 18, 2026)
 
-Today, we built a complete, high-trust, responsive B2B industrial battery web application modeled after modern industrial energy sites like Power-Sonic, custom-tailored for **MERI H Industries**.
+Today, we built a complete, high-trust, responsive B2B industrial battery web application modeled after modern industrial energy sites like Sunka, custom-tailored for **MERI H Industries**.
 
 ### 1. Branding & Header Navigation
 - **Company Branding**: Integrated the official **MERI H Industries** logo in the sticky main navigation bar with clean brand text (`MERI INDUSTRIES`).

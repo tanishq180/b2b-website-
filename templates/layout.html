@@ -3,8 +3,8 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}Power-Sonic Industrial Energy Solutions | B2B Battery Specifications{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>{% block title %}Sunka Industrial Energy Solutions | B2B Battery Specifications{% endblock %}</title>
   <meta name="description"
     content="{% block meta_description %}Leading manufacturer of SLA, AGM, Gel, and Lithium LiFePO4 industrial batteries engineered for UPS, Solar, Medical, Telecom, and Security applications.{% endblock %}">
 
@@ -29,12 +29,12 @@
     <div class="container utility-flex">
       <div class="utility-left">
         <div class="utility-item">
-          <span>📞 B2B Direct Hotline:</span>
+          <span>📞 Hotline:</span>
           <a href="tel:+18005557693">+1 (800) 555-POWER</a>
         </div>
-        <div class="utility-item">
-          <span>✉️ Technical Support:</span>
-          <a href="mailto:engineering@power-sonic-b2b.com">engineering@power-sonic-b2b.com</a>
+        <div class="utility-item utility-email">
+          <span>✉️ Support:</span>
+          <a href="mailto:engineering@sunka-batteries.com">engineering@sunka-batteries.com</a>
         </div>
       </div>
       <div class="utility-right">
@@ -42,7 +42,7 @@
         <div class="header-search-wrapper">
           <span class="header-search-icon">🔍</span>
           <input type="text" id="header-search-input" class="header-search-input"
-            placeholder="Search battery model or spec..." autocomplete="off">
+            placeholder="Search model or spec..." autocomplete="off">
           <div id="header-search-results" class="header-search-results"></div>
         </div>
       </div>
@@ -53,26 +53,79 @@
   <nav class="main-header">
     <div class="container navbar-flex">
       <a href="/" class="brand-logo">
-        <div class="logo-icon"><img src="{{ url_for('static', filename='images/meri_logo.png') }}" alt="MERI H INDUSTRIES Logo"></div>
-        <div>
-          MERI <span class="accent">INDUSTRIES</span>
+        <div class="logo-icon"><img src="{{ url_for('static', filename='images/meri_logo.png') }}"
+            alt="MERI H INDUSTRIES Logo"></div>
+        <div class="brand-text-group">
+          <span class="brand-title">MERI <span class="accent">INDUSTRIES</span></span>
           <span class="brand-tag">INDUSTRIAL ENERGY SOLUTIONS</span>
         </div>
       </a>
 
       <ul class="nav-menu">
         <li><a href="/" class="nav-link {% if request.path == '/' %}active{% endif %}">Home</a></li>
-        <li><a href="/catalog" class="nav-link {% if request.path == '/catalog' %}active{% endif %}">Battery Catalog</a>
-        </li>
+        <li><a href="/catalog" class="nav-link {% if request.path == '/catalog' %}active{% endif %}">Battery Catalog</a></li>
+        <li><a href="/about" class="nav-link {% if request.path == '/about' %}active{% endif %}">About & Standards</a></li>
         <li><a href="/contact" class="nav-link {% if request.path == '/contact' %}active{% endif %}">Contact</a></li>
       </ul>
 
       <div class="nav-actions">
-        <a href="/download/catalog-pdf" class="btn btn-outline-navy" download="MERI-Industries-2026-Product-Catalog.pdf">Battery Catalog PDF 📥</a>
+        <a href="/download/catalog-pdf" class="btn btn-outline-navy"
+          download="MERI-Industries-2026-Product-Catalog.pdf">Battery Catalog PDF 📥</a>
         <button class="btn btn-accent open-rfq-modal-btn">Request Bulk Quote</button>
       </div>
+
+      <!-- Hamburger Button for Mobile -->
+      <button class="mobile-menu-toggle" id="mobile-menu-toggle" type="button" aria-label="Toggle mobile menu">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
     </div>
   </nav>
+
+  <!-- 3. Mobile Slide-out Drawer Navigation -->
+  <div id="mobile-nav-overlay" class="mobile-nav-overlay"></div>
+  <aside id="mobile-nav-drawer" class="mobile-nav-drawer" aria-label="Mobile Navigation">
+    <div class="mobile-nav-header">
+      <a href="/" class="brand-logo">
+        <div class="logo-icon"><img src="{{ url_for('static', filename='images/meri_logo.png') }}" alt="MERI Logo"></div>
+        <div class="brand-text-group">
+          <span class="brand-title">MERI <span class="accent">INDUSTRIES</span></span>
+        </div>
+      </a>
+      <button id="mobile-nav-close" class="mobile-nav-close-btn" aria-label="Close menu">&times;</button>
+    </div>
+
+    <div class="mobile-nav-body">
+      <!-- Mobile Search Box -->
+      <div class="mobile-search-wrapper">
+        <span class="mobile-search-icon">🔍</span>
+        <input type="text" id="mobile-search-input" class="mobile-search-input" placeholder="Search battery model..." autocomplete="off">
+        <div id="mobile-search-results" class="header-search-results"></div>
+      </div>
+
+      <!-- Navigation Links -->
+      <ul class="mobile-nav-menu">
+        <li><a href="/" class="mobile-nav-link {% if request.path == '/' %}active{% endif %}">🏠 Home</a></li>
+        <li><a href="/catalog" class="mobile-nav-link {% if request.path == '/catalog' %}active{% endif %}">⚡ Battery Catalog</a></li>
+        <li><a href="/about" class="mobile-nav-link {% if request.path == '/about' %}active{% endif %}">🏢 Quality Standards</a></li>
+        <li><a href="/contact" class="mobile-nav-link {% if request.path == '/contact' %}active{% endif %}">📞 Direct Contact</a></li>
+      </ul>
+
+      <!-- Action Buttons -->
+      <div class="mobile-nav-actions">
+        <button class="btn btn-accent open-rfq-modal-btn" style="width: 100%;">⚡ Request Bulk Quote</button>
+        <a href="/download/catalog-pdf" class="btn btn-outline-navy" style="width: 100%;" download="MERI-Industries-2026-Product-Catalog.pdf">📥 Download PDF Catalog</a>
+      </div>
+
+      <!-- Direct Contact Hotline -->
+      <div class="mobile-nav-contact">
+        <div class="mobile-contact-title">Direct Engineering Support</div>
+        <a href="tel:+18005557693" class="mobile-contact-item">📞 +1 (800) 555-POWER</a>
+        <a href="mailto:engineering@sunka-batteries.com" class="mobile-contact-item">✉️ engineering@sunka-batteries.com</a>
+      </div>
+    </div>
+  </aside>
   {% endblock %}
 
   <!-- Main Body Content Placeholder -->
@@ -87,7 +140,7 @@
     <div class="modal-card">
       <div class="modal-header">
         <h3>Submit B2B Request for Quote (RFQ)</h3>
-        <button id="rfq-modal-close" class="modal-close-btn">&times;</button>
+        <button id="rfq-modal-close" class="modal-close-btn" aria-label="Close modal">&times;</button>
       </div>
       <div class="modal-body">
         <form id="b2b-rfq-form">
@@ -142,9 +195,8 @@
                 placeholder="Provide details on operating temperature, peak discharge current, dimension constraints, or delivery timeline..."></textarea>
             </div>
           </div>
-          <div class="mt-3 text-right">
-            <button type="submit" class="btn btn-accent btn-lg style='width: 100%;'">Submit Official RFQ
-              Request</button>
+          <div class="modal-form-actions">
+            <button type="submit" class="btn btn-accent btn-lg" style="width: 100%;">Submit Official RFQ Request</button>
           </div>
         </form>
       </div>
@@ -156,24 +208,14 @@
   <section class="trust-banner">
     <div class="container trust-grid">
       <div class="trust-item">
-        <div class="trust-icon">🏅</div>
-        <h4>ISO 9001:2015 Certified</h4>
-        <p>Stringent automated quality testing standards across all manufacturing lines.</p>
-      </div>
-      <div class="trust-item">
-        <div class="trust-icon">⚡</div>
-        <h4>High Recombination Rate</h4>
-        <p>>99% gas recombination efficiency with flame retardant UL94-V0 enclosures.</p>
-      </div>
-      <div class="trust-item">
         <div class="trust-icon">🚚</div>
         <h4>Global B2B Supply Network</h4>
         <p>Strategically located regional warehousing for rapid 24-48 hr dispatch.</p>
       </div>
       <div class="trust-item">
         <div class="trust-icon">🛡️</div>
-        <h4>Complete Warranty Coverage</h4>
-        <p>Comprehensive 2 to 5-year replacement warranty on industrial batteries.</p>
+        <h4>Warranty Coverage</h4>
+        <p>Comprehensive 6 to 12 months replacement warranty on industrial batteries.</p>
       </div>
     </div>
   </section>
@@ -184,8 +226,8 @@
   <footer class="footer">
     <div class="container footer-grid">
       <div class="footer-brand">
-        <h3>POWER<span class="accent" style="color:var(--color-accent-red);">SONIC</span></h3>
-        <p class="mb-3">Power-Sonic is a global leader in engineered energy solutions, delivering high-performance SLA,
+        <h3>SUN<span class="accent" style="color:var(--color-accent-orange);">KA</span></h3>
+        <p class="mb-3">Sunka is a global leader in engineered energy solutions, delivering high-performance SLA,
           AGM, Gel, and Smart Lithium batteries for critical industrial infrastructure.</p>
         <p style="font-size: 0.8rem; color: #64748B;">Registered Corporate Office: 3650 Rosecrans St, San Diego, CA
           92110<br>GSTIN / Tax Reg: US943820194</p>
@@ -217,23 +259,38 @@
         <h4>Technical Resources</h4>
         <ul>
           <li><a href="/about">Quality & Testing Standards</a></li>
-          <li><a href="/catalog">Download PDF Specification Cards</a></li>
+          <li><a href="/download/catalog-pdf" download="MERI-Industries-2026-Product-Catalog.pdf">Download PDF Catalog</a></li>
           <li><a href="/contact">Submit Technical Support Inquiry</a></li>
         </ul>
       </div>
     </div>
 
     <div class="container footer-bottom">
-      <p>&copy; {{ now.year if now else 2026 }} Power-Sonic Industrial Battery Corporation. All rights reserved.</p>
-      <div style="display:flex; gap: 1.5rem;">
-        <a href="/about" style="color: #64748B;">Privacy Policy</a>
-        <a href="/about" style="color: #64748B;">Terms of Supply</a>
-        <a href="/about" style="color: #64748B;">ISO Certifications</a>
-        <a href="/admin" style="color: #64748B;">Admin Portal ⚙️</a>
-      </div>
+      <p>&copy; 2026 MERI H INDUSTRIES / Sunka Batteries. All rights reserved.</p>
+      <p style="color: #64748B;">ISO 9001:2015 | UL Recognized Components | CE & RoHS Compliant</p>
     </div>
   </footer>
   {% endblock %}
+
+  <!-- 7. Mobile Sticky Bottom Action Bar -->
+  <nav class="mobile-bottom-bar" aria-label="Mobile quick actions">
+    <a href="/catalog" class="mobile-bar-item {% if request.path == '/catalog' %}active{% endif %}">
+      <span class="bar-icon">⚡</span>
+      <span class="bar-label">Catalog</span>
+    </a>
+    <a href="tel:+18005557693" class="mobile-bar-item">
+      <span class="bar-icon">📞</span>
+      <span class="bar-label">Call Sales</span>
+    </a>
+    <button type="button" class="mobile-bar-item mobile-bar-rfq open-rfq-modal-btn">
+      <span class="bar-icon">📝</span>
+      <span class="bar-label">Get Quote</span>
+    </button>
+    <button type="button" class="mobile-bar-item" id="mobile-bar-menu-btn">
+      <span class="bar-icon">☰</span>
+      <span class="bar-label">Menu</span>
+    </button>
+  </nav>
 
   <!-- Scripts -->
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>

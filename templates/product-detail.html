@@ -4,12 +4,12 @@
 {% block meta_description %}{{ product.model }} technical specifications, electrical parameters, mechanical dimensions, and B2B quote request.{% endblock %}
 
 {% block content %}
-<section class="section" style="padding-top: 2.5rem;">
+<section class="section pdp-section">
   <div class="container">
 
     <!-- Breadcrumb Navigation -->
-    <nav style="margin-bottom: 1.5rem; font-size: 0.875rem; color: var(--color-text-muted);">
-      <a href="/">Home</a> / <a href="/catalog">Catalog</a> / <a href="/catalog?chemistry={{ product.chemistry_code }}">{{ product.chemistry }}</a> / <strong style="color: var(--color-navy-dark);">{{ product.model }}</strong>
+    <nav class="pdp-breadcrumbs">
+      <a href="/">Home</a> <span>/</span> <a href="/catalog">Catalog</a> <span>/</span> <a href="/catalog?chemistry={{ product.chemistry_code }}">{{ product.chemistry }}</a> <span>/</span> <strong class="breadcrumb-current">{{ product.model }}</strong>
     </nav>
 
     <!-- Main PDP Grid -->
@@ -22,13 +22,13 @@
         </div>
 
         <div class="pdp-gallery-thumbs">
-          <button class="thumb-btn active" data-img="{{ product.image }}">
+          <button class="thumb-btn active" data-img="{{ product.image }}" type="button" aria-label="Product image">
             <img src="{{ product.image }}" alt="Front Cutout View">
           </button>
 
           <!-- Dynamic SVG Technical CAD Schematic View -->
-          <button class="thumb-btn" data-img="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200' viewBox='0 0 300 200' fill='none' stroke='%230B192C' stroke-width='2'><rect x='40' y='50' width='220' height='120' rx='4' fill='%23F8FAFC'/><rect x='60' y='30' width='30' height='20' fill='%23EA580C'/><rect x='210' y='30' width='30' height='20' fill='%231E293B'/><line x1='40' y1='185' x2='260' y2='185'/><text x='130' y='198' font-size='12' fill='%2364748B'>L: {{ product.dimensions.length_mm }} mm ({{ product.dimensions.length_in }} in)</text><line x1='20' y1='50' x2='20' y2='170'/><text x='15' y='115' font-size='12' fill='%2364748B' transform='rotate(-90 15 115)'>H: {{ product.dimensions.height_mm }} mm</text><text x='85' y='115' font-size='14' font-weight='bold' fill='%230B192C'>CAD SCHEMATIC</text></svg>">
-            <div style="font-size:0.75rem; font-weight:700; color:#1E293B; display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%;">
+          <button class="thumb-btn" data-img="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200' viewBox='0 0 300 200' fill='none' stroke='%230B192C' stroke-width='2'><rect x='40' y='50' width='220' height='120' rx='4' fill='%23F8FAFC'/><rect x='60' y='30' width='30' height='20' fill='%23EA580C'/><rect x='210' y='30' width='30' height='20' fill='%231E293B'/><line x1='40' y1='185' x2='260' y2='185'/><text x='130' y='198' font-size='12' fill='%2364748B'>L: {{ product.dimensions.length_mm }} mm ({{ product.dimensions.length_in }} in)</text><line x1='20' y1='50' x2='20' y2='170'/><text x='15' y='115' font-size='12' fill='%2364748B' transform='rotate(-90 15 115)'>H: {{ product.dimensions.height_mm }} mm</text><text x='85' y='115' font-size='14' font-weight='bold' fill='%230B192C'>CAD SCHEMATIC</text></svg>" type="button" aria-label="CAD schematic diagram">
+            <div class="thumb-cad-icon">
               <span>📐 CAD</span>
               <span>Diagram</span>
             </div>
@@ -48,7 +48,7 @@
         <h1 class="pdp-model">{{ product.model }}</h1>
         <p class="pdp-title">{{ product.title }}</p>
 
-        <p style="color: var(--color-text-main); margin-bottom: 1.5rem; font-size: 0.975rem;">
+        <p class="pdp-desc">
           {{ product.description }}
         </p>
 
@@ -82,7 +82,7 @@
 
         <!-- CTAs -->
         <div class="pdp-cta-group">
-          <button class="btn btn-accent btn-lg open-rfq-modal-btn" data-product-model="{{ product.model }}">
+          <button class="btn btn-accent btn-lg open-rfq-modal-btn w-100" data-product-model="{{ product.model }}">
             Request Bulk Quote (RFQ)
           </button>
         </div>
@@ -97,43 +97,47 @@
         ⚡ Technical Specifications & Performance Parameters
       </div>
 
-      <table class="spec-table">
-        <tbody>
-          <!-- Electrical Specs -->
-          <tr><th colspan="2" style="background-color: #0B192C; color: white;">1. ELECTRICAL SPECIFICATIONS</th></tr>
-          <tr><th>Nominal Voltage</th><td>{{ product.voltage }} Volts</td></tr>
-          <tr><th>Nominal Capacity (20hr rate)</th><td>{{ product.capacity_ah }} Amp-Hours (Ah)</td></tr>
-          <tr><th>Nominal Energy</th><td>{{ product.energy_wh }} Watt-Hours (Wh)</td></tr>
-          <tr><th>Internal Resistance (fully charged)</th><td>Approx {{ product.internal_resistance_mOhm }} mΩ</td></tr>
-          <tr><th>Max Discharge Current (5 seconds)</th><td>{{ product.max_discharge_current_a }} Amperes</td></tr>
-          <tr><th>Self Discharge Rate</th><td>&lt; 3% per month at 20°C (68°F)</td></tr>
-          <tr><th>Cycle Life Performance</th><td>{{ product.cycle_life }}</td></tr>
+      <div class="spec-table-scroll-wrapper">
+        <table class="spec-table">
+          <tbody>
+            <!-- Electrical Specs -->
+            <tr><th colspan="2" class="spec-category-header">1. ELECTRICAL SPECIFICATIONS</th></tr>
+            <tr><th>Nominal Voltage</th><td>{{ product.voltage }} Volts</td></tr>
+            <tr><th>Nominal Capacity (20hr rate)</th><td>{{ product.capacity_ah }} Amp-Hours (Ah)</td></tr>
+            <tr><th>Nominal Energy</th><td>{{ product.energy_wh }} Watt-Hours (Wh)</td></tr>
+            <tr><th>Internal Resistance (fully charged)</th><td>Approx {{ product.internal_resistance_mOhm }} mΩ</td></tr>
+            <tr><th>Max Discharge Current (5 seconds)</th><td>{{ product.max_discharge_current_a }} Amperes</td></tr>
+            <tr><th>Self Discharge Rate</th><td>&lt; 3% per month at 20°C (68°F)</td></tr>
+            <tr><th>Cycle Life Performance</th><td>{{ product.cycle_life }}</td></tr>
 
-          <!-- Mechanical Specs -->
-          <tr><th colspan="2" style="background-color: #0B192C; color: white;">2. MECHANICAL & PHYSICAL PARAMETERS</th></tr>
-          <tr><th>Dimensions (L x W x H)</th><td>{{ product.dimensions.length_mm }} x {{ product.dimensions.width_mm }} x {{ product.dimensions.height_mm }} mm ({{ product.dimensions.length_in }}" x {{ product.dimensions.width_in }}" x {{ product.dimensions.height_in }}")</td></tr>
-          <tr><th>Total Height with Terminals</th><td>{{ product.dimensions.total_height_mm }} mm</td></tr>
-          <tr><th>Weight</th><td>{{ product.weight_kg }} kg ({{ product.weight_lbs }} lbs)</td></tr>
-          <tr><th>Terminal Configuration</th><td>{{ product.terminal_type }}</td></tr>
-          <tr><th>Container Casing Material</th><td>ABS Flame Retardant (UL94-HB standard / UL94-V0 optional)</td></tr>
+            <!-- Mechanical Specs -->
+            <tr><th colspan="2" class="spec-category-header">2. MECHANICAL & PHYSICAL PARAMETERS</th></tr>
+            <tr><th>Dimensions (L x W x H)</th><td>{{ product.dimensions.length_mm }} x {{ product.dimensions.width_mm }} x {{ product.dimensions.height_mm }} mm ({{ product.dimensions.length_in }}" x {{ product.dimensions.width_in }}" x {{ product.dimensions.height_in }}")</td></tr>
+            <tr><th>Total Height with Terminals</th><td>{{ product.dimensions.total_height_mm }} mm</td></tr>
+            <tr><th>Weight</th><td>{{ product.weight_kg }} kg ({{ product.weight_lbs }} lbs)</td></tr>
+            <tr><th>Terminal Configuration</th><td>{{ product.terminal_type }}</td></tr>
+            <tr><th>Container Casing Material</th><td>ABS Flame Retardant (UL94-HB standard / UL94-V0 optional)</td></tr>
 
-          <!-- Environmental Specs -->
-          <tr><th colspan="2" style="background-color: #0B192C; color: white;">3. OPERATING TEMPERATURE RANGES</th></tr>
-          <tr><th>Charge Temperature</th><td>{{ product.operating_temp_range.charge }}</td></tr>
-          <tr><th>Discharge Temperature</th><td>{{ product.operating_temp_range.discharge }}</td></tr>
-          <tr><th>Storage Temperature</th><td>{{ product.operating_temp_range.storage }}</td></tr>
-          <tr><th>Compliance & Certifications</th><td>
-            {% for cert in product.certifications %}
-              <span class="pdp-badge" style="margin-right: 0.3rem;">{{ cert }}</span>
-            {% endfor %}
-          </td></tr>
-        </tbody>
-      </table>
+            <!-- Environmental Specs -->
+            <tr><th colspan="2" class="spec-category-header">3. OPERATING TEMPERATURE RANGES</th></tr>
+            <tr><th>Charge Temperature</th><td>{{ product.operating_temp_range.charge }}</td></tr>
+            <tr><th>Discharge Temperature</th><td>{{ product.operating_temp_range.discharge }}</td></tr>
+            <tr><th>Storage Temperature</th><td>{{ product.operating_temp_range.storage }}</td></tr>
+            <tr><th>Compliance & Certifications</th><td>
+              <div class="cert-tags">
+                {% for cert in product.certifications %}
+                  <span class="pdp-badge">{{ cert }}</span>
+                {% endfor %}
+              </div>
+            </td></tr>
+          </tbody>
+        </table>
+      </div>
     </div>
 
     <!-- Related Products Cross-Sell -->
     {% if related_products %}
-    <div style="margin-top: 4rem;">
+    <div class="related-section">
       <h3 class="section-title" style="font-size: 1.5rem; margin-bottom: 1.5rem;">Related Battery Models</h3>
       <div class="product-grid">
         {% for r in related_products %}

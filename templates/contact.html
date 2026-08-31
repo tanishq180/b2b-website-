@@ -1,9 +1,9 @@
 {% extends "layout.html" %}
 
-{% block title %}Contact & Technical Support | Power-Sonic B2B{% endblock %}
+{% block title %}Contact & Technical Support | Sunka B2B{% endblock %}
 
 {% block content %}
-<section class="section" style="padding-top: 3rem;">
+<section class="section contact-section">
   <div class="container">
 
     <div class="section-header">
@@ -12,31 +12,37 @@
       <p class="section-desc">Have questions about battery sizing, custom OEM designs, or volume distributor pricing? Submit your request below.</p>
     </div>
 
-    <div style="display: grid; grid-template-columns: 1fr 1.5fr; gap: 3rem; align-items: start;">
+    <div class="contact-grid">
 
       <!-- Direct Contact Info -->
-      <div style="background: white; border: 1px solid #E2E8F0; border-radius: 12px; padding: 2rem; box-shadow: var(--shadow-sm);">
-        <h3 style="color: var(--color-navy-dark); font-size: 1.3rem; margin-bottom: 1.5rem;">Corporate Headquarters</h3>
+      <div class="contact-card">
+        <h3 class="contact-card-title">Corporate Headquarters</h3>
         
-        <div style="margin-bottom: 1.5rem;">
-          <strong style="display:block; color: var(--color-navy-dark); font-size: 0.9rem; text-transform: uppercase;">Address</strong>
-          <p style="color: #64748B; font-size: 0.95rem;">Power-Sonic Corporation<br>3650 Rosecrans St, San Diego, CA 92110</p>
+        <div class="contact-info-block">
+          <strong class="contact-label">Address</strong>
+          <p class="contact-text">Sunka Battery Corporation<br>3650 Rosecrans St, San Diego, CA 92110</p>
         </div>
 
-        <div style="margin-bottom: 1.5rem;">
-          <strong style="display:block; color: var(--color-navy-dark); font-size: 0.9rem; text-transform: uppercase;">Direct Phone Hotline</strong>
-          <p style="color: #64748B; font-size: 0.95rem;">Toll Free: +1 (800) 555-POWER<br>International: +1 (619) 661-2020</p>
+        <div class="contact-info-block">
+          <strong class="contact-label">Direct Phone Hotline</strong>
+          <p class="contact-text">
+            Toll Free: <a href="tel:+18005557693">+1 (800) 555-POWER</a><br>
+            International: <a href="tel:+16196612020">+1 (619) 661-2020</a>
+          </p>
         </div>
 
-        <div style="margin-bottom: 1.5rem;">
-          <strong style="display:block; color: var(--color-navy-dark); font-size: 0.9rem; text-transform: uppercase;">Email Contacts</strong>
-          <p style="color: #64748B; font-size: 0.95rem;">Sales & RFQ: <a href="mailto:sales@power-sonic-b2b.com">sales@power-sonic-b2b.com</a><br>Engineering: <a href="mailto:engineering@power-sonic-b2b.com">engineering@power-sonic-b2b.com</a></p>
+        <div class="contact-info-block">
+          <strong class="contact-label">Email Contacts</strong>
+          <p class="contact-text">
+            Sales & RFQ: <a href="mailto:sales@sunka-batteries.com">sales@sunka-batteries.com</a><br>
+            Engineering: <a href="mailto:engineering@sunka-batteries.com">engineering@sunka-batteries.com</a>
+          </p>
         </div>
       </div>
 
       <!-- Contact Inquiry Form -->
-      <div style="background: white; border: 1px solid #E2E8F0; border-radius: 12px; padding: 2rem; box-shadow: var(--shadow-sm);">
-        <h3 style="color: var(--color-navy-dark); font-size: 1.3rem; margin-bottom: 1.5rem;">Submit B2B Technical Inquiry</h3>
+      <div class="contact-card">
+        <h3 class="contact-card-title">Submit B2B Technical Inquiry</h3>
 
         <form id="contact-page-form" onsubmit="event.preventDefault(); document.querySelector('.open-rfq-modal-btn').click();">
           <div class="form-grid">
@@ -61,7 +67,7 @@
               <textarea class="form-control" rows="4" placeholder="How can our application engineers assist you?"></textarea>
             </div>
           </div>
-          <button type="submit" class="btn btn-accent btn-lg mt-3 style='width:100%;'">Send Inquiry</button>
+          <button type="submit" class="btn btn-accent btn-lg w-100 mt-3">Send Inquiry</button>
         </form>
       </div>
 

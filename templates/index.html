@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% block title %}Power-Sonic Industrial Energy Solutions | SLA, AGM & Lithium Batteries{% endblock %}
+{% block title %}Sunka Industrial Energy Solutions | SLA, AGM & Lithium Batteries{% endblock %}
 
 {% block content %}
 
@@ -19,12 +19,13 @@
       </p>
       <div class="hero-actions">
         <a href="/catalog" class="btn btn-accent btn-lg">Explore Battery Catalog</a>
+        <button type="button" class="btn btn-outline-light btn-lg open-rfq-modal-btn">Request Bulk Quote</button>
       </div>
 
       <div class="hero-stats">
         <div class="stat-item">
           <div class="stat-num">50<span>+</span></div>
-          <div class="stat-label">Years of Engineering</div>
+          <div class="stat-label">Years Engineering</div>
         </div>
         <div class="stat-item">
           <div class="stat-num">100M<span>+</span></div>
@@ -32,7 +33,7 @@
         </div>
         <div class="stat-item">
           <div class="stat-num">99.9<span>%</span></div>
-          <div class="stat-label">Recombination Efficiency</div>
+          <div class="stat-label">Reliability Rate</div>
         </div>
       </div>
     </div>
@@ -53,7 +54,7 @@
 </section>
 
 <!-- Application / Market Grid -->
-<section class="section">
+<section class="section app-markets-section">
   <div class="container">
     <div class="section-header">
       <span class="section-subtitle">TARGET MARKETS & SECTORS</span>
@@ -83,7 +84,7 @@
       <a href="/catalog" class="app-card">
         <div class="app-icon-wrapper">🏥</div>
         <h3>Medical Equipment</h3>
-        <p>ISO 13485 compliant batteries powering mobile diagnostic carts and life-support units.</p>
+        <p>High-reliability backup batteries powering mobile diagnostic carts and life-support units.</p>
       </a>
 
       <a href="/catalog" class="app-card">
@@ -96,7 +97,7 @@
 </section>
 
 <!-- Product Category Showcase -->
-<section class="section" style="background-color: #FFFFFF; border-top: 1px solid #E2E8F0; border-bottom: 1px solid #E2E8F0;">
+<section class="section product-family-section">
   <div class="container">
     <div class="section-header">
       <span class="section-subtitle">OUR PRODUCT FAMILIES</span>
@@ -119,13 +120,13 @@
             <div class="spec-item"><strong>4V - 12V</strong><span>Voltage Range</span></div>
             <div class="spec-item"><strong>0.8Ah - 200Ah</strong><span>Capacity Range</span></div>
           </div>
-          <a href="/catalog?chemistry=agm" class="btn btn-navy style='width:100%;'">Explore AGM Series →</a>
+          <a href="/catalog?chemistry=agm" class="btn btn-navy w-100">Explore AGM Series →</a>
         </div>
       </div>
 
       <!-- Lithium LiFePO4 Family Card -->
       <div class="product-card">
-        <span class="product-badge-tag" style="background-color:#E11D48;">Lithium LiFePO4</span>
+        <span class="product-badge-tag badge-lithium">Lithium LiFePO4</span>
         <div class="product-img-wrapper">
           <img src="{{ url_for('static', filename='images/lithium_lifepo4_battery.jpg') }}" alt="PSL Series Lithium Battery">
         </div>
@@ -136,13 +137,13 @@
             <div class="spec-item"><strong>12.8V - 51.2V</strong><span>Voltage Range</span></div>
             <div class="spec-item"><strong>9Ah - 300Ah</strong><span>Capacity Range</span></div>
           </div>
-          <a href="/catalog?chemistry=lithium" class="btn btn-navy style='width:100%;'">Explore Lithium Series →</a>
+          <a href="/catalog?chemistry=lithium" class="btn btn-navy w-100">Explore Lithium Series →</a>
         </div>
       </div>
 
       <!-- Deep Cycle Gel Card -->
       <div class="product-card">
-        <span class="product-badge-tag" style="background-color:#EA580C;">Deep Cycle Gel</span>
+        <span class="product-badge-tag badge-gel">Deep Cycle Gel</span>
         <div class="product-img-wrapper">
           <img src="{{ url_for('static', filename='images/deep_cycle_gel_battery.jpg') }}" alt="PSG Series Gel Battery">
         </div>
@@ -153,95 +154,63 @@
             <div class="spec-item"><strong>6V - 12V</strong><span>Voltage Range</span></div>
             <div class="spec-item"><strong>15Ah - 200Ah</strong><span>Capacity Range</span></div>
           </div>
-          <a href="/catalog?chemistry=gel" class="btn btn-navy style='width:100%;'">Explore Gel Series →</a>
+          <a href="/catalog?chemistry=gel" class="btn btn-navy w-100">Explore Gel Series →</a>
         </div>
       </div>
 
-    </div>
-  </div>
-</section>
-
-<!-- Featured Technical Spec Batteries -->
-<section class="section">
-  <div class="container">
-    <div class="section-header">
-      <span class="section-subtitle">POPULAR SPECIFICATIONS</span>
-      <h2 class="section-title">Featured Industrial Batteries</h2>
-    </div>
-
-    <div class="product-grid">
-      {% for p in featured_products %}
-      <div class="product-card">
-        <span class="product-badge-tag">{{ p.chemistry }}</span>
-        <div class="product-img-wrapper">
-          <img src="{{ p.image }}" alt="{{ p.model }}">
-        </div>
-        <div class="product-body">
-          <h3 class="product-model">{{ p.model }}</h3>
-          <p class="product-title">{{ p.title }}</p>
-          <div class="spec-mini-grid">
-            <div class="spec-item">
-              <strong>{{ p.voltage }}V</strong>
-              <span>Voltage</span>
-            </div>
-            <div class="spec-item">
-              <strong>{{ p.capacity_ah }} Ah</strong>
-              <span>Capacity</span>
-            </div>
-            <div class="spec-item">
-              <strong>{{ p.weight_kg }} kg</strong>
-              <span>Weight</span>
-            </div>
-            <div class="spec-item">
-              <strong>{{ p.terminal_code.upper() }}</strong>
-              <span>Terminal</span>
-            </div>
-          </div>
-          <div class="product-actions">
-            <a href="/product/{{ p.id }}" class="btn btn-outline-navy btn-sm" style="width: 100%;">View Specs</a>
-          </div>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
-
-    <div class="text-center mt-4">
-      <a href="/catalog" class="btn btn-lg btn-outline-navy">View Complete 2026 Catalog & Filter Specs →</a>
     </div>
   </div>
 </section>
 
 <!-- B2B Quick Inquiry Lead Capture Banner -->
-<section class="section" style="background-color: var(--color-navy-dark); color: white;">
-  <div class="container" style="max-width: 900px;">
+<section class="section engineering-lead-section">
+  <div class="container" style="max-width: 920px;">
     <div class="text-center mb-4">
       <span class="section-subtitle" style="color: var(--color-accent-orange);">APPLICATION ENGINEERING ASSISTANCE</span>
-      <h2 class="section-title" style="color: white;">Find the Right Battery for Your Project</h2>
-      <p style="color: #94A3B8;">Need assistance calculating Ah capacity, sizing C-rates, or specifying custom wiring terminals? Speak directly with a Power-Sonic sales engineer.</p>
+      <h2 class="section-title text-white">Find the Right Battery for Your Project</h2>
+      <p class="lead-subtitle">Need assistance calculating Ah capacity, sizing C-rates, or specifying custom wiring terminals? Speak directly with a Sunka sales engineer.</p>
     </div>
 
-    <form class="p-4" style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px;" onsubmit="event.preventDefault(); document.querySelector('.open-rfq-modal-btn').click();">
-      <div class="form-grid">
-        <div class="form-group">
-          <label class="form-label" style="color:white;">Select Chemistry</label>
-          <select class="form-control">
-            <option>Sealed Lead Acid (AGM)</option>
-            <option>Lithium LiFePO4 Smart</option>
-            <option>Deep Cycle Gel</option>
-          </select>
+    <form class="engineering-finder-card" onsubmit="event.preventDefault(); document.querySelector('.open-rfq-modal-btn').click();">
+      <div class="engineering-finder-grid">
+        <div class="finder-field-group">
+          <label class="finder-field-label" for="finder-chemistry">
+            <span class="label-icon">🔋</span>
+            <span>Select Battery Chemistry</span>
+          </label>
+          <div class="finder-select-wrapper">
+            <select id="finder-chemistry" class="finder-select">
+              <option value="sla">Sealed Lead Acid (AGM Standard)</option>
+              <option value="lithium">Lithium LiFePO4 Smart Battery</option>
+              <option value="gel">Deep Cycle Gel Series</option>
+              <option value="high_rate">High Rate UPS Discharge</option>
+              <option value="graphene">Next-Gen Graphene Series</option>
+            </select>
+          </div>
         </div>
-        <div class="form-group">
-          <label class="form-label" style="color:white;">Required Voltage (V)</label>
-          <select class="form-control">
-            <option>12 Volt (Standard)</option>
-            <option>24 Volt</option>
-            <option>48 Volt (Rackmount)</option>
-            <option>6 Volt</option>
-          </select>
+
+        <div class="finder-field-group">
+          <label class="finder-field-label" for="finder-voltage">
+            <span class="label-icon">⚡</span>
+            <span>Required Nominal Voltage</span>
+          </label>
+          <div class="finder-select-wrapper">
+            <select id="finder-voltage" class="finder-select">
+              <option value="12">12 Volt (Standard)</option>
+              <option value="48">48 Volt (Rackmount Telecom)</option>
+              <option value="24">24 Volt Industrial</option>
+              <option value="6">6 Volt Deep Cycle</option>
+              <option value="4">4 Volt Compact SLA</option>
+            </select>
+          </div>
         </div>
       </div>
-      <div class="mt-3 text-center">
-        <button type="submit" class="btn btn-accent btn-lg">Launch Custom Specification Inquiry →</button>
+
+      <div class="finder-action-row">
+        <button type="submit" class="btn btn-accent btn-lg finder-btn-submit">
+          <span>Launch Custom Specification Inquiry</span>
+          <span style="font-size: 1.15rem;">→</span>
+        </button>
       </div>
     </form>
   </div>

@@ -1,24 +1,41 @@
 {% extends "layout.html" %}
 
-{% block title %}Interactive Battery Catalog & Specs Filter | Power-Sonic{% endblock %}
+{% block title %}Interactive Battery Catalog & Specs Filter | Sunka{% endblock %}
 
 {% block content %}
-<section class="section" style="padding-top: 2.5rem;">
+<section class="section catalog-section">
   <div class="container">
     
     <!-- Catalog Header -->
-    <div style="margin-bottom: 2rem;">
-      <h1 class="section-title" style="margin-bottom: 0.5rem;">Industrial Battery Catalog</h1>
+    <div class="catalog-page-header">
+      <h1 class="section-title">Industrial Battery Catalog</h1>
       <p class="section-desc">Search, filter, and compare technical specifications across our full product line of SLA, Gel, and Lithium batteries.</p>
     </div>
+
+    <!-- Mobile Filter Trigger Bar (Visible only on mobile/tablet) -->
+    <div class="mobile-filter-bar">
+      <button id="mobile-filter-toggle-btn" class="btn btn-outline-navy mobile-filter-btn" type="button">
+        <span>⚙️ Filter Specifications</span>
+        <span id="active-filter-badge" class="filter-count-badge" style="display:none;">0</span>
+      </button>
+      <div id="mobile-catalog-count" class="mobile-count-text">
+        <!-- populated by js -->
+      </div>
+    </div>
+
+    <!-- Filter Overlay for Mobile Offcanvas -->
+    <div id="filter-sidebar-overlay" class="filter-sidebar-overlay"></div>
 
     <div class="catalog-layout">
 
       <!-- Multi-Attribute Filter Sidebar -->
-      <aside class="filter-sidebar">
+      <aside class="filter-sidebar" id="filter-sidebar">
         <div class="filter-header">
           <h3>Filter Specifications</h3>
-          <button id="reset-filters-btn" class="btn-reset-filter">Reset All</button>
+          <div class="filter-header-actions">
+            <button id="reset-filters-btn" class="btn-reset-filter" type="button">Reset</button>
+            <button id="close-filter-sidebar-btn" class="close-filter-btn" type="button" aria-label="Close filters">&times;</button>
+          </div>
         </div>
 
         <form id="catalog-filter-form">
@@ -193,6 +210,9 @@
             </div>
           </div>
 
+          <div class="filter-mobile-footer">
+            <button id="apply-filters-btn" type="button" class="btn btn-accent" style="width: 100%;">Apply Filters</button>
+          </div>
         </form>
       </aside>
 
@@ -200,10 +220,10 @@
       <main class="catalog-main">
         <!-- Toolbar -->
         <div class="catalog-toolbar">
-          <div id="catalog-result-count" style="font-weight: 700; color: var(--color-navy-dark);">
+          <div id="catalog-result-count" class="catalog-result-count">
             Loading Product Catalog...
           </div>
-          <div>
+          <div class="catalog-search-box">
             <input type="text" id="catalog-search-input" class="catalog-search-input" placeholder="Search model or keyword..." autocomplete="off">
           </div>
         </div>
