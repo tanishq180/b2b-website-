@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% block title %}Sunka Industrial Energy Solutions | SLA, AGM & Lithium Batteries{% endblock %}
+{% block title %}Sunka Industrial Energy Solutions | Lead Acid & Lithium Batteries{% endblock %}
 
 {% block content %}
 
@@ -15,7 +15,7 @@
         Engineered Energy Solutions <span class="highlight">Built for Industry.</span>
       </h1>
       <p class="hero-subtitle">
-        High-performance Sealed Lead Acid (AGM, Gel) and Smart Lithium Iron Phosphate (LiFePO4) batteries engineered for uninterruptible power, renewable storage, telecom, and critical equipment.
+        High-performance Sealed Lead Acid (AGM) and Smart Lithium Iron Phosphate (LiFePO4) batteries engineered for uninterruptible power, renewable storage, telecom, and critical equipment.
       </p>
       <div class="hero-actions">
         <a href="/catalog" class="btn btn-accent btn-lg">Explore Battery Catalog</a>
@@ -24,16 +24,12 @@
 
       <div class="hero-stats">
         <div class="stat-item">
-          <div class="stat-num">50<span>+</span></div>
+          <div class="stat-num">15<span>+</span></div>
           <div class="stat-label">Years Engineering</div>
         </div>
         <div class="stat-item">
           <div class="stat-num">100M<span>+</span></div>
           <div class="stat-label">Batteries Deployed</div>
-        </div>
-        <div class="stat-item">
-          <div class="stat-num">99.9<span>%</span></div>
-          <div class="stat-label">Reliability Rate</div>
         </div>
       </div>
     </div>
@@ -41,13 +37,6 @@
     <div class="hero-visual">
       <div class="hero-img-card">
         <img src="{{ url_for('static', filename='images/products/sunka_mr1232bs.jpg') }}" alt="SUNKA MR1232BS Industrial Battery">
-      </div>
-      <div class="hero-badge-float">
-        <div class="badge-icon">🔋</div>
-        <div class="badge-text">
-          <strong>SUNKA MR1232BS</strong>
-          <span>12V 3.2Ah Sealed Lead-Acid VRLA</span>
-        </div>
       </div>
     </div>
   </div>
@@ -107,54 +96,37 @@
 
     <div class="product-grid">
 
-      <!-- SLA / AGM Family Card -->
+      <!-- Sealed Lead Acid Family Card -->
       <div class="product-card">
-        <span class="product-badge-tag">SLA / AGM</span>
+        <span class="product-badge-tag">Lead Acid</span>
         <div class="product-img-wrapper">
-          <img src="{{ url_for('static', filename='images/sla_agm_battery.jpg') }}" alt="PS Series AGM Battery">
+          <img src="{{ url_for('static', filename='images/products/sunka_rb1245e.jpg') }}" alt="SUNKA Sealed Lead Acid Battery">
         </div>
         <div class="product-body">
-          <h3 class="product-model">PS Series General Purpose</h3>
-          <p class="product-title">Absorbent Glass Mat (AGM) valve regulated lead acid batteries for general standby backup power.</p>
+          <h3 class="product-model">SUNKA Lead Acid Series</h3>
+          <p class="product-title">Valve Regulated Lead-Acid (VRLA / SLA) maintenance-free rechargeable batteries for standby and backup power.</p>
           <div class="spec-mini-grid">
             <div class="spec-item"><strong>4V - 12V</strong><span>Voltage Range</span></div>
-            <div class="spec-item"><strong>0.8Ah - 200Ah</strong><span>Capacity Range</span></div>
+            <div class="spec-item"><strong>1.0Ah - 12Ah</strong><span>Capacity Range</span></div>
           </div>
-          <a href="/catalog?chemistry=agm" class="btn btn-navy w-100">Explore AGM Series →</a>
+          <a href="/catalog?chemistry=sla" class="btn btn-navy w-100">Explore Lead Acid Series →</a>
         </div>
       </div>
 
-      <!-- Lithium LiFePO4 Family Card -->
+      <!-- Lithium Li-ion Family Card -->
       <div class="product-card">
-        <span class="product-badge-tag badge-lithium">Lithium LiFePO4</span>
+        <span class="product-badge-tag badge-lithium">Lithium Li-ion</span>
         <div class="product-img-wrapper">
-          <img src="{{ url_for('static', filename='images/lithium_lifepo4_battery.jpg') }}" alt="PSL Series Lithium Battery">
+          <img src="{{ url_for('static', filename='images/products/sunka_18650_2200.jpg') }}" alt="SUNKA Lithium-Ion 18650 Battery">
         </div>
         <div class="product-body">
-          <h3 class="product-model">PSL Series Smart Lithium</h3>
-          <p class="product-title">Next-gen LiFePO4 with built-in intelligent BMS, CANbus telemetry, and 3500+ deep cycles.</p>
+          <h3 class="product-model">SUNKA Lithium Series</h3>
+          <p class="product-title">High energy density 18650 cylindrical cells engineered for high reliability, portable electronics, and custom pack assemblies.</p>
           <div class="spec-mini-grid">
-            <div class="spec-item"><strong>12.8V - 51.2V</strong><span>Voltage Range</span></div>
-            <div class="spec-item"><strong>9Ah - 300Ah</strong><span>Capacity Range</span></div>
+            <div class="spec-item"><strong>3.7V Nominal</strong><span>Voltage Rating</span></div>
+            <div class="spec-item"><strong>1600mAh - 2200mAh</strong><span>Capacity Range</span></div>
           </div>
           <a href="/catalog?chemistry=lithium" class="btn btn-navy w-100">Explore Lithium Series →</a>
-        </div>
-      </div>
-
-      <!-- Deep Cycle Gel Card -->
-      <div class="product-card">
-        <span class="product-badge-tag badge-gel">Deep Cycle Gel</span>
-        <div class="product-img-wrapper">
-          <img src="{{ url_for('static', filename='images/deep_cycle_gel_battery.jpg') }}" alt="PSG Series Gel Battery">
-        </div>
-        <div class="product-body">
-          <h3 class="product-model">PSG Series Gel Deep Cycle</h3>
-          <p class="product-title">Gel electrolyte chemistry designed for high temperature tolerance and deep recovery capability.</p>
-          <div class="spec-mini-grid">
-            <div class="spec-item"><strong>6V - 12V</strong><span>Voltage Range</span></div>
-            <div class="spec-item"><strong>15Ah - 200Ah</strong><span>Capacity Range</span></div>
-          </div>
-          <a href="/catalog?chemistry=gel" class="btn btn-navy w-100">Explore Gel Series →</a>
         </div>
       </div>
 
@@ -180,9 +152,8 @@
           </label>
           <div class="finder-select-wrapper">
             <select id="finder-chemistry" class="finder-select">
-              <option value="sla">Sealed Lead Acid (AGM Standard)</option>
-              <option value="lithium">Lithium LiFePO4 Smart Battery</option>
-              <option value="gel">Deep Cycle Gel Series</option>
+              <option value="sla">Lead Acid Series</option>
+              <option value="lithium">Lithium Series</option>
               <option value="high_rate">High Rate UPS Discharge</option>
               <option value="graphene">Next-Gen Graphene Series</option>
             </select>
