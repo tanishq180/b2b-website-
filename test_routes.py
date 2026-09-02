@@ -12,7 +12,6 @@ class TestSunkaApp(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertIn(b'Engineered Energy Solutions', res.data)
         self.assertIn(b'main-header', res.data)
-        self.assertIn(b'top-utility-bar', res.data)
         self.assertIn(b'Request Bulk Quote', res.data)
 
     def test_catalog_page(self):
@@ -52,18 +51,18 @@ class TestSunkaApp(unittest.TestCase):
         self.assertGreaterEqual(data['filtered_count'], 1)
 
     def test_api_filter_categories(self):
-        # Test 48V Rackmount Telecom Lithium
+        # Test 48V Telecom Category (Lithium & Graphene)
         res = self.client.post('/api/filter', json={'voltage': ['48']})
         self.assertEqual(res.status_code, 200)
         data = res.get_json()
-        self.assertEqual(data['filtered_count'], 1)
-        self.assertEqual(data['products'][0]['id'], 'psl-48100')
+        self.assertEqual(data['filtered_count'], 2)
 
-        # Test High Rate UPS
-        res = self.client.post('/api/filter', json={'chemistry': ['high_rate']})
+        # Test Graphene Battery Filter
+        res = self.client.post('/api/filter', json={'chemistry': ['graphene']})
         self.assertEqual(res.status_code, 200)
         data = res.get_json()
         self.assertGreaterEqual(data['filtered_count'], 2)
+        self.assertEqual(data['products'][0]['chemistry'], 'Graphene')
 
     def test_api_rfq(self):
         payload = {

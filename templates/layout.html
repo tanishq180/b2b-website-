@@ -24,30 +24,6 @@
 
   <!-- Navigation Header Block -->
   {% block header %}
-  <!-- 1. Top Utility Bar -->
-  <header class="top-utility-bar">
-    <div class="container utility-flex">
-      <div class="utility-left">
-        <div class="utility-item">
-          <span>📞 Hotline:</span>
-          <a href="tel:+18005557693">+1 (800) 555-POWER</a>
-        </div>
-        <div class="utility-item utility-email">
-          <span>✉️ Support:</span>
-          <a href="mailto:engineering@sunka-batteries.com">engineering@sunka-batteries.com</a>
-        </div>
-      </div>
-      <div class="utility-right">
-        <!-- Live Header Search -->
-        <div class="header-search-wrapper">
-          <span class="header-search-icon">🔍</span>
-          <input type="text" id="header-search-input" class="header-search-input"
-            placeholder="Search model or spec..." autocomplete="off">
-          <div id="header-search-results" class="header-search-results"></div>
-        </div>
-      </div>
-    </div>
-  </header>
 
   <!-- 2. Main Navigation Bar -->
   <nav class="main-header">
@@ -119,8 +95,8 @@
       <!-- Direct Contact Hotline -->
       <div class="mobile-nav-contact">
         <div class="mobile-contact-title">Direct Engineering Support</div>
-        <a href="tel:+18005557693" class="mobile-contact-item">📞 +1 (800) 555-POWER</a>
-        <a href="mailto:engineering@sunka-batteries.com" class="mobile-contact-item">✉️ engineering@sunka-batteries.com</a>
+        <a href="tel:+917538843410" class="mobile-contact-item">📞 +91 7538843410</a>
+        <a href="mailto:merihindustries@gmail.com" class="mobile-contact-item">✉️ merihindustries@gmail.com</a>
       </div>
     </div>
   </aside>
@@ -154,18 +130,14 @@
                 placeholder="e.g. Apex Telecom Infrastructure" required>
             </div>
             <div class="form-group">
-              <label class="form-label" for="rfq-email">Corporate Work Email *</label>
+              <label class="form-label" for="rfq-email">Email *</label>
               <input type="email" id="rfq-email" name="email" class="form-control" placeholder="rvance@apextelecom.com"
                 required>
             </div>
             <div class="form-group">
               <label class="form-label" for="rfq-phone">Phone Number *</label>
-              <input type="tel" id="rfq-phone" name="phone" class="form-control" placeholder="+1 (555) 019-2834"
+              <input type="tel" id="rfq-phone" name="phone" class="form-control" placeholder="+91 98765 43210"
                 required>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="rfq-tax-id">GSTIN / Tax ID (Optional)</label>
-              <input type="text" id="rfq-tax-id" name="gstin_tax_id" class="form-control" placeholder="27AAACG0000A1Z5">
             </div>
             <div class="form-group">
               <label class="form-label" for="rfq-product-model">Target Battery Model</label>
@@ -178,14 +150,8 @@
             </div>
             <div class="form-group">
               <label class="form-label" for="rfq-application">Target Application</label>
-              <select id="rfq-application" name="application_details" class="form-control">
-                <option value="UPS Systems">UPS & Data Center Standby</option>
-                <option value="Solar & Energy Storage">Solar & Energy Storage (ESS)</option>
-                <option value="Telecom">Telecom Towers & 5G Infrastructure</option>
-                <option value="Medical Equipment">Medical Devices & Healthcare</option>
-                <option value="Mobility / EV">Industrial Mobility & EV Robotics</option>
-                <option value="Fire & Security">Fire Systems & Security Alarm</option>
-              </select>
+              <input type="text" id="rfq-application" name="application_details" class="form-control"
+                placeholder="e.g. UPS, Solar ESS, Telecom, Medical, EV">
             </div>
             <div class="form-group full-width">
               <label class="form-label" for="rfq-message">Technical Requirements & Custom Specifications</label>
@@ -216,7 +182,7 @@
         <ul>
           <li><a href="/catalog?chemistry=sla">Lead Acid</a></li>
           <li><a href="/catalog?chemistry=lithium">Lithium Series</a></li>
-          <li><a href="/catalog?chemistry=high_rate">High Rate UPS Series</a></li>
+          <li><a href="/catalog?chemistry=graphene">Graphene Series</a></li>
           <li><a href="/catalog?voltage=48">48V Telecom Rackmount</a></li>
         </ul>
       </div>
@@ -254,7 +220,7 @@
       <span class="bar-icon">⚡</span>
       <span class="bar-label">Catalog</span>
     </a>
-    <a href="tel:+18005557693" class="mobile-bar-item">
+    <a href="tel:+917538843410" class="mobile-bar-item">
       <span class="bar-icon">📞</span>
       <span class="bar-label">Call Sales</span>
     </a>

@@ -278,7 +278,7 @@ function renderCatalogProducts(products) {
 
   catalogGrid.innerHTML = products.map(p => `
     <div class="product-card">
-      <span class="product-badge-tag ${p.chemistry_code === 'lithium' ? 'badge-lithium' : (p.chemistry_code === 'gel' ? 'badge-gel' : '')}">${p.chemistry}</span>
+      <span class="product-badge-tag ${p.chemistry_code === 'lithium' ? 'badge-lithium' : (p.chemistry_code === 'graphene' ? 'badge-graphene' : (p.chemistry_code === 'gel' ? 'badge-gel' : ''))}">${p.chemistry}</span>
       <div class="product-img-wrapper">
         <img src="${p.image}" alt="${p.model}" loading="lazy">
       </div>

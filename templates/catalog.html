@@ -48,10 +48,6 @@
                 <span>Lead Acid</span>
               </label>
               <label class="filter-checkbox">
-                <input type="checkbox" name="chemistry" value="high_rate" {% if request.args.get('chemistry') == 'high_rate' %}checked{% endif %}>
-                <span>High Rate UPS</span>
-              </label>
-              <label class="filter-checkbox">
                 <input type="checkbox" name="chemistry" value="lithium" {% if request.args.get('chemistry') == 'lithium' %}checked{% endif %}>
                 <span>Smart Lithium LiFePO4</span>
               </label>
