@@ -1,0 +1,122 @@
+{% extends "layout.html" %}
+
+{% block title %}Request Bulk Quote & Technical Inquiries | MERI Industries (Sunka Batteries){% endblock %}
+{% block meta_description %}Submit a B2B Request for Quote (RFQ) or contact MERI Industries engineering support for volume pricing, custom packs, and datasheets.{% endblock %}
+
+{% block content %}
+<section class="section contact-section">
+  <div class="container">
+
+    <div class="section-header text-center">
+      <span class="section-subtitle">DIRECT B2B & BULK QUOTE INQUIRIES</span>
+      <h1 class="section-title">Request a Bulk Quote & Engineering Support</h1>
+      <p class="section-desc">
+        Connect directly with our application engineers for volume distributor pricing, custom battery pack configurations, or technical datasheets. We respond within 2 business hours.
+      </p>
+    </div>
+
+    <div class="contact-grid">
+
+      <!-- Left Column: Direct Contact & Engineering Support Info -->
+      <div class="contact-card contact-info-card">
+        <h3 class="contact-card-title">Corporate & Engineering Headquarters</h3>
+        
+        <div class="contact-info-block">
+          <strong class="contact-label">Company & Brand</strong>
+          <p class="contact-text">
+            <strong>MERI Industries</strong><br>
+            <span class="text-muted">Sunka Industrial Battery Division</span>
+          </p>
+        </div>
+
+        <div class="contact-info-block">
+          <strong class="contact-label">Direct Phone & WhatsApp Hotline</strong>
+          <p class="contact-text">
+            <a href="tel:+917538843410" class="contact-highlight-link">📞 +91 7538843410</a><br>
+            <span class="contact-subtext">Mon – Sat: 9:00 AM – 7:00 PM IST</span>
+          </p>
+        </div>
+
+        <div class="contact-info-block">
+          <strong class="contact-label">Official Engineering Email</strong>
+          <p class="contact-text">
+            <a href="mailto:merihindustries@gmail.com" class="contact-highlight-link">✉️ merihindustries@gmail.com</a><br>
+            <span class="contact-subtext">Fast response for CAD drawings & RFQs</span>
+          </p>
+        </div>
+
+        <div class="contact-info-block">
+          <strong class="contact-label">B2B Manufacturing Capabilities</strong>
+          <ul class="contact-feature-list">
+            <li>⚡ Sealed Lead Acid (SLA/AGM) 4V, 6V, 12V High-Rate</li>
+            <li>🔋 Smart LiFePO4 & 18650 Cylindrical Pack Assemblies</li>
+            <li>🚀 Next-Gen Ultra High Cycle Graphene Batteries</li>
+            <li>🏭 OEM/ODM Custom Dimensions & Wiring Harnesses</li>
+            <li>📦 Volume Distributor Tier Pricing & Global Logistics</li>
+          </ul>
+        </div>
+
+        <div class="contact-cert-badge">
+          <span>🛡️ ISO 9001:2015</span>
+          <span>⚡ CE Certified</span>
+          <span>🔥 UL94-V0 Rated</span>
+          <span>🌿 RoHS Compliant</span>
+        </div>
+      </div>
+
+      <!-- Right Column: B2B RFQ / Contact Inquiry Form -->
+      <div class="contact-card contact-form-card">
+        <h3 class="contact-card-title">Submit Official RFQ / Bulk Quote Request</h3>
+        <p class="contact-form-intro text-muted mb-3">
+          Complete the form below to receive a formal commercial quote with volume discounts and technical documentation.
+        </p>
+
+        <form id="contact-page-form" class="b2b-contact-form">
+          <div class="form-grid">
+            <div class="form-group">
+              <label class="form-label" for="contact-full-name">Full Name *</label>
+              <input type="text" id="contact-full-name" name="full_name" class="form-control" placeholder="e.g. Robert Vance" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="contact-company-name">Company / Organization *</label>
+              <input type="text" id="contact-company-name" name="company_name" class="form-control" placeholder="e.g. Apex Power Systems" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="contact-email">Business Email *</label>
+              <input type="email" id="contact-email" name="email" class="form-control" placeholder="rvance@apexpower.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="contact-phone">Phone Number *</label>
+              <input type="tel" id="contact-phone" name="phone" class="form-control" placeholder="+91 98765 43210" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="contact-product-model">Target Battery Model / Chemistry</label>
+              <input type="text" id="contact-product-model" name="product_model" class="form-control" placeholder="e.g. PSL-121000 or Multiple Models">
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="contact-qty">Estimated Quantity (Units)</label>
+              <input type="number" id="contact-qty" name="estimated_qty" class="form-control" min="1" value="10" placeholder="10">
+            </div>
+            <div class="form-group full-width">
+              <label class="form-label" for="contact-application">Target Application / Project Use</label>
+              <input type="text" id="contact-application" name="application_details" class="form-control" placeholder="e.g. UPS Data Center, Solar ESS, Telecom Rack, Medical Device">
+            </div>
+            <div class="form-group full-width">
+              <label class="form-label" for="contact-message">Technical Requirements & Specifications</label>
+              <textarea id="contact-message" name="message" class="form-control" rows="4" placeholder="Mention voltage, peak discharge amperage, operating temperatures, dimension constraints, or delivery timeline..."></textarea>
+            </div>
+          </div>
+
+          <div id="contact-form-status" class="form-status-box" style="display:none; margin-top: 1rem;"></div>
+
+          <button type="submit" id="contact-submit-btn" class="btn btn-accent btn-lg w-100 mt-3">
+            <span class="btn-text">Submit Bulk Quote Request ⚡</span>
+          </button>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+{% endblock %}

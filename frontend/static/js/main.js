@@ -1,5 +1,5 @@
 /**
- * Sunka Style B2B Industrial Battery Application Controller
+ * MERI Industries - B2B Industrial Battery Application Controller
  * Fully Mobile & Desktop Responsive
  */
 
@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileNav();
   initHeaderSearch();
   initCatalogFilters();
+  initContactPage();
   initRFQBasket();
   initRFQModal();
   initPDPGallery();
@@ -257,6 +258,19 @@ function initCatalogFilters() {
     });
   }
 
+  // Check URL params for initial filters on catalog page
+  const urlParams = new URLSearchParams(window.location.search);
+  const chemParam = urlParams.get('chemistry');
+  const voltParam = urlParams.get('voltage');
+  if (chemParam && filterForm) {
+    const cb = filterForm.querySelector(`input[name="chemistry"][value="${chemParam}"]`);
+    if (cb) cb.checked = true;
+  }
+  if (voltParam && filterForm) {
+    const cb = filterForm.querySelector(`input[name="voltage"][value="${voltParam}"]`);
+    if (cb) cb.checked = true;
+  }
+
   // Initial load
   fetchFilteredProducts();
 }
@@ -305,7 +319,7 @@ function renderCatalogProducts(products) {
         </div>
         <div class="product-actions">
           <a href="/product/${p.id}" class="btn btn-outline-navy btn-sm">View Specs</a>
-          <button class="btn btn-accent btn-sm open-rfq-modal-btn" data-product-model="${p.model}">Request Quote</button>
+          <a href="/contact?model=${encodeURIComponent(p.model)}" class="btn btn-accent btn-sm">Request Quote</a>
         </div>
       </div>
     </div>
@@ -313,7 +327,139 @@ function renderCatalogProducts(products) {
 }
 
 /* ==========================================================================
-   4. RFQ Basket LocalStorage State
+   4. Contact & Bulk Quote Page Form Handling
+   ========================================================================== */
+function initContactPage() {
+  const contactForm = document.getElementById('contact-page-form');
+  if (!contactForm) return;
+
+  // 1. Auto pre-fill fields from URL query parameters (e.g. ?model=PSL-121000&qty=20&chemistry=SLA&voltage=12V)
+  const urlParams = new URLSearchParams(window.location.search);
+  const modelParam = urlParams.get('model');
+  const qtyParam = urlParams.get('qty');
+  const chemistryParam = urlParams.get('chemistry');
+  const voltageParam = urlParams.get('voltage');
+
+  const modelInput = document.getElementById('contact-product-model');
+  const qtyInput = document.getElementById('contact-qty');
+  const appInput = document.getElementById('contact-application');
+  const msgInput = document.getElementById('contact-message');
+  const statusBox = document.getElementById('contact-form-status');
+  const submitBtn = document.getElementById('contact-submit-btn');
+
+  if (modelParam && modelInput) {
+    modelInput.value = modelParam;
+  }
+  if (qtyParam && qtyInput) {
+    qtyInput.value = qtyParam;
+  }
+  if (chemistryParam || voltageParam) {
+    const specs = [chemistryParam, voltageParam].filter(Boolean).join(', ');
+    if (modelInput && !modelInput.value) {
+      modelInput.value = specs;
+    }
+    if (msgInput && !msgInput.value) {
+      msgInput.value = `Requesting official pricing and specification data for ${specs}.`;
+    }
+  }
+
+  // 2. Handle Contact & Quote AJAX Submission
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const originalBtnHTML = submitBtn ? submitBtn.innerHTML : 'Submit Bulk Quote Request';
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<span>⏳ Submitting B2B Request...</span>`;
+    }
+    if (statusBox) {
+      statusBox.style.display = 'none';
+      statusBox.className = 'form-status-box';
+    }
+
+    const formData = new FormData(contactForm);
+    const payload = {
+      full_name: formData.get('full_name') || '',
+      company_name: formData.get('company_name') || '',
+      email: formData.get('email') || '',
+      phone: formData.get('phone') || '',
+      product_model: formData.get('product_model') || '',
+      estimated_qty: formData.get('estimated_qty') || '10',
+      application_details: formData.get('application_details') || '',
+      message: formData.get('message') || '',
+      items: rfqBasket
+    };
+
+    fetch('/api/rfq', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnHTML;
+        }
+
+        if (data.status === 'success') {
+          contactForm.reset();
+          if (statusBox) {
+            statusBox.className = 'form-status-box status-success';
+            statusBox.innerHTML = `
+              <div class="status-icon">✅</div>
+              <div class="status-content">
+                <h4 style="color:#065F46; font-size:1.05rem; margin-bottom:0.25rem;">Bulk Quote Request Received!</h4>
+                <p style="color:#047857; font-size:0.9rem; margin-bottom:0.4rem;">
+                  Your Tracking ID: <strong style="color:#064E3B; font-family:monospace; font-size:0.95rem;">${data.quote_id}</strong>
+                </p>
+                <p style="color:#065F46; font-size:0.85rem;">
+                  Our application engineer will review your technical specifications and reach out with formal distributor pricing and datasheets within 2 business hours.
+                </p>
+              </div>
+            `;
+            statusBox.style.display = 'flex';
+          }
+          showToast(`RFQ ${data.quote_id} submitted successfully!`, 'success');
+          statusBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          if (statusBox) {
+            statusBox.className = 'form-status-box status-error';
+            statusBox.innerHTML = `
+              <div class="status-icon">⚠️</div>
+              <div class="status-content">
+                <h4 style="color:#991B1B; font-size:0.95rem; margin-bottom:0.25rem;">Submission Notice</h4>
+                <p style="color:#B91C1C; font-size:0.85rem;">${data.message || 'Please verify required fields and try again.'}</p>
+              </div>
+            `;
+            statusBox.style.display = 'flex';
+          }
+          showToast(`Error: ${data.message}`, 'error');
+        }
+      })
+      .catch(err => {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalBtnHTML;
+        }
+        if (statusBox) {
+          statusBox.className = 'form-status-box status-error';
+          statusBox.innerHTML = `
+            <div class="status-icon">⚠️</div>
+            <div class="status-content">
+              <h4 style="color:#991B1B; font-size:0.95rem;">Network Error</h4>
+              <p style="color:#B91C1C; font-size:0.85rem;">Unable to submit form. Please check your internet connection or call our support hotline directly.</p>
+            </div>
+          `;
+          statusBox.style.display = 'flex';
+        }
+        showToast('Network error while submitting quote request.', 'error');
+      });
+  });
+}
+
+/* ==========================================================================
+   5. RFQ Basket LocalStorage State
    ========================================================================== */
 let rfqBasket = [];
 
@@ -363,7 +509,7 @@ function updateBasketUI() {
 }
 
 /* ==========================================================================
-   5. B2B RFQ Form Modal & API Submit
+   6. B2B RFQ Form Modal & API Submit (Fallback & Quick RFQs)
    ========================================================================== */
 function initRFQModal() {
   const modalOverlay = document.getElementById('rfq-modal-overlay');
@@ -453,7 +599,7 @@ function initRFQModal() {
 }
 
 /* ==========================================================================
-   6. PDP Image Gallery & Tabs
+   7. PDP Image Gallery & Tabs
    ========================================================================== */
 function initPDPGallery() {
   const mainImg = document.getElementById('pdp-main-image');
@@ -472,7 +618,7 @@ function initPDPGallery() {
 }
 
 /* ==========================================================================
-   7. Toast Notifications
+   8. Toast Notifications
    ========================================================================== */
 function showToast(message, type = 'info') {
   let container = document.getElementById('toast-container');

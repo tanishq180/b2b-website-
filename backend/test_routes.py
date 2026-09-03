@@ -1,5 +1,11 @@
 import io
+import os
+import sys
 import unittest
+
+# Ensure backend directory is in python path
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 from app import app, load_products
 
 class TestSunkaApp(unittest.TestCase):

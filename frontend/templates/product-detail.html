@@ -82,9 +82,9 @@
 
         <!-- CTAs -->
         <div class="pdp-cta-group">
-          <button class="btn btn-accent btn-lg open-rfq-modal-btn w-100" data-product-model="{{ product.model }}">
-            Request Bulk Quote (RFQ)
-          </button>
+          <a href="/contact?model={{ product.model | urlencode }}&qty={{ product.moq }}" class="btn btn-accent btn-lg w-100 text-center">
+            ⚡ Request Bulk Quote (RFQ)
+          </a>
         </div>
 
       </div>

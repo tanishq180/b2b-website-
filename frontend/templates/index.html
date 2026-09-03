@@ -19,7 +19,7 @@
       </p>
       <div class="hero-actions">
         <a href="/catalog" class="btn btn-accent btn-lg">Explore Battery Catalog</a>
-        <button type="button" class="btn btn-outline-light btn-lg open-rfq-modal-btn">Request Bulk Quote</button>
+        <a href="/contact" class="btn btn-outline-light btn-lg">Request Bulk Quote</a>
       </div>
 
       <div class="hero-stats">
@@ -160,7 +160,7 @@
       <p class="lead-subtitle">Need assistance calculating Ah capacity, sizing C-rates, or specifying custom wiring terminals? Speak directly with a Sunka sales engineer.</p>
     </div>
 
-    <form class="engineering-finder-card" onsubmit="event.preventDefault(); document.querySelector('.open-rfq-modal-btn').click();">
+    <form class="engineering-finder-card" action="/contact" method="GET">
       <div class="engineering-finder-grid">
         <div class="finder-field-group">
           <label class="finder-field-label" for="finder-chemistry">
@@ -168,10 +168,10 @@
             <span>Select Battery Chemistry</span>
           </label>
           <div class="finder-select-wrapper">
-            <select id="finder-chemistry" class="finder-select">
-              <option value="sla">Lead Acid Series</option>
-              <option value="lithium">Lithium Series</option>
-              <option value="graphene">Next-Gen Graphene Series</option>
+            <select id="finder-chemistry" name="chemistry" class="finder-select">
+              <option value="Lead Acid (SLA)">Lead Acid Series</option>
+              <option value="Lithium LiFePO4">Lithium Series</option>
+              <option value="Graphene">Next-Gen Graphene Series</option>
             </select>
           </div>
         </div>
@@ -182,12 +182,12 @@
             <span>Required Nominal Voltage</span>
           </label>
           <div class="finder-select-wrapper">
-            <select id="finder-voltage" class="finder-select">
-              <option value="12">12 Volt (Standard)</option>
-              <option value="48">48 Volt (Rackmount Telecom)</option>
-              <option value="24">24 Volt Industrial</option>
-              <option value="6">6 Volt Deep Cycle</option>
-              <option value="4">4 Volt Compact SLA</option>
+            <select id="finder-voltage" name="voltage" class="finder-select">
+              <option value="12V">12 Volt (Standard)</option>
+              <option value="48V">48 Volt (Rackmount Telecom)</option>
+              <option value="24V">24 Volt Industrial</option>
+              <option value="6V">6 Volt Deep Cycle</option>
+              <option value="4V">4 Volt Compact SLA</option>
             </select>
           </div>
         </div>

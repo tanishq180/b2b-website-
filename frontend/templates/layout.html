@@ -25,7 +25,7 @@
   <!-- Navigation Header Block -->
   {% block header %}
 
-  <!-- 2. Main Navigation Bar -->
+  <!-- 1. Main Navigation Bar -->
   <nav class="main-header">
     <div class="container navbar-flex">
       <a href="/" class="brand-logo">
@@ -46,7 +46,9 @@
       <div class="nav-actions">
         <a href="/download/catalog-pdf" class="btn btn-outline-navy"
           download="MERI-Industries-2026-Product-Catalog.pdf">Battery Catalog PDF 📥</a>
-        <button class="btn btn-accent open-rfq-modal-btn">Request Bulk Quote</button>
+        {% if request.path != '/contact' %}
+        <a href="/contact" class="btn btn-accent">Request Bulk Quote</a>
+        {% endif %}
       </div>
 
       <!-- Hamburger Button for Mobile -->
@@ -58,7 +60,7 @@
     </div>
   </nav>
 
-  <!-- 3. Mobile Slide-out Drawer Navigation -->
+  <!-- 2. Mobile Slide-out Drawer Navigation -->
   <div id="mobile-nav-overlay" class="mobile-nav-overlay"></div>
   <aside id="mobile-nav-drawer" class="mobile-nav-drawer" aria-label="Mobile Navigation">
     <div class="mobile-nav-header">
@@ -83,13 +85,15 @@
       <ul class="mobile-nav-menu">
         <li><a href="/" class="mobile-nav-link {% if request.path == '/' %}active{% endif %}">🏠 Home</a></li>
         <li><a href="/catalog" class="mobile-nav-link {% if request.path == '/catalog' %}active{% endif %}">⚡ Battery Catalog</a></li>
-        <li><a href="/contact" class="mobile-nav-link {% if request.path == '/contact' %}active{% endif %}">📞 Direct Contact</a></li>
+        <li><a href="/contact" class="mobile-nav-link {% if request.path == '/contact' %}active{% endif %}">📞 Contact & Bulk Quote</a></li>
       </ul>
 
       <!-- Action Buttons -->
       <div class="mobile-nav-actions">
-        <button class="btn btn-accent open-rfq-modal-btn" style="width: 100%;">⚡ Request Bulk Quote</button>
-        <a href="/download/catalog-pdf" class="btn btn-outline-navy" style="width: 100%;" download="MERI-Industries-2026-Product-Catalog.pdf">📥 Download PDF Catalog</a>
+        {% if request.path != '/contact' %}
+        <a href="/contact" class="btn btn-accent" style="width: 100%; text-align: center;">⚡ Request Bulk Quote</a>
+        {% endif %}
+        <a href="/download/catalog-pdf" class="btn btn-outline-navy" style="width: 100%; text-align: center;" download="MERI-Industries-2026-Product-Catalog.pdf">📥 Download PDF Catalog</a>
       </div>
 
       <!-- Direct Contact Hotline -->
@@ -109,7 +113,7 @@
     {% endblock %}
   </main>
 
-  <!-- 4. Global B2B RFQ Modal -->
+  <!-- 3. Global B2B RFQ Modal (Fallback / Direct Quick Modal) -->
   <div id="rfq-modal-overlay" class="modal-overlay">
     <div class="modal-card">
       <div class="modal-header">
@@ -167,7 +171,7 @@
     </div>
   </div>
 
-  <!-- 6. Footer -->
+  <!-- 4. Footer -->
   {% block footer %}
   <footer class="footer">
     <div class="container footer-grid">
@@ -203,7 +207,7 @@
         <ul>
           <li><a href="/about">Quality & Testing Standards</a></li>
           <li><a href="/download/catalog-pdf" download="MERI-Industries-2026-Product-Catalog.pdf">Download PDF Catalog</a></li>
-          <li><a href="/contact">Submit Technical Support Inquiry</a></li>
+          <li><a href="/contact">Request Bulk Quote & Support</a></li>
         </ul>
       </div>
     </div>
@@ -214,7 +218,7 @@
   </footer>
   {% endblock %}
 
-  <!-- 7. Mobile Sticky Bottom Action Bar -->
+  <!-- 5. Mobile Sticky Bottom Action Bar -->
   <nav class="mobile-bottom-bar" aria-label="Mobile quick actions">
     <a href="/catalog" class="mobile-bar-item {% if request.path == '/catalog' %}active{% endif %}">
       <span class="bar-icon">⚡</span>
@@ -224,11 +228,18 @@
       <span class="bar-icon">📞</span>
       <span class="bar-label">Call Sales</span>
     </a>
-    <button type="button" class="mobile-bar-item mobile-bar-rfq open-rfq-modal-btn">
+    {% if request.path != '/contact' %}
+    <a href="/contact" class="mobile-bar-item mobile-bar-rfq">
       <span class="bar-icon">📝</span>
       <span class="bar-label">Get Quote</span>
-    </button>
-    <button type="button" class="mobile-bar-item" id="mobile-bar-menu-btn">
+    </a>
+    {% else %}
+    <a href="mailto:merihindustries@gmail.com" class="mobile-bar-item">
+      <span class="bar-icon">✉️</span>
+      <span class="bar-label">Email Us</span>
+    </a>
+    {% endif %}
+    <button type="button" class="mobile-bar-item" id="mobile-bar-menu-btn" aria-label="Open navigation menu">
       <span class="bar-icon">☰</span>
       <span class="bar-label">Menu</span>
     </button>
