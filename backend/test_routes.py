@@ -57,18 +57,18 @@ class TestSunkaApp(unittest.TestCase):
         self.assertGreaterEqual(data['filtered_count'], 1)
 
     def test_api_filter_categories(self):
-        # Test 48V Telecom Category (Lithium & Graphene)
+        # Test 48V Telecom Category (Lithium PSL-48100)
         res = self.client.post('/api/filter', json={'voltage': ['48']})
         self.assertEqual(res.status_code, 200)
         data = res.get_json()
-        self.assertEqual(data['filtered_count'], 2)
+        self.assertEqual(data['filtered_count'], 1)
 
-        # Test Graphene Battery Filter
-        res = self.client.post('/api/filter', json={'chemistry': ['graphene']})
+        # Test Gel Battery Filter
+        res = self.client.post('/api/filter', json={'chemistry': ['gel']})
         self.assertEqual(res.status_code, 200)
         data = res.get_json()
-        self.assertGreaterEqual(data['filtered_count'], 2)
-        self.assertEqual(data['products'][0]['chemistry'], 'Graphene')
+        self.assertGreaterEqual(data['filtered_count'], 1)
+        self.assertEqual(data['products'][0]['chemistry'], 'Gel')
 
     def test_api_rfq(self):
         payload = {

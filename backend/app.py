@@ -104,7 +104,7 @@ def download_catalog_pdf():
         "/F1 24 Tf\n"
         "50 720 Td (MERI INDUSTRIES - 2026 PRODUCT CATALOG) Tj\n"
         "/F1 12 Tf\n"
-        "0 -40 Td (Complete Technical Specification Guide for SLA, Lithium, and Graphene Batteries) Tj\n"
+        "0 -40 Td (Complete Technical Specification Guide for SLA and Lithium Batteries) Tj\n"
         "0 -30 Td (Official B2B Engineering Specification Manual) Tj\n"
         "ET\n"
         "endstream\n"

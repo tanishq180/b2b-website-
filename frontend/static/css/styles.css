@@ -861,10 +861,6 @@ img {
 .product-badge-tag.badge-gel {
   background-color: var(--color-accent-orange);
 }
-.product-badge-tag.badge-graphene {
-  background: linear-gradient(135deg, #0ea5e9, #0d9488);
-  color: #FFFFFF;
-}
 .product-img-wrapper {
   background-color: #F8FAFC;
   padding: 1.25rem;
