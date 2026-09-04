@@ -759,55 +759,6 @@
     "lead_time": "In Stock (Ships in 48 hrs)"
   },
   {
-    "id": "dcg-12100",
-    "model": "DCG-12100 Gel",
-    "title": "12V 100Ah Deep Cycle Gel Solar Battery",
-    "chemistry": "Gel",
-    "chemistry_code": "gel",
-    "voltage": 12,
-    "capacity_ah": 100.0,
-    "capacity_bucket": "100Ah",
-    "energy_wh": 1200,
-    "terminal_type": "M8 Threaded Insert",
-    "terminal_code": "m8",
-    "applications": [
-      "Solar & Energy Storage",
-      "Mobility / EV",
-      "Telecom"
-    ],
-    "dimensions": {
-      "length_mm": 330,
-      "width_mm": 171,
-      "height_mm": 216,
-      "total_height_mm": 222,
-      "length_in": 12.99,
-      "width_in": 6.73,
-      "height_in": 8.5
-    },
-    "weight_kg": 30.5,
-    "weight_lbs": 67.2,
-    "max_discharge_current_a": 1000,
-    "internal_resistance_mOhm": 5.2,
-    "operating_temp_range": {
-      "charge": "-20\u00b0C to 50\u00b0C",
-      "discharge": "-40\u00b0C to 60\u00b0C",
-      "storage": "-20\u00b0C to 50\u00b0C"
-    },
-    "cycle_life": "1200+ cycles at 80% DOD",
-    "certifications": [
-      "UL 1989",
-      "CE"
-    ],
-    "image": "/static/images/deep_cycle_gel_battery.jpg",
-    "description": "Gel electrolyte battery engineered for deep cyclic performance, high ambient temperature tolerance, and off-grid solar energy systems.",
-    "features": [
-      "Thixotropic gel electrolyte eliminates acid stratification",
-      "Superior deep discharge recovery performance"
-    ],
-    "moq": 2,
-    "lead_time": "In Stock (Ships in 24 hrs)"
-  },
-  {
     "id": "psl-48100",
     "model": "PSL-48100 Telecom Rack",
     "title": "51.2V 100Ah 19-Inch Rackmount Telecom Lithium Module",

@@ -63,12 +63,12 @@ class TestSunkaApp(unittest.TestCase):
         data = res.get_json()
         self.assertEqual(data['filtered_count'], 1)
 
-        # Test Gel Battery Filter
-        res = self.client.post('/api/filter', json={'chemistry': ['gel']})
+        # Test SLA Battery Filter
+        res = self.client.post('/api/filter', json={'chemistry': ['sla']})
         self.assertEqual(res.status_code, 200)
         data = res.get_json()
         self.assertGreaterEqual(data['filtered_count'], 1)
-        self.assertEqual(data['products'][0]['chemistry'], 'Gel')
+        self.assertEqual(data['products'][0]['chemistry'], 'SLA')
 
     def test_api_rfq(self):
         payload = {

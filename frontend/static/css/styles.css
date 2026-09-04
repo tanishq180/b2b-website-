@@ -858,9 +858,6 @@ img {
 .product-badge-tag.badge-lithium {
   background-color: var(--color-accent-red);
 }
-.product-badge-tag.badge-gel {
-  background-color: var(--color-accent-orange);
-}
 .product-img-wrapper {
   background-color: #F8FAFC;
   padding: 1.25rem;
