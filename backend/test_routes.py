@@ -86,6 +86,17 @@ class TestSunkaApp(unittest.TestCase):
         data = res.get_json()
         self.assertEqual(data['status'], 'success')
         self.assertIn('RFQ-', data['quote_id'])
+        self.assertIn('timestamp', data)
+
+    def test_api_enquiries(self):
+        res = self.client.get('/api/enquiries')
+        self.assertEqual(res.status_code, 200)
+        data = res.get_json()
+        self.assertEqual(data['status'], 'success')
+        self.assertGreaterEqual(data['count'], 1)
+        # Verify first enquiry has timestamp
+        first_item = data['submissions'][-1]
+        self.assertIn('timestamp', first_item)
 
 if __name__ == '__main__':
     unittest.main()

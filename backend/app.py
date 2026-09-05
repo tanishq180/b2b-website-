@@ -39,6 +39,10 @@ def save_rfq_submission(submission_data):
                 rfqs = json.load(f)
         except Exception:
             rfqs = []
+
+    if not submission_data.get('timestamp'):
+        submission_data['timestamp'] = datetime.now().isoformat()
+
     rfqs.append(submission_data)
     with open(RFQ_LOG_FILE, 'w', encoding='utf-8') as f:
         json.dump(rfqs, f, indent=2)
@@ -262,8 +266,21 @@ def submit_rfq():
     return jsonify({
         'status': 'success',
         'quote_id': quote_id,
+        'timestamp': rfq_payload['timestamp'],
         'message': f'Thank you {full_name}. Your B2B Quote Request ({quote_id}) has been received. Our application engineer will reach out within 2 business hours.'
     })
+
+@app.route('/api/rfq', methods=['GET'])
+@app.route('/api/enquiries', methods=['GET'])
+def get_rfq_submissions():
+    if not os.path.exists(RFQ_LOG_FILE):
+        return jsonify({'status': 'success', 'count': 0, 'submissions': []})
+    try:
+        with open(RFQ_LOG_FILE, 'r', encoding='utf-8') as f:
+            rfqs = json.load(f)
+        return jsonify({'status': 'success', 'count': len(rfqs), 'submissions': rfqs})
+    except Exception as e:
+        return jsonify({'status': 'error', 'message': str(e)}), 500
 
 @app.errorhandler(404)
 def page_not_found(e):

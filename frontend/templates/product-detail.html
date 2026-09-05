@@ -15,22 +15,112 @@
     <!-- Main PDP Grid -->
     <div class="pdp-grid">
 
-      <!-- Left Column: Gallery & CAD Diagrams -->
+      <!-- Left Column: Gallery & CAD Diagrams Slider -->
       <div class="pdp-gallery-container">
-        <div class="pdp-gallery-main">
-          <img id="pdp-main-image" src="{{ product.image }}" alt="{{ product.model }}">
-        </div>
+        <div class="pdp-slider-wrapper" id="pdp-slider-wrapper">
+          <!-- Slide Counter Pill -->
+          <div class="slider-counter" id="slider-counter">
+            <span id="current-slide-num">1</span> / <span id="total-slide-num">3</span>
+          </div>
 
-        <div class="pdp-gallery-thumbs">
-          <button class="thumb-btn active" data-img="{{ product.image }}" type="button" aria-label="Product image">
-            <img src="{{ product.image }}" alt="Front Cutout View">
+          <!-- Slider Track -->
+          <div class="pdp-slider-track" id="pdp-slider-track">
+            <!-- Slide 1: Primary Product Photo -->
+            <div class="pdp-slide" data-slide-index="0">
+              <img src="{{ product.image }}" alt="{{ product.model }} - Primary View" class="slide-img">
+              <span class="slide-caption">Physical Product View</span>
+            </div>
+
+            <!-- Slide 2: Technical CAD Orthographic Schematic -->
+            <div class="pdp-slide" data-slide-index="1">
+              <div class="slide-svg-container">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" class="slide-cad-svg" fill="none">
+                  <rect width="400" height="260" fill="#F8FAFC" rx="8"/>
+                  <rect x="70" y="70" width="260" height="140" rx="6" fill="#FFFFFF" stroke="#0B192C" stroke-width="2.5"/>
+                  <!-- Positive Terminal (Red/Orange) -->
+                  <rect x="95" y="46" width="36" height="24" rx="2" fill="#EA580C" stroke="#C2410C" stroke-width="1.5"/>
+                  <text x="113" y="40" font-size="12" font-weight="bold" fill="#EA580C" text-anchor="middle">(+) POS</text>
+                  <!-- Negative Terminal (Dark/Blue) -->
+                  <rect x="269" y="46" width="36" height="24" rx="2" fill="#1E293B" stroke="#0B192C" stroke-width="1.5"/>
+                  <text x="287" y="40" font-size="12" font-weight="bold" fill="#475569" text-anchor="middle">(-) NEG</text>
+                  <!-- Dimension Lines: Length -->
+                  <line x1="70" y1="230" x2="330" y2="230" stroke="#64748B" stroke-width="1.5" stroke-dasharray="4 2"/>
+                  <path d="M 70 226 L 70 234 M 330 226 L 330 234" stroke="#64748B" stroke-width="1.5"/>
+                  <text x="200" y="246" font-size="12" font-weight="600" fill="#0B192C" text-anchor="middle">Length: {{ product.dimensions.length_mm }} mm ({{ product.dimensions.length_in }}")</text>
+                  <!-- Dimension Lines: Height -->
+                  <line x1="45" y1="70" x2="45" y2="210" stroke="#64748B" stroke-width="1.5" stroke-dasharray="4 2"/>
+                  <path d="M 41 70 L 49 70 M 41 210 L 49 210" stroke="#64748B" stroke-width="1.5"/>
+                  <text x="32" y="145" font-size="12" font-weight="600" fill="#0B192C" text-anchor="middle" transform="rotate(-90 32 145)">Height: {{ product.dimensions.height_mm }} mm</text>
+                  <!-- Center Spec Label -->
+                  <rect x="120" y="115" width="160" height="50" rx="4" fill="#F1F5F9" stroke="#CBD5E1"/>
+                  <text x="200" y="135" font-size="13" font-weight="bold" fill="#0B192C" text-anchor="middle">{{ product.model }}</text>
+                  <text x="200" y="153" font-size="11" fill="#64748B" text-anchor="middle">W: {{ product.dimensions.width_mm }} mm | TH: {{ product.dimensions.total_height_mm }} mm</text>
+                </svg>
+              </div>
+              <span class="slide-caption">Dimensional CAD Blueprint</span>
+            </div>
+
+            <!-- Slide 3: Terminal & Configuration Schematic -->
+            <div class="pdp-slide" data-slide-index="2">
+              <div class="slide-svg-container">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 260" class="slide-cad-svg" fill="none">
+                  <rect width="400" height="260" fill="#F8FAFC" rx="8"/>
+                  <rect x="50" y="40" width="300" height="180" rx="8" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+                  <text x="200" y="75" font-size="14" font-weight="bold" fill="#0B192C" text-anchor="middle">TERMINAL & ELECTRICAL CONFIGURATION</text>
+                  <!-- Terminal Type Badge -->
+                  <rect x="90" y="95" width="220" height="32" rx="16" fill="#EFF6FF" stroke="#3B82F6"/>
+                  <text x="200" y="116" font-size="12" font-weight="bold" fill="#1D4ED8" text-anchor="middle">Terminal: {{ product.terminal_type }}</text>
+                  <!-- Specs Table within schematic -->
+                  <text x="80" y="155" font-size="12" font-weight="600" fill="#475569">Nominal Voltage:</text>
+                  <text x="320" y="155" font-size="12" font-weight="bold" fill="#0B192C" text-anchor="end">{{ product.voltage }}V DC</text>
+                  <line x1="80" y1="165" x2="320" y2="165" stroke="#E2E8F0" stroke-width="1"/>
+                  <text x="80" y="185" font-size="12" font-weight="600" fill="#475569">Max Discharge Current:</text>
+                  <text x="320" y="185" font-size="12" font-weight="bold" fill="#EA580C" text-anchor="end">{{ product.max_discharge_current_a }} Amps</text>
+                  <line x1="80" y1="195" x2="320" y2="195" stroke="#E2E8F0" stroke-width="1"/>
+                  <text x="80" y="210" font-size="11" fill="#64748B">Flame Retardant UL94-HB / V0 Standard Casing</text>
+                </svg>
+              </div>
+              <span class="slide-caption">Terminal & Electrical Layout</span>
+            </div>
+          </div>
+
+          <!-- Navigation Arrow Buttons -->
+          <button type="button" class="slider-arrow slider-prev" id="pdp-slider-prev" aria-label="Previous Slide">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <button type="button" class="slider-arrow slider-next" id="pdp-slider-next" aria-label="Next Slide">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
           </button>
 
-          <!-- Dynamic SVG Technical CAD Schematic View -->
-          <button class="thumb-btn" data-img="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='200' viewBox='0 0 300 200' fill='none' stroke='%230B192C' stroke-width='2'><rect x='40' y='50' width='220' height='120' rx='4' fill='%23F8FAFC'/><rect x='60' y='30' width='30' height='20' fill='%23EA580C'/><rect x='210' y='30' width='30' height='20' fill='%231E293B'/><line x1='40' y1='185' x2='260' y2='185'/><text x='130' y='198' font-size='12' fill='%2364748B'>L: {{ product.dimensions.length_mm }} mm ({{ product.dimensions.length_in }} in)</text><line x1='20' y1='50' x2='20' y2='170'/><text x='15' y='115' font-size='12' fill='%2364748B' transform='rotate(-90 15 115)'>H: {{ product.dimensions.height_mm }} mm</text><text x='85' y='115' font-size='14' font-weight='bold' fill='%230B192C'>CAD SCHEMATIC</text></svg>" type="button" aria-label="CAD schematic diagram">
+          <!-- Dot Indicators -->
+          <div class="slider-dots" id="pdp-slider-dots">
+            <button class="slider-dot active" data-slide-to="0" aria-label="Go to slide 1"></button>
+            <button class="slider-dot" data-slide-to="1" aria-label="Go to slide 2"></button>
+            <button class="slider-dot" data-slide-to="2" aria-label="Go to slide 3"></button>
+          </div>
+        </div>
+
+        <!-- Thumbnails Strip -->
+        <div class="pdp-gallery-thumbs" id="pdp-slider-thumbs">
+          <button class="thumb-btn active" data-slide-to="0" type="button" aria-label="Product Photo">
+            <img src="{{ product.image }}" alt="Front View">
+          </button>
+
+          <button class="thumb-btn" data-slide-to="1" type="button" aria-label="CAD Blueprint">
             <div class="thumb-cad-icon">
               <span>📐 CAD</span>
-              <span>Diagram</span>
+              <span>Blueprint</span>
+            </div>
+          </button>
+
+          <button class="thumb-btn" data-slide-to="2" type="button" aria-label="Terminal Schematic">
+            <div class="thumb-cad-icon">
+              <span>⚡ Terminal</span>
+              <span>Layout</span>
             </div>
           </button>
         </div>
@@ -80,13 +170,6 @@
           </div>
         </div>
 
-        <!-- CTAs -->
-        <div class="pdp-cta-group">
-          <a href="/contact?model={{ product.model | urlencode }}&qty={{ product.moq }}" class="btn btn-accent btn-lg w-100 text-center">
-            ⚡ Request Bulk Quote (RFQ)
-          </a>
-        </div>
-
       </div>
 
     </div>
@@ -134,34 +217,6 @@
         </table>
       </div>
     </div>
-
-    <!-- Related Products Cross-Sell -->
-    {% if related_products %}
-    <div class="related-section">
-      <h3 class="section-title" style="font-size: 1.5rem; margin-bottom: 1.5rem;">Related Battery Models</h3>
-      <div class="product-grid">
-        {% for r in related_products %}
-        <div class="product-card">
-          <span class="product-badge-tag">{{ r.chemistry }}</span>
-          <div class="product-img-wrapper">
-            <img src="{{ r.image }}" alt="{{ r.model }}">
-          </div>
-          <div class="product-body">
-            <h3 class="product-model">{{ r.model }}</h3>
-            <p class="product-title">{{ r.title }}</p>
-            <div class="spec-mini-grid">
-              <div class="spec-item"><strong>{{ r.voltage }}V</strong><span>Voltage</span></div>
-              <div class="spec-item"><strong>{{ r.capacity_ah }} Ah</strong><span>Capacity</span></div>
-            </div>
-            <div class="product-actions">
-              <a href="/product/{{ r.id }}" class="btn btn-outline-navy btn-sm">View Specs</a>
-            </div>
-          </div>
-        </div>
-        {% endfor %}
-      </div>
-    </div>
-    {% endif %}
 
   </div>
 </section>

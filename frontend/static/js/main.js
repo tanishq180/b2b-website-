@@ -599,22 +599,123 @@ function initRFQModal() {
 }
 
 /* ==========================================================================
-   7. PDP Image Gallery & Tabs
+   7. PDP Image Gallery & Interactive Slider
    ========================================================================== */
 function initPDPGallery() {
-  const mainImg = document.getElementById('pdp-main-image');
-  const thumbs = document.querySelectorAll('.thumb-btn');
+  const sliderWrapper = document.getElementById('pdp-slider-wrapper');
+  const track = document.getElementById('pdp-slider-track');
+  const slides = document.querySelectorAll('.pdp-slide');
+  const prevBtn = document.getElementById('pdp-slider-prev');
+  const nextBtn = document.getElementById('pdp-slider-next');
+  const counterEl = document.getElementById('current-slide-num');
+  const totalCounterEl = document.getElementById('total-slide-num');
+  const dots = document.querySelectorAll('.slider-dot');
+  const thumbs = document.querySelectorAll('#pdp-slider-thumbs .thumb-btn');
 
-  if (!mainImg || thumbs.length === 0) return;
+  if (!track || slides.length === 0) return;
 
-  thumbs.forEach(thumb => {
-    thumb.addEventListener('click', () => {
-      thumbs.forEach(t => t.classList.remove('active'));
-      thumb.classList.add('active');
-      const newSrc = thumb.getAttribute('data-img');
-      if (newSrc) mainImg.src = newSrc;
+  let currentIndex = 0;
+  const totalSlides = slides.length;
+
+  if (totalCounterEl) {
+    totalCounterEl.textContent = totalSlides;
+  }
+
+  function updateSlider(index) {
+    currentIndex = (index + totalSlides) % totalSlides;
+    
+    // Smooth slide transition
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+    // Update Counter
+    if (counterEl) {
+      counterEl.textContent = currentIndex + 1;
+    }
+
+    // Update Active Slide class
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === currentIndex);
+    });
+
+    // Update Active Dot
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === currentIndex);
+    });
+
+    // Update Active Thumbnail
+    thumbs.forEach((thumb, i) => {
+      thumb.classList.toggle('active', i === currentIndex);
+    });
+  }
+
+  // Next & Prev Arrow Handlers
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => updateSlider(currentIndex + 1));
+  }
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => updateSlider(currentIndex - 1));
+  }
+
+  // Dots click handlers
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      const slideTo = parseInt(dot.getAttribute('data-slide-to'), 10);
+      if (!isNaN(slideTo)) updateSlider(slideTo);
     });
   });
+
+  // Thumbnails click handlers
+  thumbs.forEach(thumb => {
+    thumb.addEventListener('click', () => {
+      const slideTo = parseInt(thumb.getAttribute('data-slide-to'), 10);
+      if (!isNaN(slideTo)) updateSlider(slideTo);
+    });
+  });
+
+  // Touch Swipe Handlers for Mobile
+  if (sliderWrapper) {
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+    sliderWrapper.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+      touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+
+    sliderWrapper.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      touchEndY = e.changedTouches[0].screenY;
+      handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+      const diffX = touchEndX - touchStartX;
+      const diffY = touchEndY - touchStartY;
+      
+      // Horizontal swipe must be greater than vertical movement
+      if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
+        if (diffX < 0) {
+          // Swipe Left -> Next Slide
+          updateSlider(currentIndex + 1);
+        } else {
+          // Swipe Right -> Prev Slide
+          updateSlider(currentIndex - 1);
+        }
+      }
+    }
+
+    // Keyboard Arrow Keys
+    sliderWrapper.setAttribute('tabindex', '0');
+    sliderWrapper.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') {
+        updateSlider(currentIndex + 1);
+      } else if (e.key === 'ArrowLeft') {
+        updateSlider(currentIndex - 1);
+      }
+    });
+  }
 }
 
 /* ==========================================================================
