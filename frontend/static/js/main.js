@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initRFQBasket();
   initRFQModal();
   initPDPGallery();
+  initBackToTop();
 });
 
 /* ==========================================================================
@@ -144,16 +145,23 @@ function initHeaderSearch() {
 }
 
 /* ==========================================================================
-   3. Catalog Dynamic Filtering & Mobile Offcanvas Sheet
+   3. Catalog Dynamic Filtering & Expandable Sidebar System
    ========================================================================== */
 function initCatalogFilters() {
   const catalogGrid = document.getElementById('catalog-product-grid');
+  const catalogLayout = document.getElementById('catalog-layout');
   const filterForm = document.getElementById('catalog-filter-form');
   const catalogSearchInput = document.getElementById('catalog-search-input');
   const resultCountEl = document.getElementById('catalog-result-count');
   const mobileCountEl = document.getElementById('mobile-catalog-count');
   const resetBtn = document.getElementById('reset-filters-btn');
   const filterBadge = document.getElementById('active-filter-badge');
+  const desktopFilterBadge = document.getElementById('active-filter-badge-desktop');
+
+  // Desktop Expandable Sidebar Controls
+  const toggleSidebarBtn = document.getElementById('toggle-filter-sidebar-btn');
+  const toggleSidebarText = document.getElementById('toggle-filter-btn-text');
+  const collapseSidebarBtn = document.getElementById('collapse-sidebar-btn');
 
   // Mobile Filter Drawer Elements
   const filterToggleBtn = document.getElementById('mobile-filter-toggle-btn');
@@ -178,6 +186,59 @@ function initCatalogFilters() {
     }
   }
 
+  function toggleSidebar(expand) {
+    if (!catalogLayout) return;
+    const isCollapsed = catalogLayout.classList.contains('sidebar-collapsed');
+    const shouldCollapse = expand !== undefined ? !expand : !isCollapsed;
+
+    if (shouldCollapse) {
+      catalogLayout.classList.add('sidebar-collapsed');
+      if (toggleSidebarBtn) {
+        toggleSidebarBtn.setAttribute('aria-expanded', 'false');
+      }
+      if (toggleSidebarText) {
+        toggleSidebarText.textContent = 'Filter Specifications';
+      }
+    } else {
+      catalogLayout.classList.remove('sidebar-collapsed');
+      if (toggleSidebarBtn) {
+        toggleSidebarBtn.setAttribute('aria-expanded', 'true');
+      }
+      if (toggleSidebarText) {
+        toggleSidebarText.textContent = 'Hide Filters';
+      }
+    }
+  }
+
+  if (toggleSidebarBtn) {
+    toggleSidebarBtn.addEventListener('click', () => {
+      if (window.innerWidth <= 992) {
+        openMobileFilter();
+      } else {
+        toggleSidebar();
+      }
+    });
+  }
+
+  if (collapseSidebarBtn) {
+    collapseSidebarBtn.addEventListener('click', () => {
+      toggleSidebar(false);
+    });
+  }
+
+  // Filter Accordion Groups Handler
+  const accordionHeaders = document.querySelectorAll('.filter-accordion .filter-group-header');
+  accordionHeaders.forEach(header => {
+    header.addEventListener('click', (e) => {
+      e.preventDefault();
+      const parent = header.closest('.filter-accordion');
+      if (parent) {
+        const isActive = parent.classList.toggle('active');
+        header.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+      }
+    });
+  });
+
   if (filterToggleBtn) {
     filterToggleBtn.addEventListener('click', openMobileFilter);
   }
@@ -194,13 +255,20 @@ function initCatalogFilters() {
   if (!catalogGrid) return;
 
   function updateFilterBadge() {
-    if (!filterForm || !filterBadge) return;
+    if (!filterForm) return;
     const checkedCount = filterForm.querySelectorAll('input[type="checkbox"]:checked').length;
     if (checkedCount > 0) {
-      filterBadge.textContent = checkedCount;
-      filterBadge.style.display = 'inline-block';
+      if (filterBadge) {
+        filterBadge.textContent = checkedCount;
+        filterBadge.style.display = 'inline-block';
+      }
+      if (desktopFilterBadge) {
+        desktopFilterBadge.textContent = checkedCount;
+        desktopFilterBadge.style.display = 'inline-block';
+      }
     } else {
-      filterBadge.style.display = 'none';
+      if (filterBadge) filterBadge.style.display = 'none';
+      if (desktopFilterBadge) desktopFilterBadge.style.display = 'none';
     }
   }
 
@@ -739,4 +807,41 @@ function showToast(message, type = 'info') {
   setTimeout(() => {
     toast.remove();
   }, 4000);
+}
+
+/* ==========================================================================
+   9. Back to Top Smooth Scroll Handler
+   ========================================================================== */
+function initBackToTop() {
+  const backToTopBtn = document.getElementById('back-to-top-btn');
+  if (!backToTopBtn) return;
+
+  let ticking = false;
+
+  function toggleBackToTop() {
+    if (window.scrollY > 300) {
+      backToTopBtn.classList.add('visible');
+    } else {
+      backToTopBtn.classList.remove('visible');
+    }
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', () => {
+    if (!ticking) {
+      window.requestAnimationFrame(toggleBackToTop);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  backToTopBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+
+  // Initial visibility check
+  toggleBackToTop();
 }

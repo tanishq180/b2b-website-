@@ -4,7 +4,7 @@
 
 {% block content %}
 <section class="section catalog-section">
-  <div class="container">
+  <div class="container catalog-container">
     
     <!-- Catalog Header -->
     <div class="catalog-page-header">
@@ -14,7 +14,7 @@
 
     <!-- Mobile Filter Trigger Bar (Visible only on mobile/tablet) -->
     <div class="mobile-filter-bar">
-      <button id="mobile-filter-toggle-btn" class="btn btn-outline-navy mobile-filter-btn" type="button">
+      <button id="mobile-filter-toggle-btn" class="btn btn-outline-navy mobile-filter-btn" type="button" aria-label="Open filter specifications">
         <span>⚙️ Filter Specifications</span>
         <span id="active-filter-badge" class="filter-count-badge" style="display:none;">0</span>
       </button>
@@ -26,175 +26,221 @@
     <!-- Filter Overlay for Mobile Offcanvas -->
     <div id="filter-sidebar-overlay" class="filter-sidebar-overlay"></div>
 
-    <div class="catalog-layout">
+    <div class="catalog-layout sidebar-collapsed" id="catalog-layout">
 
-      <!-- Multi-Attribute Filter Sidebar -->
-      <aside class="filter-sidebar" id="filter-sidebar">
+      <!-- Multi-Attribute Expandable Filter Sidebar -->
+      <aside class="filter-sidebar" id="filter-sidebar" aria-label="Product Specification Filters">
         <div class="filter-header">
-          <h3>Filter Specifications</h3>
+          <div class="filter-header-title-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+            </svg>
+            <h3>Filter Specifications</h3>
+          </div>
           <div class="filter-header-actions">
-            <button id="reset-filters-btn" class="btn-reset-filter" type="button">Reset</button>
+            <button id="reset-filters-btn" class="btn-reset-filter" type="button">Reset All</button>
+            <button id="collapse-sidebar-btn" class="btn-collapse-sidebar" type="button" title="Hide filter sidebar" aria-label="Hide filter sidebar">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="11 17 6 12 11 7"></polyline>
+                <polyline points="18 17 13 12 18 7"></polyline>
+              </svg>
+            </button>
             <button id="close-filter-sidebar-btn" class="close-filter-btn" type="button" aria-label="Close filters">&times;</button>
           </div>
         </div>
 
         <form id="catalog-filter-form">
-          <!-- Chemistry Filter -->
-          <div class="filter-group">
-            <div class="filter-group-title">Battery Chemistry</div>
-            <div class="filter-options">
-              <label class="filter-checkbox">
-                <input type="checkbox" name="chemistry" value="sla" {% if request.args.get('chemistry') == 'sla' or request.args.get('chemistry') == 'agm' %}checked{% endif %}>
-                <span>Lead Acid</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="chemistry" value="lithium" {% if request.args.get('chemistry') == 'lithium' %}checked{% endif %}>
-                <span>Smart Lithium LiFePO4</span>
-              </label>
+          <!-- Chemistry Filter Accordion -->
+          <div class="filter-group filter-accordion active">
+            <button type="button" class="filter-group-header" aria-expanded="true">
+              <span class="filter-group-title">Battery Chemistry</span>
+              <span class="accordion-arrow">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </span>
+            </button>
+            <div class="filter-group-content">
+              <div class="filter-options">
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="chemistry" value="sla" {% if request.args.get('chemistry') == 'sla' or request.args.get('chemistry') == 'agm' %}checked{% endif %}>
+                  <span>Lead Acid</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="chemistry" value="lithium" {% if request.args.get('chemistry') == 'lithium' %}checked{% endif %}>
+                  <span>Smart Lithium LiFePO4</span>
+                </label>
+              </div>
             </div>
           </div>
 
-          <!-- Nominal Voltage Filter -->
-          <div class="filter-group">
-            <div class="filter-group-title">Nominal Voltage (V)</div>
-            <div class="filter-options">
-              <label class="filter-checkbox">
-                <input type="checkbox" name="voltage" value="4">
-                <span>3.7V / 4 Volt (Compact / 18650)</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="voltage" value="6">
-                <span>6 Volt</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="voltage" value="12" {% if request.args.get('voltage') == '12' %}checked{% endif %}>
-                <span>12 Volt</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="voltage" value="48">
-                <span>48V / 51.2V Telecom Rack</span>
-              </label>
+          <!-- Nominal Voltage Filter Accordion -->
+          <div class="filter-group filter-accordion active">
+            <button type="button" class="filter-group-header" aria-expanded="true">
+              <span class="filter-group-title">Nominal Voltage (V)</span>
+              <span class="accordion-arrow">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </span>
+            </button>
+            <div class="filter-group-content">
+              <div class="filter-options">
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="voltage" value="4">
+                  <span>3.7V / 4 Volt (Compact / 18650)</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="voltage" value="6">
+                  <span>6 Volt</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="voltage" value="12" {% if request.args.get('voltage') == '12' %}checked{% endif %}>
+                  <span>12 Volt</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="voltage" value="48">
+                  <span>48V / 51.2V Telecom Rack</span>
+                </label>
+              </div>
             </div>
           </div>
 
-          <!-- Capacity Range Filter -->
-          <div class="filter-group">
-            <div class="filter-group-title">Amp-Hour Capacity (Ah)</div>
-            <div class="filter-options">
-              <label class="filter-checkbox">
-                <input type="checkbox" name="capacity" value="0.5Ah">
-                <span>0.5 Ah</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="capacity" value="1Ah">
-                <span>1.0 Ah</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="capacity" value="1.3Ah">
-                <span>1.3 Ah</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="capacity" value="1.6Ah">
-                <span>1.6 Ah</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="capacity" value="2Ah">
-                <span>2.0 Ah</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="capacity" value="2.2Ah">
-                <span>2.2 Ah</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="capacity" value="3.2Ah">
-                <span>3.2 Ah</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="capacity" value="4.5Ah">
-                <span>4.5 Ah</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="capacity" value="5.5Ah">
-                <span>5.5 Ah</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="capacity" value="6Ah">
-                <span>6.0 Ah</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="capacity" value="7Ah">
-                <span>7.0 Ah</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="capacity" value="9.5Ah">
-                <span>9.5 Ah</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="capacity" value="10Ah">
-                <span>10.0 Ah</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="capacity" value="100Ah">
-                <span>100.0 Ah</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="capacity" value="200Ah">
-                <span>200.0 Ah</span>
-              </label>
+          <!-- Capacity Range Filter Accordion -->
+          <div class="filter-group filter-accordion active">
+            <button type="button" class="filter-group-header" aria-expanded="true">
+              <span class="filter-group-title">Amp-Hour Capacity (Ah)</span>
+              <span class="accordion-arrow">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </span>
+            </button>
+            <div class="filter-group-content">
+              <div class="filter-options">
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="capacity" value="0.5Ah">
+                  <span>0.5 Ah</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="capacity" value="1Ah">
+                  <span>1.0 Ah</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="capacity" value="1.3Ah">
+                  <span>1.3 Ah</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="capacity" value="1.6Ah">
+                  <span>1.6 Ah</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="capacity" value="2Ah">
+                  <span>2.0 Ah</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="capacity" value="2.2Ah">
+                  <span>2.2 Ah</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="capacity" value="3.2Ah">
+                  <span>3.2 Ah</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="capacity" value="4.5Ah">
+                  <span>4.5 Ah</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="capacity" value="5.5Ah">
+                  <span>5.5 Ah</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="capacity" value="6Ah">
+                  <span>6.0 Ah</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="capacity" value="7Ah">
+                  <span>7.0 Ah</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="capacity" value="9.5Ah">
+                  <span>9.5 Ah</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="capacity" value="10Ah">
+                  <span>10.0 Ah</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="capacity" value="100Ah">
+                  <span>100.0 Ah</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="capacity" value="200Ah">
+                  <span>200.0 Ah</span>
+                </label>
+              </div>
             </div>
           </div>
 
-          <!-- Terminal Type Filter -->
-          <div class="filter-group">
-            <div class="filter-group-title">Terminal Type</div>
-            <div class="filter-options">
-              <label class="filter-checkbox">
-                <input type="checkbox" name="terminal" value="f1">
-                <span>Faston F1 (0.187")</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="terminal" value="f2">
-                <span>Faston F2 (0.250")</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="terminal" value="m6">
-                <span>M6 Threaded</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="terminal" value="m8">
-                <span>M8 Threaded</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="terminal" value="nb">
-                <span>Nut & Bolt (NB)</span>
-              </label>
+          <!-- Terminal Type Filter Accordion -->
+          <div class="filter-group filter-accordion active">
+            <button type="button" class="filter-group-header" aria-expanded="true">
+              <span class="filter-group-title">Terminal Type</span>
+              <span class="accordion-arrow">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </span>
+            </button>
+            <div class="filter-group-content">
+              <div class="filter-options">
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="terminal" value="f1">
+                  <span>Faston F1 (0.187")</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="terminal" value="f2">
+                  <span>Faston F2 (0.250")</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="terminal" value="m6">
+                  <span>M6 Threaded</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="terminal" value="m8">
+                  <span>M8 Threaded</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="terminal" value="nb">
+                  <span>Nut & Bolt (NB)</span>
+                </label>
+              </div>
             </div>
           </div>
 
-          <!-- Target Application Filter -->
-          <div class="filter-group">
-            <div class="filter-group-title">Target Application</div>
-            <div class="filter-options">
-              <label class="filter-checkbox">
-                <input type="checkbox" name="application" value="UPS Systems">
-                <span>UPS Systems & Data Centers</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="application" value="Solar & Energy Storage">
-                <span>Solar & Energy Storage</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="application" value="Telecom">
-                <span>Telecom & 5G Base Station</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="application" value="Medical Equipment">
-                <span>Medical & Healthcare</span>
-              </label>
-              <label class="filter-checkbox">
-                <input type="checkbox" name="application" value="Fire & Security">
-                <span>Fire & Security Alarms</span>
-              </label>
+          <!-- Target Application Filter Accordion -->
+          <div class="filter-group filter-accordion active">
+            <button type="button" class="filter-group-header" aria-expanded="true">
+              <span class="filter-group-title">Target Application</span>
+              <span class="accordion-arrow">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </span>
+            </button>
+            <div class="filter-group-content">
+              <div class="filter-options">
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="application" value="UPS Systems">
+                  <span>UPS Systems & Data Centers</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="application" value="Solar & Energy Storage">
+                  <span>Solar & Energy Storage</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="application" value="Telecom">
+                  <span>Telecom & 5G Base Station</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="application" value="Medical Equipment">
+                  <span>Medical & Healthcare</span>
+                </label>
+                <label class="filter-checkbox">
+                  <input type="checkbox" name="application" value="Fire & Security">
+                  <span>Fire & Security Alarms</span>
+                </label>
+              </div>
             </div>
           </div>
 
@@ -206,17 +252,31 @@
 
       <!-- Catalog Main Area -->
       <main class="catalog-main">
-        <!-- Toolbar -->
+        <!-- Toolbar with Expandable Toggle & Search -->
         <div class="catalog-toolbar">
-          <div id="catalog-result-count" class="catalog-result-count">
-            Loading Product Catalog...
+          <div class="catalog-toolbar-left">
+            <button id="toggle-filter-sidebar-btn" class="btn btn-outline-navy toggle-filter-btn" type="button" aria-expanded="false" aria-controls="filter-sidebar">
+              <span class="filter-btn-icon">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+                </svg>
+              </span>
+              <span id="toggle-filter-btn-text" class="filter-btn-text">Filter Specifications</span>
+              <span id="active-filter-badge-desktop" class="filter-count-badge" style="display:none;">0</span>
+            </button>
+            <div id="catalog-result-count" class="catalog-result-count">
+              Loading Product Catalog...
+            </div>
           </div>
-          <div class="catalog-search-box">
-            <input type="text" id="catalog-search-input" class="catalog-search-input" placeholder="Search model or keyword..." autocomplete="off">
+
+          <div class="catalog-toolbar-right">
+            <div class="catalog-search-box">
+              <input type="text" id="catalog-search-input" class="catalog-search-input" placeholder="Search model, voltage or chemistry..." autocomplete="off">
+            </div>
           </div>
         </div>
 
-        <!-- Product Grid -->
+        <!-- Product Grid (covers entire width when sidebar collapsed) -->
         <div id="catalog-product-grid" class="product-grid">
           <!-- Populated dynamically by main.js via REST API -->
         </div>
@@ -224,5 +284,12 @@
 
     </div>
   </div>
+
+  <!-- Floating Back to Top Button -->
+  <button id="back-to-top-btn" class="back-to-top-btn" type="button" aria-label="Back to top" title="Back to top">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
 </section>
 {% endblock %}
