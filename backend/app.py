@@ -88,9 +88,6 @@ def product_detail(product_id):
     
     return render_template('product-detail.html', product=product, related_products=related_products)
 
-@app.route('/about')
-def about():
-    return render_template('about.html')
 
 @app.route('/contact')
 def contact():

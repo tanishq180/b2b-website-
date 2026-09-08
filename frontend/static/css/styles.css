@@ -1182,21 +1182,27 @@ img {
 .btn-reset-filter {
   font-size: 0.775rem;
   color: var(--color-accent-red);
-  background: none;
-  border: none;
+  background-color: rgba(225, 29, 72, 0.08);
+  border: 1px solid rgba(225, 29, 72, 0.25);
   cursor: pointer;
   font-weight: 700;
-  padding: 0.25rem 0.4rem;
-  border-radius: var(--radius-sm);
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   transition: var(--transition-fast);
 }
 
 .btn-reset-filter:hover {
-  background-color: rgba(225, 29, 72, 0.08);
+  background-color: var(--color-accent-red);
+  color: #FFFFFF;
+  border-color: var(--color-accent-red);
+  box-shadow: 0 2px 8px rgba(225, 29, 72, 0.25);
 }
 
 .btn-collapse-sidebar {
-  background: #F1F5F9;
+  background: var(--color-bg-main);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   color: var(--color-navy-light);
@@ -1212,6 +1218,19 @@ img {
   background: var(--color-navy-dark);
   color: #FFFFFF;
   border-color: var(--color-navy-dark);
+}
+
+.filter-sidebar-footer {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  gap: 0.65rem;
+  align-items: center;
+  position: sticky;
+  bottom: 0;
+  background: var(--color-bg-card);
+  z-index: 5;
 }
 
 .close-filter-btn {
@@ -1366,30 +1385,58 @@ img {
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
-  font-size: 0.875rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  padding: 0.5rem 1rem;
-  border-radius: var(--radius-sm);
+  padding: 0.55rem 1.15rem;
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: var(--transition-fast);
-  background-color: #FFFFFF;
+  transition: all 0.2s ease;
+  background-color: var(--color-navy-dark);
+  color: #FFFFFF;
+  border: 1.5px solid var(--color-navy-dark);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .toggle-filter-btn:hover {
-  background-color: var(--color-navy-dark);
+  background-color: var(--color-accent-orange);
+  border-color: var(--color-accent-orange);
   color: #FFFFFF;
-  border-color: var(--color-navy-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(234, 88, 12, 0.25);
 }
 
 .catalog-layout.sidebar-collapsed .toggle-filter-btn {
+  background-color: var(--color-bg-card);
+  color: var(--color-navy-dark);
+  border-color: var(--color-border-dark);
+}
+
+.catalog-layout.sidebar-collapsed .toggle-filter-btn:hover {
   background-color: var(--color-navy-dark);
   color: #FFFFFF;
   border-color: var(--color-navy-dark);
 }
 
-.catalog-layout.sidebar-collapsed .toggle-filter-btn:hover {
-  background-color: var(--color-accent-orange);
-  border-color: var(--color-accent-orange);
+.btn-toolbar-reset {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-full);
+  background: rgba(225, 29, 72, 0.08);
+  border: 1px solid rgba(225, 29, 72, 0.25);
+  color: var(--color-accent-red);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.btn-toolbar-reset:hover {
+  background: var(--color-accent-red);
+  color: #FFFFFF;
+  border-color: var(--color-accent-red);
+  box-shadow: 0 2px 8px rgba(225, 29, 72, 0.25);
 }
 
 .catalog-result-count {
@@ -2287,11 +2334,72 @@ img {
 }
 
 /* ==========================================================================
-   RESPONSIVE MEDIA QUERIES (Mobile & Tablet Breakpoints)
+   RESPONSIVE MEDIA QUERIES (Multi-Device & Cross-Screen Compatibility)
+   Breakpoints:
+   - Ultra-Wide Screens: min-width: 1400px
+   - Laptops & Desktops: 1024px - 1399px
+   - Tablets & Small Laptops: 993px - 1023px
+   - Tablets Portrait: 769px - 992px
+   - Large Mobile & Phablets: 481px - 768px
+   - Small Mobile & Foldables: <= 480px & <= 360px
    ========================================================================== */
 
-/* --- Tablet / Medium Devices (max-width: 992px) --- */
+/* --- 1. Large Desktops & 4K / Ultra-wide Screens (min-width: 1400px) --- */
+@media (min-width: 1400px) {
+  .container {
+    max-width: 1380px;
+  }
+
+  .catalog-container {
+    max-width: 1640px;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.75rem;
+  }
+
+  .app-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.5rem;
+  }
+
+  .hero-grid {
+    grid-template-columns: 1.25fr 0.95fr;
+    gap: 4rem;
+  }
+}
+
+/* --- 2. Standard Laptops (1024px - 1200px) --- */
+@media (max-width: 1200px) {
+  .nav-menu {
+    gap: 1.25rem;
+  }
+
+  .nav-link {
+    font-size: 0.9rem;
+  }
+
+  .catalog-layout {
+    grid-template-columns: 260px 1fr;
+    gap: 1.25rem;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .app-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* --- 3. Tablets & iPad Landscape (max-width: 992px) --- */
 @media (max-width: 992px) {
+  :root {
+    --header-height: 68px;
+  }
 
   .nav-menu,
   .nav-actions {
@@ -2305,14 +2413,20 @@ img {
   .hero-grid {
     grid-template-columns: 1fr;
     gap: 2.5rem;
+    text-align: left;
   }
 
   .hero-visual {
-    max-width: 500px;
+    max-width: 520px;
     margin: 0 auto;
+    width: 100%;
   }
 
   .catalog-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .catalog-layout.sidebar-collapsed {
     grid-template-columns: 1fr;
   }
 
@@ -2328,8 +2442,8 @@ img {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(11, 25, 44, 0.6);
-    backdrop-filter: blur(3px);
+    background-color: rgba(9, 13, 22, 0.7);
+    backdrop-filter: blur(4px);
     z-index: 990;
     opacity: 0;
     visibility: hidden;
@@ -2344,18 +2458,31 @@ img {
   .filter-sidebar {
     position: fixed;
     top: 0;
-    right: -320px;
-    width: min(85vw, 320px);
+    right: -360px;
+    width: min(88vw, 360px);
     height: 100vh;
     height: 100dvh;
     max-height: 100dvh;
     z-index: 995;
-    background-color: #FFFFFF;
+    background-color: var(--color-bg-card);
     box-shadow: var(--shadow-xl);
     border-radius: 0;
+    border-left: 1px solid var(--color-border);
     transition: right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     display: flex;
     flex-direction: column;
+    padding: 1.5rem;
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .catalog-layout.sidebar-collapsed .filter-sidebar {
+    opacity: 1;
+    visibility: visible;
+    width: min(88vw, 360px);
+    padding: 1.5rem;
+    transform: none;
   }
 
   .filter-sidebar.mobile-open {
@@ -2366,50 +2493,63 @@ img {
     display: block;
   }
 
-  .filter-mobile-footer {
-    display: block;
+  .btn-collapse-sidebar {
+    display: none;
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   }
 
   .pdp-grid {
     grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .pdp-slider-wrapper {
+    max-width: 580px;
+    margin: 0 auto 1rem auto;
+  }
+
+  .pdp-gallery-thumbs {
+    max-width: 580px;
+    margin: 0 auto;
   }
 
   .contact-grid {
     grid-template-columns: 1fr;
+    gap: 2rem;
   }
 
   .footer-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
+  }
+
+  .theme-grid-options {
+    grid-template-columns: 1fr 1fr;
   }
 }
 
-/* --- Mobile Smartphones (max-width: 768px) --- */
+/* --- 4. Smartphones & Small Tablets (max-width: 768px) --- */
 @media (max-width: 768px) {
   body {
-    padding-bottom: 64px;
-    /* Space for sticky bottom bar */
+    padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
   }
 
   .mobile-bottom-bar {
     display: flex;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 
   .top-utility-bar {
-    padding: 0.4rem 0;
-  }
-
-  .utility-email,
-  .top-utility-bar .utility-right {
     display: none;
   }
 
-  .utility-flex {
-    justify-content: center;
-  }
-
   .hero-stats {
-    gap: 1.25rem;
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
   }
 
   .engineering-finder-grid {
@@ -2417,8 +2557,9 @@ img {
     gap: 1rem;
   }
 
-  .about-grid {
-    grid-template-columns: 1fr;
+  .app-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
   }
 
   .pdp-quick-specs {
@@ -2427,21 +2568,58 @@ img {
 
   .footer-grid {
     grid-template-columns: 1fr;
-    gap: 1.75rem;
+    gap: 2rem;
+  }
+
+  .floating-theme-toggle {
+    bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
+    left: 1rem;
+    padding: 0.55rem 0.9rem;
+    font-size: 0.8rem;
+  }
+
+  .back-to-top-btn {
+    bottom: calc(5rem + env(safe-area-inset-bottom, 0px));
+    right: 1rem;
+    width: 44px;
+    height: 44px;
+  }
+
+  .theme-toast {
+    bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+    right: 1rem;
+    left: 1rem;
+    text-align: center;
+    justify-content: center;
   }
 
   .toast-container {
-    bottom: 80px;
-    /* Above mobile bottom bar */
+    bottom: calc(75px + env(safe-area-inset-bottom, 0px));
     right: 12px;
     left: 12px;
   }
+
+  .theme-palette-sheet {
+    padding: 1.5rem 1.25rem;
+    max-height: 85vh;
+  }
+
+  .theme-grid-options {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-card {
+    padding: 1.5rem 1.25rem;
+    max-width: 95vw;
+    max-height: 88vh;
+    overflow-y: auto;
+  }
 }
 
-/* --- Small Mobile Phones (max-width: 480px) --- */
+/* --- 5. Small Mobile Phones (max-width: 480px) --- */
 @media (max-width: 480px) {
   .container {
-    padding: 0 1rem;
+    padding: 0 0.85rem;
   }
 
   .brand-title {
@@ -2457,9 +2635,18 @@ img {
     height: 36px;
   }
 
+  .hero-title {
+    font-size: clamp(1.75rem, 7vw, 2.25rem);
+  }
+
+  .hero-subtitle {
+    font-size: 0.95rem;
+  }
+
   .hero-actions {
     flex-direction: column;
     width: 100%;
+    gap: 0.75rem;
   }
 
   .hero-actions .btn {
@@ -2475,16 +2662,20 @@ img {
 
   .hero-stats {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 0.75rem;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
   }
 
   .stat-item .stat-num {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
   }
 
   .stat-item .stat-label {
-    font-size: 0.65rem;
+    font-size: 0.7rem;
+  }
+
+  .app-grid {
+    grid-template-columns: 1fr;
   }
 
   .form-grid {
@@ -2497,6 +2688,42 @@ img {
 
   .product-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .catalog-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.85rem;
+  }
+
+  .catalog-toolbar-left {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.65rem;
+  }
+
+  .toggle-filter-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .btn-toolbar-reset {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .catalog-search-box {
+    max-width: 100%;
+  }
+
+  .pdp-slide {
+    height: 280px;
+    padding: 1.5rem 1rem 2.5rem 1rem;
+  }
+
+  .pdp-slide .slide-img {
+    max-height: 200px;
   }
 
   .pdp-quick-specs {
@@ -2513,13 +2740,10 @@ img {
     width: 100%;
   }
 
-  .catalog-toolbar {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .catalog-search-box {
-    max-width: 100%;
+  .spec-table th,
+  .spec-table td {
+    padding: 0.65rem 0.75rem;
+    font-size: 0.825rem;
   }
 
   .contact-card {
@@ -2534,88 +2758,91 @@ img {
     padding: 0.85rem 1.25rem;
     font-size: 0.95rem;
   }
+
+  .floating-theme-toggle span:not(.theme-icon):not(.theme-badge) {
+    display: none;
+  }
 }
 
-/* Touch-friendly inputs & buttons on all mobile screens */
-@media (hover: none) and (pointer: coarse) {
+/* --- 6. Ultra-Compact Phones & Foldable Covers (max-width: 360px) --- */
+@media (max-width: 360px) {
+  .brand-title {
+    font-size: 1rem;
+  }
 
+  .mobile-menu-toggle {
+    width: 38px;
+    height: 38px;
+  }
+
+  .hero-title {
+    font-size: 1.6rem;
+  }
+
+  .hero-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .pdp-quick-specs {
+    grid-template-columns: 1fr;
+  }
+
+  .mobile-bar-item {
+    font-size: 0.65rem;
+    min-width: 48px;
+  }
+
+  .mobile-bar-item .bar-icon {
+    font-size: 1.1rem;
+  }
+}
+
+/* --- 7. Touch Device Optimization --- */
+@media (hover: none) and (pointer: coarse) {
   .btn,
   .form-control,
   .finder-select,
-  .mobile-bar-item {
+  .mobile-bar-item,
+  .filter-checkbox,
+  .thumb-btn,
+  .theme-option-card {
     min-height: 44px;
+    touch-action: manipulation;
+  }
+
+  .filter-checkbox input[type="checkbox"] {
+    min-width: 20px;
+    min-height: 20px;
   }
 }
 
-/* ==========================================================================
-   Back to Top Floating Button
-   ========================================================================== */
-.back-to-top-btn {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-full);
-  background: linear-gradient(135deg, var(--color-navy-dark), var(--color-navy));
-  color: #FFFFFF;
-  border: 1.5px solid rgba(255, 255, 255, 0.18);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 16px rgba(11, 25, 44, 0.28), 0 0 0 1px rgba(255, 255, 255, 0.08);
-  cursor: pointer;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(16px) scale(0.9);
-  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background 0.25s ease, box-shadow 0.25s ease;
-  z-index: 990;
-  outline: none;
-}
-
-.back-to-top-btn svg {
-  width: 22px;
-  height: 22px;
-  stroke: #FFFFFF;
-  transition: transform 0.2s ease;
-}
-
-.back-to-top-btn.visible {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0) scale(1);
-}
-
-.back-to-top-btn:hover {
-  background: linear-gradient(135deg, var(--color-accent-red), var(--color-accent-orange));
-  transform: translateY(-4px) scale(1.06);
-  box-shadow: 0 8px 25px rgba(225, 29, 72, 0.38);
-  border-color: rgba(255, 255, 255, 0.4);
-}
-
-.back-to-top-btn:hover svg {
-  transform: translateY(-2px);
-}
-
-.back-to-top-btn:active {
-  transform: translateY(0) scale(0.96);
-  box-shadow: 0 2px 8px rgba(225, 29, 72, 0.3);
-}
-
-.back-to-top-btn:focus-visible {
-  box-shadow: 0 0 0 3px rgba(234, 88, 12, 0.5), 0 8px 24px rgba(11, 25, 44, 0.3);
-}
-
-@media (max-width: 768px) {
-  .back-to-top-btn {
-    bottom: 5.5rem;
-    right: 1.25rem;
-    width: 44px;
-    height: 44px;
+/* --- 8. Print Stylesheet --- */
+@media print {
+  .main-header,
+  .top-utility-bar,
+  .mobile-bottom-bar,
+  .floating-theme-toggle,
+  .back-to-top-btn,
+  .theme-modal-overlay,
+  .modal-overlay,
+  .filter-sidebar,
+  .catalog-toolbar {
+    display: none !important;
   }
 
-  .back-to-top-btn svg {
-    width: 20px;
-    height: 20px;
+  body {
+    background: #FFFFFF !important;
+    color: #000000 !important;
+    font-size: 12pt;
+  }
+
+  .spec-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  .spec-table th,
+  .spec-table td {
+    border: 1px solid #000000 !important;
   }
 }

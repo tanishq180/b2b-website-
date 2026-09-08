@@ -39,7 +39,8 @@
 
       <ul class="nav-menu">
         <li><a href="/" class="nav-link {% if request.path == '/' %}active{% endif %}">Home</a></li>
-        <li><a href="/catalog" class="nav-link {% if request.path == '/catalog' %}active{% endif %}">Battery Catalog</a></li>
+        <li><a href="/catalog" class="nav-link {% if request.path == '/catalog' %}active{% endif %}">Battery Catalog</a>
+        </li>
         <li><a href="/contact" class="nav-link {% if request.path == '/contact' %}active{% endif %}">Contact</a></li>
       </ul>
 
@@ -65,7 +66,8 @@
   <aside id="mobile-nav-drawer" class="mobile-nav-drawer" aria-label="Mobile Navigation">
     <div class="mobile-nav-header">
       <a href="/" class="brand-logo">
-        <div class="logo-icon"><img src="{{ url_for('static', filename='images/meri_logo.png') }}" alt="MERI Logo"></div>
+        <div class="logo-icon"><img src="{{ url_for('static', filename='images/meri_logo.png') }}" alt="MERI Logo">
+        </div>
         <div class="brand-text-group">
           <span class="brand-title">MERI <span class="accent">INDUSTRIES</span></span>
         </div>
@@ -77,15 +79,18 @@
       <!-- Mobile Search Box -->
       <div class="mobile-search-wrapper">
         <span class="mobile-search-icon">🔍</span>
-        <input type="text" id="mobile-search-input" class="mobile-search-input" placeholder="Search battery model..." autocomplete="off">
+        <input type="text" id="mobile-search-input" class="mobile-search-input" placeholder="Search battery model..."
+          autocomplete="off">
         <div id="mobile-search-results" class="header-search-results"></div>
       </div>
 
       <!-- Navigation Links -->
       <ul class="mobile-nav-menu">
         <li><a href="/" class="mobile-nav-link {% if request.path == '/' %}active{% endif %}">🏠 Home</a></li>
-        <li><a href="/catalog" class="mobile-nav-link {% if request.path == '/catalog' %}active{% endif %}">⚡ Battery Catalog</a></li>
-        <li><a href="/contact" class="mobile-nav-link {% if request.path == '/contact' %}active{% endif %}">📞 Contact & Bulk Quote</a></li>
+        <li><a href="/catalog" class="mobile-nav-link {% if request.path == '/catalog' %}active{% endif %}">⚡ Battery
+            Catalog</a></li>
+        <li><a href="/contact" class="mobile-nav-link {% if request.path == '/contact' %}active{% endif %}">📞 Contact &
+            Bulk Quote</a></li>
       </ul>
 
       <!-- Action Buttons -->
@@ -93,7 +98,8 @@
         {% if request.path != '/contact' %}
         <a href="/contact" class="btn btn-accent" style="width: 100%; text-align: center;">⚡ Request Bulk Quote</a>
         {% endif %}
-        <a href="/download/catalog-pdf" class="btn btn-outline-navy" style="width: 100%; text-align: center;" download="MERI-Industries-2026-Product-Catalog.pdf">📥 Download PDF Catalog</a>
+        <a href="/download/catalog-pdf" class="btn btn-outline-navy" style="width: 100%; text-align: center;"
+          download="MERI-Industries-2026-Product-Catalog.pdf">📥 Download PDF Catalog</a>
       </div>
 
       <!-- Direct Contact Hotline -->
@@ -140,8 +146,7 @@
             </div>
             <div class="form-group">
               <label class="form-label" for="rfq-phone">Phone Number *</label>
-              <input type="tel" id="rfq-phone" name="phone" class="form-control" placeholder="+91 98765 43210"
-                required>
+              <input type="tel" id="rfq-phone" name="phone" class="form-control" placeholder="+91 98765 43210" required>
             </div>
             <div class="form-group">
               <label class="form-label" for="rfq-product-model">Target Battery Model</label>
@@ -164,7 +169,8 @@
             </div>
           </div>
           <div class="modal-form-actions">
-            <button type="submit" class="btn btn-accent btn-lg" style="width: 100%;">Submit Official RFQ Request</button>
+            <button type="submit" class="btn btn-accent btn-lg" style="width: 100%;">Submit Official RFQ
+              Request</button>
           </div>
         </form>
       </div>
@@ -177,7 +183,8 @@
     <div class="container footer-grid">
       <div class="footer-brand">
         <h3>MERI <span class="accent" style="color:var(--color-accent-orange);">INDUSTRIES</span></h3>
-        <p class="mb-3">MERI Industries manufactures and supplies Sunka brand engineered energy solutions, delivering high-performance Lead Acid and Lithium batteries for critical industrial infrastructure.</p>
+        <p class="mb-3">MERI Industries manufactures and supplies Sunka brand engineered energy solutions, delivering
+          high-performance Lead Acid and Lithium batteries for critical industrial infrastructure.</p>
         <p style="font-size: 0.8rem; color: #64748B;">Brand: Sunka Batteries<br>Company: MERI Industries</p>
       </div>
 
@@ -204,8 +211,8 @@
       <div class="footer-links">
         <h4>Technical Resources</h4>
         <ul>
-          <li><a href="/about">Quality & Testing Standards</a></li>
-          <li><a href="/download/catalog-pdf" download="MERI-Industries-2026-Product-Catalog.pdf">Download PDF Catalog</a></li>
+          <li><a href="/download/catalog-pdf" download="MERI-Industries-2026-Product-Catalog.pdf">Download PDF
+              Catalog</a></li>
           <li><a href="/contact">Request Bulk Quote & Support</a></li>
         </ul>
       </div>

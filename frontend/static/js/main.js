@@ -254,21 +254,31 @@ function initCatalogFilters() {
 
   if (!catalogGrid) return;
 
+  const resetBottomBtn = document.getElementById('reset-filters-bottom-btn');
+  const toolbarResetBtn = document.getElementById('toolbar-reset-filters-btn');
+
   function updateFilterBadge() {
     if (!filterForm) return;
     const checkedCount = filterForm.querySelectorAll('input[type="checkbox"]:checked').length;
-    if (checkedCount > 0) {
+    const hasSearch = catalogSearchInput && catalogSearchInput.value.trim().length > 0;
+    const totalActiveFilters = checkedCount + (hasSearch ? 1 : 0);
+
+    if (totalActiveFilters > 0) {
       if (filterBadge) {
-        filterBadge.textContent = checkedCount;
+        filterBadge.textContent = totalActiveFilters;
         filterBadge.style.display = 'inline-block';
       }
       if (desktopFilterBadge) {
-        desktopFilterBadge.textContent = checkedCount;
+        desktopFilterBadge.textContent = totalActiveFilters;
         desktopFilterBadge.style.display = 'inline-block';
+      }
+      if (toolbarResetBtn) {
+        toolbarResetBtn.style.display = 'inline-flex';
       }
     } else {
       if (filterBadge) filterBadge.style.display = 'none';
       if (desktopFilterBadge) desktopFilterBadge.style.display = 'none';
+      if (toolbarResetBtn) toolbarResetBtn.style.display = 'none';
     }
   }
 
@@ -318,13 +328,16 @@ function initCatalogFilters() {
       timer = setTimeout(fetchFilteredProducts, 300);
     });
   }
-  if (resetBtn) {
-    resetBtn.addEventListener('click', () => {
-      if (filterForm) filterForm.reset();
-      if (catalogSearchInput) catalogSearchInput.value = '';
-      fetchFilteredProducts();
-    });
+
+  function resetAllFilters() {
+    if (filterForm) filterForm.reset();
+    if (catalogSearchInput) catalogSearchInput.value = '';
+    fetchFilteredProducts();
   }
+
+  if (resetBtn) resetBtn.addEventListener('click', resetAllFilters);
+  if (resetBottomBtn) resetBottomBtn.addEventListener('click', resetAllFilters);
+  if (toolbarResetBtn) toolbarResetBtn.addEventListener('click', resetAllFilters);
 
   // Check URL params for initial filters on catalog page
   const urlParams = new URLSearchParams(window.location.search);
@@ -691,7 +704,7 @@ function initPDPGallery() {
 
   function updateSlider(index) {
     currentIndex = (index + totalSlides) % totalSlides;
-    
+
     // Smooth slide transition
     track.style.transform = `translateX(-${currentIndex * 100}%)`;
 
@@ -761,7 +774,7 @@ function initPDPGallery() {
     function handleSwipe() {
       const diffX = touchEndX - touchStartX;
       const diffY = touchEndY - touchStartY;
-      
+
       // Horizontal swipe must be greater than vertical movement
       if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 40) {
         if (diffX < 0) {

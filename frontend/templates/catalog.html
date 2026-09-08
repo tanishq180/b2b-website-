@@ -32,15 +32,21 @@
       <aside class="filter-sidebar" id="filter-sidebar" aria-label="Product Specification Filters">
         <div class="filter-header">
           <div class="filter-header-title-wrap">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
             </svg>
             <h3>Filter Specifications</h3>
           </div>
           <div class="filter-header-actions">
-            <button id="reset-filters-btn" class="btn-reset-filter" type="button">Reset All</button>
+            <button id="reset-filters-btn" class="btn-reset-filter" type="button" title="Reset all selected filters">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                <path d="M3 3v5h5"></path>
+              </svg>
+              <span>Reset</span>
+            </button>
             <button id="collapse-sidebar-btn" class="btn-collapse-sidebar" type="button" title="Hide filter sidebar" aria-label="Hide filter sidebar">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="11 17 6 12 11 7"></polyline>
                 <polyline points="18 17 13 12 18 7"></polyline>
               </svg>
@@ -244,8 +250,15 @@
             </div>
           </div>
 
-          <div class="filter-mobile-footer">
-            <button id="apply-filters-btn" type="button" class="btn btn-accent" style="width: 100%;">Apply Filters</button>
+          <div class="filter-sidebar-footer">
+            <button id="reset-filters-bottom-btn" type="button" class="btn btn-outline-navy btn-sm" style="flex: 1;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                <path d="M3 3v5h5"></path>
+              </svg>
+              <span>Reset All</span>
+            </button>
+            <button id="apply-filters-btn" type="button" class="btn btn-accent btn-sm" style="flex: 1.2;">Apply Filters</button>
           </div>
         </form>
       </aside>
@@ -255,15 +268,24 @@
         <!-- Toolbar with Expandable Toggle & Search -->
         <div class="catalog-toolbar">
           <div class="catalog-toolbar-left">
-            <button id="toggle-filter-sidebar-btn" class="btn btn-outline-navy toggle-filter-btn" type="button" aria-expanded="false" aria-controls="filter-sidebar">
+            <button id="toggle-filter-sidebar-btn" class="btn toggle-filter-btn" type="button" aria-expanded="false" aria-controls="filter-sidebar">
               <span class="filter-btn-icon">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
                   <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
                 </svg>
               </span>
               <span id="toggle-filter-btn-text" class="filter-btn-text">Filter Specifications</span>
               <span id="active-filter-badge-desktop" class="filter-count-badge" style="display:none;">0</span>
             </button>
+
+            <button id="toolbar-reset-filters-btn" class="btn-toolbar-reset" type="button" title="Clear all active filters" style="display: none;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                <path d="M3 3v5h5"></path>
+              </svg>
+              <span>Reset Filters</span>
+            </button>
+
             <div id="catalog-result-count" class="catalog-result-count">
               Loading Product Catalog...
             </div>

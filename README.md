@@ -23,7 +23,6 @@ Website Creation/
 │       ├── index.html           # Homepage with hero & featured products
 │       ├── catalog.html         # Interactive battery catalog & filter engine
 │       ├── product-detail.html  # Technical PDP with engineering specs & CAD
-│       ├── about.html           # Company engineering & QA standards
 │       └── contact.html         # Engineering contact & support inquiry
 │
 ├── backend/                      # Dedicated Backend Workspace
