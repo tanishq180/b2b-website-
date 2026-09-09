@@ -886,24 +886,32 @@ img {
 }
 
 /* --- Application / Market Grid --- */
+.app-markets-section {
+  padding: clamp(2.5rem, 4vw, 3.75rem) 0;
+}
+
 .app-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.25rem;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
 }
 
 .app-card {
   background-color: var(--color-bg-card);
   border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: 1.5rem 1.25rem;
+  border-radius: var(--radius-lg);
+  padding: 1.75rem 1.25rem;
   text-align: center;
   transition: var(--transition-normal);
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
 }
 
 .app-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
   box-shadow: var(--shadow-lg);
   border-color: var(--color-accent-orange);
 }
@@ -916,25 +924,30 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 1rem auto;
+  margin: 0 auto 1.1rem auto;
   color: var(--color-navy-dark);
-  font-size: 1.6rem;
+  font-size: 1.65rem;
   transition: var(--transition-fast);
 }
 
 .app-card:hover .app-icon-wrapper {
   background-color: var(--color-accent-orange);
   color: #FFFFFF;
+  transform: scale(1.08);
 }
 
 .app-card h3 {
-  font-size: 1.05rem;
-  margin-bottom: 0.4rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--color-navy-dark);
 }
 
 .app-card p {
-  font-size: 0.85rem;
+  font-size: 0.88rem;
+  line-height: 1.5;
   color: var(--color-text-muted);
+  margin-bottom: 0;
 }
 
 /* --- Product Cards Grid --- */
@@ -2360,7 +2373,7 @@ img {
   }
 
   .app-grid {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 1.5rem;
   }
 
@@ -2391,7 +2404,8 @@ img {
   }
 
   .app-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.25rem;
   }
 }
 

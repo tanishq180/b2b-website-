@@ -15,7 +15,6 @@
       "UPS Systems",
       "Emergency Lighting",
       "Alarms & Security Systems",
-      "Medical Equipment",
       "Solar & Renewable Energy"
     ],
     "dimensions": {
@@ -66,8 +65,7 @@
     "applications": [
       "UPS Systems",
       "Security & Alarm Systems",
-      "Emergency Lighting",
-      "Medical Equipment"
+      "Emergency Lighting"
     ],
     "dimensions": {
       "length_mm": 90,
@@ -92,7 +90,7 @@
       "CE"
     ],
     "image": "/static/images/products/sunka_rb1245e.jpg",
-    "description": "SUNKA RB1245E 12V 4.5Ah maintenance-free VRLA battery engineered for reliable long service life in medical and security backup systems.",
+    "description": "SUNKA RB1245E 12V 4.5Ah maintenance-free VRLA battery engineered for reliable long service life in security and emergency backup systems.",
     "features": [
       "Low self-discharge rate (3% per month at 25\u00b0C)",
       "Wide operating temperature range",
@@ -219,7 +217,6 @@
       "Emergency Lighting",
       "Solar Lighting",
       "Power Banks",
-      "Medical Devices",
       "DIY Battery Packs"
     ],
     "dimensions": {
@@ -274,7 +271,6 @@
       "Emergency Lighting",
       "Solar Lighting",
       "Power Banks",
-      "Medical Devices",
       "UPS Systems"
     ],
     "dimensions": {
@@ -378,7 +374,6 @@
       "Emergency Lighting",
       "Alarm & Security Systems",
       "UPS Systems",
-      "Medical Equipment",
       "Solar Power Systems"
     ],
     "dimensions": {
@@ -428,8 +423,7 @@
     "applications": [
       "UPS Systems",
       "Emergency Lighting",
-      "Security Systems",
-      "Medical Devices"
+      "Security Systems"
     ],
     "dimensions": {
       "length_mm": 70,
@@ -477,8 +471,7 @@
     "applications": [
       "Emergency Lighting",
       "Alarm & Security Systems",
-      "UPS Systems",
-      "Medical Equipment"
+      "UPS Systems"
     ],
     "dimensions": {
       "length_mm": 70,
@@ -672,7 +665,6 @@
     "terminal_code": "f2",
     "applications": [
       "UPS Systems",
-      "Medical Equipment",
       "Fire & Security"
     ],
     "dimensions": {
@@ -721,7 +713,6 @@
     "terminal_code": "f2",
     "applications": [
       "Solar & Energy Storage",
-      "Medical Equipment",
       "Mobility / EV",
       "UPS Systems"
     ],
@@ -771,7 +762,6 @@
     "terminal_type": "M8 Threaded Terminal Block",
     "terminal_code": "m8",
     "applications": [
-      "Telecom",
       "UPS Systems",
       "Solar & Energy Storage"
     ],

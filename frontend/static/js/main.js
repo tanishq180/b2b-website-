@@ -168,7 +168,6 @@ function initCatalogFilters() {
   const filterSidebar = document.getElementById('filter-sidebar');
   const filterOverlay = document.getElementById('filter-sidebar-overlay');
   const closeFilterBtn = document.getElementById('close-filter-sidebar-btn');
-  const applyFilterBtn = document.getElementById('apply-filters-btn');
 
   function openMobileFilter() {
     if (filterSidebar && filterOverlay) {
@@ -245,16 +244,12 @@ function initCatalogFilters() {
   if (closeFilterBtn) {
     closeFilterBtn.addEventListener('click', closeMobileFilter);
   }
-  if (applyFilterBtn) {
-    applyFilterBtn.addEventListener('click', closeMobileFilter);
-  }
   if (filterOverlay) {
     filterOverlay.addEventListener('click', closeMobileFilter);
   }
 
   if (!catalogGrid) return;
 
-  const resetBottomBtn = document.getElementById('reset-filters-bottom-btn');
   const toolbarResetBtn = document.getElementById('toolbar-reset-filters-btn');
 
   function updateFilterBadge() {
@@ -336,7 +331,6 @@ function initCatalogFilters() {
   }
 
   if (resetBtn) resetBtn.addEventListener('click', resetAllFilters);
-  if (resetBottomBtn) resetBottomBtn.addEventListener('click', resetAllFilters);
   if (toolbarResetBtn) toolbarResetBtn.addEventListener('click', resetAllFilters);
 
   // Check URL params for initial filters on catalog page
