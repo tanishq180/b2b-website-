@@ -264,7 +264,7 @@ def submit_rfq():
         'status': 'success',
         'quote_id': quote_id,
         'timestamp': rfq_payload['timestamp'],
-        'message': f'Thank you {full_name}. Your B2B Quote Request ({quote_id}) has been received. Our application engineer will reach out within 2 business hours.'
+        'message': f'Thank you {full_name}. Your message and inquiry ({quote_id}) has been received. Our application engineers will reach out to you.'
     })
 
 @app.route('/api/rfq', methods=['GET'])

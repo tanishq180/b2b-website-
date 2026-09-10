@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCatalogFilters();
   initContactPage();
   initRFQBasket();
-  initRFQModal();
+  initFloatingRFQ();
   initPDPGallery();
   initBackToTop();
 });
@@ -394,7 +394,7 @@ function renderCatalogProducts(products) {
         </div>
         <div class="product-actions">
           <a href="/product/${p.id}" class="btn btn-outline-navy btn-sm">View Specs</a>
-          <a href="/contact?model=${encodeURIComponent(p.model)}" class="btn btn-accent btn-sm">Request Quote</a>
+          <button type="button" class="btn btn-accent btn-sm open-rfq-modal-btn" data-product-model="${p.model}">Request Quote</button>
         </div>
       </div>
     </div>
@@ -584,63 +584,149 @@ function updateBasketUI() {
 }
 
 /* ==========================================================================
-   6. B2B RFQ Form Modal & API Submit (Fallback & Quick RFQs)
+   6. Persistent Floating RFQ Bottom-Right Widget Controller
    ========================================================================== */
-function initRFQModal() {
-  const modalOverlay = document.getElementById('rfq-modal-overlay');
-  const modalCloseBtn = document.getElementById('rfq-modal-close');
-  const rfqForm = document.getElementById('b2b-rfq-form');
+function initFloatingRFQ() {
+  const container = document.getElementById('floating-rfq-container');
+  const triggerBtn = document.getElementById('floating-rfq-trigger');
+  const popup = document.getElementById('floating-rfq-popup');
+  const closeBtn = document.getElementById('floating-rfq-close');
+  const minimizeBtn = document.getElementById('floating-rfq-minimize');
+  const backdrop = document.getElementById('floating-rfq-backdrop');
+  const form = document.getElementById('b2b-floating-rfq-form');
+  const statusBox = document.getElementById('floating-rfq-status');
+  const mobileBarRfqBtn = document.getElementById('mobile-bar-rfq-btn');
+  const submitBtn = document.getElementById('floating-rfq-submit');
+  const modelInput = document.getElementById('floating-model');
 
+  if (!container || !triggerBtn || !popup) return;
+
+  let isOpen = false;
+
+  function openRFQ(prefillModel = null) {
+    isOpen = true;
+    popup.classList.add('active');
+    triggerBtn.classList.add('active');
+    triggerBtn.setAttribute('aria-expanded', 'true');
+    if (backdrop) backdrop.classList.add('active');
+
+    if (prefillModel && modelInput) {
+      modelInput.value = prefillModel;
+    }
+
+    // Focus first appropriate input
+    setTimeout(() => {
+      const nameInput = document.getElementById('floating-name');
+      if (nameInput && !nameInput.value) {
+        nameInput.focus();
+      } else if (modelInput && !modelInput.value) {
+        modelInput.focus();
+      }
+    }, 150);
+  }
+
+  function closeRFQ() {
+    isOpen = false;
+    popup.classList.remove('active');
+    triggerBtn.classList.remove('active');
+    triggerBtn.setAttribute('aria-expanded', 'false');
+    if (backdrop) backdrop.classList.remove('active');
+  }
+
+  function toggleRFQ() {
+    if (isOpen) {
+      closeRFQ();
+    } else {
+      openRFQ();
+    }
+  }
+
+  // Toggle on button click
+  triggerBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleRFQ();
+  });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeRFQ();
+    });
+  }
+
+  if (minimizeBtn) {
+    minimizeBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      closeRFQ();
+    });
+  }
+
+  if (backdrop) {
+    backdrop.addEventListener('click', closeRFQ);
+  }
+
+  if (mobileBarRfqBtn) {
+    mobileBarRfqBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      openRFQ();
+    });
+  }
+
+  // Delegate for any .open-rfq-modal-btn button in the DOM
   document.addEventListener('click', (e) => {
     const btn = e.target.closest('.open-rfq-modal-btn');
     if (btn) {
       e.preventDefault();
-      const singleModel = btn.getAttribute('data-product-model');
-      if (singleModel) {
-        const modelInput = document.getElementById('rfq-product-model');
-        if (modelInput) modelInput.value = singleModel;
-      }
-      if (modalOverlay) {
-        modalOverlay.classList.add('active');
-        document.body.style.overflow = 'hidden';
-      }
+      const model = btn.getAttribute('data-product-model') || '';
+      openRFQ(model);
     }
   });
 
-  function closeModal() {
-    if (modalOverlay) {
-      modalOverlay.classList.remove('active');
-      document.body.style.overflow = '';
+  // Global window helper
+  window.openRFQPopup = function (model = null) {
+    openRFQ(model);
+  };
+
+  // Close on Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isOpen) {
+      closeRFQ();
     }
-  }
+  });
 
-  if (modalCloseBtn && modalOverlay) {
-    modalCloseBtn.addEventListener('click', closeModal);
-    modalOverlay.addEventListener('click', (e) => {
-      if (e.target === modalOverlay) closeModal();
-    });
-  }
+  // Click outside on desktop closes popup
+  document.addEventListener('click', (e) => {
+    if (isOpen && !container.contains(e.target)) {
+      closeRFQ();
+    }
+  });
 
-  if (rfqForm) {
-    rfqForm.addEventListener('submit', (e) => {
+  // Handle Form Submission
+  if (form) {
+    form.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      const submitBtn = rfqForm.querySelector('button[type="submit"]');
-      const originalText = submitBtn.textContent;
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Submitting Request...';
+      const origBtnHTML = submitBtn ? submitBtn.innerHTML : 'Send Message ✉️';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<span>⏳ Sending your message...</span>`;
+      }
+      if (statusBox) {
+        statusBox.style.display = 'none';
+        statusBox.className = 'rfq-popup-status';
+      }
 
-      const formData = new FormData(rfqForm);
+      const formData = new FormData(form);
       const payload = {
-        full_name: formData.get('full_name'),
-        company_name: formData.get('company_name'),
-        email: formData.get('email'),
-        phone: formData.get('phone'),
-        gstin_tax_id: formData.get('gstin_tax_id'),
-        product_model: formData.get('product_model'),
-        estimated_qty: formData.get('estimated_qty'),
-        application_details: formData.get('application_details'),
-        message: formData.get('message'),
+        full_name: formData.get('full_name') || '',
+        company_name: formData.get('company_name') || '',
+        email: formData.get('email') || '',
+        phone: formData.get('phone') || '',
+        product_model: formData.get('product_model') || '',
+        estimated_qty: formData.get('estimated_qty') || '10',
+        application_details: formData.get('application_details') || '',
+        message: formData.get('message') || '',
         items: rfqBasket
       };
 
@@ -651,23 +737,63 @@ function initRFQModal() {
       })
         .then(res => res.json())
         .then(data => {
-          submitBtn.disabled = false;
-          submitBtn.textContent = originalText;
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = origBtnHTML;
+          }
 
           if (data.status === 'success') {
-            closeModal();
-            rfqForm.reset();
-            rfqBasket = [];
-            saveBasket();
-            showToast(`✅ ${data.message}`, 'success');
+            form.reset();
+            if (statusBox) {
+              statusBox.className = 'rfq-popup-status status-success';
+              statusBox.innerHTML = `
+                <div class="rfq-status-card">
+                  <div class="rfq-status-icon">💬</div>
+                  <h4 class="rfq-status-title">Message Sent Successfully!</h4>
+                  <p class="rfq-status-ref">Tracking Reference: <strong>${data.quote_id}</strong></p>
+                  <p class="rfq-status-desc">
+                    Thank you for contacting MERI Industries. Our application engineers have received your inquiry and will be in touch with you shortly.
+                  </p>
+                  <button type="button" class="btn btn-outline-navy btn-sm mt-2" onclick="document.getElementById('floating-rfq-status').style.display='none';">
+                    Send Another Message
+                  </button>
+                </div>
+              `;
+              statusBox.style.display = 'block';
+            }
+            showToast(`✅ Message sent! Reference: ${data.quote_id}`, 'success');
           } else {
+            if (statusBox) {
+              statusBox.className = 'rfq-popup-status status-error';
+              statusBox.innerHTML = `
+                <div class="rfq-status-card">
+                  <div class="rfq-status-icon">⚠️</div>
+                  <h4 class="rfq-status-title" style="color:#991B1B;">Submission Error</h4>
+                  <p class="rfq-status-desc" style="color:#B91C1C;">${data.message || 'Please verify required fields.'}</p>
+                </div>
+              `;
+              statusBox.style.display = 'block';
+            }
             showToast(`⚠️ Error: ${data.message}`, 'error');
           }
         })
         .catch(err => {
-          submitBtn.disabled = false;
-          submitBtn.textContent = originalText;
-          showToast('Network connection error. Please try again.', 'error');
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = origBtnHTML;
+          }
+          if (statusBox) {
+            statusBox.className = 'rfq-popup-status status-error';
+            statusBox.innerHTML = `
+              <div class="rfq-status-card">
+                <div class="rfq-status-icon">⚠️</div>
+                <h4 class="rfq-status-title" style="color:#991B1B;">Network Error</h4>
+                <p class="rfq-status-desc" style="color:#B91C1C;">Unable to connect. Please check your internet connection or call +91 7538843410 directly.</p>
+              </div>
+            `;
+            statusBox.style.display = 'block';
+          }
+          showToast('Network error while sending message.', 'error');
         });
     });
   }

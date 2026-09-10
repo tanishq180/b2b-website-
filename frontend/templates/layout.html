@@ -119,63 +119,111 @@
     {% endblock %}
   </main>
 
-  <!-- 3. Global B2B RFQ Modal (Fallback / Direct Quick Modal) -->
-  <div id="rfq-modal-overlay" class="modal-overlay">
-    <div class="modal-card">
-      <div class="modal-header">
-        <h3>Submit B2B Request for Quote (RFQ)</h3>
-        <button id="rfq-modal-close" class="modal-close-btn" aria-label="Close modal">&times;</button>
+  <!-- 3. Persistent Floating Leave a Message / RFQ Widget (All pages except Contact Us) -->
+  {% if request.path != '/contact' %}
+  <div id="floating-rfq-container" class="floating-rfq-container">
+    
+    <!-- Floating Trigger Pill / Launcher Button in Bottom-Right Corner -->
+    <button id="floating-rfq-trigger" class="floating-rfq-trigger" type="button" aria-expanded="false" aria-controls="floating-rfq-popup" aria-label="Open Leave a Message form">
+      <span class="rfq-trigger-pulse"></span>
+      <span class="rfq-trigger-icon-wrap">
+        <svg class="icon-open" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+        <svg class="icon-close" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </span>
+      <span class="rfq-trigger-content">
+        <span class="rfq-trigger-main">Leave a Message</span>
+      </span>
+    </button>
+
+    <!-- Floating Pop-up Window (Bottom-Right Docked) -->
+    <div id="floating-rfq-popup" class="floating-rfq-popup" role="dialog" aria-modal="false" aria-labelledby="floating-rfq-heading">
+      
+      <!-- Pop-up Header -->
+      <div class="rfq-popup-header">
+        <div class="rfq-popup-header-info">
+          <div class="rfq-popup-icon-badge">💬</div>
+          <div>
+            <h3 id="floating-rfq-heading" class="rfq-popup-title">Leave a Message</h3>
+            <p class="rfq-popup-subtitle">Engineering support &amp; inquiries</p>
+          </div>
+        </div>
+        <div class="rfq-popup-controls">
+          <button type="button" id="floating-rfq-minimize" class="rfq-control-btn" aria-label="Minimize message form" title="Minimize">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+          </button>
+          <button type="button" id="floating-rfq-close" class="rfq-control-btn" aria-label="Close message form" title="Close">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+          </button>
+        </div>
       </div>
-      <div class="modal-body">
-        <form id="b2b-rfq-form">
-          <div class="form-grid">
-            <div class="form-group">
-              <label class="form-label" for="rfq-full-name">Full Name *</label>
-              <input type="text" id="rfq-full-name" name="full_name" class="form-control"
-                placeholder="e.g. Robert Vance" required>
+
+      <!-- Pop-up Body / Form -->
+      <div class="rfq-popup-body">
+        
+        <!-- Status Box for confirmation / feedback -->
+        <div id="floating-rfq-status" class="rfq-popup-status" style="display: none;"></div>
+
+        <form id="b2b-floating-rfq-form" class="floating-rfq-form">
+          <div class="rfq-grid-2">
+            <div class="rfq-form-field">
+              <label for="floating-name" class="rfq-form-label">Full Name *</label>
+              <input type="text" id="floating-name" name="full_name" class="rfq-form-control" placeholder="e.g. Robert Vance" required autocomplete="name">
             </div>
-            <div class="form-group">
-              <label class="form-label" for="rfq-company-name">Company Name *</label>
-              <input type="text" id="rfq-company-name" name="company_name" class="form-control"
-                placeholder="e.g. Apex Telecom Infrastructure" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="rfq-email">Email *</label>
-              <input type="email" id="rfq-email" name="email" class="form-control" placeholder="rvance@apextelecom.com"
-                required>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="rfq-phone">Phone Number *</label>
-              <input type="tel" id="rfq-phone" name="phone" class="form-control" placeholder="+91 98765 43210" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="rfq-product-model">Target Battery Model</label>
-              <input type="text" id="rfq-product-model" name="product_model" class="form-control"
-                placeholder="e.g. PSL-121000 or Multiple Models">
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="rfq-qty">Estimated Quantity / MOQ</label>
-              <input type="number" id="rfq-qty" name="estimated_qty" class="form-control" min="1" value="10">
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="rfq-application">Target Application</label>
-              <input type="text" id="rfq-application" name="application_details" class="form-control"
-                placeholder="e.g. UPS, Solar ESS, Telecom, Security, EV">
-            </div>
-            <div class="form-group full-width">
-              <label class="form-label" for="rfq-message">Technical Requirements & Custom Specifications</label>
-              <textarea id="rfq-message" name="message" class="form-control" rows="3"
-                placeholder="Provide details on operating temperature, peak discharge current, dimension constraints, or delivery timeline..."></textarea>
+            <div class="rfq-form-field">
+              <label for="floating-company" class="rfq-form-label">Company / Org</label>
+              <input type="text" id="floating-company" name="company_name" class="rfq-form-control" placeholder="e.g. Apex Power Systems" autocomplete="organization">
             </div>
           </div>
-          <div class="modal-form-actions">
-            <button type="submit" class="btn btn-accent btn-lg" style="width: 100%;">Submit Official RFQ
-              Request</button>
+
+          <div class="rfq-grid-2">
+            <div class="rfq-form-field">
+              <label for="floating-email" class="rfq-form-label">Business Email *</label>
+              <input type="email" id="floating-email" name="email" class="rfq-form-control" placeholder="rvance@apexpower.com" required autocomplete="email">
+            </div>
+            <div class="rfq-form-field">
+              <label for="floating-phone" class="rfq-form-label">Phone Number *</label>
+              <input type="tel" id="floating-phone" name="phone" class="rfq-form-control" placeholder="+91 98765 43210" required autocomplete="tel">
+            </div>
           </div>
+
+          <div class="rfq-grid-2">
+            <div class="rfq-form-field">
+              <label for="floating-model" class="rfq-form-label">Battery Model / Subject</label>
+              <input type="text" id="floating-model" name="product_model" class="rfq-form-control" placeholder="e.g. PSL-121000 or SLA Series">
+            </div>
+            <div class="rfq-form-field">
+              <label for="floating-qty" class="rfq-form-label">Estimated Quantity</label>
+              <input type="number" id="floating-qty" name="estimated_qty" class="rfq-form-control" min="1" value="10" placeholder="10">
+            </div>
+          </div>
+
+          <div class="rfq-form-field full-width">
+            <label for="floating-app" class="rfq-form-label">Target Application</label>
+            <input type="text" id="floating-app" name="application_details" class="rfq-form-control" placeholder="e.g. UPS Data Center, Solar ESS, Telecom, Robotics">
+          </div>
+
+          <div class="rfq-form-field full-width">
+            <label for="floating-message" class="rfq-form-label">Your Message / Requirements *</label>
+            <textarea id="floating-message" name="message" class="rfq-form-control rfq-form-textarea" rows="3" placeholder="Write your message, technical requirements, or quote inquiry here..." required></textarea>
+          </div>
+
+          <button type="submit" id="floating-rfq-submit" class="rfq-submit-button">
+            <span class="btn-text">Send Message ✉️</span>
+          </button>
         </form>
       </div>
+
     </div>
+
+    <!-- Backdrop for mobile / tablet when popup is open -->
+    <div id="floating-rfq-backdrop" class="floating-rfq-backdrop"></div>
   </div>
+  {% endif %}
 
   <!-- 4. Footer -->
   {% block footer %}
@@ -234,7 +282,7 @@
       <span class="bar-label">Call Sales</span>
     </a>
     {% if request.path != '/contact' %}
-    <a href="/contact" class="mobile-bar-item mobile-bar-rfq">
+    <a href="javascript:void(0);" class="mobile-bar-item mobile-bar-rfq" id="mobile-bar-rfq-btn">
       <span class="bar-icon">📝</span>
       <span class="bar-label">Get Quote</span>
     </a>

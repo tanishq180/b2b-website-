@@ -1,19 +1,18 @@
 {% extends "layout.html" %}
 
-{% block title %}Request Bulk Quote & Technical Inquiries | MERI Industries (Sunka Batteries){% endblock %}
-{% block meta_description %}Submit a B2B Request for Quote (RFQ) or contact MERI Industries engineering support for
-volume pricing, custom packs, and datasheets.{% endblock %}
+{% block title %}Contact & Request Bulk Quote | MERI Industries (Sunka Batteries){% endblock %}
+{% block meta_description %}Connect with MERI Industries engineering support for volume pricing, custom battery packs, CAD drawings, and technical datasheets.{% endblock %}
 
 {% block content %}
 <section class="section contact-section">
   <div class="container">
 
     <div class="section-header text-center">
-      <span class="section-subtitle">DIRECT CONTACT & BULK QUOTE INQUIRIES</span>
-      <h1 class="section-title">Request a Bulk Quote & Engineering Support</h1>
+      <span class="section-subtitle">DIRECT CONTACT &amp; BULK INQUIRIES</span>
+      <h1 class="section-title">Contact &amp; Request Bulk Quote</h1>
       <p class="section-desc">
         Connect directly with our application engineers for volume distributor pricing, custom battery pack
-        configurations, or technical datasheets. We respond within 2 business hours.
+        configurations, or technical datasheets.
       </p>
     </div>
 
@@ -21,10 +20,10 @@ volume pricing, custom packs, and datasheets.{% endblock %}
 
       <!-- Left Column: Direct Contact & Engineering Support Info -->
       <div class="contact-card contact-info-card">
-        <h3 class="contact-card-title">Corporate & Engineering Headquarters</h3>
+        <h3 class="contact-card-title">Corporate &amp; Engineering Office</h3>
 
         <div class="contact-info-block">
-          <strong class="contact-label">Company & Brand</strong>
+          <strong class="contact-label">Company &amp; Brand</strong>
           <p class="contact-text">
             <strong>MERI Industries</strong><br>
             <span class="text-muted">Sunka Industrial Battery Division</span>
@@ -32,7 +31,7 @@ volume pricing, custom packs, and datasheets.{% endblock %}
         </div>
 
         <div class="contact-info-block">
-          <strong class="contact-label">Direct Phone & WhatsApp Hotline</strong>
+          <strong class="contact-label">Direct Phone &amp; WhatsApp</strong>
           <p class="contact-text">
             <a href="tel:+917538843410" class="contact-highlight-link">📞 +91 7538843410</a><br>
             <span class="contact-subtext">Mon – Sat: 9:00 AM – 7:00 PM IST</span>
@@ -42,19 +41,16 @@ volume pricing, custom packs, and datasheets.{% endblock %}
         <div class="contact-info-block">
           <strong class="contact-label">Official Engineering Email</strong>
           <p class="contact-text">
-            <a href="mailto:merihindustries@gmail.com" class="contact-highlight-link">✉️
-              merihindustries@gmail.com</a><br>
-            <!-- <span class="contact-subtext">Fast response for CAD drawings & RFQs</span> -->
+            <a href="mailto:merihindustries@gmail.com" class="contact-highlight-link">✉️ merihindustries@gmail.com</a>
           </p>
         </div>
       </div>
 
       <!-- Right Column: B2B RFQ / Contact Inquiry Form -->
       <div class="contact-card contact-form-card">
-        <h3 class="contact-card-title">Submit Official RFQ / Bulk Quote Request</h3>
+        <h3 class="contact-card-title">Submit Official RFQ / Inquiry</h3>
         <p class="contact-form-intro text-muted mb-3">
-          Complete the form below to receive a formal commercial quote with volume discounts and technical
-          documentation.
+          Complete the form below to receive formal commercial pricing, volume discounts, and technical documentation.
         </p>
 
         <form id="contact-page-form" class="b2b-contact-form">
@@ -62,27 +58,27 @@ volume pricing, custom packs, and datasheets.{% endblock %}
             <div class="form-group">
               <label class="form-label" for="contact-full-name">Full Name *</label>
               <input type="text" id="contact-full-name" name="full_name" class="form-control"
-                placeholder="e.g. Robert Vance" required>
+                placeholder="e.g. Robert Vance" required autocomplete="name">
             </div>
             <div class="form-group">
               <label class="form-label" for="contact-company-name">Company / Organization *</label>
               <input type="text" id="contact-company-name" name="company_name" class="form-control"
-                placeholder="e.g. Apex Power Systems" required>
+                placeholder="e.g. Apex Power Systems" required autocomplete="organization">
             </div>
             <div class="form-group">
               <label class="form-label" for="contact-email">Business Email *</label>
               <input type="email" id="contact-email" name="email" class="form-control"
-                placeholder="rvance@apexpower.com" required>
+                placeholder="rvance@apexpower.com" required autocomplete="email">
             </div>
             <div class="form-group">
               <label class="form-label" for="contact-phone">Phone Number *</label>
               <input type="tel" id="contact-phone" name="phone" class="form-control" placeholder="+91 98765 43210"
-                required>
+                required autocomplete="tel">
             </div>
             <div class="form-group">
               <label class="form-label" for="contact-product-model">Target Battery Model / Chemistry</label>
               <input type="text" id="contact-product-model" name="product_model" class="form-control"
-                placeholder="e.g. PSL-121000 or Multiple Models">
+                placeholder="e.g. PSL-121000 or 12V SLA Series">
             </div>
             <div class="form-group">
               <label class="form-label" for="contact-qty">Estimated Quantity (Units)</label>
@@ -95,7 +91,7 @@ volume pricing, custom packs, and datasheets.{% endblock %}
                 placeholder="e.g. UPS Data Center, Solar ESS, Telecom Rack, Security System">
             </div>
             <div class="form-group full-width">
-              <label class="form-label" for="contact-message">Technical Requirements & Specifications</label>
+              <label class="form-label" for="contact-message">Technical Requirements &amp; Specifications</label>
               <textarea id="contact-message" name="message" class="form-control" rows="4"
                 placeholder="Mention voltage, peak discharge amperage, operating temperatures, dimension constraints, or delivery timeline..."></textarea>
             </div>
