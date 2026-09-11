@@ -26,6 +26,14 @@ class TestSunkaApp(unittest.TestCase):
         self.assertIn(b'Industrial Battery Catalog', res.data)
         self.assertIn(b'main-header', res.data)
 
+    def test_contact_page(self):
+        res = self.client.get('/contact')
+        self.assertEqual(res.status_code, 200)
+        self.assertIn(b'Contact &amp; Request Bulk Quote', res.data)
+        self.assertIn(b'contact-page-form', res.data)
+        self.assertIn(b'formspree.io/f/mwlkyyrr', res.data)
+
+
     def test_pdp_page(self):
         res = self.client.get('/product/ps-1295')
         self.assertEqual(res.status_code, 200)
