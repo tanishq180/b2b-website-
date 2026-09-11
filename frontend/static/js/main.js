@@ -438,7 +438,7 @@ function initContactPage() {
     }
   }
 
-  // 2. Handle Contact & Quote AJAX Submission
+  // 2. Handle Contact & Quote AJAX Submission via Formspree
   contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -452,32 +452,30 @@ function initContactPage() {
       statusBox.className = 'form-status-box';
     }
 
+    const quoteId = `RFQ-${new Date().toISOString().slice(0, 10).replace(/-/g, '')}-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
     const formData = new FormData(contactForm);
-    const payload = {
-      full_name: formData.get('full_name') || '',
-      company_name: formData.get('company_name') || '',
-      email: formData.get('email') || '',
-      phone: formData.get('phone') || '',
-      product_model: formData.get('product_model') || '',
-      estimated_qty: formData.get('estimated_qty') || '10',
-      application_details: formData.get('application_details') || '',
-      message: formData.get('message') || '',
-      items: rfqBasket
-    };
+    formData.set('quote_id', quoteId);
+    
+    if (rfqBasket && rfqBasket.length > 0) {
+      const itemsFormatted = rfqBasket.map(item => `${item.model} (${item.qty} units)`).join(', ');
+      formData.set('basket_items', itemsFormatted);
+    }
 
-    fetch('/api/rfq', {
+    // Submit to Formspree Endpoint
+    fetch(contactForm.action || 'https://formspree.io/f/mwlkyyrr', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+      body: formData,
+      headers: {
+        'Accept': 'application/json'
+      }
     })
-      .then(res => res.json())
-      .then(data => {
+      .then(async (res) => {
         if (submitBtn) {
           submitBtn.disabled = false;
           submitBtn.innerHTML = originalBtnHTML;
         }
 
-        if (data.status === 'success') {
+        if (res.ok) {
           contactForm.reset();
           if (statusBox) {
             statusBox.className = 'form-status-box status-success';
@@ -486,7 +484,7 @@ function initContactPage() {
               <div class="status-content">
                 <h4 style="color:#065F46; font-size:1.05rem; margin-bottom:0.25rem;">Bulk Quote Request Received!</h4>
                 <p style="color:#047857; font-size:0.9rem; margin-bottom:0.4rem;">
-                  Your Tracking ID: <strong style="color:#064E3B; font-family:monospace; font-size:0.95rem;">${data.quote_id}</strong>
+                  Your Tracking ID: <strong style="color:#064E3B; font-family:monospace; font-size:0.95rem;">${quoteId}</strong>
                 </p>
                 <p style="color:#065F46; font-size:0.85rem;">
                   Our application engineer will review your technical specifications and reach out with formal distributor pricing and datasheets within 2 business hours.
@@ -495,21 +493,49 @@ function initContactPage() {
             `;
             statusBox.style.display = 'flex';
           }
-          showToast(`RFQ ${data.quote_id} submitted successfully!`, 'success');
+          showToast(`RFQ ${quoteId} submitted successfully!`, 'success');
           statusBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+          // Background sync to local Flask backend if available
+          try {
+            fetch('/api/rfq', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                quote_id: quoteId,
+                full_name: formData.get('full_name') || '',
+                company_name: formData.get('company_name') || '',
+                email: formData.get('email') || '',
+                phone: formData.get('phone') || '',
+                product_model: formData.get('product_model') || '',
+                estimated_qty: formData.get('estimated_qty') || '10',
+                application_details: formData.get('application_details') || '',
+                message: formData.get('message') || '',
+                items: rfqBasket
+              })
+            }).catch(() => {});
+          } catch (_) {}
         } else {
+          const data = await res.json().catch(() => ({}));
+          let errorMsg = 'Please verify required fields and try again.';
+          if (data && data.errors && data.errors.length > 0) {
+            errorMsg = data.errors.map(err => `${err.field ? err.field + ': ' : ''}${err.message}`).join(', ');
+          } else if (data && data.error) {
+            errorMsg = data.error;
+          }
+
           if (statusBox) {
             statusBox.className = 'form-status-box status-error';
             statusBox.innerHTML = `
               <div class="status-icon">⚠️</div>
               <div class="status-content">
                 <h4 style="color:#991B1B; font-size:0.95rem; margin-bottom:0.25rem;">Submission Notice</h4>
-                <p style="color:#B91C1C; font-size:0.85rem;">${data.message || 'Please verify required fields and try again.'}</p>
+                <p style="color:#B91C1C; font-size:0.85rem;">${errorMsg}</p>
               </div>
             `;
             statusBox.style.display = 'flex';
           }
-          showToast(`Error: ${data.message}`, 'error');
+          showToast(`Error: ${errorMsg}`, 'error');
         }
       })
       .catch(err => {
@@ -702,7 +728,7 @@ function initFloatingRFQ() {
     }
   });
 
-  // Handle Form Submission
+  // Handle Form Submission via Formspree Vanilla JS AJAX
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -717,32 +743,29 @@ function initFloatingRFQ() {
         statusBox.className = 'rfq-popup-status';
       }
 
+      const quoteId = `RFQ-${new Date().toISOString().slice(0, 10).replace(/-/g, '')}-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
       const formData = new FormData(form);
-      const payload = {
-        full_name: formData.get('full_name') || '',
-        company_name: formData.get('company_name') || '',
-        email: formData.get('email') || '',
-        phone: formData.get('phone') || '',
-        product_model: formData.get('product_model') || '',
-        estimated_qty: formData.get('estimated_qty') || '10',
-        application_details: formData.get('application_details') || '',
-        message: formData.get('message') || '',
-        items: rfqBasket
-      };
+      formData.set('quote_id', quoteId);
+      
+      if (rfqBasket && rfqBasket.length > 0) {
+        const itemsFormatted = rfqBasket.map(item => `${item.model} (${item.qty} units)`).join(', ');
+        formData.set('basket_items', itemsFormatted);
+      }
 
-      fetch('/api/rfq', {
+      fetch(form.action || 'https://formspree.io/f/mwlkyyrr', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
       })
-        .then(res => res.json())
-        .then(data => {
+        .then(async (res) => {
           if (submitBtn) {
             submitBtn.disabled = false;
             submitBtn.innerHTML = origBtnHTML;
           }
 
-          if (data.status === 'success') {
+          if (res.ok) {
             form.reset();
             if (statusBox) {
               statusBox.className = 'rfq-popup-status status-success';
@@ -750,7 +773,7 @@ function initFloatingRFQ() {
                 <div class="rfq-status-card">
                   <div class="rfq-status-icon">💬</div>
                   <h4 class="rfq-status-title">Message Sent Successfully!</h4>
-                  <p class="rfq-status-ref">Tracking Reference: <strong>${data.quote_id}</strong></p>
+                  <p class="rfq-status-ref">Tracking Reference: <strong>${quoteId}</strong></p>
                   <p class="rfq-status-desc">
                     Thank you for contacting MERI Industries. Our application engineers have received your inquiry and will be in touch with you shortly.
                   </p>
@@ -761,20 +784,48 @@ function initFloatingRFQ() {
               `;
               statusBox.style.display = 'block';
             }
-            showToast(`✅ Message sent! Reference: ${data.quote_id}`, 'success');
+            showToast(`✅ Message sent! Reference: ${quoteId}`, 'success');
+
+            // Background sync to local Flask backend if available
+            try {
+              fetch('/api/rfq', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  quote_id: quoteId,
+                  full_name: formData.get('full_name') || '',
+                  company_name: formData.get('company_name') || '',
+                  email: formData.get('email') || '',
+                  phone: formData.get('phone') || '',
+                  product_model: formData.get('product_model') || '',
+                  estimated_qty: formData.get('estimated_qty') || '10',
+                  application_details: formData.get('application_details') || '',
+                  message: formData.get('message') || '',
+                  items: rfqBasket
+                })
+              }).catch(() => {});
+            } catch (_) {}
           } else {
+            const data = await res.json().catch(() => ({}));
+            let errorMsg = 'Please verify required fields.';
+            if (data && data.errors && data.errors.length > 0) {
+              errorMsg = data.errors.map(err => `${err.field ? err.field + ': ' : ''}${err.message}`).join(', ');
+            } else if (data && data.error) {
+              errorMsg = data.error;
+            }
+
             if (statusBox) {
               statusBox.className = 'rfq-popup-status status-error';
               statusBox.innerHTML = `
                 <div class="rfq-status-card">
                   <div class="rfq-status-icon">⚠️</div>
                   <h4 class="rfq-status-title" style="color:#991B1B;">Submission Error</h4>
-                  <p class="rfq-status-desc" style="color:#B91C1C;">${data.message || 'Please verify required fields.'}</p>
+                  <p class="rfq-status-desc" style="color:#B91C1C;">${errorMsg}</p>
                 </div>
               `;
               statusBox.style.display = 'block';
             }
-            showToast(`⚠️ Error: ${data.message}`, 'error');
+            showToast(`⚠️ Error: ${errorMsg}`, 'error');
           }
         })
         .catch(err => {
