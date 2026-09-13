@@ -865,7 +865,7 @@ function initFloatingRFQ() {
               <div class="rfq-status-card">
                 <div class="rfq-status-icon">⚠️</div>
                 <h4 class="rfq-status-title" style="color:#991B1B;">Network Error</h4>
-                <p class="rfq-status-desc" style="color:#B91C1C;">Unable to connect. Please check your internet connection or call +91 7538843410 directly.</p>
+                <p class="rfq-status-desc" style="color:#B91C1C;">Unable to connect. Please check your internet connection or call +91 7538844410 directly.</p>
               </div>
             `;
             statusBox.style.display = 'block';
