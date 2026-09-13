@@ -238,6 +238,8 @@ function initCatalogFilters() {
     });
   });
 
+  const applyMobileFilterBtn = document.getElementById('apply-mobile-filter-btn');
+
   if (filterToggleBtn) {
     filterToggleBtn.addEventListener('click', openMobileFilter);
   }
@@ -247,6 +249,30 @@ function initCatalogFilters() {
   if (filterOverlay) {
     filterOverlay.addEventListener('click', closeMobileFilter);
   }
+  if (applyMobileFilterBtn) {
+    applyMobileFilterBtn.addEventListener('click', () => {
+      fetchFilteredProducts();
+      closeMobileFilter();
+    });
+  }
+
+  // Auto close mobile drawers on window resize to desktop
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      if (window.innerWidth > 992) {
+        closeMobileFilter();
+        const drawer = document.getElementById('mobile-nav-drawer');
+        const overlay = document.getElementById('mobile-nav-overlay');
+        if (drawer) drawer.classList.remove('active');
+        if (overlay) overlay.classList.remove('active');
+        const toggleBtn = document.getElementById('mobile-menu-toggle');
+        if (toggleBtn) toggleBtn.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    }, 150);
+  }, { passive: true });
 
   if (!catalogGrid) return;
 
