@@ -27,7 +27,7 @@
           <div class="pdp-slider-track" id="pdp-slider-track">
             <!-- Slide 1: Primary Product Photo -->
             <div class="pdp-slide" data-slide-index="0">
-              <img src="{{ product.image }}" alt="{{ product.model }} - Primary View" class="slide-img">
+              <img src="{{ product.image }}" alt="{{ product.model }} {{ product.voltage }}V {{ product.capacity_ah }}Ah {{ product.chemistry }} Industrial Battery" class="slide-img" width="600" height="400">
               <span class="slide-caption">Physical Product View</span>
             </div>
 
@@ -107,7 +107,7 @@
         <!-- Thumbnails Strip -->
         <div class="pdp-gallery-thumbs" id="pdp-slider-thumbs">
           <button class="thumb-btn active" data-slide-to="0" type="button" aria-label="Product Photo">
-            <img src="{{ product.image }}" alt="Front View">
+            <img src="{{ product.image }}" alt="{{ product.model }} Preview Thumbnail" width="80" height="60">
           </button>
 
           <button class="thumb-btn" data-slide-to="1" type="button" aria-label="CAD Blueprint">
@@ -138,7 +138,7 @@
         <h1 class="pdp-model">{{ product.model }}</h1>
         <p class="pdp-title">{{ product.title }}</p>
 
-        <p class="pdp-desc">
+        <p class="pdp-desc text-effect" data-preset="fade-in-blur" data-speed-reveal="1.1" data-speed-segment="0.3">
           {{ product.description }}
         </p>
 
@@ -228,6 +228,54 @@
         </table>
       </div>
     </div>
+
+    <!-- Related Products Section -->
+    {% if related_products and related_products|length > 0 %}
+    <div class="pdp-related-section" style="margin-top: 3.5rem;">
+      <div class="section-header">
+        <span class="section-subtitle">RECOMMENDED SPECIFICATIONS</span>
+        <h2 class="section-title">Related Industrial Batteries</h2>
+        <p class="section-desc">Alternative models matching similar chemistry, voltage characteristics, or application requirements.</p>
+      </div>
+
+      <div class="product-grid" style="margin-top: 1.5rem;">
+        {% for rel in related_products %}
+        <div class="product-card">
+          <span class="product-badge-tag {{ 'badge-lithium' if rel.chemistry_code == 'lithium' else '' }}">{{ rel.chemistry }}</span>
+          <div class="product-img-wrapper">
+            <img src="{{ rel.image }}" alt="{{ rel.model }} {{ rel.voltage }}V {{ rel.capacity_ah }}Ah {{ rel.chemistry }} Battery" loading="lazy" width="300" height="220" onerror="this.onerror=null; this.src='/static/images/deep_cycle_gel_battery.jpg';">
+          </div>
+          <div class="product-body">
+            <h3 class="product-model">{{ rel.model }}</h3>
+            <p class="product-title">{{ rel.title }}</p>
+            <div class="spec-mini-grid">
+              <div class="spec-item">
+                <strong>{{ rel.voltage }}V</strong>
+                <span>Voltage</span>
+              </div>
+              <div class="spec-item">
+                <strong>{{ rel.capacity_ah }} Ah</strong>
+                <span>Capacity</span>
+              </div>
+              <div class="spec-item">
+                <strong>{{ rel.weight_kg }} kg</strong>
+                <span>Weight</span>
+              </div>
+              <div class="spec-item">
+                <strong>{{ (rel.terminal_code or 'F2')|upper }}</strong>
+                <span>Terminal</span>
+              </div>
+            </div>
+            <div class="product-actions">
+              <a href="/product/{{ rel.id }}" class="btn btn-outline-navy btn-sm">View Specs</a>
+              <button type="button" class="btn btn-accent btn-sm open-rfq-modal-btn" data-product-model="{{ rel.model }}">Request Quote</button>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
 
   </div>
 </section>

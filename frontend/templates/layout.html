@@ -12,12 +12,18 @@
   <meta name="description"
     content="{% block meta_description %}Leading manufacturer of Sealed Lead Acid and Lithium industrial batteries engineered for UPS, Solar, Telecom, and Security applications.{% endblock %}">
 
-  <!-- Fonts: Inter & Montserrat -->
+  <!-- Fonts: Inter, JetBrains Mono & Montserrat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Montserrat:wght@600;700;800;900&display=swap"
     rel="stylesheet">
+
+  <!-- Favicon & Touch Icons -->
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/favicon.png') }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ url_for('static', filename='images/apple-touch-icon.png') }}">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.ico') }}">
 
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
@@ -32,19 +38,26 @@
   <!-- 1. Main Navigation Bar -->
   <nav class="main-header">
     <div class="container navbar-flex">
-      <a href="/" class="brand-logo">
-        <div class="logo-icon"><img src="{{ url_for('static', filename='images/meri_logo.png') }}"
-            alt="MERI H INDUSTRIES Logo"></div>
+      <a href="/" class="brand-logo" aria-label="MERI Industries - Home">
+        <div class="logo-icon">
+          <img src="{{ url_for('static', filename='images/meri_logo.png') }}" alt="MERI Industries - Industrial Battery Solutions Logo" width="44" height="44">
+        </div>
         <div class="brand-text-group">
           <span class="brand-title">MERI <span class="accent">INDUSTRIES</span></span>
           <span class="brand-tag">INDUSTRIAL ENERGY SOLUTIONS</span>
         </div>
       </a>
 
+      <!-- Desktop Header Live Search Box -->
+      <div class="header-search-wrapper" style="position: relative; max-width: 280px; width: 100%; display: none;">
+        <span class="header-search-icon">🔍</span>
+        <input type="text" id="header-search-input" class="header-search-input" placeholder="Search battery model..." autocomplete="off" aria-label="Search battery catalog">
+        <div id="header-search-results" class="header-search-results"></div>
+      </div>
+
       <ul class="nav-menu">
         <li><a href="/" class="nav-link {% if request.path == '/' %}active{% endif %}">Home</a></li>
-        <li><a href="/catalog" class="nav-link {% if request.path == '/catalog' %}active{% endif %}">Battery Catalog</a>
-        </li>
+        <li><a href="/catalog" class="nav-link {% if request.path == '/catalog' %}active{% endif %}">Battery Catalog</a></li>
         <li><a href="/contact" class="nav-link {% if request.path == '/contact' %}active{% endif %}">Contact</a></li>
       </ul>
 
@@ -69,8 +82,8 @@
   <div id="mobile-nav-overlay" class="mobile-nav-overlay"></div>
   <aside id="mobile-nav-drawer" class="mobile-nav-drawer" aria-label="Mobile Navigation">
     <div class="mobile-nav-header">
-      <a href="/" class="brand-logo">
-        <div class="logo-icon"><img src="{{ url_for('static', filename='images/meri_logo.png') }}" alt="MERI Logo">
+      <a href="/" class="brand-logo" aria-label="MERI Industries - Home">
+        <div class="logo-icon"><img src="{{ url_for('static', filename='images/meri_logo.png') }}" alt="MERI Industries Logo" width="44" height="44">
         </div>
         <div class="brand-text-group">
           <span class="brand-title">MERI <span class="accent">INDUSTRIES</span></span>
@@ -253,10 +266,10 @@
       <div class="footer-links">
         <h4>Target Applications</h4>
         <ul>
-          <li><a href="/catalog">UPS & Data Centers</a></li>
-          <li><a href="/catalog">Solar Energy Storage</a></li>
-          <li><a href="/catalog">Security & Fire Alarms</a></li>
-          <li><a href="/catalog">Mobility & AGV Robotics</a></li>
+          <li><a href="/catalog?application=UPS+Systems">UPS &amp; Data Centers</a></li>
+          <li><a href="/catalog?application=Solar+%26+Energy+Storage">Solar Energy Storage</a></li>
+          <li><a href="/catalog?application=Fire+%26+Security">Security &amp; Fire Alarms</a></li>
+          <li><a href="/catalog?application=Emergency+Lighting">Emergency Lighting &amp; Mobility</a></li>
         </ul>
       </div>
 

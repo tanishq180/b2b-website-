@@ -764,6 +764,137 @@ img {
   margin-bottom: 1.25rem;
 }
 
+/* ==========================================================================
+   Text Scramble Component & Pill Styles
+   (Matching React TextScramble font-mono text-sm uppercase)
+   ========================================================================== */
+.font-mono {
+  font-family: 'JetBrains Mono', 'Roboto Mono', 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+}
+
+.text-sm {
+  font-size: 0.8125rem !important;
+  line-height: 1.25rem !important;
+}
+
+.uppercase {
+  text-transform: uppercase !important;
+  letter-spacing: 0.08em;
+}
+
+.text-scramble {
+  display: inline-block;
+  position: relative;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+  will-change: contents;
+}
+
+.text-scramble .scramble-char {
+  color: var(--color-accent-orange);
+  font-weight: 700;
+  display: inline-block;
+  opacity: 0.95;
+  text-shadow: 0 0 8px rgba(234, 88, 12, 0.65);
+  transition: all 0.05s ease;
+}
+
+.hero-eyebrow-container {
+  margin-bottom: 1.25rem;
+}
+
+.hero-scramble-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(234, 88, 12, 0.4);
+  box-shadow: 0 0 20px -3px rgba(234, 88, 12, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-full);
+  color: #FB923C;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  cursor: pointer;
+  user-select: none;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+  max-width: 100%;
+}
+
+.hero-scramble-pill:hover {
+  border-color: var(--color-accent-orange);
+  box-shadow: 0 0 24px 0px rgba(234, 88, 12, 0.45);
+  transform: translateY(-2px);
+}
+
+.hero-scramble-pill .scramble-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-accent-orange);
+  box-shadow: 0 0 10px var(--color-accent-orange);
+  position: relative;
+  flex-shrink: 0;
+}
+
+.hero-scramble-pill .scramble-live-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-accent-orange);
+  animation: scramble-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes scramble-ping {
+  0% {
+    transform: scale(0.95);
+    opacity: 1;
+  }
+  75%, 100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+@keyframes scramble-glow {
+  from {
+    opacity: 0.7;
+    filter: brightness(1);
+  }
+  to {
+    opacity: 1;
+    filter: brightness(1.3);
+  }
+}
+
+/* ==========================================================================
+   TextEffect - fade-in-blur Animation Preset
+   (Matching motion-primitives TextEffect preset='fade-in-blur')
+   ========================================================================== */
+.text-effect-word {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(8px);
+  transform: translateY(4px);
+  transition: opacity var(--segment-dur, 0.3s) cubic-bezier(0.16, 1, 0.3, 1),
+              filter var(--segment-dur, 0.3s) cubic-bezier(0.16, 1, 0.3, 1),
+              transform var(--segment-dur, 0.3s) cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, filter, transform;
+  margin-right: 0.25em;
+}
+
+.text-effect-word:last-child {
+  margin-right: 0;
+}
+
+.text-effect-word.is-visible {
+  opacity: 1;
+  filter: blur(0px);
+  transform: translateY(0);
+}
+
 .hero-title {
   font-size: clamp(2rem, 4.5vw, 2.85rem);
   color: #FFFFFF;
@@ -773,6 +904,13 @@ img {
 
 .hero-title span.highlight {
   color: var(--color-accent-orange);
+  display: inline-block;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.hero-title span.highlight:hover {
+  filter: brightness(1.15);
 }
 
 .hero-subtitle {
@@ -2193,10 +2331,12 @@ textarea.form-control {
     transform: scale(0.96);
     opacity: 0.8;
   }
+
   50% {
     transform: scale(1.08);
     opacity: 0;
   }
+
   100% {
     transform: scale(1.12);
     opacity: 0;
@@ -2534,8 +2674,15 @@ textarea.form-control {
 }
 
 @keyframes rfq-fade-in {
-  from { opacity: 0; transform: translateY(-8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Backdrop */
@@ -3459,6 +3606,7 @@ textarea.form-control {
 
 /* --- 10. Touch & Pointer Optimization --- */
 @media (hover: none) and (pointer: coarse) {
+
   .btn,
   .form-control,
   .rfq-form-control,
@@ -3494,6 +3642,7 @@ textarea.form-control {
 
 /* --- 11. Accessibility & Reduced Motion --- */
 @media (prefers-reduced-motion: reduce) {
+
   *,
   *::before,
   *::after {
@@ -3506,6 +3655,7 @@ textarea.form-control {
 
 /* --- 12. Print Stylesheet --- */
 @media print {
+
   .main-header,
   .top-utility-bar,
   .mobile-bottom-bar,

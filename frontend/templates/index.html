@@ -12,9 +12,9 @@
         <span>⚡ ENGINEERED FOR MISSION-CRITICAL UPTIME</span>
       </div>
       <h1 class="hero-title">
-        Engineered Energy Solutions <span class="highlight">Built for Industry.</span>
+        Engineered Energy Solutions <span class="highlight text-scramble font-mono uppercase" data-scramble="Built for Industry." title="Click to re-scramble">Built for Industry.</span>
       </h1>
-      <p class="hero-subtitle">
+      <p class="hero-subtitle text-effect" data-preset="fade-in-blur" data-speed-reveal="1.1" data-speed-segment="0.3">
         High-performance Sealed Lead Acid (AGM) and Smart Lithium Iron Phosphate (LiFePO4) batteries engineered for
         uninterruptible power, renewable storage, telecom, and critical equipment.
       </p>
@@ -38,7 +38,8 @@
     <div class="hero-visual">
       <div class="hero-img-card">
         <img src="{{ url_for('static', filename='images/products/sunka_mr1232bs.jpg') }}"
-          alt="SUNKA MR1232BS Industrial Battery">
+          alt="SUNKA MR1232BS 12V 3.2Ah Sealed Lead-Acid (SLA) Rechargeable Industrial Battery" width="480"
+          height="360">
       </div>
     </div>
   </div>
@@ -48,35 +49,35 @@
 <section class="section app-markets-section">
   <div class="container">
     <div class="section-header">
-      <span class="section-subtitle">TARGET MARKETS & SECTORS</span>
+      <span class="section-subtitle">TARGET MARKETS &amp; SECTORS</span>
       <h2 class="section-title">Industrial Applications</h2>
-      <p class="section-desc">Custom power configurations tailored for maximum longevity and strict regulatory
+      <p class="section-desc text-effect" data-preset="fade-in-blur" data-speed-reveal="1.1" data-speed-segment="0.3">Custom power configurations tailored for maximum longevity and strict regulatory
         compliance.</p>
     </div>
 
     <div class="app-grid">
-      <a href="/catalog" class="app-card">
+      <a href="/catalog?application=UPS+Systems" class="app-card">
         <div class="app-icon-wrapper">💻</div>
         <h3>UPS & Data Centers</h3>
         <p>High-rate short-duration discharge batteries for critical server backup power.</p>
       </a>
 
-      <a href="/catalog" class="app-card">
+      <a href="/catalog?application=Solar+%26+Energy+Storage" class="app-card">
         <div class="app-icon-wrapper">☀️</div>
         <h3>Solar & ESS</h3>
         <p>High-reliability SLA and smart LiFePO4 storage for off-grid and hybrid renewable microgrids.</p>
       </a>
 
-      <a href="/catalog" class="app-card">
+      <a href="/catalog?application=Fire+%26+Security" class="app-card">
         <div class="app-icon-wrapper">🛡️</div>
         <h3>Security & Fire Alarms</h3>
         <p>Uninterrupted backup power for critical alarm systems, access control, and fire panels.</p>
       </a>
 
-      <a href="/catalog" class="app-card">
+      <a href="/catalog?application=Emergency+Lighting" class="app-card">
         <div class="app-icon-wrapper">🤖</div>
-        <h3>Mobility & AGV</h3>
-        <p>Vibration-resistant high-cycle batteries for warehouse robotics and electric fork lifts.</p>
+        <h3>Emergency Lighting &amp; Mobility</h3>
+        <p>Vibration-resistant high-cycle batteries for emergency exit signs, AGV robotics, and equipment.</p>
       </a>
     </div>
   </div>
@@ -88,7 +89,7 @@
     <div class="section-header">
       <span class="section-subtitle">OUR PRODUCT CATEGORIES</span>
       <h2 class="section-title">Engineered Battery Technologies</h2>
-      <p class="section-desc">Select from our broad range of chemistries engineered to deliver optimal volumetric
+      <p class="section-desc text-effect" data-preset="fade-in-blur" data-speed-reveal="1.1" data-speed-segment="0.3">Select from our broad range of chemistries engineered to deliver optimal volumetric
         density and cycle life.</p>
     </div>
 
@@ -99,7 +100,7 @@
         <span class="product-badge-tag">Lead Acid</span>
         <div class="product-img-wrapper">
           <img src="{{ url_for('static', filename='images/products/sunka_rb1245e.jpg') }}"
-            alt="SUNKA Sealed Lead Acid Battery">
+            alt="SUNKA RB1245E 12V 4.5Ah Sealed Lead Acid VRLA Battery" loading="lazy" width="400" height="300">
         </div>
         <div class="product-body">
           <h3 class="product-model">SUNKA Lead Acid Series</h3>
@@ -118,7 +119,7 @@
         <span class="product-badge-tag badge-lithium">Lithium Li-ion</span>
         <div class="product-img-wrapper">
           <img src="{{ url_for('static', filename='images/products/sunka_18650_2200.jpg') }}"
-            alt="SUNKA Lithium-Ion 18650 Battery">
+            alt="SUNKA 18650 3.7V 2200mAh Lithium-Ion Cylindrical Battery Cell" loading="lazy" width="400" height="300">
         </div>
         <div class="product-body">
           <h3 class="product-model">SUNKA Lithium Series</h3>
@@ -137,7 +138,7 @@
         <span class="product-badge-tag badge-lithium">Telecom LiFePO4</span>
         <div class="product-img-wrapper">
           <img src="{{ url_for('static', filename='images/telecom_rack_battery.jpg') }}"
-            alt="SUNKA Telecom Rackmount Lithium Battery">
+            alt="SUNKA 48V 100Ah 3U Rackmount LiFePO4 Telecom Lithium Battery" loading="lazy" width="400" height="300">
         </div>
         <div class="product-body">
           <h3 class="product-model">SUNKA Telecom Series</h3>
@@ -159,10 +160,9 @@
 <section class="section engineering-lead-section">
   <div class="container" style="max-width: 920px;">
     <div class="text-center mb-4">
-      <span class="section-subtitle" style="color: var(--color-accent-orange);">APPLICATION ENGINEERING
-        ASSISTANCE</span>
+      <span class="section-subtitle" style="color: var(--color-accent-orange);">APPLICATION ENGINEERING ASSISTANCE</span>
       <h2 class="section-title text-white">Find the Right Battery for Your Project</h2>
-      <p class="lead-subtitle">Need assistance calculating Ah capacity, sizing C-rates, or specifying custom wiring
+      <p class="lead-subtitle text-effect" data-preset="fade-in-blur" data-speed-reveal="1.1" data-speed-segment="0.3">Need assistance calculating Ah capacity, sizing C-rates, or specifying custom wiring
         terminals? Speak directly with a Sunka sales engineer.</p>
     </div>
 

@@ -12,6 +12,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initFloatingRFQ();
   initPDPGallery();
   initBackToTop();
+  initTextScramble();
+  initTextEffect();
 });
 
 /* ==========================================================================
@@ -363,13 +365,72 @@ function initCatalogFilters() {
   const urlParams = new URLSearchParams(window.location.search);
   const chemParam = urlParams.get('chemistry');
   const voltParam = urlParams.get('voltage');
-  if (chemParam && filterForm) {
-    const cb = filterForm.querySelector(`input[name="chemistry"][value="${chemParam}"]`);
-    if (cb) cb.checked = true;
+  const capParam = urlParams.get('capacity');
+  const termParam = urlParams.get('terminal');
+  const appParam = urlParams.get('application') || urlParams.get('applications');
+  const searchParam = urlParams.get('search') || urlParams.get('q') || urlParams.get('query');
+
+  let hasInitialFilters = false;
+
+  if (filterForm) {
+    if (chemParam) {
+      hasInitialFilters = true;
+      const chemValues = chemParam.split(',');
+      chemValues.forEach(val => {
+        const clean = val.trim().toLowerCase();
+        const cb = filterForm.querySelector(`input[name="chemistry"][value="${clean}"]`);
+        if (cb) cb.checked = true;
+      });
+    }
+    if (voltParam) {
+      hasInitialFilters = true;
+      const voltValues = voltParam.split(',');
+      voltValues.forEach(val => {
+        const clean = val.trim();
+        const cb = filterForm.querySelector(`input[name="voltage"][value="${clean}"]`);
+        if (cb) cb.checked = true;
+      });
+    }
+    if (capParam) {
+      hasInitialFilters = true;
+      const capValues = capParam.split(',');
+      capValues.forEach(val => {
+        const clean = val.trim();
+        const cb = filterForm.querySelector(`input[name="capacity"][value="${clean}"]`);
+        if (cb) cb.checked = true;
+      });
+    }
+    if (termParam) {
+      hasInitialFilters = true;
+      const termValues = termParam.split(',');
+      termValues.forEach(val => {
+        const clean = val.trim().toLowerCase();
+        const cb = filterForm.querySelector(`input[name="terminal"][value="${clean}"]`);
+        if (cb) cb.checked = true;
+      });
+    }
+    if (appParam) {
+      hasInitialFilters = true;
+      const appValues = appParam.split(',');
+      appValues.forEach(val => {
+        const cleanVal = val.trim().toLowerCase();
+        filterForm.querySelectorAll('input[name="application"]').forEach(cb => {
+          if (cb.value.toLowerCase().includes(cleanVal) || cleanVal.includes(cb.value.toLowerCase())) {
+            cb.checked = true;
+          }
+        });
+      });
+    }
   }
-  if (voltParam && filterForm) {
-    const cb = filterForm.querySelector(`input[name="voltage"][value="${voltParam}"]`);
-    if (cb) cb.checked = true;
+
+  if (searchParam && catalogSearchInput) {
+    hasInitialFilters = true;
+    catalogSearchInput.value = searchParam;
+  }
+
+  // If initial filters exist and on desktop, auto-expand sidebar so user sees applied filters
+  if (hasInitialFilters && window.innerWidth > 992 && typeof toggleSidebar === 'function') {
+    toggleSidebar(true);
   }
 
   // Initial load
@@ -395,7 +456,7 @@ function renderCatalogProducts(products) {
     <div class="product-card">
       <span class="product-badge-tag ${p.chemistry_code === 'lithium' ? 'badge-lithium' : ''}">${p.chemistry}</span>
       <div class="product-img-wrapper">
-        <img src="${p.image}" alt="${p.model}" loading="lazy">
+        <img src="${p.image}" alt="${p.model} ${p.voltage}V ${p.capacity_ah}Ah ${p.chemistry} Industrial Battery" loading="lazy" width="300" height="220" onerror="this.onerror=null; this.src='/static/images/deep_cycle_gel_battery.jpg';">
       </div>
       <div class="product-body">
         <h3 class="product-model">${p.model}</h3>
@@ -1055,3 +1116,233 @@ function initBackToTop() {
   // Initial visibility check
   toggleBackToTop();
 }
+
+/* ==========================================================================
+   10. Text Scramble Animation Engine (Inspired by Cult UI / Motion-Primitives)
+   ========================================================================== */
+class TextScramble {
+  constructor(el, options = {}) {
+    this.el = el;
+    this.chars = options.chars || '!<>-_\\/[]{}—=+*^?#________0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    this.speed = options.speed || 30; // ms per frame
+    this.chance = options.chance || 0.28;
+    this.isScrambling = false;
+    this.frameRequest = null;
+    this.timer = null;
+    this.queue = [];
+    this.frame = 0;
+    this.resolve = null;
+    this.update = this.update.bind(this);
+  }
+
+  setText(newText, duration = 850) {
+    if (this.isScrambling) {
+      if (this.timer) clearTimeout(this.timer);
+      if (this.frameRequest) cancelAnimationFrame(this.frameRequest);
+    }
+    this.isScrambling = true;
+    const oldText = this.el.getAttribute('data-current-text') || this.el.innerText || '';
+    const length = Math.max(oldText.length, newText.length);
+    const promise = new Promise((resolve) => (this.resolve = resolve));
+
+    this.queue = [];
+    const totalFrames = Math.max(20, Math.floor(duration / this.speed));
+
+    for (let i = 0; i < length; i++) {
+      const from = oldText[i] || '';
+      const to = newText[i] || '';
+      const start = Math.floor(Math.random() * (totalFrames * 0.35));
+      const end = start + Math.floor(Math.random() * (totalFrames * 0.55)) + Math.floor(totalFrames * 0.15);
+      this.queue.push({ from, to, start, end, char: '' });
+    }
+
+    this.targetText = newText;
+    this.frame = 0;
+    this.update();
+    return promise;
+  }
+
+  update() {
+    let output = '';
+    let complete = 0;
+
+    for (let i = 0, n = this.queue.length; i < n; i++) {
+      let { from, to, start, end, char } = this.queue[i];
+      if (this.frame >= end) {
+        complete++;
+        output += to;
+      } else if (this.frame >= start) {
+        if (!char || Math.random() < this.chance) {
+          char = this.randomChar();
+          this.queue[i].char = char;
+        }
+        output += `<span class="scramble-char">${this.escapeHtml(char)}</span>`;
+      } else {
+        output += from ? this.escapeHtml(from) : '';
+      }
+    }
+
+    this.el.innerHTML = output;
+
+    if (complete === this.queue.length) {
+      this.isScrambling = false;
+      this.el.setAttribute('data-current-text', this.targetText);
+      if (this.resolve) this.resolve();
+    } else {
+      this.frame++;
+      this.timer = setTimeout(() => {
+        this.frameRequest = requestAnimationFrame(this.update);
+      }, this.speed);
+    }
+  }
+
+  randomChar() {
+    return this.chars[Math.floor(Math.random() * this.chars.length)];
+  }
+
+  escapeHtml(str) {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+}
+
+// Make globally available
+window.TextScramble = TextScramble;
+
+function initTextScramble() {
+  const scrambleElements = document.querySelectorAll('.text-scramble, [data-scramble]');
+  if (!scrambleElements.length) return;
+
+  scrambleElements.forEach((el, index) => {
+    const targetText = el.getAttribute('data-scramble') || el.innerText.trim();
+    const duration = parseInt(el.getAttribute('data-scramble-duration'), 10) || 850;
+    const hoverEnabled = el.getAttribute('data-scramble-hover') !== 'false';
+    const scrambler = new TextScramble(el);
+    el._scrambler = scrambler;
+
+    // Trigger on opening the landing page for orange heading
+    const delay = parseInt(el.getAttribute('data-scramble-delay'), 10) || 300;
+    setTimeout(() => {
+      scrambler.setText(targetText, duration);
+      el._scramblerScrambled = true;
+    }, delay);
+
+    // Re-scramble on hover or click of the orange heading text
+    if (hoverEnabled) {
+      el.addEventListener('mouseenter', () => {
+        if (!scrambler.isScrambling) {
+          scrambler.setText(targetText, duration);
+        }
+      });
+      el.addEventListener('click', () => {
+        scrambler.setText(targetText, duration);
+      });
+    }
+  });
+}
+
+/* ==========================================================================
+   11. TextEffect Animation Engine (Preset: 'fade-in-blur', speedReveal: 1.1, speedSegment: 0.3)
+   Inspired by motion-primitives / Cult UI TextEffect
+   ========================================================================== */
+class TextEffect {
+  constructor(el, options = {}) {
+    this.el = el;
+    this.preset = options.preset || el.getAttribute('data-preset') || 'fade-in-blur';
+    this.speedReveal = parseFloat(options.speedReveal || el.getAttribute('data-speed-reveal') || '1.1');
+    this.speedSegment = parseFloat(options.speedSegment || el.getAttribute('data-speed-segment') || '0.3');
+    this.delay = parseFloat(options.delay || el.getAttribute('data-delay') || '0');
+    this.isAnimated = false;
+    this.init();
+  }
+
+  init() {
+    if (this.el._textEffectInitialized) return;
+    this.el._textEffectInitialized = true;
+
+    const rawText = this.el.textContent.trim();
+    if (!rawText) return;
+
+    // Split into words while maintaining structure
+    const words = rawText.split(/\s+/);
+    this.el.innerHTML = words
+      .map((word, i) => {
+        return `<span class="text-effect-word" style="--segment-dur: ${this.speedSegment}s;" data-word-index="${i}">${this.escapeHtml(word)}</span>`;
+      })
+      .join(' ');
+
+    this.el.classList.add('text-effect-ready');
+  }
+
+  animate() {
+    if (this.isAnimated) return;
+    this.isAnimated = true;
+
+    const wordEls = this.el.querySelectorAll('.text-effect-word');
+    const baseStagger = 0.032 / (this.speedReveal || 1.1);
+
+    wordEls.forEach((wordEl, i) => {
+      const staggerDelay = (this.delay / 1000) + (i * baseStagger);
+      wordEl.style.transitionDelay = `${staggerDelay.toFixed(3)}s`;
+      wordEl.classList.add('is-visible');
+    });
+  }
+
+  escapeHtml(str) {
+    return str
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+}
+
+window.TextEffect = TextEffect;
+
+function initTextEffect() {
+  // Target all description elements across all pages
+  const targets = document.querySelectorAll('.text-effect, .hero-subtitle, .section-desc, .lead-subtitle, .contact-form-intro, .product-title');
+  if (!targets.length) return;
+
+  const observer = 'IntersectionObserver' in window ? new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        const effectInstance = entry.target._textEffect;
+        if (effectInstance && !effectInstance.isAnimated) {
+          effectInstance.animate();
+        }
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -30px 0px' }) : null;
+
+  targets.forEach((el, index) => {
+    if (el._textEffect) return;
+
+    const isHeroDesc = el.classList.contains('hero-subtitle') || el.closest('.hero-section');
+    const speedReveal = parseFloat(el.getAttribute('data-speed-reveal')) || 1.1;
+    const speedSegment = parseFloat(el.getAttribute('data-speed-segment')) || 0.3;
+
+    const effect = new TextEffect(el, {
+      preset: 'fade-in-blur',
+      speedReveal: speedReveal,
+      speedSegment: speedSegment,
+      delay: isHeroDesc ? 180 : 0
+    });
+    el._textEffect = effect;
+
+    if (isHeroDesc || !observer) {
+      setTimeout(() => {
+        effect.animate();
+      }, isHeroDesc ? 220 : index * 60);
+    } else {
+      observer.observe(el);
+    }
+  });
+}
+

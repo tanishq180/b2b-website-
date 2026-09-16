@@ -2,7 +2,7 @@ import os
 import json
 import uuid
 from datetime import datetime
-from flask import Flask, render_template, request, jsonify, abort, Response
+from flask import Flask, render_template, request, jsonify, abort, Response, redirect, url_for, send_from_directory
 from werkzeug.utils import secure_filename
 
 # Directory & Path Configurations
@@ -74,9 +74,13 @@ def catalog():
     return render_template('catalog.html')
 
 @app.route('/product/<product_id>')
+@app.route('/product/<product_id>/')
+@app.route('/products/<product_id>')
+@app.route('/battery/<product_id>')
 def product_detail(product_id):
     products = load_products()
-    product = next((p for p in products if p['id'] == product_id.lower()), None)
+    clean_id = product_id.strip().lower()
+    product = next((p for p in products if p['id'] == clean_id), None)
     if not product:
         abort(404)
     
@@ -84,10 +88,31 @@ def product_detail(product_id):
     related_products = [
         p for p in products 
         if p['id'] != product['id'] and (p['chemistry'] == product['chemistry'] or any(app_item in product.get('applications', []) for app_item in p.get('applications', [])))
-    ][:3]
+    ][:4]
     
     return render_template('product-detail.html', product=product, related_products=related_products)
 
+@app.route('/products')
+def products_redirect():
+    return redirect(url_for('catalog'))
+
+@app.route('/quote')
+@app.route('/rfq')
+def quote_redirect():
+    return redirect(url_for('contact'))
+
+@app.route('/about')
+@app.route('/about-us')
+def about_redirect():
+    return redirect(url_for('contact'))
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(
+        os.path.join(STATIC_DIR, 'images'),
+        'favicon.ico',
+        mimetype='image/x-icon'
+    )
 
 @app.route('/contact')
 def contact():
@@ -282,11 +307,11 @@ def get_rfq_submissions():
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('layout.html', custom_body="""
-    <div class="container py-5 text-center my-5">
-        <h1 class="display-3 text-navy font-weight-bold">404</h1>
-        <h2>Technical Specification Page Not Found</h2>
-        <p class="lead text-muted">The battery model or technical page you requested does not exist in our active catalog.</p>
-        <a href="/catalog" class="btn btn-accent mt-3 px-4 py-2">Explore Battery Catalog</a>
+    <div class="container text-center" style="padding: 5rem 1rem; text-align: center;">
+        <h1 style="font-size: 4rem; color: var(--color-navy-dark); font-weight: 800; margin-bottom: 0.5rem;">404</h1>
+        <h2 style="margin-bottom: 1rem;">Page Not Found</h2>
+        <p style="color: var(--color-text-muted); margin-bottom: 1.5rem;">The page or battery specification you requested does not exist in our catalog.</p>
+        <a href="/catalog" class="btn btn-accent">Explore Battery Catalog</a>
     </div>
     """), 404
 
