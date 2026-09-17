@@ -171,11 +171,11 @@
         </div>
 
         <!-- PDP Action Buttons -->
-        <div class="pdp-cta-group" style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-          <button type="button" class="btn btn-accent btn-lg open-rfq-modal-btn" data-product-model="{{ product.model }}" style="flex: 1; min-width: 200px;">
+        <div class="pdp-cta-group">
+          <button type="button" class="btn btn-accent btn-lg open-rfq-modal-btn" data-product-model="{{ product.model }}">
             ⚡ Request Bulk Quote
           </button>
-          <a href="/download/catalog-pdf" class="btn btn-outline-navy btn-lg" style="flex: 1; min-width: 200px;" download="MERI-Industries-2026-Product-Catalog.pdf">
+          <a href="/download/catalog-pdf" class="btn btn-outline-navy btn-lg" download="MERI-Industries-2026-Product-Catalog.pdf">
             📥 Download Catalog PDF
           </a>
         </div>
@@ -227,18 +227,34 @@
           </tbody>
         </table>
       </div>
+
+      <!-- Specs Section RFQ & Engineering CTA Bar -->
+      <div class="specs-table-cta-bar">
+        <div class="specs-table-cta-info">
+          <h4>Need bulk distributor pricing or custom specifications for {{ product.model }}?</h4>
+          <p>Request an official quote with full datasheets, CAD dimensional drawings, and volume discounts.</p>
+        </div>
+        <div class="specs-table-cta-actions">
+          <button type="button" class="btn btn-accent btn-md open-rfq-modal-btn" data-product-model="{{ product.model }}">
+            ⚡ Request Quote for {{ product.model }}
+          </button>
+          <a href="/contact?model={{ product.model }}" class="btn btn-outline-navy btn-md">
+            💬 Contact Engineer
+          </a>
+        </div>
+      </div>
     </div>
 
     <!-- Related Products Section -->
     {% if related_products and related_products|length > 0 %}
-    <div class="pdp-related-section" style="margin-top: 3.5rem;">
+    <div class="pdp-related-section">
       <div class="section-header">
         <span class="section-subtitle">RECOMMENDED SPECIFICATIONS</span>
         <h2 class="section-title">Related Industrial Batteries</h2>
         <p class="section-desc">Alternative models matching similar chemistry, voltage characteristics, or application requirements.</p>
       </div>
 
-      <div class="product-grid" style="margin-top: 1.5rem;">
+      <div class="product-grid">
         {% for rel in related_products %}
         <div class="product-card">
           <span class="product-badge-tag {{ 'badge-lithium' if rel.chemistry_code == 'lithium' else '' }}">{{ rel.chemistry }}</span>

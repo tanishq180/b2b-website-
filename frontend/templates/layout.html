@@ -243,6 +243,107 @@
   </div>
   {% endif %}
 
+  <!-- Global Central B2B RFQ Modal Overlay -->
+  <div id="rfq-modal-overlay" class="rfq-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="rfq-modal-title" style="display: none;">
+    <div class="rfq-modal-dialog">
+      <div class="rfq-modal-content">
+        <!-- Modal Header -->
+        <div class="rfq-modal-header">
+          <div class="rfq-modal-header-text">
+            <div class="rfq-modal-badge">⚡ OFFICIAL B2B RFQ</div>
+            <h2 id="rfq-modal-title" class="rfq-modal-title">Request Bulk Quote &amp; Specifications</h2>
+            <p class="rfq-modal-subtitle">Direct pricing, datasheets, and engineering support from MERI Industries within 2 hours</p>
+          </div>
+          <button type="button" id="rfq-modal-close" class="rfq-modal-close-btn" aria-label="Close quote modal" title="Close">&times;</button>
+        </div>
+
+        <!-- Selected Product Context Banner -->
+        <div id="rfq-modal-product-banner" class="rfq-selected-product-box" style="display: none;">
+          <div class="rfq-product-badge-icon">🔋</div>
+          <div class="rfq-product-info">
+            <span class="rfq-product-label">Selected Battery Model:</span>
+            <strong id="rfq-selected-model-text" class="rfq-product-name">SUNKA MR1232BS</strong>
+          </div>
+        </div>
+
+        <!-- Status Box for confirmation / feedback -->
+        <div id="rfq-modal-status" class="rfq-modal-status-box" style="display: none;"></div>
+
+        <!-- Form Body -->
+        <div class="rfq-modal-body">
+          <form id="b2b-center-rfq-form" class="rfq-center-form" action="https://formspree.io/f/mwlkyyrr" method="POST">
+            <input type="hidden" name="_subject" value="New B2B Bulk RFQ Request - MERI Industries">
+            
+            <div class="rfq-form-row">
+              <div class="rfq-form-col">
+                <label for="modal-rfq-name" class="rfq-form-label">Full Name <span class="required">*</span></label>
+                <input type="text" id="modal-rfq-name" name="full_name" class="rfq-modal-input" placeholder="e.g. Robert Vance" required autocomplete="name">
+              </div>
+              <div class="rfq-form-col">
+                <label for="modal-rfq-company" class="rfq-form-label">Company / Organization <span class="required">*</span></label>
+                <input type="text" id="modal-rfq-company" name="company_name" class="rfq-modal-input" placeholder="e.g. Apex Telecom Infrastructure" required autocomplete="organization">
+              </div>
+            </div>
+
+            <div class="rfq-form-row">
+              <div class="rfq-form-col">
+                <label for="modal-rfq-email" class="rfq-form-label">Corporate Email <span class="required">*</span></label>
+                <input type="email" id="modal-rfq-email" name="email" class="rfq-modal-input" placeholder="rvance@apextelecom.com" required autocomplete="email">
+              </div>
+              <div class="rfq-form-col">
+                <label for="modal-rfq-phone" class="rfq-form-label">Phone Number <span class="required">*</span></label>
+                <input type="tel" id="modal-rfq-phone" name="phone" class="rfq-modal-input" placeholder="+91 98765 43210" required autocomplete="tel">
+              </div>
+            </div>
+
+            <div class="rfq-form-row">
+              <div class="rfq-form-col">
+                <label for="modal-rfq-model" class="rfq-form-label">Battery Model / Spec</label>
+                <input type="text" id="modal-rfq-model" name="product_model" class="rfq-modal-input" placeholder="e.g. PSL-121000 or MR1232BS">
+              </div>
+              <div class="rfq-form-col">
+                <label for="modal-rfq-qty" class="rfq-form-label">Estimated Quantity (Units)</label>
+                <input type="number" id="modal-rfq-qty" name="estimated_qty" class="rfq-modal-input" min="1" value="10" placeholder="10">
+              </div>
+            </div>
+
+            <div class="rfq-form-row full-width">
+              <div class="rfq-form-col">
+                <label for="modal-rfq-app" class="rfq-form-label">Target Application</label>
+                <select id="modal-rfq-app" name="application_details" class="rfq-modal-select">
+                  <option value="UPS Systems & Data Centers">UPS Systems &amp; Data Centers</option>
+                  <option value="Solar & Energy Storage (ESS)">Solar &amp; Renewable Energy Storage (ESS)</option>
+                  <option value="Telecom & 5G Infrastructure">Telecom Towers &amp; 5G Infrastructure</option>
+                  <option value="Fire Alarm & Security Systems">Fire Alarm &amp; Security Systems</option>
+                  <option value="Emergency Lighting & Mobility">Emergency Lighting &amp; Mobility</option>
+                  <option value="Industrial EV & Robotics">Industrial EV &amp; Robotics</option>
+                  <option value="Other Custom Application">Other Custom Project</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="rfq-form-row full-width">
+              <div class="rfq-form-col">
+                <label for="modal-rfq-message" class="rfq-form-label">Technical Requirements / Note</label>
+                <textarea id="modal-rfq-message" name="message" class="rfq-modal-textarea" rows="3" placeholder="Specify dimension constraints, terminal type, C-rate, target dispatch date, or compliance requirements..."></textarea>
+              </div>
+            </div>
+
+            <div class="rfq-modal-footer">
+              <button type="submit" id="modal-rfq-submit" class="btn btn-accent btn-lg w-100">
+                <span>⚡ Submit Official RFQ Request</span>
+              </button>
+              <div class="rfq-modal-direct-call">
+                <span>Need urgent engineering sizing?</span>
+                <a href="tel:+917538844410">📞 Call +91 7538844410</a>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- 4. Footer -->
   {% block footer %}
   <footer class="footer">

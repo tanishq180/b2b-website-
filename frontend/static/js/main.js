@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCatalogFilters();
   initContactPage();
   initRFQBasket();
+  initRFQModal();
   initFloatingRFQ();
   initPDPGallery();
   initBackToTop();
@@ -78,8 +79,7 @@ function initMobileNav() {
       const filterOverlay = document.getElementById('filter-sidebar-overlay');
       if (filterSidebar) filterSidebar.classList.remove('mobile-open');
       if (filterOverlay) filterOverlay.classList.remove('active');
-      const rfqModal = document.getElementById('rfq-modal-overlay');
-      if (rfqModal) rfqModal.classList.remove('active');
+      if (typeof window.closeRFQModal === 'function') window.closeRFQModal();
     }
   });
 }
@@ -697,7 +697,214 @@ function updateBasketUI() {
 }
 
 /* ==========================================================================
-   6. Persistent Floating RFQ Bottom-Right Widget Controller
+   6. Global Central B2B RFQ Modal Controller
+   ========================================================================== */
+function initRFQModal() {
+  const modalOverlay = document.getElementById('rfq-modal-overlay');
+  const closeBtn = document.getElementById('rfq-modal-close');
+  const form = document.getElementById('b2b-center-rfq-form');
+  const modelInput = document.getElementById('modal-rfq-model');
+  const nameInput = document.getElementById('modal-rfq-name');
+  const statusBox = document.getElementById('rfq-modal-status');
+  const submitBtn = document.getElementById('modal-rfq-submit');
+  const productBanner = document.getElementById('rfq-modal-product-banner');
+  const selectedModelText = document.getElementById('rfq-selected-model-text');
+
+  if (!modalOverlay) return;
+
+  let isOpen = false;
+
+  function openModal(prefillModel = '') {
+    isOpen = true;
+    modalOverlay.style.display = 'flex';
+    modalOverlay.offsetHeight; // trigger reflow
+    modalOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+
+    if (statusBox) {
+      statusBox.style.display = 'none';
+      statusBox.className = 'rfq-modal-status-box';
+    }
+
+    if (prefillModel) {
+      if (modelInput) modelInput.value = prefillModel;
+      if (selectedModelText) selectedModelText.textContent = prefillModel;
+      if (productBanner) productBanner.style.display = 'flex';
+    } else {
+      if (productBanner) productBanner.style.display = 'none';
+    }
+
+    setTimeout(() => {
+      if (nameInput) nameInput.focus();
+    }, 150);
+  }
+
+  function closeModal() {
+    isOpen = false;
+    modalOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+    setTimeout(() => {
+      if (!isOpen) {
+        modalOverlay.style.display = 'none';
+      }
+    }, 280);
+  }
+
+  // Global helper functions
+  window.openRFQModal = openModal;
+  window.closeRFQModal = closeModal;
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', closeModal);
+  }
+
+  modalOverlay.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) {
+      closeModal();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && isOpen) {
+      closeModal();
+    }
+  });
+
+  // Global event delegation for all RFQ buttons with .open-rfq-modal-btn
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.open-rfq-modal-btn');
+    if (btn) {
+      e.preventDefault();
+      const model = btn.getAttribute('data-product-model') || '';
+      openModal(model);
+    }
+  });
+
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const origBtnHTML = submitBtn ? submitBtn.innerHTML : '<span>⚡ Submit Official RFQ Request</span>';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `<span>⏳ Submitting Official RFQ...</span>`;
+      }
+      if (statusBox) {
+        statusBox.style.display = 'none';
+        statusBox.className = 'rfq-modal-status-box';
+      }
+
+      const quoteId = `RFQ-${new Date().toISOString().slice(0, 10).replace(/-/g, '')}-${Math.random().toString(36).substring(2, 8).toUpperCase()}`;
+      const formData = new FormData(form);
+      formData.set('quote_id', quoteId);
+
+      if (rfqBasket && rfqBasket.length > 0) {
+        const itemsFormatted = rfqBasket.map(item => `${item.model} (${item.qty} units)`).join(', ');
+        formData.set('basket_items', itemsFormatted);
+      }
+
+      fetch(form.action || 'https://formspree.io/f/mwlkyyrr', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      })
+        .then(async (res) => {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = origBtnHTML;
+          }
+
+          if (res.ok) {
+            form.reset();
+            if (statusBox) {
+              statusBox.className = 'rfq-modal-status-box status-success';
+              statusBox.innerHTML = `
+                <div class="status-icon">✅</div>
+                <div class="status-content">
+                  <h4 style="color:#065F46; font-size:1.1rem; margin-bottom:0.25rem;">RFQ Request Submitted Successfully!</h4>
+                  <p style="color:#047857; font-size:0.925rem; margin-bottom:0.4rem;">
+                    Tracking Reference ID: <strong style="color:#064E3B; font-family:monospace; font-size:1rem;">${quoteId}</strong>
+                  </p>
+                  <p style="color:#065F46; font-size:0.85rem;">
+                    Thank you for contacting MERI Industries. Our application engineering team has received your technical specifications and will provide formal distributor pricing and datasheets within 2 business hours.
+                  </p>
+                  <button type="button" class="btn btn-navy btn-sm mt-3" onclick="window.closeRFQModal();">
+                    Done / Close
+                  </button>
+                </div>
+              `;
+              statusBox.style.display = 'flex';
+            }
+            showToast(`✅ RFQ ${quoteId} submitted successfully!`, 'success');
+
+            // Background sync to local Flask backend if available
+            try {
+              fetch('/api/rfq', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                  quote_id: quoteId,
+                  full_name: formData.get('full_name') || '',
+                  company_name: formData.get('company_name') || '',
+                  email: formData.get('email') || '',
+                  phone: formData.get('phone') || '',
+                  product_model: formData.get('product_model') || '',
+                  estimated_qty: formData.get('estimated_qty') || '10',
+                  application_details: formData.get('application_details') || '',
+                  message: formData.get('message') || '',
+                  items: rfqBasket
+                })
+              }).catch(() => {});
+            } catch (_) {}
+          } else {
+            const data = await res.json().catch(() => ({}));
+            let errorMsg = 'Please verify required fields and try again.';
+            if (data && data.errors && data.errors.length > 0) {
+              errorMsg = data.errors.map(err => `${err.field ? err.field + ': ' : ''}${err.message}`).join(', ');
+            } else if (data && data.error) {
+              errorMsg = data.error;
+            }
+
+            if (statusBox) {
+              statusBox.className = 'rfq-modal-status-box status-error';
+              statusBox.innerHTML = `
+                <div class="status-icon">⚠️</div>
+                <div class="status-content">
+                  <h4 style="color:#991B1B; font-size:0.95rem; margin-bottom:0.25rem;">Submission Notice</h4>
+                  <p style="color:#B91C1C; font-size:0.85rem;">${errorMsg}</p>
+                </div>
+              `;
+              statusBox.style.display = 'flex';
+            }
+            showToast(`Error: ${errorMsg}`, 'error');
+          }
+        })
+        .catch(err => {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = origBtnHTML;
+          }
+          if (statusBox) {
+            statusBox.className = 'rfq-modal-status-box status-error';
+            statusBox.innerHTML = `
+              <div class="status-icon">⚠️</div>
+              <div class="status-content">
+                <h4 style="color:#991B1B; font-size:0.95rem;">Network Connection Error</h4>
+                <p style="color:#B91C1C; font-size:0.85rem;">Unable to connect. Please check your internet connection or call our hotline directly at +91 7538844410.</p>
+              </div>
+            `;
+            statusBox.style.display = 'flex';
+          }
+          showToast('Network error while submitting quote request.', 'error');
+        });
+    });
+  }
+}
+
+/* ==========================================================================
+   7. Persistent Floating RFQ Bottom-Right Widget Controller
    ========================================================================== */
 function initFloatingRFQ() {
   const container = document.getElementById('floating-rfq-container');
@@ -782,19 +989,13 @@ function initFloatingRFQ() {
     mobileBarRfqBtn.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
-      openRFQ();
+      if (typeof window.openRFQModal === 'function') {
+        window.openRFQModal();
+      } else {
+        openRFQ();
+      }
     });
   }
-
-  // Delegate for any .open-rfq-modal-btn button in the DOM
-  document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.open-rfq-modal-btn');
-    if (btn) {
-      e.preventDefault();
-      const model = btn.getAttribute('data-product-model') || '';
-      openRFQ(model);
-    }
-  });
 
   // Global window helper
   window.openRFQPopup = function (model = null) {

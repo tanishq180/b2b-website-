@@ -39,11 +39,16 @@ class TestSunkaApp(unittest.TestCase):
         self.assertEqual(res.status_code, 200)
         self.assertIn(b'PS-1295 F2', res.data)
         self.assertIn(b'1. ELECTRICAL SPECIFICATIONS', res.data)
+        self.assertIn(b'specs-table-cta-bar', res.data)
+        self.assertIn(b'rfq-modal-overlay', res.data)
+        self.assertIn(b'b2b-center-rfq-form', res.data)
 
     def test_pdp_lithium(self):
         res = self.client.get('/product/psl-1290')
         self.assertEqual(res.status_code, 200)
         self.assertIn(b'PSL-1290 Smart', res.data)
+        self.assertIn(b'specs-table-cta-bar', res.data)
+        self.assertIn(b'rfq-modal-overlay', res.data)
 
     def test_api_products(self):
         res = self.client.get('/api/products?q=lithium')
