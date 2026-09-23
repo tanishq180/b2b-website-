@@ -2,7 +2,7 @@ import os
 import json
 import uuid
 from datetime import datetime
-from flask import Flask, render_template, request, jsonify, abort, Response, redirect, url_for, send_from_directory
+from flask import Flask, render_template, request, jsonify, abort, Response, redirect, url_for, send_from_directory, send_file
 from werkzeug.utils import secure_filename
 
 # Directory & Path Configurations
@@ -119,36 +119,19 @@ def contact():
     return render_template('contact.html')
 
 @app.route('/download/catalog-pdf')
+@app.route('/catalog-pdf')
 def download_catalog_pdf():
-    pdf_content = (
-        "%PDF-1.4\n"
-        "1 0 obj << /Type /Catalog /Pages 2 0 R >> endobj\n"
-        "2 0 obj << /Type /Pages /Kids [3 0 R] /Count 1 >> endobj\n"
-        "3 0 obj << /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R >> >> >> endobj\n"
-        "4 0 obj << /Length 220 >> stream\n"
-        "BT\n"
-        "/F1 24 Tf\n"
-        "50 720 Td (MERI INDUSTRIES - 2026 PRODUCT CATALOG) Tj\n"
-        "/F1 12 Tf\n"
-        "0 -40 Td (Complete Technical Specification Guide for SLA and Lithium Batteries) Tj\n"
-        "0 -30 Td (Official B2B Engineering Specification Manual) Tj\n"
-        "ET\n"
-        "endstream\n"
-        "endobj\n"
-        "5 0 obj << /Type /Font /Subtype /Type1 /BaseFont /Helvetica >> endobj\n"
-        "xref\n0 6\n"
-        "0000000000 65535 f \n"
-        "0000000009 00000 n \n"
-        "0000000058 00000 n \n"
-        "0000000115 00000 n \n"
-        "0000000261 00000 n \n"
-        "0000000532 00000 n \n"
-        "trailer << /Size 6 /Root 1 0 R >>\n"
-        "startxref\n605\n%%EOF\n"
-    )
-    response = Response(pdf_content, mimetype='application/pdf')
-    response.headers['Content-Disposition'] = 'attachment; filename=MERI-Industries-2026-Product-Catalog.pdf'
-    return response
+    pdf_path = os.path.join(STATIC_DIR, 'docs', 'SUNKA_Battery_Catalogue.pdf')
+    if not os.path.exists(pdf_path):
+        pdf_path = os.path.join(PROJECT_ROOT, 'SUNKA_Battery_Catalogue.pdf')
+    if os.path.exists(pdf_path):
+        return send_file(
+            pdf_path,
+            mimetype='application/pdf',
+            as_attachment=False,
+            download_name='SUNKA_Battery_Catalogue.pdf'
+        )
+    abort(404)
 
 # --- REST API ENDPOINTS ---
 

@@ -57,13 +57,12 @@
 
       <ul class="nav-menu">
         <li><a href="/" class="nav-link {% if request.path == '/' %}active{% endif %}">Home</a></li>
-        <li><a href="/catalog" class="nav-link {% if request.path == '/catalog' %}active{% endif %}">Battery Catalog</a></li>
+        <li><a href="/catalog" class="nav-link {% if request.path == '/catalog' %}active{% endif %}">Products</a></li>
         <li><a href="/contact" class="nav-link {% if request.path == '/contact' %}active{% endif %}">Contact</a></li>
       </ul>
 
       <div class="nav-actions">
-        <a href="/download/catalog-pdf" class="btn btn-outline-navy"
-          download="MERI-Industries-2026-Product-Catalog.pdf">Battery Catalog PDF 📥</a>
+        <a href="/download/catalog-pdf" class="btn btn-outline-navy" target="_blank" rel="noopener noreferrer">Battery Catalog PDF 📄</a>
         {% if request.path != '/contact' %}
         <a href="/contact" class="btn btn-accent">Request Bulk Quote</a>
         {% endif %}
@@ -104,8 +103,7 @@
       <!-- Navigation Links -->
       <ul class="mobile-nav-menu">
         <li><a href="/" class="mobile-nav-link {% if request.path == '/' %}active{% endif %}">🏠 Home</a></li>
-        <li><a href="/catalog" class="mobile-nav-link {% if request.path == '/catalog' %}active{% endif %}">⚡ Battery
-            Catalog</a></li>
+        <li><a href="/catalog" class="mobile-nav-link {% if request.path == '/catalog' %}active{% endif %}">⚡ Products</a></li>
         <li><a href="/contact" class="mobile-nav-link {% if request.path == '/contact' %}active{% endif %}">📞 Contact &
             Bulk Quote</a></li>
       </ul>
@@ -116,7 +114,7 @@
         <a href="/contact" class="btn btn-accent" style="width: 100%; text-align: center;">⚡ Request Bulk Quote</a>
         {% endif %}
         <a href="/download/catalog-pdf" class="btn btn-outline-navy" style="width: 100%; text-align: center;"
-          download="MERI-Industries-2026-Product-Catalog.pdf">📥 Download PDF Catalog</a>
+          target="_blank" rel="noopener noreferrer">📄 View PDF Catalog</a>
       </div>
 
       <!-- Direct Contact Hotline -->
@@ -377,8 +375,7 @@
       <div class="footer-links">
         <h4>Technical Resources</h4>
         <ul>
-          <li><a href="/download/catalog-pdf" download="MERI-Industries-2026-Product-Catalog.pdf">Download PDF
-              Catalog</a></li>
+          <li><a href="/download/catalog-pdf" target="_blank" rel="noopener noreferrer">View PDF Catalog</a></li>
           <li><a href="/contact">Request Bulk Quote & Support</a></li>
         </ul>
       </div>
@@ -394,7 +391,7 @@
   <nav class="mobile-bottom-bar" aria-label="Mobile quick actions">
     <a href="/catalog" class="mobile-bar-item {% if request.path == '/catalog' %}active{% endif %}">
       <span class="bar-icon">⚡</span>
-      <span class="bar-label">Catalog</span>
+      <span class="bar-label">Products</span>
     </a>
     <a href="tel:+917538844410" class="mobile-bar-item">
       <span class="bar-icon">📞</span>

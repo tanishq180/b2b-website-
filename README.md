@@ -79,4 +79,4 @@ python backend/test_routes.py
 - `GET /api/products/<product_id>` — Fetch detailed specs for a specific battery model
 - `POST /api/filter` — Multi-dimensional filter (chemistry, voltage, capacity, terminal, applications)
 - `POST /api/rfq` — Submit B2B Request for Quote
-- `GET /download/catalog-pdf` — Direct download for the 2026 Technical Specification Guide PDF
+- `GET /download/catalog-pdf` (or `/catalog-pdf`) — View/serve the 2026 Technical Specification Guide PDF in-browser
