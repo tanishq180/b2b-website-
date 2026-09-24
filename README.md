@@ -29,7 +29,6 @@ Website Creation/
 │   ├── app.py                   # Flask server, routing & REST API endpoints
 │   ├── products.json            # Battery catalog database & specifications
 │   ├── rfq_submissions.json     # B2B RFQ quote logs and inquiry store
-│   ├── requirements.txt         # Backend Python dependencies
 │   └── test_routes.py           # Automated unit test suite
 │
 ├── run.py                        # Root server launcher
