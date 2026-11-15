@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
    ========================================================================== */
 function initMobileNav() {
   const toggleBtn = document.getElementById('mobile-menu-toggle');
-  const bottomBarMenuBtn = document.getElementById('mobile-bar-menu-btn');
   const closeBtn = document.getElementById('mobile-nav-close');
   const drawer = document.getElementById('mobile-nav-drawer');
   const overlay = document.getElementById('mobile-nav-overlay');
@@ -53,13 +52,6 @@ function initMobileNav() {
       } else {
         openMobileNav();
       }
-    });
-  }
-
-  if (bottomBarMenuBtn) {
-    bottomBarMenuBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      openMobileNav();
     });
   }
 
