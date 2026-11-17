@@ -31,9 +31,9 @@
     "max_discharge_current_a": 48,
     "internal_resistance_mOhm": 30.0,
     "operating_temp_range": {
-      "charge": "-10\u00b0C to 40\u00b0C",
-      "discharge": "-15\u00b0C to 50\u00b0C",
-      "storage": "-20\u00b0C to 40\u00b0C"
+      "charge": "-10°C to 40°C",
+      "discharge": "-15°C to 50°C",
+      "storage": "-20°C to 40°C"
     },
     "cycle_life": "300 - 500 cycles at 100% DOD",
     "certifications": [
@@ -81,9 +81,9 @@
     "max_discharge_current_a": 67.5,
     "internal_resistance_mOhm": 35.0,
     "operating_temp_range": {
-      "charge": "-10\u00b0C to 40\u00b0C",
-      "discharge": "-15\u00b0C to 50\u00b0C",
-      "storage": "-20\u00b0C to 40\u00b0C"
+      "charge": "-10°C to 40°C",
+      "discharge": "-15°C to 50°C",
+      "storage": "-20°C to 40°C"
     },
     "cycle_life": "300 - 500 cycles at 100% DOD",
     "certifications": [
@@ -92,7 +92,7 @@
     "image": "/static/images/products/sunka_rb1245e.jpg",
     "description": "SUNKA RB1245E 12V 4.5Ah maintenance-free VRLA battery engineered for reliable long service life in security and emergency backup systems.",
     "features": [
-      "Low self-discharge rate (3% per month at 25\u00b0C)",
+      "Low self-discharge rate (3% per month at 25°C)",
       "Wide operating temperature range",
       "F1 Faston Tab 187 terminal connection"
     ],
@@ -131,9 +131,9 @@
     "max_discharge_current_a": 105,
     "internal_resistance_mOhm": 16.0,
     "operating_temp_range": {
-      "charge": "-10\u00b0C to 60\u00b0C",
-      "discharge": "-20\u00b0C to 60\u00b0C",
-      "storage": "-20\u00b0C to 60\u00b0C"
+      "charge": "-10°C to 60°C",
+      "discharge": "-20°C to 60°C",
+      "storage": "-20°C to 60°C"
     },
     "cycle_life": "300 - 500 cycles at 100% DOD",
     "certifications": [
@@ -141,7 +141,7 @@
       "UL94-HB"
     ],
     "image": "/static/images/products/sunka_rb670e.jpg",
-    "description": "SUNKA RB670E 6V 7Ah VRLA battery featuring 16 m\u03a9 ultra-low internal resistance for security alarms and emergency lighting panels.",
+    "description": "SUNKA RB670E 6V 7Ah VRLA battery featuring 16 mΩ ultra-low internal resistance for security alarms and emergency lighting panels.",
     "features": [
       "Valve regulated sealed maintenance-free design",
       "Absorbent Glass Mat (AGM) electrolyte absorption",
@@ -153,52 +153,96 @@
   {
     "id": "sunka-rb6100e",
     "model": "SUNKA RB6100E",
-    "title": "6V 10.0Ah High Capacity VRLA Battery",
+    "title": "6V 10Ah Sealed Lead-Acid Rechargeable Battery",
     "chemistry": "SLA",
     "chemistry_code": "sla",
     "voltage": 6,
-    "capacity_ah": 10.0,
+    "capacity_ah": 10,
     "capacity_bucket": "10Ah",
     "energy_wh": 60,
-    "terminal_type": "F1 (Faston Tab 187)",
-    "terminal_code": "f1",
-    "applications": [
-      "UPS Systems",
-      "Alarm & Security Systems",
-      "Emergency Lighting",
-      "Solar & Renewable Energy"
-    ],
-    "dimensions": {
-      "length_mm": 151,
-      "width_mm": 50,
-      "height_mm": 94,
-      "total_height_mm": 100,
-      "length_in": 5.94,
-      "width_in": 1.97,
-      "height_in": 3.7
-    },
-    "weight_kg": 1.56,
+    "terminal_type": "On request",
+    "terminal_code": "",
+    "applications": [],
+    "dimensions": {},
+    "weight_kg": null,
     "weight_lbs": 3.44,
     "max_discharge_current_a": 150,
     "internal_resistance_mOhm": 12.0,
     "operating_temp_range": {
-      "charge": "-10\u00b0C to 60\u00b0C",
-      "discharge": "-20\u00b0C to 60\u00b0C",
-      "storage": "-20\u00b0C to 60\u00b0C"
+      "charge": "-10°C to 60°C",
+      "discharge": "-20°C to 60°C",
+      "storage": "-20°C to 60°C"
     },
     "cycle_life": "300 - 500 cycles at 100% DOD",
-    "certifications": [
-      "CE",
-      "UL94-HB"
-    ],
-    "image": "/static/images/products/sunka_rb6100e.jpg",
-    "description": "High capacity 6V 10Ah VRLA battery with 12 m\u03a9 internal resistance delivering long standby runtime.",
+    "certifications": [],
+    "image": "/static/images/products/customer/20261030_120501 (1).jpg",
+    "description": "SUNKA RB6100E rechargeable sealed lead-acid battery, rated 6V and 10Ah as printed on the supplied product label. Contact MERI Industries to confirm fit, availability and application suitability.",
     "features": [
-      "High rate discharge capability",
-      "Stable voltage output throughout discharge curve"
+      "Sealed lead-acid rechargeable battery",
+      "Six-month supplier warranty"
     ],
-    "moq": 10,
-    "lead_time": "In Stock (Ships in 24 hrs)"
+    "moq": null,
+    "lead_time": "Confirm availability",
+    "photo_gallery": [
+      {
+        "url": "/static/images/products/studio/rb6100e.png",
+        "rotation": 0,
+        "caption": "Studio-enhanced product image"
+      },
+      {
+        "url": "/static/images/products/customer/20261030_120501 (1).jpg",
+        "rotation": -90
+      }
+    ],
+    "photo_rotation": 0,
+    "label_specs": [
+      [
+        "Brand",
+        "SUNKA"
+      ],
+      [
+        "Model",
+        "RB6100E"
+      ],
+      [
+        "Nominal voltage",
+        "6 V"
+      ],
+      [
+        "Rated capacity",
+        "10 Ah"
+      ],
+      [
+        "Chemistry",
+        "Sealed lead-acid rechargeable battery"
+      ],
+      [
+        "Cycle charging voltage (label)",
+        "7.20–7.50 V"
+      ],
+      [
+        "Standby charging voltage (label)",
+        "6.75–6.90 V"
+      ],
+      [
+        "Maximum charging current (label)",
+        "3 A"
+      ],
+      [
+        "Dimensions, weight and terminal size",
+        "Available on request"
+      ],
+      [
+        "Warranty",
+        "6 months"
+      ]
+    ],
+    "original_photo_gallery": [
+      {
+        "url": "/static/images/products/customer/20261030_120501 (1).jpg",
+        "rotation": -90
+      }
+    ]
   },
   {
     "id": "sunka-18650-2200",
@@ -233,9 +277,9 @@
     "max_discharge_current_a": 6.6,
     "internal_resistance_mOhm": 35.0,
     "operating_temp_range": {
-      "charge": "0\u00b0C to 45\u00b0C",
-      "discharge": "-20\u00b0C to 60\u00b0C",
-      "storage": "-10\u00b0C to 45\u00b0C"
+      "charge": "0°C to 45°C",
+      "discharge": "-20°C to 60°C",
+      "storage": "-10°C to 45°C"
     },
     "cycle_life": "500+ cycles",
     "certifications": [
@@ -287,9 +331,9 @@
     "max_discharge_current_a": 6.0,
     "internal_resistance_mOhm": 38.0,
     "operating_temp_range": {
-      "charge": "0\u00b0C to 45\u00b0C",
-      "discharge": "-20\u00b0C to 60\u00b0C",
-      "storage": "-10\u00b0C to 45\u00b0C"
+      "charge": "0°C to 45°C",
+      "discharge": "-20°C to 60°C",
+      "storage": "-10°C to 45°C"
     },
     "cycle_life": "500+ cycles",
     "certifications": [
@@ -338,9 +382,9 @@
     "max_discharge_current_a": 4.8,
     "internal_resistance_mOhm": 40.0,
     "operating_temp_range": {
-      "charge": "0\u00b0C to 45\u00b0C",
-      "discharge": "-20\u00b0C to 60\u00b0C",
-      "storage": "-10\u00b0C to 45\u00b0C"
+      "charge": "0°C to 45°C",
+      "discharge": "-20°C to 60°C",
+      "storage": "-10°C to 45°C"
     },
     "cycle_life": "500+ cycles",
     "certifications": [
@@ -390,9 +434,9 @@
     "max_discharge_current_a": 142.5,
     "internal_resistance_mOhm": 20.0,
     "operating_temp_range": {
-      "charge": "-10\u00b0C to 40\u00b0C",
-      "discharge": "-15\u00b0C to 50\u00b0C",
-      "storage": "-20\u00b0C to 40\u00b0C"
+      "charge": "-10°C to 40°C",
+      "discharge": "-15°C to 50°C",
+      "storage": "-20°C to 40°C"
     },
     "cycle_life": "300 - 500 cycles at 100% DOD",
     "certifications": [
@@ -439,9 +483,9 @@
     "max_discharge_current_a": 90,
     "internal_resistance_mOhm": 22.0,
     "operating_temp_range": {
-      "charge": "-10\u00b0C to 40\u00b0C",
-      "discharge": "-15\u00b0C to 50\u00b0C",
-      "storage": "-20\u00b0C to 40\u00b0C"
+      "charge": "-10°C to 40°C",
+      "discharge": "-15°C to 50°C",
+      "storage": "-20°C to 40°C"
     },
     "cycle_life": "300 - 500 cycles at 100% DOD",
     "certifications": [
@@ -459,51 +503,96 @@
   {
     "id": "sunka-rb650bs",
     "model": "SUNKA RB650BS",
-    "title": "6V 5.5Ah Sealed Lead-Acid Rechargeable Battery",
+    "title": "6V 5Ah Sealed Lead-Acid Rechargeable Battery",
     "chemistry": "SLA",
     "chemistry_code": "sla",
     "voltage": 6,
-    "capacity_ah": 5.5,
-    "capacity_bucket": "5.5Ah",
-    "energy_wh": 33,
-    "terminal_type": "T1 / T2 Optional",
-    "terminal_code": "f1",
-    "applications": [
-      "Emergency Lighting",
-      "Alarm & Security Systems",
-      "UPS Systems"
-    ],
-    "dimensions": {
-      "length_mm": 70,
-      "width_mm": 48,
-      "height_mm": 101,
-      "total_height_mm": 107,
-      "length_in": 2.76,
-      "width_in": 1.89,
-      "height_in": 3.98
-    },
-    "weight_kg": 0.72,
+    "capacity_ah": 5,
+    "capacity_bucket": "5Ah",
+    "energy_wh": 30,
+    "terminal_type": "On request",
+    "terminal_code": "",
+    "applications": [],
+    "dimensions": {},
+    "weight_kg": null,
     "weight_lbs": 1.59,
     "max_discharge_current_a": 82.5,
     "internal_resistance_mOhm": 24.0,
     "operating_temp_range": {
-      "charge": "-10\u00b0C to 40\u00b0C",
-      "discharge": "-15\u00b0C to 50\u00b0C",
-      "storage": "-20\u00b0C to 40\u00b0C"
+      "charge": "-10°C to 40°C",
+      "discharge": "-15°C to 50°C",
+      "storage": "-20°C to 40°C"
     },
     "cycle_life": "300 - 500 cycles at 100% DOD",
-    "certifications": [
-      "CE",
-      "UL94-HB"
-    ],
-    "image": "/static/images/products/sunka_rb650bs.jpg",
-    "description": "6V 5.5Ah VRLA battery engineered for consistent performance in electronic cash registers and security backup.",
+    "certifications": [],
+    "image": "/static/images/products/customer/20261030_115446 (1).jpg",
+    "description": "SUNKA RB650BS rechargeable sealed lead-acid battery, rated 6V and 5Ah as printed on the supplied product label. Contact MERI Industries to confirm fit, availability and application suitability.",
     "features": [
-      "Absorbent Glass Mat (AGM) separator",
-      "Low internal resistance"
+      "Sealed lead-acid rechargeable battery",
+      "Six-month supplier warranty"
     ],
-    "moq": 10,
-    "lead_time": "In Stock (Ships in 24 hrs)"
+    "moq": null,
+    "lead_time": "Confirm availability",
+    "photo_gallery": [
+      {
+        "url": "/static/images/products/studio/rb650bs.png",
+        "rotation": 0,
+        "caption": "Studio-enhanced product image"
+      },
+      {
+        "url": "/static/images/products/customer/20261030_115446 (1).jpg",
+        "rotation": 90
+      }
+    ],
+    "photo_rotation": 0,
+    "label_specs": [
+      [
+        "Brand",
+        "SUNKA"
+      ],
+      [
+        "Model",
+        "RB650BS"
+      ],
+      [
+        "Nominal voltage",
+        "6 V"
+      ],
+      [
+        "Rated capacity",
+        "5 Ah"
+      ],
+      [
+        "Chemistry",
+        "Sealed lead-acid rechargeable battery"
+      ],
+      [
+        "Cycle charging voltage (label)",
+        "7.20–7.50 V"
+      ],
+      [
+        "Standby charging voltage (label)",
+        "6.75–6.90 V"
+      ],
+      [
+        "Maximum charging current (label)",
+        "1.65 A"
+      ],
+      [
+        "Dimensions, weight and terminal size",
+        "Available on request"
+      ],
+      [
+        "Warranty",
+        "6 months"
+      ]
+    ],
+    "original_photo_gallery": [
+      {
+        "url": "/static/images/products/customer/20261030_115446 (1).jpg",
+        "rotation": 90
+      }
+    ]
   },
   {
     "id": "sunka-rb613e",
@@ -536,9 +625,9 @@
     "max_discharge_current_a": 19.5,
     "internal_resistance_mOhm": 45.0,
     "operating_temp_range": {
-      "charge": "-10\u00b0C to 40\u00b0C",
-      "discharge": "-15\u00b0C to 50\u00b0C",
-      "storage": "-20\u00b0C to 40\u00b0C"
+      "charge": "-10°C to 40°C",
+      "discharge": "-15°C to 50°C",
+      "storage": "-20°C to 40°C"
     },
     "cycle_life": "300 - 500 cycles",
     "certifications": [
@@ -584,9 +673,9 @@
     "max_discharge_current_a": 19.5,
     "internal_resistance_mOhm": 50.0,
     "operating_temp_range": {
-      "charge": "-10\u00b0C to 40\u00b0C",
-      "discharge": "-15\u00b0C to 50\u00b0C",
-      "storage": "-20\u00b0C to 40\u00b0C"
+      "charge": "-10°C to 40°C",
+      "discharge": "-15°C to 50°C",
+      "storage": "-20°C to 40°C"
     },
     "cycle_life": "300 - 500 cycles",
     "certifications": [
@@ -604,199 +693,695 @@
   {
     "id": "sunka-rb410",
     "model": "SUNKA RB410",
-    "title": "4V 1.0Ah Small Size Big Power SLA Battery",
+    "title": "4V 1Ah Sealed Lead-Acid Rechargeable Battery",
     "chemistry": "SLA",
     "chemistry_code": "sla",
     "voltage": 4,
-    "capacity_ah": 1.0,
+    "capacity_ah": 1,
     "capacity_bucket": "1Ah",
-    "energy_wh": 4.0,
-    "terminal_type": "Pin Terminal",
-    "terminal_code": "f1",
-    "applications": [
-      "Emergency Lights",
-      "Toys",
-      "Speakers",
-      "Mosquito Racket",
-      "Security Systems"
-    ],
-    "dimensions": {
-      "length_mm": 50,
-      "width_mm": 22,
-      "height_mm": 75,
-      "total_height_mm": 78,
-      "length_in": 1.97,
-      "width_in": 0.87,
-      "height_in": 2.95
-    },
-    "weight_kg": 0.15,
+    "energy_wh": 4,
+    "terminal_type": "On request",
+    "terminal_code": "",
+    "applications": [],
+    "dimensions": {},
+    "weight_kg": null,
     "weight_lbs": 0.33,
     "max_discharge_current_a": 15,
     "internal_resistance_mOhm": 40.0,
     "operating_temp_range": {
-      "charge": "-10\u00b0C to 40\u00b0C",
-      "discharge": "-15\u00b0C to 50\u00b0C",
-      "storage": "-20\u00b0C to 40\u00b0C"
+      "charge": "-10°C to 40°C",
+      "discharge": "-15°C to 50°C",
+      "storage": "-20°C to 40°C"
     },
     "cycle_life": "300 - 500 cycles",
-    "certifications": [
-      "CE"
-    ],
-    "image": "/static/images/products/sunka_rb410.jpg",
-    "description": "SUNKA Small Size. Big Power. 4V 1.0Ah rechargeable battery designed for emergency lights, electronic scales, and mosquito zapper rackets.",
+    "certifications": [],
+    "image": "/static/images/products/customer/20261030_115119 (1).jpg",
+    "description": "SUNKA RB410 rechargeable sealed lead-acid battery, rated 4V and 1Ah as printed on the supplied product label. Contact MERI Industries to confirm fit, availability and application suitability.",
     "features": [
-      "Compact size with high power density",
-      "Spill-proof sealed construction"
+      "Sealed lead-acid rechargeable battery",
+      "Six-month supplier warranty"
     ],
-    "moq": 50,
-    "lead_time": "In Stock (Ships in 24 hrs)"
+    "moq": null,
+    "lead_time": "Confirm availability",
+    "photo_gallery": [
+      {
+        "url": "/static/images/products/studio/rb410.png",
+        "rotation": 0,
+        "caption": "Studio-enhanced product image"
+      },
+      {
+        "url": "/static/images/products/customer/20261030_115119 (1).jpg",
+        "rotation": 180
+      }
+    ],
+    "photo_rotation": 0,
+    "label_specs": [
+      [
+        "Brand",
+        "SUNKA"
+      ],
+      [
+        "Model",
+        "RB410"
+      ],
+      [
+        "Nominal voltage",
+        "4 V"
+      ],
+      [
+        "Rated capacity",
+        "1 Ah"
+      ],
+      [
+        "Chemistry",
+        "Sealed lead-acid rechargeable battery"
+      ],
+      [
+        "Dimensions, weight and terminal size",
+        "Available on request"
+      ],
+      [
+        "Warranty",
+        "6 months"
+      ]
+    ],
+    "original_photo_gallery": [
+      {
+        "url": "/static/images/products/customer/20261030_115119 (1).jpg",
+        "rotation": 180
+      }
+    ]
   },
   {
-    "id": "ps-1295",
-    "model": "PS-1295 F2",
-    "title": "12V 9.5Ah Extended Capacity SLA Battery",
+    "id": "sunka-rb425",
+    "model": "SUNKA RB425",
+    "title": "4V 2.5Ah Sealed Lead-Acid Rechargeable Battery",
+    "chemistry": "SLA",
+    "chemistry_code": "sla",
+    "voltage": 4,
+    "capacity_ah": 2.5,
+    "capacity_bucket": "2.5Ah",
+    "energy_wh": 10.0,
+    "terminal_type": "On request",
+    "terminal_code": "",
+    "applications": [],
+    "dimensions": {},
+    "weight_kg": null,
+    "moq": null,
+    "lead_time": "Confirm availability",
+    "image": "/static/images/products/customer/20261030_115113 (1).jpg",
+    "photo_gallery": [
+      {
+        "url": "/static/images/products/studio/rb425.png",
+        "rotation": 0,
+        "caption": "Studio-enhanced product image"
+      },
+      {
+        "url": "/static/images/products/customer/20261030_115113 (1).jpg",
+        "rotation": 180
+      }
+    ],
+    "photo_rotation": 0,
+    "label_specs": [
+      [
+        "Brand",
+        "SUNKA"
+      ],
+      [
+        "Model",
+        "RB425"
+      ],
+      [
+        "Nominal voltage",
+        "4 V"
+      ],
+      [
+        "Rated capacity",
+        "2.5 Ah"
+      ],
+      [
+        "Chemistry",
+        "Sealed lead-acid rechargeable battery"
+      ],
+      [
+        "Dimensions, weight and terminal size",
+        "Available on request"
+      ],
+      [
+        "Warranty",
+        "6 months"
+      ]
+    ],
+    "description": "SUNKA RB425 rechargeable sealed lead-acid battery, rated 4V and 2.5Ah as printed on the supplied product label. Contact MERI Industries to confirm fit, availability and application suitability.",
+    "features": [
+      "Sealed lead-acid rechargeable battery",
+      "Six-month supplier warranty"
+    ],
+    "certifications": [],
+    "original_photo_gallery": [
+      {
+        "url": "/static/images/products/customer/20261030_115113 (1).jpg",
+        "rotation": 180
+      }
+    ]
+  },
+  {
+    "id": "sunka-rb450e",
+    "model": "SUNKA RB450E",
+    "title": "4V 5Ah Sealed Lead-Acid Rechargeable Battery",
+    "chemistry": "SLA",
+    "chemistry_code": "sla",
+    "voltage": 4,
+    "capacity_ah": 5,
+    "capacity_bucket": "5Ah",
+    "energy_wh": 20,
+    "terminal_type": "On request",
+    "terminal_code": "",
+    "applications": [],
+    "dimensions": {},
+    "weight_kg": null,
+    "moq": null,
+    "lead_time": "Confirm availability",
+    "image": "/static/images/products/customer/20261030_115129 (1).jpg",
+    "photo_gallery": [
+      {
+        "url": "/static/images/products/studio/rb450e.png",
+        "rotation": 0,
+        "caption": "Studio-enhanced product image"
+      },
+      {
+        "url": "/static/images/products/customer/20261030_115129 (1).jpg",
+        "rotation": -90
+      }
+    ],
+    "photo_rotation": 0,
+    "label_specs": [
+      [
+        "Brand",
+        "SUNKA"
+      ],
+      [
+        "Model",
+        "RB450E"
+      ],
+      [
+        "Nominal voltage",
+        "4 V"
+      ],
+      [
+        "Rated capacity",
+        "5 Ah"
+      ],
+      [
+        "Chemistry",
+        "Sealed lead-acid rechargeable battery"
+      ],
+      [
+        "Cycle charging voltage (label)",
+        "4.70–4.90 V"
+      ],
+      [
+        "Standby charging voltage (label)",
+        "4.50–4.80 V"
+      ],
+      [
+        "Maximum charging current (label)",
+        "1.5 A"
+      ],
+      [
+        "Dimensions, weight and terminal size",
+        "Available on request"
+      ],
+      [
+        "Warranty",
+        "6 months"
+      ]
+    ],
+    "description": "SUNKA RB450E rechargeable sealed lead-acid battery, rated 4V and 5Ah as printed on the supplied product label. Contact MERI Industries to confirm fit, availability and application suitability.",
+    "features": [
+      "Sealed lead-acid rechargeable battery",
+      "Six-month supplier warranty"
+    ],
+    "certifications": [],
+    "original_photo_gallery": [
+      {
+        "url": "/static/images/products/customer/20261030_115129 (1).jpg",
+        "rotation": -90
+      }
+    ]
+  },
+  {
+    "id": "sunka-rb455bs",
+    "model": "SUNKA RB455BS",
+    "title": "4V 5.5Ah Sealed Lead-Acid Rechargeable Battery",
+    "chemistry": "SLA",
+    "chemistry_code": "sla",
+    "voltage": 4,
+    "capacity_ah": 5.5,
+    "capacity_bucket": "5.5Ah",
+    "energy_wh": 22.0,
+    "terminal_type": "On request",
+    "terminal_code": "",
+    "applications": [],
+    "dimensions": {},
+    "weight_kg": null,
+    "moq": null,
+    "lead_time": "Confirm availability",
+    "image": "/static/images/products/customer/20261030_115142 (1).jpg",
+    "photo_gallery": [
+      {
+        "url": "/static/images/products/studio/rb455bs.png",
+        "rotation": 0,
+        "caption": "Studio-enhanced product image"
+      },
+      {
+        "url": "/static/images/products/customer/20261030_115142 (1).jpg",
+        "rotation": 0
+      }
+    ],
+    "photo_rotation": 0,
+    "label_specs": [
+      [
+        "Brand",
+        "SUNKA"
+      ],
+      [
+        "Model",
+        "RB455BS"
+      ],
+      [
+        "Nominal voltage",
+        "4 V"
+      ],
+      [
+        "Rated capacity",
+        "5.5 Ah"
+      ],
+      [
+        "Chemistry",
+        "Sealed lead-acid rechargeable battery"
+      ],
+      [
+        "Cycle charging voltage (label)",
+        "4.80–5.00 V"
+      ],
+      [
+        "Standby charging voltage (label)",
+        "4.50–4.60 V"
+      ],
+      [
+        "Maximum charging current (label)",
+        "1.65 A"
+      ],
+      [
+        "Dimensions, weight and terminal size",
+        "Available on request"
+      ],
+      [
+        "Warranty",
+        "6 months"
+      ]
+    ],
+    "description": "SUNKA RB455BS rechargeable sealed lead-acid battery, rated 4V and 5.5Ah as printed on the supplied product label. Contact MERI Industries to confirm fit, availability and application suitability.",
+    "features": [
+      "Sealed lead-acid rechargeable battery",
+      "Six-month supplier warranty"
+    ],
+    "certifications": [],
+    "original_photo_gallery": [
+      {
+        "url": "/static/images/products/customer/20261030_115142 (1).jpg",
+        "rotation": 0
+      }
+    ]
+  },
+  {
+    "id": "sunka-rb655bs",
+    "model": "SUNKA RB655BS",
+    "title": "6V 5.5Ah Sealed Lead-Acid Rechargeable Battery",
+    "chemistry": "SLA",
+    "chemistry_code": "sla",
+    "voltage": 6,
+    "capacity_ah": 5.5,
+    "capacity_bucket": "5.5Ah",
+    "energy_wh": 33.0,
+    "terminal_type": "On request",
+    "terminal_code": "",
+    "applications": [],
+    "dimensions": {},
+    "weight_kg": null,
+    "moq": null,
+    "lead_time": "Confirm availability",
+    "image": "/static/images/products/customer/20261030_115439 (1).jpg",
+    "photo_gallery": [
+      {
+        "url": "/static/images/products/studio/rb655bs.png",
+        "rotation": 0,
+        "caption": "Studio-enhanced product image"
+      },
+      {
+        "url": "/static/images/products/studio/rb655bs-orange.png",
+        "rotation": 0,
+        "caption": "Studio-enhanced image · orange casing"
+      },
+      {
+        "url": "/static/images/products/customer/20261030_115439 (1).jpg",
+        "rotation": 90
+      },
+      {
+        "url": "/static/images/products/customer/20261030_115516 (1).jpg",
+        "rotation": 90
+      }
+    ],
+    "photo_rotation": 0,
+    "label_specs": [
+      [
+        "Brand",
+        "SUNKA"
+      ],
+      [
+        "Model",
+        "RB655BS"
+      ],
+      [
+        "Nominal voltage",
+        "6 V"
+      ],
+      [
+        "Rated capacity",
+        "5.5 Ah"
+      ],
+      [
+        "Chemistry",
+        "Sealed lead-acid rechargeable battery"
+      ],
+      [
+        "Cycle charging voltage (label)",
+        "7.20–7.50 V"
+      ],
+      [
+        "Standby charging voltage (label)",
+        "6.75–6.90 V"
+      ],
+      [
+        "Maximum charging current (label)",
+        "1.65 A"
+      ],
+      [
+        "Dimensions, weight and terminal size",
+        "Available on request"
+      ],
+      [
+        "Warranty",
+        "6 months"
+      ]
+    ],
+    "description": "SUNKA RB655BS rechargeable sealed lead-acid battery, rated 6V and 5.5Ah as printed on the supplied product label. Contact MERI Industries to confirm fit, availability and application suitability.",
+    "features": [
+      "Sealed lead-acid rechargeable battery",
+      "Six-month supplier warranty"
+    ],
+    "certifications": [],
+    "original_photo_gallery": [
+      {
+        "url": "/static/images/products/customer/20261030_115439 (1).jpg",
+        "rotation": 90
+      },
+      {
+        "url": "/static/images/products/customer/20261030_115516 (1).jpg",
+        "rotation": 90
+      }
+    ]
+  },
+  {
+    "id": "sunka-rb1250e",
+    "model": "SUNKA RB1250E",
+    "title": "12V 5Ah Sealed Lead-Acid Rechargeable Battery",
     "chemistry": "SLA",
     "chemistry_code": "sla",
     "voltage": 12,
-    "capacity_ah": 9.5,
-    "capacity_bucket": "9.5Ah",
-    "energy_wh": 114,
-    "terminal_type": "Faston F2 (0.250\")",
-    "terminal_code": "f2",
-    "applications": [
-      "UPS Systems",
-      "Fire & Security"
+    "capacity_ah": 5,
+    "capacity_bucket": "5Ah",
+    "energy_wh": 60,
+    "terminal_type": "On request",
+    "terminal_code": "",
+    "applications": [],
+    "dimensions": {},
+    "weight_kg": null,
+    "moq": null,
+    "lead_time": "Confirm availability",
+    "image": "/static/images/products/customer/20261030_115459 (1).jpg",
+    "photo_gallery": [
+      {
+        "url": "/static/images/products/studio/rb1250e.png",
+        "rotation": 0,
+        "caption": "Studio-enhanced product image"
+      },
+      {
+        "url": "/static/images/products/customer/20261030_115459 (1).jpg",
+        "rotation": 90
+      },
+      {
+        "url": "/static/images/products/customer/20261030_115502 (1).jpg",
+        "rotation": 90
+      },
+      {
+        "url": "/static/images/products/customer/20261030_115504 (1).jpg",
+        "rotation": 90
+      }
     ],
-    "dimensions": {
-      "length_mm": 151,
-      "width_mm": 65,
-      "height_mm": 94,
-      "total_height_mm": 100,
-      "length_in": 5.94,
-      "width_in": 2.56,
-      "height_in": 3.7
-    },
-    "weight_kg": 2.7,
-    "weight_lbs": 5.95,
-    "max_discharge_current_a": 142,
-    "internal_resistance_mOhm": 17.0,
-    "operating_temp_range": {
-      "charge": "-15\u00b0C to 50\u00b0C",
-      "discharge": "-20\u00b0C to 60\u00b0C",
-      "storage": "-20\u00b0C to 50\u00b0C"
-    },
-    "cycle_life": "300 - 500 cycles at 100% DOD",
-    "certifications": [
-      "UL 1989",
-      "CE"
+    "photo_rotation": 0,
+    "label_specs": [
+      [
+        "Brand",
+        "SUNKA"
+      ],
+      [
+        "Model",
+        "RB1250E"
+      ],
+      [
+        "Nominal voltage",
+        "12 V"
+      ],
+      [
+        "Rated capacity",
+        "5 Ah"
+      ],
+      [
+        "Chemistry",
+        "Sealed lead-acid rechargeable battery"
+      ],
+      [
+        "Cycle charging voltage (label)",
+        "14.4–15.0 V"
+      ],
+      [
+        "Standby charging voltage (label)",
+        "13.5–13.8 V"
+      ],
+      [
+        "Maximum charging current (label)",
+        "1.5 A"
+      ],
+      [
+        "Dimensions, weight and terminal size",
+        "Available on request"
+      ],
+      [
+        "Warranty",
+        "6 months"
+      ]
     ],
-    "image": "/static/images/sla_agm_battery.jpg",
-    "description": "12V 9.5Ah AGM SLA battery with Faston F2 terminals delivering extended runtime in standard 12V 7Ah/9Ah footprints.",
+    "description": "SUNKA RB1250E rechargeable sealed lead-acid battery, rated 12V and 5Ah as printed on the supplied product label. Contact MERI Industries to confirm fit, availability and application suitability.",
     "features": [
-      "Enhanced energy density fits standard 12V 7Ah/9Ah footprints",
-      "Maintenance-free sealed construction"
+      "Sealed lead-acid rechargeable battery",
+      "Six-month supplier warranty"
     ],
-    "moq": 10,
-    "lead_time": "In Stock (Ships in 24 hrs)"
+    "certifications": [],
+    "original_photo_gallery": [
+      {
+        "url": "/static/images/products/customer/20261030_115459 (1).jpg",
+        "rotation": 90
+      },
+      {
+        "url": "/static/images/products/customer/20261030_115502 (1).jpg",
+        "rotation": 90
+      },
+      {
+        "url": "/static/images/products/customer/20261030_115504 (1).jpg",
+        "rotation": 90
+      }
+    ]
   },
   {
-    "id": "psl-1290",
-    "model": "PSL-1290 Smart",
-    "title": "12.8V 9.0Ah Lithium LiFePO4 Smart Battery",
-    "chemistry": "Lithium",
-    "chemistry_code": "lithium",
+    "id": "sunka-rb645e",
+    "model": "SUNKA RB645E",
+    "title": "6V 4.5Ah Sealed Lead-Acid Rechargeable Battery",
+    "chemistry": "SLA",
+    "chemistry_code": "sla",
+    "voltage": 6,
+    "capacity_ah": 4.5,
+    "capacity_bucket": "4.5Ah",
+    "energy_wh": 27.0,
+    "terminal_type": "On request",
+    "terminal_code": "",
+    "applications": [],
+    "dimensions": {},
+    "weight_kg": null,
+    "moq": null,
+    "lead_time": "Confirm availability",
+    "image": "/static/images/products/customer/20261030_115533 (1).jpg",
+    "photo_gallery": [
+      {
+        "url": "/static/images/products/studio/rb645e.png",
+        "rotation": 0,
+        "caption": "Studio-enhanced product image"
+      },
+      {
+        "url": "/static/images/products/customer/20261030_115533 (1).jpg",
+        "rotation": 90
+      }
+    ],
+    "photo_rotation": 0,
+    "label_specs": [
+      [
+        "Brand",
+        "SUNKA"
+      ],
+      [
+        "Model",
+        "RB645E"
+      ],
+      [
+        "Nominal voltage",
+        "6 V"
+      ],
+      [
+        "Rated capacity",
+        "4.5 Ah"
+      ],
+      [
+        "Chemistry",
+        "Sealed lead-acid rechargeable battery"
+      ],
+      [
+        "Cycle charging voltage (label)",
+        "7.20–7.50 V"
+      ],
+      [
+        "Standby charging voltage (label)",
+        "6.75–6.90 V"
+      ],
+      [
+        "Maximum charging current (label)",
+        "1.35 A"
+      ],
+      [
+        "Dimensions, weight and terminal size",
+        "Available on request"
+      ],
+      [
+        "Warranty",
+        "6 months"
+      ]
+    ],
+    "description": "SUNKA RB645E rechargeable sealed lead-acid battery, rated 6V and 4.5Ah as printed on the supplied product label. Contact MERI Industries to confirm fit, availability and application suitability.",
+    "features": [
+      "Sealed lead-acid rechargeable battery",
+      "Six-month supplier warranty"
+    ],
+    "certifications": [],
+    "original_photo_gallery": [
+      {
+        "url": "/static/images/products/customer/20261030_115533 (1).jpg",
+        "rotation": 90
+      }
+    ]
+  },
+  {
+    "id": "sunka-rb1223b",
+    "model": "SUNKA RB1223B",
+    "title": "12V 2.3Ah Sealed Lead-Acid Rechargeable Battery",
+    "chemistry": "SLA",
+    "chemistry_code": "sla",
     "voltage": 12,
-    "capacity_ah": 9.0,
-    "capacity_bucket": "9Ah",
-    "energy_wh": 115.2,
-    "terminal_type": "Faston F2 (0.250\")",
-    "terminal_code": "f2",
-    "applications": [
-      "Solar & Energy Storage",
-      "Mobility / EV",
-      "UPS Systems"
+    "capacity_ah": 2.3,
+    "capacity_bucket": "2.3Ah",
+    "energy_wh": 27.6,
+    "terminal_type": "On request",
+    "terminal_code": "",
+    "applications": [],
+    "dimensions": {},
+    "weight_kg": null,
+    "moq": null,
+    "lead_time": "Confirm availability",
+    "image": "/static/images/products/customer/20261030_115754 (1).jpg",
+    "photo_gallery": [
+      {
+        "url": "/static/images/products/studio/rb1223b.png",
+        "rotation": 0,
+        "caption": "Studio-enhanced product image"
+      },
+      {
+        "url": "/static/images/products/customer/20261030_115754 (1).jpg",
+        "rotation": -90
+      }
     ],
-    "dimensions": {
-      "length_mm": 151,
-      "width_mm": 65,
-      "height_mm": 94,
-      "total_height_mm": 100,
-      "length_in": 5.94,
-      "width_in": 2.56,
-      "height_in": 3.7
-    },
-    "weight_kg": 1.2,
-    "weight_lbs": 2.64,
-    "max_discharge_current_a": 18,
-    "internal_resistance_mOhm": 15.0,
-    "operating_temp_range": {
-      "charge": "0\u00b0C to 45\u00b0C",
-      "discharge": "-20\u00b0C to 60\u00b0C",
-      "storage": "-10\u00b0C to 45\u00b0C"
-    },
-    "cycle_life": "3500+ cycles at 80% DOD",
-    "certifications": [
-      "UN 38.3",
-      "UL 1973",
-      "CE"
+    "photo_rotation": 0,
+    "label_specs": [
+      [
+        "Brand",
+        "SUNKA"
+      ],
+      [
+        "Model",
+        "RB1223B"
+      ],
+      [
+        "Nominal voltage",
+        "12 V"
+      ],
+      [
+        "Rated capacity",
+        "2.3 Ah"
+      ],
+      [
+        "Chemistry",
+        "Sealed lead-acid rechargeable battery"
+      ],
+      [
+        "Cycle charging voltage (label)",
+        "14.4–15.0 V"
+      ],
+      [
+        "Standby charging voltage (label)",
+        "13.5–13.8 V"
+      ],
+      [
+        "Maximum charging current (label)",
+        "0.69 A"
+      ],
+      [
+        "Dimensions, weight and terminal size",
+        "Available on request"
+      ],
+      [
+        "Warranty",
+        "6 months"
+      ]
     ],
-    "image": "/static/images/lithium_lifepo4_battery.jpg",
-    "description": "Ultra-lightweight 12.8V 9.0Ah LiFePO4 Lithium battery featuring integrated BMS protection and 3500+ cycles.",
+    "description": "SUNKA RB1223B rechargeable sealed lead-acid battery, rated 12V and 2.3Ah as printed on the supplied product label. Contact MERI Industries to confirm fit, availability and application suitability.",
     "features": [
-      "Integrated Smart BMS prevents overcharge and thermal risks",
-      "60% weight reduction compared to SLA equivalents"
+      "Sealed lead-acid rechargeable battery",
+      "Six-month supplier warranty"
     ],
-    "moq": 4,
-    "lead_time": "In Stock (Ships in 48 hrs)"
-  },
-  {
-    "id": "psl-48100",
-    "model": "PSL-48100 Telecom Rack",
-    "title": "51.2V 100Ah 19-Inch Rackmount Telecom Lithium Module",
-    "chemistry": "Lithium",
-    "chemistry_code": "lithium",
-    "voltage": 48,
-    "capacity_ah": 100.0,
-    "capacity_bucket": "100Ah",
-    "energy_wh": 5120,
-    "terminal_type": "M8 Threaded Terminal Block",
-    "terminal_code": "m8",
-    "applications": [
-      "UPS Systems",
-      "Solar & Energy Storage"
-    ],
-    "dimensions": {
-      "length_mm": 482,
-      "width_mm": 442,
-      "height_mm": 133,
-      "total_height_mm": 133,
-      "length_in": 18.98,
-      "width_in": 17.4,
-      "height_in": 5.24
-    },
-    "weight_kg": 43.0,
-    "weight_lbs": 94.8,
-    "max_discharge_current_a": 100,
-    "internal_resistance_mOhm": 5.0,
-    "operating_temp_range": {
-      "charge": "0\u00b0C to 50\u00b0C",
-      "discharge": "-20\u00b0C to 60\u00b0C",
-      "storage": "-10\u00b0C to 45\u00b0C"
-    },
-    "cycle_life": "6000+ cycles at 80% DOD",
-    "certifications": [
-      "UN 38.3",
-      "UL 1973",
-      "CE",
-      "GR-63-CORE"
-    ],
-    "image": "/static/images/telecom_rack_battery.jpg",
-    "description": "51.2V (48V nominal) 100Ah (5.12kWh) 3U 19-inch rack-mountable lithium iron phosphate module designed for 5G base transceiver stations.",
-    "features": [
-      "Standard 3U 19-inch rackmount chassis with RS485/CANbus communication",
-      "Multi-module parallel expansion up to 16 units (81.9 kWh)"
-    ],
-    "moq": 1,
-    "lead_time": "In Stock (Ships in 48 hrs)"
+    "certifications": [],
+    "original_photo_gallery": [
+      {
+        "url": "/static/images/products/customer/20261030_115754 (1).jpg",
+        "rotation": -90
+      }
+    ]
   }
 ]

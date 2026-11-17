@@ -448,7 +448,7 @@ function renderCatalogProducts(products) {
     <div class="product-card">
       <span class="product-badge-tag ${p.chemistry_code === 'lithium' ? 'badge-lithium' : ''}">${p.chemistry}</span>
       <div class="product-img-wrapper">
-        <img src="${p.image}" alt="${p.model} ${p.voltage}V ${p.capacity_ah}Ah ${p.chemistry} Industrial Battery" loading="lazy" width="300" height="220" onerror="this.onerror=null; this.src='/static/images/deep_cycle_gel_battery.jpg';">
+        <img src="${p.catalog_image || p.image}" style="transform:rotate(${p.photo_rotation || 0}deg);object-fit:contain" alt="${p.model} ${p.voltage}V ${p.capacity_ah}Ah ${p.chemistry} Industrial Battery" loading="lazy" width="300" height="220" onerror="this.onerror=null; this.src='/static/images/deep_cycle_gel_battery.jpg';">
       </div>
       <div class="product-body">
         <h3 class="product-model">${p.model}</h3>
@@ -463,11 +463,11 @@ function renderCatalogProducts(products) {
             <span>Capacity</span>
           </div>
           <div class="spec-item">
-            <strong>${p.weight_kg} kg</strong>
+            <strong>${p.weight_kg ? p.weight_kg + ' kg' : 'On request'}</strong>
             <span>Weight</span>
           </div>
           <div class="spec-item">
-            <strong>${(p.terminal_code || 'F2').toUpperCase()}</strong>
+            <strong>${(p.terminal_code || 'On request').toUpperCase()}</strong>
             <span>Terminal</span>
           </div>
         </div>
@@ -566,7 +566,7 @@ function initContactPage() {
                   Your Tracking ID: <strong style="color:#064E3B; font-family:monospace; font-size:0.95rem;">${quoteId}</strong>
                 </p>
                 <p style="color:#065F46; font-size:0.85rem;">
-                  Our application engineer will review your technical specifications and reach out with formal distributor pricing and datasheets within 2 business hours.
+                  Our application engineer will review your technical specifications and reach out with formal distributor pricing and datasheets after reviewing your enquiry.
                 </p>
               </div>
             `;
@@ -820,7 +820,7 @@ function initRFQModal() {
                     Tracking Reference ID: <strong style="color:#064E3B; font-family:monospace; font-size:1rem;">${quoteId}</strong>
                   </p>
                   <p style="color:#065F46; font-size:0.85rem;">
-                    Thank you for contacting MERI Industries. Our application engineering team has received your technical specifications and will provide formal distributor pricing and datasheets within 2 business hours.
+                    Thank you for contacting MERI Industries. Our application engineering team has received your technical specifications and will provide formal distributor pricing and datasheets after reviewing your enquiry.
                   </p>
                   <button type="button" class="btn btn-navy btn-sm mt-3" onclick="window.closeRFQModal();">
                     Done / Close

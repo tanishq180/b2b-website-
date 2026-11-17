@@ -19,3 +19,6 @@ rfq_submissions.json
 .DS_Store
 Thumbs.db
 *.zip
+
+# Local image-generation provenance
+studio-assets.json

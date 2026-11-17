@@ -16,6 +16,7 @@
     <div class="pdp-grid">
 
       <!-- Left Column: Gallery & CAD Diagrams Slider -->
+{% if product.photo_gallery %}{% include 'photo-gallery.html' %}{% else %}
       <div class="pdp-gallery-container">
         <div class="pdp-slider-wrapper" id="pdp-slider-wrapper">
           <!-- Slide Counter Pill -->
@@ -27,7 +28,7 @@
           <div class="pdp-slider-track" id="pdp-slider-track">
             <!-- Slide 1: Primary Product Photo -->
             <div class="pdp-slide" data-slide-index="0">
-              <img src="{{ product.image }}" alt="{{ product.model }} {{ product.voltage }}V {{ product.capacity_ah }}Ah {{ product.chemistry }} Industrial Battery" class="slide-img" width="600" height="400">
+              <img src="{{ product.catalog_image }}" alt="{{ product.model }} {{ product.voltage }}V {{ product.capacity_ah }}Ah {{ product.chemistry }} Industrial Battery" class="slide-img" width="600" height="400">
               <span class="slide-caption">Physical Product View</span>
             </div>
 
@@ -77,11 +78,14 @@
                   <text x="80" y="185" font-size="12" font-weight="600" fill="#475569">Max Discharge Current:</text>
                   <text x="320" y="185" font-size="12" font-weight="bold" fill="#EA580C" text-anchor="end">{{ product.max_discharge_current_a }} Amps</text>
                   <line x1="80" y1="195" x2="320" y2="195" stroke="#E2E8F0" stroke-width="1"/>
-                  <text x="80" y="210" font-size="11" fill="#64748B">Flame Retardant UL94-HB / V0 Standard Casing</text>
+                  <text x="80" y="210" font-size="11" fill="#64748B">Confirm casing requirements with the supplier</text>
                 </svg>
               </div>
               <span class="slide-caption">Terminal & Electrical Layout</span>
             </div>
+            {% if product.image != product.catalog_image %}
+            <div class="pdp-slide" data-slide-index="3"><a href="{{ product.image }}" target="_blank" rel="noopener"><img src="{{ product.image }}" alt="{{ product.model }} full product datasheet artwork" class="slide-img datasheet-artwork"></a><span class="slide-caption">Original datasheet artwork · open for full size</span></div>
+            {% endif %}
           </div>
 
           <!-- Navigation Arrow Buttons -->
@@ -101,13 +105,14 @@
             <button class="slider-dot active" data-slide-to="0" aria-label="Go to slide 1"></button>
             <button class="slider-dot" data-slide-to="1" aria-label="Go to slide 2"></button>
             <button class="slider-dot" data-slide-to="2" aria-label="Go to slide 3"></button>
+            {% if product.image != product.catalog_image %}<button class="slider-dot" data-slide-to="3" aria-label="Go to datasheet artwork"></button>{% endif %}
           </div>
         </div>
 
         <!-- Thumbnails Strip -->
         <div class="pdp-gallery-thumbs" id="pdp-slider-thumbs">
           <button class="thumb-btn active" data-slide-to="0" type="button" aria-label="Product Photo">
-            <img src="{{ product.image }}" alt="{{ product.model }} Preview Thumbnail" width="80" height="60">
+            <img src="{{ product.catalog_image }}" alt="{{ product.model }} Preview Thumbnail" width="80" height="60">
           </button>
 
           <button class="thumb-btn" data-slide-to="1" type="button" aria-label="CAD Blueprint">
@@ -123,20 +128,22 @@
               <span>Layout</span>
             </div>
           </button>
+          {% if product.image != product.catalog_image %}<button class="thumb-btn" data-slide-to="3" type="button" aria-label="Original datasheet artwork"><img src="{{ product.image }}" alt="Datasheet artwork" width="80" height="60"></button>{% endif %}
         </div>
       </div>
 
+{% endif %}
       <!-- Right Column: Info & Action CTAs -->
       <div class="pdp-info">
         <div class="pdp-badges">
           <span class="pdp-badge primary">{{ product.chemistry }}</span>
           <span class="pdp-badge">Nominal {{ product.voltage }}V</span>
-          <span class="pdp-badge">{{ product.capacity_ah }} Ah (20hr Rate)</span>
+          <span class="pdp-badge">{{ product.capacity_ah }} Ah</span>
           <span class="pdp-badge">Terminal: {{ product.terminal_type }}</span>
         </div>
 
         <h1 class="pdp-model">{{ product.model }}</h1>
-        <p class="pdp-title">{{ product.title }}</p>
+        <p class="pdp-title">{{ product.title }}</p><p>Six-month warranty. <a href="/about#warranty">Warranty and support</a></p><div class="buyer-actions"><a class="btn btn-accent" href="/download/datasheet/{{ product.id }}">Download datasheet</a></div>
 
         <p class="pdp-desc text-effect" data-preset="fade-in-blur" data-speed-reveal="1.1" data-speed-segment="0.3">
           {{ product.description }}
@@ -157,15 +164,15 @@
             <span>Nominal Energy</span>
           </div>
           <div class="qspec-box">
-            <strong>{{ product.weight_kg }} kg</strong>
+            <strong>{{ (product.weight_kg|string ~ ' kg') if product.weight_kg else 'On request' }}</strong>
             <span>Approx Weight</span>
           </div>
           <div class="qspec-box">
-            <strong>{{ product.max_discharge_current_a }}A</strong>
+            <strong>{{ (product.max_discharge_current_a|string ~ 'A') if product.max_discharge_current_a else 'On request' }}</strong>
             <span>Max Discharge</span>
           </div>
           <div class="qspec-box">
-            <strong>{{ product.moq }} Units</strong>
+            <strong>{{ (product.moq|string ~ ' Units') if product.moq else 'On request' }}</strong>
             <span>Standard MOQ</span>
           </div>
         </div>
@@ -194,6 +201,7 @@
       <div class="spec-table-scroll-wrapper">
         <table class="spec-table">
           <tbody>
+{% if product.label_specs %}{% for label,value in product.label_specs %}<tr><th>{{ label }}</th><td>{{ value }}</td></tr>{% endfor %}{% else %}
             <!-- Electrical Specs -->
             <tr><th colspan="2" class="spec-category-header">1. ELECTRICAL SPECIFICATIONS</th></tr>
             <tr><th>Nominal Voltage</th><td>{{ product.voltage }} Volts</td></tr>
@@ -208,22 +216,17 @@
             <tr><th colspan="2" class="spec-category-header">2. MECHANICAL & PHYSICAL PARAMETERS</th></tr>
             <tr><th>Dimensions (L x W x H)</th><td>{{ product.dimensions.length_mm }} x {{ product.dimensions.width_mm }} x {{ product.dimensions.height_mm }} mm ({{ product.dimensions.length_in }}" x {{ product.dimensions.width_in }}" x {{ product.dimensions.height_in }}")</td></tr>
             <tr><th>Total Height with Terminals</th><td>{{ product.dimensions.total_height_mm }} mm</td></tr>
-            <tr><th>Weight</th><td>{{ product.weight_kg }} kg ({{ product.weight_lbs }} lbs)</td></tr>
+            <tr><th>Weight</th><td>{{ (product.weight_kg|string ~ ' kg') if product.weight_kg else 'On request' }} ({{ product.weight_lbs }} lbs)</td></tr>
             <tr><th>Terminal Configuration</th><td>{{ product.terminal_type }}</td></tr>
-            <tr><th>Container Casing Material</th><td>ABS Flame Retardant (UL94-HB standard / UL94-V0 optional)</td></tr>
+            <tr><th>Container Casing Material</th><td>Confirm casing specification before ordering</td></tr>
 
             <!-- Environmental Specs -->
             <tr><th colspan="2" class="spec-category-header">3. OPERATING TEMPERATURE RANGES</th></tr>
             <tr><th>Charge Temperature</th><td>{{ product.operating_temp_range.charge }}</td></tr>
             <tr><th>Discharge Temperature</th><td>{{ product.operating_temp_range.discharge }}</td></tr>
             <tr><th>Storage Temperature</th><td>{{ product.operating_temp_range.storage }}</td></tr>
-            <tr><th>Compliance & Certifications</th><td>
-              <div class="cert-tags">
-                {% for cert in product.certifications %}
-                  <span class="pdp-badge">{{ cert }}</span>
-                {% endfor %}
-              </div>
-            </td></tr>
+
+{% endif %}
           </tbody>
         </table>
       </div>
@@ -256,7 +259,7 @@
         <div class="product-card">
           <span class="product-badge-tag {{ 'badge-lithium' if rel.chemistry_code == 'lithium' else '' }}">{{ rel.chemistry }}</span>
           <div class="product-img-wrapper">
-            <img src="{{ rel.image }}" alt="{{ rel.model }} {{ rel.voltage }}V {{ rel.capacity_ah }}Ah {{ rel.chemistry }} Battery" loading="lazy" width="300" height="220" onerror="this.onerror=null; this.src='/static/images/deep_cycle_gel_battery.jpg';">
+            <img src="{{ rel.catalog_image }}" style="transform:rotate({{ rel.photo_rotation|default(0) }}deg)" alt="{{ rel.model }} {{ rel.voltage }}V {{ rel.capacity_ah }}Ah {{ rel.chemistry }} Battery" loading="lazy" width="300" height="220" onerror="this.onerror=null; this.src='/static/images/deep_cycle_gel_battery.jpg';">
           </div>
           <div class="product-body">
             <h3 class="product-model">{{ rel.model }}</h3>
@@ -271,11 +274,11 @@
                 <span>Capacity</span>
               </div>
               <div class="spec-item">
-                <strong>{{ rel.weight_kg }} kg</strong>
+                <strong>{{ (rel.weight_kg|string ~ ' kg') if rel.weight_kg else 'On request' }}</strong>
                 <span>Weight</span>
               </div>
               <div class="spec-item">
-                <strong>{{ (rel.terminal_code or 'F2')|upper }}</strong>
+                <strong>{{ (rel.terminal_code or 'On request')|upper }}</strong>
                 <span>Terminal</span>
               </div>
             </div>

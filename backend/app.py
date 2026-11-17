@@ -28,7 +28,19 @@ def load_products():
     if not os.path.exists(PRODUCTS_FILE):
         return []
     with open(PRODUCTS_FILE, 'r', encoding='utf-8') as f:
-        return json.load(f)
+        products = json.load(f)
+        for product in products:
+            if product.get('photo_gallery'):
+                product['catalog_image'] = product['photo_gallery'][0]['url']
+                continue
+            photo = 'images/products/' + product['id'].replace('-', '_') + '_product.png'
+            if not os.path.exists(os.path.join(STATIC_DIR, photo)):
+                photo = 'images/products/' + product['id'].replace('-', '_') + '.png'
+            if os.path.exists(os.path.join(STATIC_DIR, photo)):
+                product['catalog_image'] = '/static/' + photo
+            else:
+                product['catalog_image'] = product['image']
+        return products
 
 # Storage for RFQ submissions (in-memory demo store & log file)
 def save_rfq_submission(submission_data):
@@ -92,6 +104,41 @@ def product_detail(product_id):
     
     return render_template('product-detail.html', product=product, related_products=related_products)
 
+@app.route('/download/datasheet/<product_id>')
+def model_datasheet(product_id):
+    from io import BytesIO
+    from reportlab.pdfgen import canvas
+    from reportlab.lib.utils import simpleSplit
+    product = next((p for p in load_products() if p['id'] == product_id), None)
+    if product is None:
+        abort(404)
+    buffer = BytesIO()
+    pdf = canvas.Canvas(buffer)
+    pdf.setTitle(product['model'] + ' - Supplier datasheet')
+    pdf.setFont('Helvetica-Bold', 22)
+    pdf.drawString(45, 790, product['model'])
+    pdf.setFont('Helvetica', 11)
+    pdf.drawString(45, 765, 'MERI Industries | Chennai | Supplier product specification sheet')
+    y = 720
+    rows = [('Chemistry', product.get('chemistry')), ('Voltage', str(product.get('voltage'))+' V'), ('Capacity', str(product.get('capacity_ah'))+' Ah'), ('Terminal', product.get('terminal_type')), ('Weight', str(product.get('weight_kg'))+' kg')]
+    dimensions = product.get('dimensions', {})
+    rows.append(('Dimensions L x W x H', ' x '.join(str(dimensions.get(k, '-')) for k in ['length_mm','width_mm','height_mm'])+' mm'))
+    rows.append(('Warranty', '6 months'))
+    if product.get('label_specs'):
+        rows = product['label_specs']
+    for label, value in rows:
+        for line in simpleSplit(label + ' - ' + str(value or 'On request'), 'Helvetica', 11, 490):
+            pdf.drawString(45, y, line)
+            y -= 18
+        y -= 15
+    for line in simpleSplit('Compiled from available supplier product records. Confirm specifications and written warranty coverage before ordering. Manufacturer documentation is available on request where supplied.', 'Helvetica', 10, 490):
+        pdf.drawString(45, y, line)
+        y -= 16
+    pdf.drawString(45, 80, 'merihindustries@gmail.com | +91 7538844410')
+    pdf.save()
+    buffer.seek(0)
+    return send_file(buffer, mimetype='application/pdf', as_attachment=True, download_name=product_id+'-datasheet.pdf')
+
 @app.route('/products')
 def products_redirect():
     return redirect(url_for('catalog'))
@@ -104,7 +151,7 @@ def quote_redirect():
 @app.route('/about')
 @app.route('/about-us')
 def about_redirect():
-    return redirect(url_for('contact'))
+    return render_template('about.html')
 
 @app.route('/favicon.ico')
 def favicon():
@@ -235,7 +282,7 @@ def filter_products():
 
 @app.route('/api/rfq', methods=['POST'])
 def submit_rfq():
-    data = request.get_json() or request.form
+    data = request.get_json(silent=True) or request.form
     
     # Required Fields
     full_name = data.get('full_name', '').strip()
@@ -278,14 +325,8 @@ def submit_rfq():
 @app.route('/api/rfq', methods=['GET'])
 @app.route('/api/enquiries', methods=['GET'])
 def get_rfq_submissions():
-    if not os.path.exists(RFQ_LOG_FILE):
-        return jsonify({'status': 'success', 'count': 0, 'submissions': []})
-    try:
-        with open(RFQ_LOG_FILE, 'r', encoding='utf-8') as f:
-            rfqs = json.load(f)
-        return jsonify({'status': 'success', 'count': len(rfqs), 'submissions': rfqs})
-    except Exception as e:
-        return jsonify({'status': 'error', 'message': str(e)}), 500
+    # Enquiry records contain customer contact information and are private.
+    abort(404)
 
 @app.errorhandler(404)
 def page_not_found(e):

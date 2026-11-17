@@ -28,7 +28,7 @@
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
   {% block head_extra %}{% endblock %}
-</head>
+<link rel="stylesheet" href="/static/css/buyer-updates.css"></head>
 
 <body>
 
@@ -58,7 +58,7 @@
       <ul class="nav-menu">
         <li><a href="/" class="nav-link {% if request.path == '/' %}active{% endif %}">Home</a></li>
         <li><a href="/catalog" class="nav-link {% if request.path == '/catalog' %}active{% endif %}">Products</a></li>
-        <li><a href="/contact" class="nav-link {% if request.path == '/contact' %}active{% endif %}">Contact</a></li>
+        <li><a href="/about" class="nav-link">About</a></li><li><a href="/contact" class="nav-link {% if request.path == '/contact' %}active{% endif %}">Contact</a></li>
       </ul>
 
       <div class="nav-actions">
@@ -413,6 +413,6 @@
   <!-- Scripts -->
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   {% block scripts %}{% endblock %}
-</body>
+<script src="/static/js/buyer-updates.js"></script></body>
 
 </html>

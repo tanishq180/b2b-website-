@@ -1,0 +1,11 @@
+<div class="customer-gallery">
+  <div class="customer-photo-slides" aria-label="Product photographs">
+    {% for photo in product.photo_gallery %}
+    <a class="customer-photo" href="{{ photo.url }}" target="_blank" rel="noopener" aria-label="Open {{ product.model }} photograph {{ loop.index }}">
+      <img src="{{ photo.url }}" alt="{{ product.model }} — {{ photo.caption|default('Original product photograph') }}" style="transform:rotate({{ photo.rotation }}deg)" loading="lazy">
+      <span class="photo-caption">{{ photo.caption|default("Original product photograph") }}</span>
+    </a>
+    {% endfor %}
+  </div>
+  <p>Studio-enhanced images and original label photos · {{ product.photo_gallery|length }} photo{% if product.photo_gallery|length > 1 %}s · Swipe to view more{% endif %}</p>
+</div>
