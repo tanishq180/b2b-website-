@@ -13,7 +13,7 @@ def build_catalog():
     output = root / 'frontend/static/docs/SUNKA_Battery_Catalogue.pdf'
     styles = getSampleStyleSheet()
     story = [Paragraph('MERI Industries', styles['Title']),
-             Paragraph('Supplier of Sunka batteries | Chennai', styles['Heading2']),
+             Paragraph('Sunka battery importer and wholesaler | Chennai | Since 2014', styles['Heading2']),
              Paragraph('Current product catalog', styles['Heading2']),
              Paragraph('Imported from China. One-year supplier warranty. Contact us to confirm pricing, availability, dimensions and terminals before ordering.', styles['BodyText']), Spacer(1, 18)]
     rows = [['Model', 'Type', 'Voltage', 'Capacity']]
