@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% block title %}Sunka Industrial Energy Solutions | Lead Acid & Lithium Batteries{% endblock %}
+{% block title %}MERI Industries | SUNKA Batteries & Lithium-ion Cells{% endblock %}
 
 {% block content %}
 
@@ -9,12 +9,12 @@
   <div class="container hero-grid">
     <div class="hero-content">
       <div class="eyebrow">
-        <span>⚡ ENGINEERED FOR MISSION-CRITICAL UPTIME</span>
+        <span><svg class="ui-icon" aria-hidden="true"><use href="/static/images/ui-icons.svg#bolt"></use></svg> ENGINEERED FOR MISSION-CRITICAL UPTIME</span>
       </div>
-      <h1 class="hero-title">SUNKA industrial batteries for UPS, telecom, and energy storage.</h1><p class="supplier-byline">by MERI Industries · Chennai</p>
+      <h1 class="hero-title">SUNKA industrial batteries for UPS, telecom, and energy storage.</h1><p class="supplier-byline">SUNKA is the battery brand. MERI Industries is the importing and supplying company.</p>
       <p class="hero-subtitle" data-preset="fade-in-blur" data-speed-reveal="1.1" data-speed-segment="0.3">
-        High-performance Sealed Lead Acid (AGM) and Smart Lithium Iron Phosphate (LiFePO4) batteries engineered for
-        uninterruptible power, renewable storage, telecom, and critical equipment.
+        Sealed lead-acid batteries and Lithium-ion Cells, imported from China
+        and supplied by MERI Industries, Chennai, to business customers across India.
       </p>
       <div class="hero-actions">
         <a href="/catalog" class="btn btn-accent btn-lg">Explore Battery Catalog</a>
@@ -55,25 +55,25 @@
 
     <div class="app-grid">
       <a href="/catalog?application=UPS+Systems" class="app-card">
-        <div class="app-icon-wrapper">💻</div>
+        <div class="app-icon-wrapper"><svg class="ui-icon" aria-hidden="true"><use href="/static/images/ui-icons.svg#monitor"></use></svg></div>
         <h3>UPS & Data Centers</h3>
         <p>High-rate short-duration discharge batteries for critical server backup power.</p>
       </a>
 
       <a href="/catalog?application=Solar+%26+Energy+Storage" class="app-card">
-        <div class="app-icon-wrapper">☀️</div>
+        <div class="app-icon-wrapper"><svg class="ui-icon" aria-hidden="true"><use href="/static/images/ui-icons.svg#sun"></use></svg></div>
         <h3>Solar & ESS</h3>
-        <p>High-reliability SLA and smart LiFePO4 storage for off-grid and hybrid renewable microgrids.</p>
+        <p>Explore sealed lead-acid batteries for compatible solar backup equipment. Contact us to confirm model suitability.</p>
       </a>
 
       <a href="/catalog?application=Fire+%26+Security" class="app-card">
-        <div class="app-icon-wrapper">🛡️</div>
+        <div class="app-icon-wrapper"><svg class="ui-icon" aria-hidden="true"><use href="/static/images/ui-icons.svg#shield"></use></svg></div>
         <h3>Security & Fire Alarms</h3>
         <p>Uninterrupted backup power for critical alarm systems, access control, and fire panels.</p>
       </a>
 
       <a href="/catalog?application=Emergency+Lighting" class="app-card">
-        <div class="app-icon-wrapper">🤖</div>
+        <div class="app-icon-wrapper"><svg class="ui-icon" aria-hidden="true"><use href="/static/images/ui-icons.svg#settings"></use></svg></div>
         <h3>Emergency Lighting &amp; Mobility</h3>
         <p>Vibration-resistant high-cycle batteries for emergency exit signs, AGV robotics, and equipment.</p>
       </a>
@@ -114,20 +114,20 @@
 
       <!-- Lithium Li-ion Family Card -->
       <div class="product-card">
-        <span class="product-badge-tag badge-lithium">Lithium Li-ion</span>
+        <span class="product-badge-tag badge-lithium">Lithium-ion Cells</span>
         <div class="product-img-wrapper">
           <img src="{{ url_for('static', filename='images/products/sunka_18650_2200_product.png') }}"
             alt="SUNKA 18650 3.7V 2200mAh Lithium-Ion Cylindrical Battery Cell" loading="lazy" width="400" height="300">
         </div>
         <div class="product-body">
-          <h3 class="product-model">SUNKA Lithium Series</h3>
+          <h3 class="product-model">SUNKA Lithium-ion Cells</h3>
           <p class="product-title">High energy density 18650 cylindrical cells engineered for high reliability, portable
             electronics, and custom pack assemblies.</p>
           <div class="spec-mini-grid">
-            <div class="spec-item"><strong>3.7V Nominal</strong><span>Voltage Rating</span></div>
+            <div class="spec-item"><strong>Lithium-ion</strong><span>Cell Chemistry</span></div>
             <div class="spec-item"><strong>1600mAh - 2200mAh</strong><span>Capacity Range</span></div>
           </div>
-          <a href="/catalog?chemistry=lithium" class="btn btn-navy w-100">Explore Lithium Series →</a>
+          <a href="/catalog?chemistry=lithium" class="btn btn-navy w-100">Explore Lithium-ion Cells →</a>
         </div>
       </div>
 
@@ -150,29 +150,27 @@
       <div class="engineering-finder-grid">
         <div class="finder-field-group">
           <label class="finder-field-label" for="finder-chemistry">
-            <span class="label-icon">🔋</span>
+            <span class="label-icon"><svg class="ui-icon" aria-hidden="true"><use href="/static/images/ui-icons.svg#battery"></use></svg></span>
             <span>Select Battery Chemistry</span>
           </label>
           <div class="finder-select-wrapper">
             <select id="finder-chemistry" name="chemistry" class="finder-select">
               <option value="Lead Acid (SLA)">Lead Acid Series</option>
-              <option value="Lithium LiFePO4">Lithium Series</option>
+              <option value="Lithium">Lithium-ion Cells</option>
             </select>
           </div>
         </div>
 
         <div class="finder-field-group">
           <label class="finder-field-label" for="finder-voltage">
-            <span class="label-icon">⚡</span>
+            <span class="label-icon"><svg class="ui-icon" aria-hidden="true"><use href="/static/images/ui-icons.svg#bolt"></use></svg></span>
             <span>Required Nominal Voltage</span>
           </label>
           <div class="finder-select-wrapper">
             <select id="finder-voltage" name="voltage" class="finder-select">
               <option value="12V">12 Volt (Standard)</option>
-              <option value="48V">48 Volt (Rackmount Telecom)</option>
-              <option value="24V">24 Volt Industrial</option>
-              <option value="6V">6 Volt Deep Cycle</option>
-              <option value="4V">4 Volt Compact SLA</option>
+              <option value="6V">6 Volt</option>
+              <option value="4V">4 Volt</option>
             </select>
           </div>
         </div>

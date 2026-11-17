@@ -524,7 +524,7 @@ function initContactPage() {
     const originalBtnHTML = submitBtn ? submitBtn.innerHTML : 'Submit Bulk Quote Request';
     if (submitBtn) {
       submitBtn.disabled = true;
-      submitBtn.innerHTML = `<span>⏳ Submitting B2B Request...</span>`;
+      submitBtn.innerHTML = `<span> Submitting B2B Request...</span>`;
     }
     if (statusBox) {
       statusBox.style.display = 'none';
@@ -559,7 +559,7 @@ function initContactPage() {
           if (statusBox) {
             statusBox.className = 'form-status-box status-success';
             statusBox.innerHTML = `
-              <div class="status-icon">✅</div>
+              <div class="status-icon"></div>
               <div class="status-content">
                 <h4 style="color:#065F46; font-size:1.05rem; margin-bottom:0.25rem;">Bulk Quote Request Received!</h4>
                 <p style="color:#047857; font-size:0.9rem; margin-bottom:0.4rem;">
@@ -606,7 +606,7 @@ function initContactPage() {
           if (statusBox) {
             statusBox.className = 'form-status-box status-error';
             statusBox.innerHTML = `
-              <div class="status-icon">⚠️</div>
+              <div class="status-icon"></div>
               <div class="status-content">
                 <h4 style="color:#991B1B; font-size:0.95rem; margin-bottom:0.25rem;">Submission Notice</h4>
                 <p style="color:#B91C1C; font-size:0.85rem;">${errorMsg}</p>
@@ -625,7 +625,7 @@ function initContactPage() {
         if (statusBox) {
           statusBox.className = 'form-status-box status-error';
           statusBox.innerHTML = `
-            <div class="status-icon">⚠️</div>
+            <div class="status-icon"></div>
             <div class="status-content">
               <h4 style="color:#991B1B; font-size:0.95rem;">Network Error</h4>
               <p style="color:#B91C1C; font-size:0.85rem;">Unable to submit form. Please check your internet connection or call our support hotline directly.</p>
@@ -776,10 +776,10 @@ function initRFQModal() {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      const origBtnHTML = submitBtn ? submitBtn.innerHTML : '<span>⚡ Submit Official RFQ Request</span>';
+      const origBtnHTML = submitBtn ? submitBtn.innerHTML : '<span> Submit Official RFQ Request</span>';
       if (submitBtn) {
         submitBtn.disabled = true;
-        submitBtn.innerHTML = `<span>⏳ Submitting Official RFQ...</span>`;
+        submitBtn.innerHTML = `<span> Submitting Official RFQ...</span>`;
       }
       if (statusBox) {
         statusBox.style.display = 'none';
@@ -813,7 +813,7 @@ function initRFQModal() {
             if (statusBox) {
               statusBox.className = 'rfq-modal-status-box status-success';
               statusBox.innerHTML = `
-                <div class="status-icon">✅</div>
+                <div class="status-icon"></div>
                 <div class="status-content">
                   <h4 style="color:#065F46; font-size:1.1rem; margin-bottom:0.25rem;">RFQ Request Submitted Successfully!</h4>
                   <p style="color:#047857; font-size:0.925rem; margin-bottom:0.4rem;">
@@ -829,7 +829,7 @@ function initRFQModal() {
               `;
               statusBox.style.display = 'flex';
             }
-            showToast(`✅ RFQ ${quoteId} submitted successfully!`, 'success');
+            showToast(` RFQ ${quoteId} submitted successfully!`, 'success');
 
             // Background sync to local Flask backend if available
             try {
@@ -862,7 +862,7 @@ function initRFQModal() {
             if (statusBox) {
               statusBox.className = 'rfq-modal-status-box status-error';
               statusBox.innerHTML = `
-                <div class="status-icon">⚠️</div>
+                <div class="status-icon"></div>
                 <div class="status-content">
                   <h4 style="color:#991B1B; font-size:0.95rem; margin-bottom:0.25rem;">Submission Notice</h4>
                   <p style="color:#B91C1C; font-size:0.85rem;">${errorMsg}</p>
@@ -881,7 +881,7 @@ function initRFQModal() {
           if (statusBox) {
             statusBox.className = 'rfq-modal-status-box status-error';
             statusBox.innerHTML = `
-              <div class="status-icon">⚠️</div>
+              <div class="status-icon"></div>
               <div class="status-content">
                 <h4 style="color:#991B1B; font-size:0.95rem;">Network Connection Error</h4>
                 <p style="color:#B91C1C; font-size:0.85rem;">Unable to connect. Please check your internet connection or call our hotline directly at +91 7538844410.</p>
@@ -1013,10 +1013,10 @@ function initFloatingRFQ() {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
 
-      const origBtnHTML = submitBtn ? submitBtn.innerHTML : 'Send Message ✉️';
+      const origBtnHTML = submitBtn ? submitBtn.innerHTML : 'Send Message ';
       if (submitBtn) {
         submitBtn.disabled = true;
-        submitBtn.innerHTML = `<span>⏳ Sending your message...</span>`;
+        submitBtn.innerHTML = `<span> Sending your message...</span>`;
       }
       if (statusBox) {
         statusBox.style.display = 'none';
@@ -1051,7 +1051,7 @@ function initFloatingRFQ() {
               statusBox.className = 'rfq-popup-status status-success';
               statusBox.innerHTML = `
                 <div class="rfq-status-card">
-                  <div class="rfq-status-icon">💬</div>
+                  <div class="rfq-status-icon"></div>
                   <h4 class="rfq-status-title">Message Sent Successfully!</h4>
                   <p class="rfq-status-ref">Tracking Reference: <strong>${quoteId}</strong></p>
                   <p class="rfq-status-desc">
@@ -1064,7 +1064,7 @@ function initFloatingRFQ() {
               `;
               statusBox.style.display = 'block';
             }
-            showToast(`✅ Message sent! Reference: ${quoteId}`, 'success');
+            showToast(` Message sent! Reference: ${quoteId}`, 'success');
 
             // Background sync to local Flask backend if available
             try {
@@ -1098,14 +1098,14 @@ function initFloatingRFQ() {
               statusBox.className = 'rfq-popup-status status-error';
               statusBox.innerHTML = `
                 <div class="rfq-status-card">
-                  <div class="rfq-status-icon">⚠️</div>
+                  <div class="rfq-status-icon"></div>
                   <h4 class="rfq-status-title" style="color:#991B1B;">Submission Error</h4>
                   <p class="rfq-status-desc" style="color:#B91C1C;">${errorMsg}</p>
                 </div>
               `;
               statusBox.style.display = 'block';
             }
-            showToast(`⚠️ Error: ${errorMsg}`, 'error');
+            showToast(` Error: ${errorMsg}`, 'error');
           }
         })
         .catch(err => {
@@ -1117,7 +1117,7 @@ function initFloatingRFQ() {
             statusBox.className = 'rfq-popup-status status-error';
             statusBox.innerHTML = `
               <div class="rfq-status-card">
-                <div class="rfq-status-icon">⚠️</div>
+                <div class="rfq-status-icon"></div>
                 <h4 class="rfq-status-title" style="color:#991B1B;">Network Error</h4>
                 <p class="rfq-status-desc" style="color:#B91C1C;">Unable to connect. Please check your internet connection or call +91 7538844410 directly.</p>
               </div>

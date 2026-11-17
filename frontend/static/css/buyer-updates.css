@@ -39,3 +39,5 @@
 .product-grid .product-card .product-body>.btn:last-child{margin-top:auto;min-height:46px;display:flex;align-items:center;justify-content:center;white-space:normal}
 @media(max-width:767px){.product-grid{gap:16px;grid-template-columns:repeat(2,minmax(0,1fr))}.product-grid .product-card .product-body{padding:16px}}
 @media(max-width:580px){.product-grid{grid-template-columns:minmax(0,1fr)}.product-grid .product-card .product-img-wrapper{aspect-ratio:4 / 3}.product-grid .product-card .product-model{min-height:2.7em}.product-grid .product-card .product-body{padding:20px}}
+
+.ui-icon{width:1.15em;height:1.15em;display:inline-block;vertical-align:-.18em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}.status-icon:empty{display:none}

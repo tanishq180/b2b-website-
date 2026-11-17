@@ -34,24 +34,24 @@ CAD drawings, and technical datasheets.{% endblock %}
         <div class="contact-info-block">
           <strong class="contact-label">Direct Phone &amp; WhatsApp</strong>
           <p class="contact-text">
-            <a href="tel:+917538844410" class="contact-highlight-link">📞 +91 7538844410</a><br>
+            <a href="tel:+917538844410" class="contact-highlight-link"><svg class="ui-icon" aria-hidden="true"><use href="/static/images/ui-icons.svg#phone"></use></svg> +91 7538844410</a><br>
             <span class="contact-subtext">Mon – Sat: 9:00 AM – 7:00 PM IST</span>
           </p>
         </div>
 
         <div class="contact-info-block">
-          <strong class="contact-label">Official Engineering Email</strong>
+          <strong class="contact-label">General Inquiries by Email</strong>
           <p class="contact-text">
-            <a href="mailto:merihindustries@gmail.com" class="contact-highlight-link">✉️ merihindustries@gmail.com</a>
+            <a href="mailto:merihindustries@gmail.com" class="contact-highlight-link"><svg class="ui-icon" aria-hidden="true"><use href="/static/images/ui-icons.svg#mail"></use></svg> merihindustries@gmail.com</a>
           </p>
         </div>
       </div>
 
       <!-- Right Column: B2B RFQ / Contact Inquiry Form -->
       <div class="contact-card contact-form-card">
-        <h3 class="contact-card-title">Submit Official RFQ / Inquiry</h3>
+        <h3 class="contact-card-title">Request a Quote</h3>
         <p class="contact-form-intro text-muted mb-3 text-effect" data-preset="fade-in-blur" data-speed-reveal="1.1" data-speed-segment="0.3">
-          Complete the form below to receive formal commercial pricing, volume discounts, and technical documentation.
+          For product pricing and availability, use the quote form below. We aim to respond the same business day.
         </p>
 
         <form id="contact-page-form" class="b2b-contact-form" action="https://formspree.io/f/mwlkyyrr" method="POST">
@@ -80,7 +80,7 @@ CAD drawings, and technical datasheets.{% endblock %}
             <div class="form-group">
               <label class="form-label" for="contact-product-model">Target Battery Model / Chemistry</label>
               <input type="text" id="contact-product-model" name="product_model" class="form-control"
-                placeholder="e.g. PSL-121000 or 12V SLA Series">
+                placeholder="e.g. SUNKA MR1232BS">
             </div>
             <div class="form-group">
               <label class="form-label" for="contact-qty">Estimated Quantity (Units)</label>
@@ -102,7 +102,7 @@ CAD drawings, and technical datasheets.{% endblock %}
           <div id="contact-form-status" class="form-status-box" style="display:none; margin-top: 1rem;"></div>
 
           <button type="submit" id="contact-submit-btn" class="btn btn-accent btn-lg w-100 mt-3">
-            <span class="btn-text">Submit Bulk Quote Request ⚡</span>
+            <span class="btn-text">Submit Bulk Quote Request <svg class="ui-icon" aria-hidden="true"><use href="/static/images/ui-icons.svg#bolt"></use></svg></span>
           </button>
         </form>
       </div>

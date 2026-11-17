@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% block title %}Interactive Battery Catalog & Specs Filter | Sunka{% endblock %}
+{% block title %}SUNKA Product Catalog | MERI Industries{% endblock %}
 
 {% block content %}
 <section class="section catalog-section">
@@ -15,7 +15,7 @@
     <!-- Mobile Filter Trigger Bar (Visible only on mobile/tablet) -->
     <div class="mobile-filter-bar">
       <button id="mobile-filter-toggle-btn" class="btn btn-outline-navy mobile-filter-btn" type="button" aria-label="Open filter specifications">
-        <span>⚙️ Filter Specifications</span>
+        <span><svg class="ui-icon" aria-hidden="true"><use href="/static/images/ui-icons.svg#settings"></use></svg> Filter Specifications</span>
         <span id="active-filter-badge" class="filter-count-badge" style="display:none;">0</span>
       </button>
       <div id="mobile-catalog-count" class="mobile-count-text">
@@ -72,7 +72,7 @@
                 </label>
                 <label class="filter-checkbox">
                   <input type="checkbox" name="chemistry" value="lithium" {% if request.args.get('chemistry') == 'lithium' %}checked{% endif %}>
-                  <span>Smart Lithium LiFePO4</span>
+                  <span>Lithium-ion Cells</span>
                 </label>
               </div>
             </div>

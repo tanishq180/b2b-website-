@@ -32,3 +32,18 @@ document.addEventListener('DOMContentLoaded', () => {
   search?.addEventListener('input', render);
   render();
 });
+
+// Keep inquiry voltage choices consistent with the selected battery chemistry.
+document.addEventListener('DOMContentLoaded', () => {
+  const chemistry = document.getElementById('finder-chemistry');
+  const voltage = document.getElementById('finder-voltage');
+  if (!chemistry || !voltage) return;
+  function updateVoltages() {
+    const previous = voltage.value;
+    const choices = chemistry.value === 'Lithium' ? ['3.7V'] : ['12V', '6V', '4V'];
+    voltage.replaceChildren(...choices.map(value => new Option(value, value)));
+    if (choices.includes(previous)) voltage.value = previous;
+  }
+  chemistry.addEventListener('change', updateVoltages);
+  updateVoltages();
+});
