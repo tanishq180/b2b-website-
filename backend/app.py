@@ -318,7 +318,7 @@ def submit_rfq():
         'gstin_tax_id': data.get('gstin_tax_id', '').strip(),
         'items': data.get('items', []),
         'product_model': data.get('product_model', '').strip(),
-        'estimated_qty': data.get('estimated_qty', '1'),
+        'estimated_qty': data.get('estimated_qty', '10'),
         'application_details': data.get('application_details', '').strip(),
         'message': data.get('message', '').strip()
     }
