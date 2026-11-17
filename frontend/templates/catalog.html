@@ -1,11 +1,14 @@
 {% extends "layout.html" %}
 
-{% block title %}SUNKA Product Catalog | MERI Industries{% endblock %}
+{% block title %}Catalog | MERI Industries, supplier of Sunka batteries{% endblock %}
 
 {% block content %}
 <section class="section catalog-section">
   <div class="container catalog-container">
     
+    {% if request.args.get('notice') == 'retired-voltage' %}
+    <p role="status">24V and 48V batteries are not in our current range. Browse our available batteries below.</p>
+    {% endif %}
     <!-- Catalog Header -->
     <div class="catalog-page-header">
       <h1 class="section-title">Industrial Battery Catalog</h1>
@@ -90,7 +93,7 @@
               <div class="filter-options">
                 <label class="filter-checkbox">
                   <input type="checkbox" name="voltage" value="4">
-                  <span>3.7V / 4 Volt (Compact / 18650)</span>
+                  <span>4 Volt / Lithium-ion Cells</span>
                 </label>
                 <label class="filter-checkbox">
                   <input type="checkbox" name="voltage" value="6">
@@ -100,10 +103,7 @@
                   <input type="checkbox" name="voltage" value="12" {% if request.args.get('voltage') == '12' %}checked{% endif %}>
                   <span>12 Volt</span>
                 </label>
-                <label class="filter-checkbox">
-                  <input type="checkbox" name="voltage" value="48">
-                  <span>48V / 51.2V Telecom Rack</span>
-                </label>
+
               </div>
             </div>
           </div>
@@ -235,7 +235,7 @@
                   <span>Solar & Energy Storage</span>
                 </label>
                 <label class="filter-checkbox">
-                  <input type="checkbox" name="application" value="Fire & Security">
+                  <input type="checkbox" name="application" value="Emergency Lighting"><span>Emergency Lighting</span></label><label class="filter-checkbox"><input type="checkbox" name="application" value="Fire & Security">
                   <span>Fire & Security Alarms</span>
                 </label>
               </div>

@@ -41,3 +41,8 @@
 @media(max-width:580px){.product-grid{grid-template-columns:minmax(0,1fr)}.product-grid .product-card .product-img-wrapper{aspect-ratio:4 / 3}.product-grid .product-card .product-model{min-height:2.7em}.product-grid .product-card .product-body{padding:20px}}
 
 .ui-icon{width:1.15em;height:1.15em;display:inline-block;vertical-align:-.18em;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}.status-icon:empty{display:none}
+
+.supply-list {padding-left: 1.25rem; line-height: 1.8;}
+.supply-list li {margin-bottom: 1rem;}
+.engineering-lead-section .company-page {color: #fff;}
+.engineering-lead-section .company-page a {color: #fff; text-decoration: underline;}

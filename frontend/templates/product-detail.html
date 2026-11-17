@@ -1,6 +1,6 @@
 {% extends "layout.html" %}
 
-{% block title %}{{ product.model }} | {{ product.title }} | Technical Specs{% endblock %}
+{% block title %}{{ product.model }} | MERI Industries, supplier of Sunka batteries{% endblock %}
 {% block meta_description %}{{ product.model }} technical specifications, electrical parameters, mechanical dimensions, and B2B quote request.{% endblock %}
 
 {% block content %}
@@ -143,7 +143,7 @@
         </div>
 
         <h1 class="pdp-model">{{ product.model }}</h1>
-        <p class="pdp-title">{{ product.title }}</p><p>Six-month warranty. <a href="/about#warranty">Warranty and support</a></p><div class="buyer-actions"><a class="btn btn-accent" href="/download/datasheet/{{ product.id }}">Download datasheet</a></div>
+        <p class="pdp-title">{{ product.title }}</p><p>One-year warranty. <a href="/about#warranty">Warranty and support</a></p><div class="buyer-actions"><a class="btn btn-accent" href="/download/datasheet/{{ product.id }}">Download datasheet</a></div>
 
         <p class="pdp-desc text-effect" data-preset="fade-in-blur" data-speed-reveal="1.1" data-speed-segment="0.3">
           {{ product.description }}

@@ -23,7 +23,7 @@ class TestSunkaApp(unittest.TestCase):
     def test_homepage(self):
         res = self.client.get('/')
         self.assertEqual(res.status_code, 200)
-        self.assertIn(b'SUNKA industrial batteries', res.data)
+        self.assertIn(b'Sunka batteries for UPS', res.data)
         self.assertIn(b'main-header', res.data)
         self.assertIn(b'Request Bulk Quote', res.data)
 
@@ -36,7 +36,7 @@ class TestSunkaApp(unittest.TestCase):
     def test_contact_page(self):
         res = self.client.get('/contact')
         self.assertEqual(res.status_code, 200)
-        self.assertIn(b'Contact &amp; Request Bulk Quote', res.data)
+        self.assertIn(b'Ask for a price', res.data)
         self.assertIn(b'contact-page-form', res.data)
         self.assertIn(b'formspree.io/f/mwlkyyrr', res.data)
 
@@ -89,6 +89,21 @@ class TestSunkaApp(unittest.TestCase):
         data = res.get_json()
         self.assertGreaterEqual(data['filtered_count'], 1)
         self.assertEqual(data['products'][0]['chemistry'], 'SLA')
+
+    def test_current_catalog_links(self):
+        for chemistry in ('sla', 'lithium'):
+            response = self.client.post('/api/filter', json={'chemistry': [chemistry]})
+            self.assertGreater(response.get_json()['filtered_count'], 0)
+        for application in ('UPS Systems', 'Solar & Energy Storage', 'Fire & Security', 'Emergency Lighting'):
+            response = self.client.post('/api/filter', json={'applications': [application]})
+            self.assertGreater(response.get_json()['filtered_count'], 0, application)
+        response = self.client.get('/catalog?voltage=48', follow_redirects=True)
+        self.assertEqual(response.status_code, 200)
+        self.assertIn(b'not in our current range', response.data)
+        response = self.client.get('/download/catalog-pdf')
+        self.assertEqual(response.status_code, 200)
+        self.assertTrue(response.data.startswith(b'%PDF'))
+        response.close()
 
     def test_api_rfq(self):
         payload = {

@@ -513,7 +513,7 @@ function initContactPage() {
       modelInput.value = specs;
     }
     if (msgInput && !msgInput.value) {
-      msgInput.value = `Requesting official pricing and specification data for ${specs}.`;
+      msgInput.value = `Requesting pricing and product details for ${specs}.`;
     }
   }
 
@@ -524,7 +524,7 @@ function initContactPage() {
     const originalBtnHTML = submitBtn ? submitBtn.innerHTML : 'Submit Bulk Quote Request';
     if (submitBtn) {
       submitBtn.disabled = true;
-      submitBtn.innerHTML = `<span> Submitting B2B Request...</span>`;
+      submitBtn.innerHTML = `<span> Sending enquiry...</span>`;
     }
     if (statusBox) {
       statusBox.style.display = 'none';
@@ -566,7 +566,7 @@ function initContactPage() {
                   Your Tracking ID: <strong style="color:#064E3B; font-family:monospace; font-size:0.95rem;">${quoteId}</strong>
                 </p>
                 <p style="color:#065F46; font-size:0.85rem;">
-                  Our application engineer will review your technical specifications and reach out with formal distributor pricing and datasheets after reviewing your enquiry.
+                  Our sales team will review your technical specifications and reach out with formal distributor pricing and datasheets after reviewing your enquiry.
                 </p>
               </div>
             `;
@@ -820,7 +820,7 @@ function initRFQModal() {
                     Tracking Reference ID: <strong style="color:#064E3B; font-family:monospace; font-size:1rem;">${quoteId}</strong>
                   </p>
                   <p style="color:#065F46; font-size:0.85rem;">
-                    Thank you for contacting MERI Industries. Our application engineering team has received your technical specifications and will provide formal distributor pricing and datasheets after reviewing your enquiry.
+                    Thank you for contacting MERI Industries. Our sales team has received your technical specifications and will provide formal distributor pricing and datasheets after reviewing your enquiry.
                   </p>
                   <button type="button" class="btn btn-navy btn-sm mt-3" onclick="window.closeRFQModal();">
                     Done / Close
@@ -1055,7 +1055,7 @@ function initFloatingRFQ() {
                   <h4 class="rfq-status-title">Message Sent Successfully!</h4>
                   <p class="rfq-status-ref">Tracking Reference: <strong>${quoteId}</strong></p>
                   <p class="rfq-status-desc">
-                    Thank you for contacting MERI Industries. Our application engineers have received your inquiry and will be in touch with you shortly.
+                    Thank you for contacting MERI Industries. Our sales team have received your inquiry and will be in touch with you shortly.
                   </p>
                   <button type="button" class="btn btn-outline-navy btn-sm mt-2" onclick="document.getElementById('floating-rfq-status').style.display='none';">
                     Send Another Message

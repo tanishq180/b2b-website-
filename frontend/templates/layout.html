@@ -8,10 +8,16 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="format-detection" content="telephone=no">
-  <title>{% block title %}MERI Industries | SUNKA Batteries & Lithium-ion Cells{% endblock %}</title>
+  <title>{% block title %}MERI Industries, supplier of Sunka batteries{% endblock %}</title>
   <meta name="description"
     content="{% block meta_description %}MERI Industries is a Chennai-based importer and supplier of SUNKA sealed lead-acid batteries and Lithium-ion Cells, imported from China for business customers across India.{% endblock %}">
 
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MERI Industries, supplier of Sunka batteries">
+  <meta property="og:description" content="Chennai-based importer and supplier of Sunka sealed lead-acid batteries and Lithium-ion Cells. One-year warranty. Ask for model availability and pricing.">
+  <meta property="og:image" content="{{ url_for('static', filename='images/sunka-hero-light.png', _external=True) }}">
+  <meta property="og:image:alt" content="Sunka battery supplied by MERI Industries">
+  <meta name="twitter:card" content="summary_large_image">
   <!-- Fonts: Inter, JetBrains Mono & Montserrat -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,7 +50,7 @@
         </div>
         <div class="brand-text-group">
           <span class="brand-title">MERI <span class="accent">INDUSTRIES</span></span>
-          <span class="brand-tag">INDUSTRIAL ENERGY SOLUTIONS</span>
+          <span class="brand-tag">Supplier of Sunka batteries</span>
         </div>
       </a>
 
@@ -104,22 +110,18 @@
       <ul class="mobile-nav-menu">
         <li><a href="/" class="mobile-nav-link {% if request.path == '/' %}active{% endif %}"><svg class="ui-icon" aria-hidden="true"><use href="/static/images/ui-icons.svg#home"></use></svg> Home</a></li>
         <li><a href="/catalog" class="mobile-nav-link {% if request.path == '/catalog' %}active{% endif %}"><svg class="ui-icon" aria-hidden="true"><use href="/static/images/ui-icons.svg#bolt"></use></svg> Products</a></li>
-        <li><a href="/contact" class="mobile-nav-link {% if request.path == '/contact' %}active{% endif %}"><svg class="ui-icon" aria-hidden="true"><use href="/static/images/ui-icons.svg#phone"></use></svg> Contact &
-            Bulk Quote</a></li>
+        <li><a href="/contact" class="mobile-nav-link {% if request.path == '/contact' %}active{% endif %}"><svg class="ui-icon" aria-hidden="true"><use href="/static/images/ui-icons.svg#phone"></use></svg> Contact</a></li>
       </ul>
 
       <!-- Action Buttons -->
       <div class="mobile-nav-actions">
-        {% if request.path != '/contact' %}
-        <a href="/contact" class="btn btn-accent" style="width: 100%; text-align: center;"><svg class="ui-icon" aria-hidden="true"><use href="/static/images/ui-icons.svg#bolt"></use></svg> Request Bulk Quote</a>
-        {% endif %}
         <a href="/download/catalog-pdf" class="btn btn-outline-navy" style="width: 100%; text-align: center;"
           target="_blank" rel="noopener noreferrer"><svg class="ui-icon" aria-hidden="true"><use href="/static/images/ui-icons.svg#file"></use></svg> View PDF Catalog</a>
       </div>
 
       <!-- Direct Contact Hotline -->
       <div class="mobile-nav-contact">
-        <div class="mobile-contact-title">Direct Engineering Support</div>
+        <div class="mobile-contact-title">Contact MERI Industries</div>
         <a href="tel:+917538844410" class="mobile-contact-item"><svg class="ui-icon" aria-hidden="true"><use href="/static/images/ui-icons.svg#phone"></use></svg> +91 7538844410</a>
         <a href="mailto:merihindustries@gmail.com" class="mobile-contact-item"><svg class="ui-icon" aria-hidden="true"><use href="/static/images/ui-icons.svg#mail"></use></svg> merihindustries@gmail.com</a>
       </div>
@@ -142,9 +144,9 @@
         <!-- Modal Header -->
         <div class="rfq-modal-header">
           <div class="rfq-modal-header-text">
-            <div class="rfq-modal-badge"><svg class="ui-icon" aria-hidden="true"><use href="/static/images/ui-icons.svg#bolt"></use></svg> OFFICIAL B2B RFQ</div>
-            <h2 id="rfq-modal-title" class="rfq-modal-title">Request Bulk Quote &amp; Specifications</h2>
-            <p class="rfq-modal-subtitle">Request pricing and product details from MERI Industries. We aim to respond the same business day.</p>
+            <div class="rfq-modal-badge"><svg class="ui-icon" aria-hidden="true"><use href="/static/images/ui-icons.svg#bolt"></use></svg> PRODUCT ENQUIRY</div>
+            <h2 id="rfq-modal-title" class="rfq-modal-title">Ask for a price</h2>
+            <p class="rfq-modal-subtitle">Request pricing and product details from MERI Industries. We aim to reply within one working day.</p>
           </div>
           <button type="button" id="rfq-modal-close" class="rfq-modal-close-btn" aria-label="Close quote modal" title="Close">&times;</button>
         </div>
@@ -169,18 +171,18 @@
             <div class="rfq-form-row">
               <div class="rfq-form-col">
                 <label for="modal-rfq-name" class="rfq-form-label">Full Name <span class="required">*</span></label>
-                <input type="text" id="modal-rfq-name" name="full_name" class="rfq-modal-input" placeholder="e.g. Robert Vance" required autocomplete="name">
+                <input type="text" id="modal-rfq-name" name="full_name" class="rfq-modal-input" placeholder="Your name" required autocomplete="name">
               </div>
               <div class="rfq-form-col">
                 <label for="modal-rfq-company" class="rfq-form-label">Company / Organization <span class="required">*</span></label>
-                <input type="text" id="modal-rfq-company" name="company_name" class="rfq-modal-input" placeholder="e.g. Apex Telecom Infrastructure" required autocomplete="organization">
+                <input type="text" id="modal-rfq-company" name="company_name" class="rfq-modal-input" placeholder="Your company" required autocomplete="organization">
               </div>
             </div>
 
             <div class="rfq-form-row">
               <div class="rfq-form-col">
-                <label for="modal-rfq-email" class="rfq-form-label">Corporate Email <span class="required">*</span></label>
-                <input type="email" id="modal-rfq-email" name="email" class="rfq-modal-input" placeholder="rvance@apextelecom.com" required autocomplete="email">
+                <label for="modal-rfq-email" class="rfq-form-label">Email <span class="required">*</span></label>
+                <input type="email" id="modal-rfq-email" name="email" class="rfq-modal-input" placeholder="you@company.com" required autocomplete="email">
               </div>
               <div class="rfq-form-col">
                 <label for="modal-rfq-phone" class="rfq-form-label">Phone Number <span class="required">*</span></label>
@@ -191,7 +193,7 @@
             <div class="rfq-form-row">
               <div class="rfq-form-col">
                 <label for="modal-rfq-model" class="rfq-form-label">Battery Model / Spec</label>
-                <input type="text" id="modal-rfq-model" name="product_model" class="rfq-modal-input" placeholder="e.g. PSL-121000 or MR1232BS">
+                <input type="text" id="modal-rfq-model" name="product_model" class="rfq-modal-input" placeholder="e.g. SUNKA MR1232BS">
               </div>
               <div class="rfq-form-col">
                 <label for="modal-rfq-qty" class="rfq-form-label">Estimated Quantity (Units)</label>
@@ -201,32 +203,24 @@
 
             <div class="rfq-form-row full-width">
               <div class="rfq-form-col">
-                <label for="modal-rfq-app" class="rfq-form-label">Target Application</label>
-                <select id="modal-rfq-app" name="application_details" class="rfq-modal-select">
-                  <option value="UPS Systems & Data Centers">UPS Systems &amp; Data Centers</option>
-                  <option value="Solar & Energy Storage (ESS)">Solar &amp; Renewable Energy Storage (ESS)</option>
-                  <option value="Telecom & 5G Infrastructure">Telecom Towers &amp; 5G Infrastructure</option>
-                  <option value="Fire Alarm & Security Systems">Fire Alarm &amp; Security Systems</option>
-                  <option value="Emergency Lighting & Mobility">Emergency Lighting &amp; Mobility</option>
-                  <option value="Industrial EV & Robotics">Industrial EV &amp; Robotics</option>
-                  <option value="Other Custom Application">Other Custom Project</option>
-                </select>
+                <label for="modal-rfq-app" class="rfq-form-label">Equipment or use (optional)</label>
+                <input id="modal-rfq-app" name="application_details" class="rfq-modal-input" placeholder="e.g. UPS, alarm panel or emergency light">
               </div>
             </div>
 
             <div class="rfq-form-row full-width">
               <div class="rfq-form-col">
-                <label for="modal-rfq-message" class="rfq-form-label">Technical Requirements / Note</label>
-                <textarea id="modal-rfq-message" name="message" class="rfq-modal-textarea" rows="3" placeholder="Specify dimension constraints, terminal type, C-rate, target dispatch date, or compliance requirements..."></textarea>
+                <label for="modal-rfq-message" class="rfq-form-label">Your requirements</label>
+                <textarea id="modal-rfq-message" name="message" class="rfq-modal-textarea" rows="3" placeholder="Tell us the model, quantity, equipment and delivery location."></textarea>
               </div>
             </div>
 
             <div class="rfq-modal-footer">
               <button type="submit" id="modal-rfq-submit" class="btn btn-accent btn-lg w-100">
-                <span><svg class="ui-icon" aria-hidden="true"><use href="/static/images/ui-icons.svg#bolt"></use></svg> Submit Official RFQ Request</span>
+                <span><svg class="ui-icon" aria-hidden="true"><use href="/static/images/ui-icons.svg#bolt"></use></svg> Send enquiry</span>
               </button>
               <div class="rfq-modal-direct-call">
-                <span>Need urgent engineering sizing?</span>
+                <span>Have a question?</span>
                 <a href="tel:+917538844410"><svg class="ui-icon" aria-hidden="true"><use href="/static/images/ui-icons.svg#phone"></use></svg> Call +91 7538844410</a>
               </div>
             </div>
@@ -253,17 +247,16 @@
         <ul>
           <li><a href="/catalog?chemistry=sla">Lead Acid</a></li>
           <li><a href="/catalog?chemistry=lithium">Lithium-ion Cells</a></li>
-          <li><a href="/catalog?voltage=48">48V Telecom Rackmount</a></li>
         </ul>
       </div>
 
       <div class="footer-links">
         <h4>Target Applications</h4>
         <ul>
-          <li><a href="/catalog?application=UPS+Systems">UPS &amp; Data Centers</a></li>
-          <li><a href="/catalog?application=Solar+%26+Energy+Storage">Solar Energy Storage</a></li>
+          <li><a href="/catalog?application=UPS+Systems">UPS backup</a></li>
+          <li><a href="/catalog?application=Solar+%26+Energy+Storage">Solar backup equipment</a></li>
           <li><a href="/catalog?application=Fire+%26+Security">Security &amp; Fire Alarms</a></li>
-          <li><a href="/catalog?application=Emergency+Lighting">Emergency Lighting &amp; Mobility</a></li>
+          <li><a href="/catalog?application=Emergency+Lighting">Emergency Lighting</a></li>
         </ul>
       </div>
 
@@ -271,13 +264,13 @@
         <h4>Technical Resources</h4>
         <ul>
           <li><a href="/download/catalog-pdf" target="_blank" rel="noopener noreferrer">View PDF Catalog</a></li>
-          <li><a href="/contact">Request Bulk Quote & Support</a></li>
+          <li><a href="/contact">Contact and support</a></li>
         </ul>
       </div>
     </div>
 
     <div class="container footer-bottom">
-      <p>&copy; 2026 MERI Industries. All rights reserved. Sunka is an official brand of MERI Industries.</p>
+      <p>&copy; 2026 MERI Industries. All rights reserved. MERI Industries, supplier of Sunka batteries.</p>
     </div>
   </footer>
   {% endblock %}

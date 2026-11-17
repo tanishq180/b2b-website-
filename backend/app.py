@@ -83,6 +83,9 @@ def index():
 
 @app.route('/catalog')
 def catalog():
+    # Retired voltage links return to the current catalog instead of an empty filter.
+    if request.args.get('voltage') in ('24', '48'):
+        return redirect(url_for('catalog', notice='retired-voltage'))
     return render_template('catalog.html')
 
 @app.route('/product/<product_id>')
@@ -259,7 +262,14 @@ def filter_products():
             continue
             
         # Filter by application
-        if selected_applications and not any(app_item in selected_applications for app_item in p.get('applications', [])):
+        application_aliases = {
+            'Solar & Energy Storage': {'Solar & Renewable Energy', 'Solar Lighting', 'Solar Power Systems'},
+            'Fire & Security': {'Alarm & Security Systems', 'Alarms & Security Systems', 'Security & Alarm Systems', 'Security Equipment', 'Security Systems'},
+        }
+        matching_applications = set(selected_applications)
+        for selected in selected_applications:
+            matching_applications.update(application_aliases.get(selected, set()))
+        if selected_applications and not matching_applications.intersection(p.get('applications', [])):
             continue
             
         # Search keyword
@@ -319,7 +329,7 @@ def submit_rfq():
         'status': 'success',
         'quote_id': quote_id,
         'timestamp': rfq_payload['timestamp'],
-        'message': f'Thank you {full_name}. Your message and inquiry ({quote_id}) has been received. Our application engineers will reach out to you.'
+        'message': f'Thank you {full_name}. Your message and inquiry ({quote_id}) has been received. Our sales team will reach out to you.'
     })
 
 @app.route('/api/rfq', methods=['GET'])
